@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka - විනෝදයෙන් ගණිතය ඉගෙන ගමු.</title>
+    <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .progress-ring__circle {
+            transition: stroke-dashoffset 0.5s;
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-4">විනෝදයෙන් ගණිතය ඉගෙනගමු</h1>
+                <p class="text-xl mb-6">Interactive quizzes and games designed for Sri Lankan students from Grade 1 to O/L</p>
+                <div class="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
+                    <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-6 rounded-lg text-center transition duration-300">Start Learning</a>
+                    <a href="#" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-6 rounded-lg text-center transition duration-300">Watch Demo</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://www.truro-penwith.ac.uk/app/uploads/2023/09/Level-2-Functional-skills-maths.jpg" alt="Students learning math interactively" class="rounded-lg shadow-xl" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Why Choose MathLanka?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-gamepad text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Gamified Learning</h3>
+                    <p class="text-gray-600">Earn points, unlock levels, and compete with friends while mastering math concepts.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-book text-yellow-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Sri Lankan Curriculum</h3>
+                    <p class="text-gray-600">Aligned with the national curriculum from Grade 1 to O/L Mathematics.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition duration-300">
+                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-trophy text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Progress Tracking</h3>
+                    <p class="text-gray-600">Monitor your improvement with detailed reports and personalized recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Our Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Grade 1-5 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <img src="https://contessa-project.eu/wp-content/uploads/2019/10/primary-school-in-sri-lanka.jpg" alt="Primary mathematics" class="w-full h-40 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Primary (Grade 1-5)</h3>
+                        <p class="text-gray-600 mb-4">Foundational math skills with interactive games and stories.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-blue-600">120 Lessons</span>
+                            <a href="primary.html" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Grade 6-11 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <img src="https://www.eduwire.lk/wp-content/uploads/2024/04/Challenges-of-Sri-Lankas-School-Education-System.jpg" alt="Secondary mathematics" class="w-full h-40 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">Secondary (Grade 6-9)</h3>
+                        <p class="text-gray-600 mb-4">Comprehensive with practice tests.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-blue-600">250 Lessons</span>
+                            <a href="secondary.html" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- A/L Mathematics -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <img src="https://royalinstitute.org/wp-content/uploads/2021/09/IMG_6310DXO-Edited.jpg" alt="Advanced Level mathematics" class="w-full h-40 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800">O/L Mathematics</h3>
+                        <p class="text-gray-600 mb-4">In-depth coverage of Combined Mathematics syllabus.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-blue-600">180 Lessons</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Competitive Exams -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition duration-300">
+                    <img src="https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.dailymirror.lk/media/images/image_1524158372-08a12ce93d.jpg" alt="Competitive exams preparation" class="w-full h-40 object-cover" loading="lazy">
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-gray-800"> Exams</h3>
+                        <p class="text-gray-600 mb-4">Special preparation for exams.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm font-medium text-blue-600">90 Lessons</span>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Learning Games</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Math Duels -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-swords text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Math Duels</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Challenge friends in real-time math battles. Answer correctly to defeat your opponent!</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-purple-600">Multiplayer</span>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Puzzle Island -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-puzzle-piece text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Puzzle Island</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Solve math puzzles to unlock new islands and collect treasures.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-green-600">Adventure</span>
+                        <a href="#" class="text-green-600 hover:text-green-800 font-medium">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Speed Math -->
+                <div class="bg-gray-50 rounded-xl p-6 shadow-sm hover:shadow-md transition duration-300">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-stopwatch text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Speed Math</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Test your calculation speed against the clock. How fast can you solve problems?</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-red-600">Timed</span>
+                        <a href="#" class="text-red-600 hover:text-red-800 font-medium">Play Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">What Students Say</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/80?random=6" alt="Student" class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Nimal Perera</h4>
+                            <p class="text-sm text-gray-500">Grade 10 Student, Colombo</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"MathLanka made algebra fun! I improved my grades from C to A in just 3 months."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/80?random=7" alt="Student" class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Kamala Silva</h4>
+                            <p class="text-sm text-gray-500">O/L Student, Kandy</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"The O/L course helped me understand complex calculus concepts through interactive lessons."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star-half-alt text-yellow-400"></i>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-4">
+                        <img src="https://picsum.photos/80?random=8" alt="Teacher" class="w-12 h-12 rounded-full mr-4" loading="lazy">
+                        <div>
+                            <h4 class="font-bold text-gray-800">Mr. Rajapakse</h4>
+                            <p class="text-sm text-gray-500">Mathematics Teacher, Galle</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600">"I recommend MathLanka to all my students. The gamified approach keeps them engaged."</p>
+                    <div class="flex mt-4">
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                        <i class="fas fa-star text-yellow-400"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Ready to Transform Your Math Skills?</h2>
+            <p class="text-xl mb-8 max-w-2xl mx-auto">Join thousands of Sri Lankan students who are learning math the fun way.</p>
+            <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+                <a href="#" class="bg-white hover:bg-gray-100 text-blue-600 font-bold py-3 px-8 rounded-lg text-center transition duration-300">Get Started for Free</a>
+                <a href="#" class="bg-transparent hover:bg-blue-700 border-2 border-white text-white font-bold py-3 px-8 rounded-lg text-center transition duration-300">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample data for courses
+        const courses = [
+            {
+                id: 1,
+                title: "Primary (Grade 1-5)",
+                description: "Foundational math skills with interactive games and stories.",
+                lessons: 120,
+                image: "https://contessa-project.eu/wp-content/uploads/2019/10/primary-school-in-sri-lanka.jpg"
+            },
+            {
+                id: 2,
+                title: "Secondary (Grade 6-9)",
+                description: "Comprehensive coverage with practice tests.",
+                lessons: 250,
+                image: "https://www.eduwire.lk/wp-content/uploads/2024/04/Challenges-of-Sri-Lankas-School-Education-System.jpg"
+            },
+            {
+                id: 3,
+                title: "O/L Mathematics",
+                description: "In-depth coverage of O/L syllabus.",
+                lessons: 180,
+                image: "https://royalinstitute.org/wp-content/uploads/2021/09/IMG_6310DXO-Edited.jpg"
+            },
+            {
+                id: 4,
+                title: "Competitive Exams",
+                description: "Special preparation exams.",
+                lessons: 90,
+                image: "https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.dailymirror.lk/media/images/image_1524158372-08a12ce93d.jpg"
+            }
+        ];
+
+        // Sample data for games
+        const games = [
+            {
+                id: 1,
+                title: "Math Duels",
+                description: "Challenge friends in real-time math battles. Answer correctly to defeat your opponent!",
+                type: "Multiplayer",
+                icon: "swords"
+            },
+            {
+                id: 2,
+                title: "Puzzle Island",
+                description: "Solve math puzzles to unlock new islands and collect treasures.",
+                type: "Adventure",
+                icon: "puzzle-piece"
+            },
+            {
+                id: 3,
+                title: "Speed Math",
+                description: "Test your calculation speed against the clock. How fast can you solve problems?",
+                type: "Timed",
+                icon: "stopwatch"
+            }
+        ];
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="#" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>

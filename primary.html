@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka Primary Grades</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look, similar to the provided interface */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #ffffff; /* White background */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container mx-auto px-4 py-12">
+        <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-800 text-center mb-12">Primary Grades</h1>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-8 justify-items-center">
+            <!-- Grade 1 Card -->
+            <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
+                <img src="https://placehold.co/400x200/ADD8E6/000000?text=Grade%201" alt="Grade 1" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Grade 1</h3>
+                    <p class="text-gray-600 text-sm mb-4">Foundational math concepts for young learners, with interactive activities.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">30 Lessons</span>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">Start &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade 2 Card -->
+            <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
+                <img src="https://placehold.co/400x200/90EE90/000000?text=Grade%202" alt="Grade 2" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Grade 2</h3>
+                    <p class="text-gray-600 text-sm mb-4">Building on basic skills, introducing new topics with engaging exercises.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">35 Lessons</span>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">Start &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade 3 Card -->
+            <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
+                <img src="https://placehold.co/400x200/FFD700/000000?text=Grade%203" alt="Grade 3" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Grade 3</h3>
+                    <p class="text-gray-600 text-sm mb-4">Intermediate math challenges, problem-solving, and critical thinking.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">40 Lessons</span>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">Start &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade 4 Card -->
+            <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
+                <img src="https://placehold.co/400x200/FFA07A/000000?text=Grade%204" alt="Grade 4" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Grade 4</h3>
+                    <p class="text-gray-600 text-sm mb-4">Advanced topics for primary level, preparing for secondary education.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">45 Lessons</span>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">Start &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade 5 Card -->
+            <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
+                <img src="https://placehold.co/400x200/87CEEB/000000?text=Grade%205" alt="Grade 5" class="w-full h-48 object-cover">
+                <div class="p-6">
+                    <h3 class="font-bold text-xl text-gray-800 mb-2">Grade 5</h3>
+                    <p class="text-gray-600 text-sm mb-4">Consolidating primary math knowledge, ready for O/L preparation.</p>
+                    <div class="flex justify-between items-center mt-4">
+                        <span class="text-sm text-gray-500">50 Lessons</span>
+                        <a href="#" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">Start &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

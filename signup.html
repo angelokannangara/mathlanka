@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka Sign Up</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look, similar to the provided interface */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f2f5; /* Light gray background */
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100 p-4 sm:p-6 lg:p-8">
+
+    <div class="w-full max-w-md bg-white rounded-lg shadow-xl p-6 sm:p-8 md:p-10 border border-gray-200">
+        <!-- Logo and Title Section -->
+        <div class="flex flex-col items-center mb-8">
+            <!-- ML Logo Placeholder - You can replace this with an actual SVG or image -->
+            <div class="flex items-center justify-center w-16 h-16 bg-blue-600 rounded-full mb-4">
+                <span class="text-white text-3xl font-bold">ML</span>
+            </div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2 text-center">Join MathLanka!</h2>
+            <p class="text-gray-500 text-base text-center">Create your account to start learning the fun way.</p>
+        </div>
+
+        <!-- Sign Up Form -->
+        <form id="signupForm" class="space-y-6">
+            <!-- Username Input -->
+            <div>
+                <label for="username" class="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    required
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base transition duration-200 ease-in-out"
+                    placeholder="Choose a username"
+                >
+            </div>
+
+            <!-- Email Input -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    required
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base transition duration-200 ease-in-out"
+                    placeholder="you@example.com"
+                >
+            </div>
+
+            <!-- Password Input -->
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    required
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base transition duration-200 ease-in-out"
+                    placeholder="Create a password"
+                >
+            </div>
+
+            <!-- Confirm Password Input -->
+            <div>
+                <label for="confirm-password" class="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirm-password"
+                    name="confirm-password"
+                    required
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-blue-500 focus:border-blue-500 text-base transition duration-200 ease-in-out"
+                    placeholder="Confirm your password"
+                >
+            </div>
+
+            <!-- Sign Up Button -->
+            <div>
+                <button
+                    type="submit"
+                    class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-lg font-semibold text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-200 ease-in-out"
+                >
+                    Sign Up
+                </button>
+            </div>
+        </form>
+
+        <!-- Login Link -->
+        <div class="mt-8 text-center">
+            <p class="text-sm text-gray-600">
+                Already have an account?
+                <a href="login.html" class="font-medium text-blue-600 hover:text-blue-500 transition duration-200 ease-in-out">
+                    Login
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Simple JavaScript to handle form submission (for demonstration)
+        document.getElementById('signupForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showMessageBox('Passwords do not match. Please try again.');
+                return;
+            }
+
+            // In a real application, you would send this data to a server
+            console.log('Username:', username);
+            console.log('Email:', email);
+            console.log('Password:', password); // In a real app, do not log plain password
+
+            showMessageBox('Account created successfully! (Check console for input values)');
+        });
+
+        // Custom message box function
+        function showMessageBox(message) {
+            const msgBox = document.createElement('div');
+            msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            msgBox.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+                    <p class="text-lg font-medium text-gray-800 mb-4">${message}</p>
+                    <button onclick="this.parentNode.parentNode.remove()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">OK</button>
+                </div>
+            `;
+            document.body.appendChild(msgBox);
+        }
+    </script>
+</body>
+</html>
