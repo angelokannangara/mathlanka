@@ -84,6 +84,35 @@
                 transform: scale3d(1, 1, 1);
             }
         }
+
+        /* Styles for the new activity */
+        .count-option {
+            background-color: #e2e8f0; /* gray-200 */
+            color: #1e293b; /* dark */
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem; /* rounded-lg */
+            font-size: 1.5rem; /* text-2xl */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .count-option:hover {
+            background-color: #cbd5e1; /* gray-300 */
+            transform: translateY(-2px);
+        }
+        .count-option.correct {
+            background-color: #10b981; /* green-500 */
+            color: white;
+        }
+        .count-option.incorrect {
+            background-color: #ef4444; /* red-500 */
+            color: white;
+        }
+        .count-option.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -113,8 +142,8 @@
     <!-- Lesson Content Section -->
     <section class="py-16 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
         <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 2: Let's Count to 6!</h1>
-            <p class="text-center text-gray-600 text-lg mb-8">Great job on counting to 3! Now let's learn more numbers.</p>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 2: 6 දක්වා ගණන් කරමු!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">3 වෙනකන් හරි අපූරුවට ගණන් කලා! දැන් තව ඉලක්කම් ඉගෙනගමු.</p>
 
             <div class="space-y-10">
                 <!-- Concept 1: Number Four -->
@@ -123,8 +152,8 @@
                         <i class="fas fa-cube lesson-icon text-orange-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-orange-700 mb-2">Number Four (4)</h3>
-                        <p class="text-gray-700 text-lg">Count with me: One, Two, Three, Four!</p>
+                        <h3 class="text-2xl font-bold text-orange-700 mb-2">හතර (4)</h3>
+                        <p class="text-gray-700 text-lg">මාත් එක්ක ගණන් කරන්න: එක, දෙක, තුන, හතර. හුරේ!</p>
                         <div class="mt-4 flex flex-wrap justify-center md:justify-start items-center">
                             <span class="text-5xl font-extrabold text-orange-600 mr-4">4</span>
                             <div class="small-shape-lesson"></div>
@@ -141,8 +170,8 @@
                         <i class="fas fa-hand-paper lesson-icon text-blue-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Number Five (5)</h3>
-                        <p class="text-gray-700 text-lg">That's how many fingers you have on one hand!</p>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">පහ (5)</h3>
+                        <p class="text-gray-700 text-lg">ඔයාගෙ අතේ තියෙන ඇගිලි ගාන බලන්න!</p>
                         <div class="mt-4 flex flex-wrap justify-center md:justify-start items-center">
                             <span class="text-5xl font-extrabold text-blue-600 mr-4">5</span>
                             <div class="small-shape-lesson circle"></div>
@@ -160,8 +189,8 @@
                         <i class="fas fa-dice-six lesson-icon text-green-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-green-700 mb-2">Number Six (6)</h3>
-                        <p class="text-gray-700 text-lg">Like the dots on a dice! Let's count six.</p>
+                        <h3 class="text-2xl font-bold text-green-700 mb-2">හය (6)</h3>
+                        <p class="text-gray-700 text-lg">දාදු කැටේක තිත් දැකල තියෙනව නේ! දැං ගණන් කරමු 6 වෙනකන්.</p>
                         <div class="mt-4 flex flex-wrap justify-center md:justify-start items-center">
                             <span class="text-5xl font-extrabold text-green-600 mr-4">6</span>
                             <div class="small-shape-lesson triangle"></div>
@@ -175,9 +204,27 @@
                 </div>
             </div>
 
+            <!-- New: Lesson Activity Section -->
+            <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම: කීය වෙනකන් ඔයාට ගණන් කරන්න පුලුවන්ද?</h2>
+                <p class="text-yellow-700 text-lg mb-8">පල්ලෙහ තියෙන හැඩතල ගාන හරියටම තෝරන්න!</p>
+
+                <div id="counting-activity-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[180px] flex flex-col justify-center items-center">
+                    <div id="shapes-display" class="flex flex-wrap justify-center items-center gap-3 mb-6">
+                        <!-- Shapes will be dynamically added here -->
+                    </div>
+                    <div id="options-container" class="flex justify-center items-center gap-4">
+                        <!-- Number options will be dynamically added here -->
+                    </div>
+                    <p id="activity-feedback" class="text-xl font-semibold mt-4"></p>
+                </div>
+
+                <button id="next-activity-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">ඊලග ක්‍රියාකාරකම</button>
+            </div>
+
             <!-- Call to Action for Game/Quiz -->
             <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
-                <h3 class="text-2xl font-bold text-green-800 mb-4">You've learned to count to 6!</h3>
+                <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයාට දැන් 6 වෙනකන් ගණන් කරන්න පුලුවන්!</h3>
                 <p class="text-green-700 text-lg mb-6">Let's check your super counting skills with a quick game!</p>
                 <a href="index.html#math-game" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
                     Play Counting Game! <i class="fas fa-dice ml-2"></i>
@@ -190,7 +237,7 @@
                     <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
                 </a>
                 <!-- This button would link to Lesson 3 when created -->
-                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 opacity-50 cursor-not-allowed">
+                <a href="grade1_lesson3.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 ">
                     Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                 </a>
             </div>
@@ -284,6 +331,114 @@
             mobileMenu.querySelector('button').addEventListener('click', function() {
                 mobileMenu.classList.add('hidden');
             });
+
+            // New Activity JavaScript
+            const shapesDisplay = document.getElementById('shapes-display');
+            const optionsContainer = document.getElementById('options-container');
+            const activityFeedback = document.getElementById('activity-feedback');
+            const nextActivityBtn = document.getElementById('next-activity-btn');
+
+            let correctAnswer = 0;
+
+            const shapeTypes = ['square', 'circle', 'triangle'];
+            const shapeColors = ['bg-orange-400', 'bg-blue-400', 'bg-green-400', 'bg-red-400', 'bg-purple-400'];
+
+            function generateShapes(count) {
+                shapesDisplay.innerHTML = ''; // Clear previous shapes
+                const shapeType = shapeTypes[Math.floor(Math.random() * shapeTypes.length)];
+                const shapeColor = shapeColors[Math.floor(Math.random() * shapeColors.length)];
+
+                for (let i = 0; i < count; i++) {
+                    const shape = document.createElement('div');
+                    shape.className = `small-shape-lesson ${shapeType} ${shapeColor}`;
+                    if (shapeType === 'triangle') {
+                        // Triangles need custom border colors for variety
+                        const triangleColors = ['#f59e0b', '#3b82f6', '#10b981', '#ef4444', '#a78bfa']; // accent, blue, green, red, purple
+                        shape.style.borderBottomColor = triangleColors[Math.floor(Math.random() * triangleColors.length)];
+                        shape.style.backgroundColor = 'transparent'; // Ensure background doesn't override triangle border
+                    }
+                    shapesDisplay.appendChild(shape);
+                }
+            }
+
+            function generateOptions(correctCount) {
+                optionsContainer.innerHTML = ''; // Clear previous options
+                let options = new Set();
+                options.add(correctCount);
+
+                // Add incorrect options, ensuring they are between 1 and 6 and unique
+                while (options.size < 3) { // Generate 3 options (1 correct, 2 incorrect)
+                    let incorrectOption = Math.floor(Math.random() * 6) + 1; // Numbers 1-6
+                    if (incorrectOption !== correctCount) {
+                        options.add(incorrectOption);
+                    }
+                }
+
+                // Convert set to array and shuffle
+                options = Array.from(options);
+                for (let i = options.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [options[i], options[j]] = [options[j], options[i]];
+                }
+
+                options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'count-option';
+                    button.textContent = option;
+                    button.dataset.value = option;
+                    button.addEventListener('click', handleOptionClick);
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function handleOptionClick(event) {
+                const selectedValue = parseInt(event.target.dataset.value);
+                const allOptions = optionsContainer.querySelectorAll('.count-option');
+
+                // Disable all options after selection
+                allOptions.forEach(btn => btn.classList.add('disabled'));
+
+                if (selectedValue === correctAnswer) {
+                    activityFeedback.textContent = 'හුරේ! හරියටම හරි!';
+                    activityFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    event.target.classList.add('correct');
+                    nextActivityBtn.classList.remove('hidden'); // Show next activity button
+                } else {
+                    activityFeedback.textContent = `අයියෝ! ඒ පාරනම් වැරදියි. උත්තරේ ${correctAnswer}. ආයෙ පාරක් උත්සහ කරමු!`;
+                    activityFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    event.target.classList.add('incorrect');
+                    // Highlight the correct answer after a short delay
+                    setTimeout(() => {
+                        allOptions.forEach(btn => {
+                            if (parseInt(btn.dataset.value) === correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    }, 500);
+
+                    // Reset activity after a short delay to allow re-trying
+                    setTimeout(() => {
+                        startNewActivity();
+                    }, 2000);
+                }
+            }
+
+            function startNewActivity() {
+                // Pick a random count between 4 and 6 for this lesson
+                correctAnswer = Math.floor(Math.random() * 3) + 4; // Generates 4, 5, or 6
+
+                generateShapes(correctAnswer);
+                generateOptions(correctAnswer);
+
+                activityFeedback.textContent = ''; // Clear feedback
+                activityFeedback.className = 'text-xl font-semibold mt-4'; // Reset classes
+                nextActivityBtn.classList.add('hidden'); // Hide next activity button
+            }
+
+            nextActivityBtn.addEventListener('click', startNewActivity);
+
+            // Start the first activity when the page loads
+            startNewActivity();
         });
     </script>
 </body>
