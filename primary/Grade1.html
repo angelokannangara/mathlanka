@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 1</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a clean look, similar to the provided interface */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #6cc4ff; /* White background */
+        }
+
+        .draggable-shape {
+        cursor: grab;
+        user-select: none;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: bold;
+        transition: transform 0.1s ease-out;
+        box-sizing: border-box; /* Include padding/border in width/height */
+    }
+
+    /* Level 1 Shapes */
+    .draggable-red-square {
+        background-color: #ef4444; /* red-500 */
+        border-radius: 8px;
+    }
+    .draggable-blue-square {
+        background-color: #3b82f6; /* blue-500 */
+        border-radius: 8px;
+    }
+
+    /* Common drag states */
+    .dragging {
+        opacity: 0.7;
+        transform: scale(1.1);
+        cursor: grabbing;
+    }
+    .drag-over {
+        border-color: #10b981 !important; /* green-500 */
+        box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.5); /* Highlight on drag over */
+    }
+
+    /* Level 2 Objects */
+    .l2-object {
+        cursor: pointer;
+        background-color: #f59e0b; /* accent color */
+        border-radius: 50%; /* Make them circles */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        color: white;
+        border: 4px solid transparent;
+        transition: transform 0.2s, border-color 0.2s;
+    }
+    .l2-object:hover {
+        transform: translateY(-5px);
+    }
+    .l2-object.correct {
+        border-color: #10b981; /* green */
+        transform: scale(1.05);
+    }
+    .l2-object.incorrect {
+        border-color: #ef4444; /* red */
+        transform: scale(0.95);
+        opacity: 0.7;
+    }
+    .l2-object.disabled {
+        pointer-events: none;
+        cursor: default;
+    }
+
+    /* Level 3 Quantity Boxes */
+    .draggable-quantity-box {
+        cursor: grab;
+        user-select: none;
+        width: 80px; /* Larger to fit shapes */
+        height: 80px;
+        background-color: #e0f2f7; /* Light blue */
+        border-radius: 12px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-center;
+        align-items: center;
+        gap: 4px; /* Space between small shapes */
+        padding: 5px;
+        transition: transform 0.1s ease-out;
+        box-sizing: border-box;
+        border: 2px solid #a7d9ee;
+    }
+    .draggable-quantity-box.dragging {
+        opacity: 0.7;
+        transform: scale(1.05);
+        cursor: grabbing;
+    }
+
+    /* Small shapes inside quantity boxes */
+    .small-shape {
+        width: 15px;
+        height: 15px;
+        background-color: white;
+        border-radius: 4px;
+        border: 1px solid #7dd3fc; /* sky-400 */
+    }
+    .small-shape.circle {
+        border-radius: 50%;
+        background-color: #a78bfa; /* purple-400 */
+    }
+    .small-shape.triangle {
+        width: 0;
+        height: 0;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-bottom: 16px solid #fbbf24; /* amber-400 */
+        background-color: transparent; /* Override background for triangle */
+        border-radius: 0;
+    }    
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <section id="math-game" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">Grade 1 Math Games</h2>
+            <p id="level-title" class="text-xl text-center mb-8 text-blue-700 font-semibold">Ready for Level 1!</p>
+
+            <div id="game-area" class="relative min-h-[400px] bg-gray-50 p-8 rounded-xl shadow-lg flex flex-col items-center justify-center">
+
+                <div id="level-1-content" class="absolute inset-0 p-8 flex flex-col md:flex-row justify-center items-center gap-8 hidden">
+                    <div id="l1-source-box" class="bg-gray-100 p-8 rounded-xl shadow-md w-full md:w-1/3 min-h-[200px] flex flex-wrap justify-center items-center gap-4 border-2 border-dashed border-gray-300">
+                        <p class="text-gray-500 text-lg">Drag squares from here</p>
+                    </div>
+                    <div class="flex flex-col gap-8 w-full md:w-1/2">
+                        <div id="l1-target-box-red" class="bg-red-50 p-8 rounded-xl shadow-md min-h-[150px] border-2 border-dashed border-red-300 flex flex-wrap justify-center items-center gap-4" data-accept-color="red">
+                            <p class="text-red-600 text-lg">Drop Red Squares Here</p>
+                        </div>
+                        <div id="l1-target-box-blue" class="bg-blue-50 p-8 rounded-xl shadow-md min-h-[150px] border-2 border-dashed border-blue-300 flex flex-wrap justify-center items-center gap-4" data-accept-color="blue">
+                            <p class="text-blue-600 text-lg">Drop Blue Squares Here</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="level-2-content" class="absolute inset-0 p-8 flex flex-col justify-center items-center gap-8 hidden">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Click the Larger Object!</h3>
+                    <div id="l2-objects-container" class="flex justify-center items-end gap-12 min-h-[150px]">
+                        </div>
+                    <p id="l2-feedback" class="text-lg font-medium mt-4"></p>
+                </div>
+
+                <div id="level-3-content" class="absolute inset-0 p-8 flex flex-col md:flex-row justify-center items-center gap-8 hidden">
+                    <div id="l3-source-box" class="bg-gray-100 p-8 rounded-xl shadow-md w-full md:w-1/3 min-h-[200px] flex flex-wrap justify-center items-center gap-4 border-2 border-dashed border-gray-300">
+                        <p class="text-gray-500 text-lg">Drag quantity boxes from here</p>
+                    </div>
+                    <div class="flex flex-col gap-8 w-full md:w-1/2">
+                        <div id="l3-target-box-1" class="bg-purple-50 p-8 rounded-xl shadow-md min-h-[100px] border-2 border-dashed border-purple-300 flex justify-center items-center gap-4" data-accept-quantity="1">
+                            <span class="text-purple-600 text-3xl font-bold">1</span>
+                        </div>
+                        <div id="l3-target-box-2" class="bg-green-50 p-8 rounded-xl shadow-md min-h-[100px] border-2 border-dashed border-green-300 flex justify-center items-center gap-4" data-accept-quantity="2">
+                            <span class="text-green-600 text-3xl font-bold">2</span>
+                        </div>
+                        <div id="l3-target-box-3" class="bg-orange-50 p-8 rounded-xl shadow-md min-h-[100px] border-2 border-dashed border-orange-300 flex justify-center items-center gap-4" data-accept-quantity="3">
+                            <span class="text-orange-600 text-3xl font-bold">3</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="absolute bottom-4 flex gap-4">
+                    <button id="start-game-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">Start Game</button>
+                    <button id="next-level-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Level</button>
+                    <button id="reset-level-btn" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Reset Level</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+        // ... (your existing JavaScript code, like the mobile menu toggle) ...
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Game State Variables ---
+            let currentLevel = 0; // 0 for initial state, 1 for Level 1, etc.
+            let draggedItem = null;
+            let levelCompletionStatus = {
+                1: false,
+                2: false,
+                3: false
+            };
+    
+            // --- DOM Elements ---
+            const levelTitle = document.getElementById('level-title');
+            const gameArea = document.getElementById('game-area');
+            const levelContents = {
+                1: document.getElementById('level-1-content'),
+                2: document.getElementById('level-2-content'),
+                3: document.getElementById('level-3-content')
+            };
+            const startGameBtn = document.getElementById('start-game-btn');
+            const nextLevelBtn = document.getElementById('next-level-btn');
+            const resetLevelBtn = document.getElementById('reset-level-btn');
+    
+            // --- Level 1 Elements ---
+            const l1SourceBox = document.getElementById('l1-source-box');
+            const l1TargetBoxRed = document.getElementById('l1-target-box-red');
+            const l1TargetBoxBlue = document.getElementById('l1-target-box-blue');
+    
+            // --- Level 2 Elements ---
+            const l2ObjectsContainer = document.getElementById('l2-objects-container');
+            const l2Feedback = document.getElementById('l2-feedback');
+            let l2CorrectObjectId = null;
+    
+            // --- Level 3 Elements ---
+            const l3SourceBox = document.getElementById('l3-source-box');
+            const l3TargetBox1 = document.getElementById('l3-target-box-1');
+            const l3TargetBox2 = document.getElementById('l3-target-box-2');
+            const l3TargetBox3 = document = document.getElementById('l3-target-box-3');
+    
+    
+            // --- Helper Functions for Shapes ---
+    
+            /**
+             * Creates a draggable shape element.
+             * @param {string} id - Unique ID for the element.
+             * @param {string} typeClass - CSS class for shape type (e.g., 'red-square', 'small-shape').
+             * @param {string} textContent - Text to display (optional).
+             * @param {Object} dataset - Custom data attributes (e.g., { 'color': 'red' }).
+             * @returns {HTMLDivElement} The created draggable element.
+             */
+            function createDraggableElement(id, typeClass, textContent = '', dataset = {}, size = null) {
+                const div = document.createElement('div');
+                div.className = `draggable-shape ${typeClass}`;
+                div.id = id;
+                div.textContent = textContent;
+                div.setAttribute('draggable', 'true');
+                for (const key in dataset) {
+                    div.dataset[key] = dataset[key];
+                }
+                if (size) {
+                    div.style.width = `${size}px`;
+                    div.style.height = `${size}px`;
+                }
+                return div;
+            }
+    
+            /**
+             * Creates a small shape element for quantity boxes.
+             * @param {string} shapeType - 'square', 'circle', or 'triangle'.
+             */
+            function createSmallShape(shapeType) {
+                const div = document.createElement('div');
+                div.className = `small-shape ${shapeType}`;
+                return div;
+            }
+    
+            // --- General Drag & Drop Handlers ---
+    
+            function handleDragStart(e) {
+                draggedItem = e.target;
+                setTimeout(() => {
+                    draggedItem.classList.add('dragging');
+                }, 0);
+                e.dataTransfer.setData('text/plain', draggedItem.id);
+            }
+    
+            function handleDragEnd() {
+                if (draggedItem) {
+                    draggedItem.classList.remove('dragging');
+                }
+                draggedItem = null;
+            }
+    
+            function handleDragOver(e) {
+                e.preventDefault(); // Crucial to allow dropping
+                const targetBox = e.currentTarget;
+                if (draggedItem && draggedItem.parentElement !== targetBox) { // Prevent self-hover
+                    // Level 1 specific validation
+                    if (currentLevel === 1 && targetBox.dataset.acceptColor) {
+                        if (draggedItem.dataset.color === targetBox.dataset.acceptColor) {
+                            targetBox.classList.add('drag-over');
+                        } else {
+                            targetBox.classList.remove('drag-over');
+                        }
+                        return; // Exit after L1 validation
+                    }
+                    // Level 3 specific validation
+                    if (currentLevel === 3 && targetBox.dataset.acceptQuantity) {
+                        if (draggedItem.dataset.quantity === targetBox.dataset.acceptQuantity) {
+                            targetBox.classList.add('drag-over');
+                        } else {
+                            targetBox.classList.remove('drag-over');
+                        }
+                        return; // Exit after L3 validation
+                    }
+                    // Allow dropping back to source box or valid generic targets
+                     if (targetBox.id === 'l1-source-box' || targetBox.id === 'l3-source-box') {
+                        targetBox.classList.add('drag-over');
+                     }
+                }
+            }
+    
+            function handleDragLeave(e) {
+                e.currentTarget.classList.remove('drag-over');
+            }
+    
+            function handleDrop(e) {
+                e.preventDefault();
+                const targetBox = e.currentTarget;
+                targetBox.classList.remove('drag-over');
+    
+                if (draggedItem) {
+                    let isValidDrop = false;
+    
+                    // Level 1 Drop Validation
+                    if (currentLevel === 1 && targetBox.dataset.acceptColor) {
+                        if (draggedItem.dataset.color === targetBox.dataset.acceptColor) {
+                            isValidDrop = true;
+                        }
+                    }
+                    // Level 3 Drop Validation
+                    else if (currentLevel === 3 && targetBox.dataset.acceptQuantity) {
+                        if (draggedItem.dataset.quantity === targetBox.dataset.acceptQuantity) {
+                            isValidDrop = true;
+                        }
+                    }
+                    // Drop back to source box is always valid
+                    else if (targetBox.id === 'l1-source-box' || targetBox.id === 'l3-source-box') {
+                        isValidDrop = true;
+                    }
+    
+                    if (isValidDrop) {
+                        // Remove placeholder if it exists
+                        const placeholder = targetBox.querySelector('p');
+                        if (placeholder) {
+                            placeholder.remove();
+                        }
+                        targetBox.appendChild(draggedItem);
+                        checkLevelCompletion(); // Check after each valid drop
+                    }
+                }
+            }
+    
+            // --- Level Management ---
+    
+            function showLevel(levelNum) {
+                // Hide all levels
+                Object.values(levelContents).forEach(contentDiv => contentDiv.classList.add('hidden'));
+                // Show the current level
+                if (levelContents[levelNum]) {
+                    levelContents[levelNum].classList.remove('hidden');
+                    levelTitle.textContent = `Level ${levelNum}`;
+                    currentLevel = levelNum;
+                    resetLevelBtn.classList.remove('hidden'); // Show reset button for active level
+                    nextLevelBtn.classList.add('hidden'); // Hide next level button initially
+                    initializeLevel(levelNum); // Initialize game logic for the level
+                } else {
+                    levelTitle.textContent = "All Levels Complete!";
+                    nextLevelBtn.classList.add('hidden');
+                    resetLevelBtn.classList.add('hidden');
+                    startGameBtn.classList.remove('hidden'); // Allow starting over
+                    alert("Congratulations! You've completed all levels!");
+                    currentLevel = 0; // Reset for potential replay
+                }
+            }
+    
+            function initializeLevel(levelNum) {
+                // Reset completion status for the current level
+                levelCompletionStatus[levelNum] = false;
+    
+                // Clear previous feedback/states
+                l2Feedback.textContent = '';
+                l2Feedback.className = 'text-lg font-medium mt-4'; // Reset classes
+    
+                switch (levelNum) {
+                    case 1:
+                        setupLevel1();
+                        break;
+                    case 2:
+                        setupLevel2();
+                        break;
+                    case 3:
+                        setupLevel3();
+                        break;
+                }
+            }
+    
+            function checkLevelCompletion() {
+                let completed = false;
+                if (currentLevel === 1) {
+                    const redSquares = l1TargetBoxRed.querySelectorAll('.draggable-red-square').length;
+                    const blueSquares = l1TargetBoxBlue.querySelectorAll('.draggable-blue-square').length;
+                    const totalShapes = l1SourceBox.children.length + l1TargetBoxRed.children.length + l1TargetBoxBlue.children.length - (l1SourceBox.querySelector('p') ? 1 : 0) - (l1TargetBoxRed.querySelector('p') ? 1 : 0) - (l1TargetBoxBlue.querySelector('p') ? 1 : 0);
+    
+                    // Assuming 3 red and 3 blue squares for 6 total shapes
+                    if (redSquares === 3 && blueSquares === 3 && totalShapes === 6) {
+                        completed = true;
+                    }
+                } else if (currentLevel === 3) {
+                    const q1 = l3TargetBox1.querySelectorAll('[data-quantity="1"]').length;
+                    const q2 = l3TargetBox2.querySelectorAll('[data-quantity="2"]').length;
+                    const q3 = l3TargetBox3.querySelectorAll('[data-quantity="3"]').length;
+    
+                    // Assuming 1 box for each quantity type
+                    if (q1 === 1 && q2 === 1 && q3 === 1) {
+                        completed = true;
+                    }
+                }
+                // Level 2 completion is handled directly in its click handler
+    
+                if (completed && !levelCompletionStatus[currentLevel]) {
+                    levelCompletionStatus[currentLevel] = true;
+                    nextLevelBtn.classList.remove('hidden');
+                    alert(`Level ${currentLevel} Completed! Well done!`);
+                }
+            }
+    
+            // --- Level 1: Color Sorting ---
+            function setupLevel1() {
+                l1SourceBox.innerHTML = '<p class="text-gray-500 text-lg">Drag squares from here</p>';
+                l1TargetBoxRed.innerHTML = '<p class="text-red-600 text-lg">Drop Red Squares Here</p>';
+                l1TargetBoxBlue.innerHTML = '<p class="text-blue-600 text-lg">Drop Blue Squares Here</p>';
+    
+                const shapesData = [
+                    { id: 'l1s1', type: 'red-square', color: 'red' },
+                    { id: 'l1s2', type: 'blue-square', color: 'blue' },
+                    { id: 'l1s3', type: 'red-square', color: 'red' },
+                    { id: 'l1s4', type: 'blue-square', color: 'blue' },
+                    { id: 'l1s5', type: 'red-square', color: 'red' },
+                    { id: 'l1s6', type: 'blue-square', color: 'blue' },
+                ];
+    
+                shapesData.forEach(shape => {
+                    const el = createDraggableElement(shape.id, `draggable-${shape.type}`, '', { color: shape.color });
+                    l1SourceBox.appendChild(el);
+                });
+    
+                // Attach drag listeners to all new draggable elements
+                document.querySelectorAll('#l1-source-box .draggable-shape').forEach(el => {
+                    el.addEventListener('dragstart', handleDragStart);
+                    el.addEventListener('dragend', handleDragEnd);
+                });
+    
+                // Attach drop listeners to target boxes and source
+                l1TargetBoxRed.addEventListener('dragover', handleDragOver);
+                l1TargetBoxRed.addEventListener('dragleave', handleDragLeave);
+                l1TargetBoxRed.addEventListener('drop', handleDrop);
+    
+                l1TargetBoxBlue.addEventListener('dragover', handleDragOver);
+                l1TargetBoxBlue.addEventListener('dragleave', handleDragLeave);
+                l1TargetBoxBlue.addEventListener('drop', handleDrop);
+    
+                l1SourceBox.addEventListener('dragover', handleDragOver);
+                l1SourceBox.addEventListener('dragleave', handleDragLeave);
+                l1SourceBox.addEventListener('drop', handleDrop);
+            }
+    
+            // --- Level 2: Larger Object Selection ---
+            function setupLevel2() {
+                l2ObjectsContainer.innerHTML = '';
+                l2Feedback.textContent = '';
+                l2Feedback.className = 'text-lg font-medium mt-4'; // Reset classes
+                l2CorrectObjectId = null;
+    
+                const size1 = Math.floor(Math.random() * 40) + 80; // 80-120px
+                const size2 = Math.floor(Math.random() * 40) + 80; // 80-120px
+    
+                let largerSize, smallerSize;
+                let largerId, smallerId;
+    
+                // Ensure there's a clear larger object
+                if (size1 > size2) {
+                    largerSize = size1;
+                    smallerSize = size2 - Math.min(20, size2 / 2); // Make smaller significantly smaller
+                    largerId = 'l2obj1';
+                    smallerId = 'l2obj2';
+                } else if (size2 > size1) {
+                    largerSize = size2;
+                    smallerSize = size1 - Math.min(20, size1 / 2);
+                    largerId = 'l2obj2';
+                    smallerId = 'l2obj1';
+                } else { // If sizes are equal, make one larger
+                    largerSize = size1 + 30;
+                    smallerSize = size1;
+                    largerId = 'l2obj1';
+                    smallerId = 'l2obj2';
+                }
+    
+                const object1 = document.createElement('div');
+                object1.id = 'l2obj1';
+                object1.className = 'l2-object';
+                object1.style.width = `${largerId === 'l2obj1' ? largerSize : smallerSize}px`;
+                object1.style.height = `${largerId === 'l2obj1' ? largerSize : smallerSize}px`;
+                object1.textContent = ''; // No text content
+                object1.addEventListener('click', handleL2Click);
+    
+                const object2 = document.createElement('div');
+                object2.id = 'l2obj2';
+                object2.className = 'l2-object';
+                object2.style.width = `${largerId === 'l2obj2' ? largerSize : smallerSize}px`;
+                object2.style.height = `${largerId === 'l2obj2' ? largerSize : smallerSize}px`;
+                object2.textContent = '';
+                object2.addEventListener('click', handleL2Click);
+    
+                l2CorrectObjectId = largerId;
+    
+                // Randomize order
+                if (Math.random() < 0.5) {
+                    l2ObjectsContainer.appendChild(object1);
+                    l2ObjectsContainer.appendChild(object2);
+                } else {
+                    l2ObjectsContainer.appendChild(object2);
+                    l2ObjectsContainer.appendChild(object1);
+                }
+            }
+    
+            function handleL2Click(e) {
+                if (levelCompletionStatus[2]) return; // Prevent multiple clicks after completion
+    
+                const clickedObject = e.target;
+                document.querySelectorAll('.l2-object').forEach(obj => obj.classList.add('disabled')); // Disable all objects after first click
+    
+                if (clickedObject.id === l2CorrectObjectId) {
+                    l2Feedback.textContent = 'Correct! Well done.';
+                    l2Feedback.className = 'text-lg font-bold text-green-600 mt-4';
+                    clickedObject.classList.add('correct');
+                    levelCompletionStatus[2] = true;
+                    nextLevelBtn.classList.remove('hidden');
+                } else {
+                    l2Feedback.textContent = 'Incorrect. Try again.';
+                    l2Feedback.className = 'text-lg font-bold text-red-600 mt-4';
+                    clickedObject.classList.add('incorrect');
+                    // You might want to allow retries or highlight correct answer after a delay
+                    setTimeout(() => {
+                        setupLevel2(); // Reset for another try
+                        document.querySelectorAll('.l2-object').forEach(obj => obj.classList.remove('disabled', 'correct', 'incorrect'));
+                    }, 1500); // Reset after 1.5 seconds
+                }
+            }
+    
+    
+            // --- Level 3: Quantity Matching ---
+            function setupLevel3() {
+                l3SourceBox.innerHTML = '<p class="text-gray-500 text-lg">Drag quantity boxes from here</p>';
+                l3TargetBox1.innerHTML = '<span class="text-purple-600 text-3xl font-bold">1</span>';
+                l3TargetBox2.innerHTML = '<span class="text-green-600 text-3xl font-bold">2</span>';
+                l3TargetBox3.innerHTML = '<span class="text-orange-600 text-3xl font-bold">3</span>';
+    
+                const quantityData = [
+                    { id: 'l3q1', quantity: 1, type: 'square' },
+                    { id: 'l3q2', quantity: 2, type: 'circle' },
+                    { id: 'l3q3', quantity: 3, type: 'triangle' },
+                ];
+    
+                quantityData.forEach(data => {
+                    const box = createDraggableElement(data.id, 'draggable-quantity-box', '', { quantity: data.quantity });
+                    for (let i = 0; i < data.quantity; i++) {
+                        box.appendChild(createSmallShape(data.type));
+                    }
+                    l3SourceBox.appendChild(box);
+                });
+    
+                // Attach drag listeners to all new draggable elements
+                document.querySelectorAll('#l3-source-box .draggable-quantity-box').forEach(el => {
+                    el.addEventListener('dragstart', handleDragStart);
+                    el.addEventListener('dragend', handleDragEnd);
+                });
+    
+                // Attach drop listeners to target boxes and source
+                l3TargetBox1.addEventListener('dragover', handleDragOver);
+                l3TargetBox1.addEventListener('dragleave', handleDragLeave);
+                l3TargetBox1.addEventListener('drop', handleDrop);
+    
+                l3TargetBox2.addEventListener('dragover', handleDragOver);
+                l3TargetBox2.addEventListener('dragleave', handleDragLeave);
+                l3TargetBox2.addEventListener('drop', handleDrop);
+    
+                l3TargetBox3.addEventListener('dragover', handleDragOver);
+                l3TargetBox3.addEventListener('dragleave', handleDragLeave);
+                l3TargetBox3.addEventListener('drop', handleDrop);
+    
+                l3SourceBox.addEventListener('dragover', handleDragOver);
+                l3SourceBox.addEventListener('dragleave', handleDragLeave);
+                l3SourceBox.addEventListener('drop', handleDrop);
+            }
+    
+            // --- Event Listeners for Game Controls ---
+            startGameBtn.addEventListener('click', () => {
+                startGameBtn.classList.add('hidden');
+                showLevel(1);
+            });
+    
+            nextLevelBtn.addEventListener('click', () => {
+                nextLevelBtn.classList.add('hidden');
+                showLevel(currentLevel + 1);
+            });
+    
+            resetLevelBtn.addEventListener('click', () => {
+                if (currentLevel > 0) {
+                     // Re-initialize the current level
+                    initializeLevel(currentLevel);
+                    levelCompletionStatus[currentLevel] = false; // Reset completion status
+                    nextLevelBtn.classList.add('hidden'); // Hide next level button
+                } else {
+                    // If no level is active (e.g., initial state), start from level 1
+                    startGameBtn.click();
+                }
+            });
+    
+    
+            // Initial setup on page load
+            showLevel(0); // Show initial state, hide all levels
+        });
+    </script>
+</body>
+</html>
