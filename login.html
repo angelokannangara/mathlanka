@@ -114,12 +114,12 @@
             measurementId: "G-XW99KH0VWM"
         };
 
-        const appId = firebaseConfig.projectId || 'default-app-id'; // Use your projectId as the appId
+        const appId = firebaseConfig.projectId || '1:919138495654:web:50af907fc5b3f55b9b1867'; // Use your projectId as the appId
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        // const db = getFirestore(app); // Uncomment if you need to fetch user data on login page
+         const db = getFirestore(app) // Uncomment if you need to fetch user data on login page
 
         // Custom message box function
         function showMessageBox(message, type = 'info', callback = null) {
