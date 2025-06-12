@@ -89,7 +89,7 @@
         <div class="mt-8 text-center">
             <p class="text-sm text-gray-600">
                 Don't have an account?
-                <a href="signup.html" class="font-medium text-blue-600 hover:text-blue-500 transition duration-200 ease-in-out">
+                <a href="/mathlanka/signup.html" class="font-medium text-blue-600 hover:text-blue-500 transition duration-200 ease-in-out">
                     Sign Up
                 </a>
             </p>
@@ -100,30 +100,40 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        // Firestore is not strictly needed for login page, but included for consistency if future user data fetching is desired
-        // import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // Firestore is needed for fetching user data or if any Firestore operations are intended on this page
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        // Define BASE_PATH for GitHub Pages sub-directory hosting
+        const BASE_PATH = "/mathlanka/"; // Adjust this if your repo name changes
+
+        // YOUR ACTUAL FIREBASE CONFIGURATION (PASTE IT HERE)
         const firebaseConfig = {
-            apiKey: "AIzaSyBjMGNztMbvT-UxacasxvokPrdGkU5pp98",
-            authDomain: "math-lanka.firebaseapp.com",
-            projectId: "math-lanka",
-            storageBucket: "math-lanka.firebasestorage.app",
-            messagingSenderId: "919138495654",
-            appId: "1:919138495654:web:50af907fc5b3f55b9b1867",
-            measurementId: "G-XW99KH0VWM"
+          apiKey: "YOUR_API_KEY", // Replace with your actual apiKey
+          authDomain: "YOUR_AUTH_DOMAIN", // e.g., "your-project-id.firebaseapp.com"
+          projectId: "YOUR_PROJECT_ID", // e.g., "your-project-id"
+          storageBucket: "YOUR_STORAGE_BUCKET", // e.g., "your-project-id.appspot.com"
+          messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+          appId: "YOUR_APP_ID", // e.g., "1:1234567890:web:abcdef12345"
+          // measurementId: "YOUR_MEASUREMENT_ID" // Optional, if you use Analytics
         };
 
-        const appId = firebaseConfig.projectId || 'math-lanka'; // Use your projectId as the appId
+        const appId = firebaseConfig.projectId || 'default-app-id';
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-         const db = getFirestore(app) // Uncomment if you need to fetch user data on login page
+        const db = getFirestore(app); // Initialized getFirestore
 
-        // Custom message box function
+        // Custom message box function (defined once in the module scope)
         function showMessageBox(message, type = 'info', callback = null) {
+            // Remove any existing message box to prevent multiple
+            const existingMsgBox = document.getElementById('customMessageBox');
+            if (existingMsgBox) {
+                existingMsgBox.remove();
+            }
+
             const msgBox = document.createElement('div');
+            msgBox.id = 'customMessageBox'; // Give it a unique ID for easier removal
             msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
             msgBox.innerHTML = `
                 <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
@@ -133,10 +143,15 @@
             `;
             document.body.appendChild(msgBox);
 
-            document.getElementById('msgBoxOkBtn').onclick = () => {
+            // Use addEventListener for robustness
+            document.getElementById('msgBoxOkBtn').addEventListener('click', function handler() {
                 msgBox.remove();
-                if (callback) callback();
-            };
+                if (callback) {
+                    callback();
+                }
+                // Remove the event listener itself to prevent memory leaks if button is dynamic
+                this.removeEventListener('click', handler);
+            });
         }
 
         // Handle Login Form Submission
@@ -156,7 +171,7 @@
 
                 // Redirect to the dashboard upon successful login
                 showMessageBox('Login successful! Welcome!', 'info', () => {
-                    window.location.href=BASE_PATH + 'dashboard.html'; // Redirect to dashboard page
+                    window.location.href = BASE_PATH + 'dashboard.html'; // Corrected and using BASE_PATH
                 });
 
             } catch (error) {
