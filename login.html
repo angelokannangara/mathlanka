@@ -96,41 +96,32 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs and Authentication Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        // Firestore is not strictly needed for login, but included for consistency if future user data fetching is desired
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        // Firestore is not strictly needed for login page, but included for consistency if future user data fetching is desired
         // import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Firebase configuration (provided by Canvas environment)
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // Your ACTUAL FIREBASE CONFIGURATION (replace with your project's config)
+        const firebaseConfig = {
+          apiKey: "YOUR_API_KEY", // Replace with your actual apiKey
+          authDomain: "YOUR_AUTH_DOMAIN", // e.g., "your-project-id.firebaseapp.com"
+          projectId: "YOUR_PROJECT_ID", // e.g., "your-project-id"
+          storageBucket: "YOUR_STORAGE_BUCKET", // e.g., "your-project-id.appspot.com"
+          messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+          appId: "YOUR_APP_ID", // e.g., "1:1234567890:web:abcdef12345"
+          // measurementId: "YOUR_MEASUREMENT_ID" // Optional, if you use Analytics
+        };
+
+        const appId = firebaseConfig.projectId || 'default-app-id'; // Use your projectId as the appId
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         // const db = getFirestore(app); // Uncomment if you need to fetch user data on login page
 
-        // Sign in with custom token or anonymously on load
-        async function authenticateFirebase() {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                    console.log("Signed in with custom token.");
-                } else {
-                    // Fallback for development outside Canvas, or if custom token isn't provided
-                    // await signInAnonymously(auth); // Not needed for explicit signup/login
-                    console.log("No custom token provided. Firebase will handle auth via signup/login.");
-                }
-            } catch (error) {
-                console.error("Firebase authentication error on load:", error);
-                // Optionally show error message
-            }
-        }
-        authenticateFirebase();
-
-        // Custom message box function (moved here to be accessible)
+        // Custom message box function
         function showMessageBox(message, type = 'info', callback = null) {
             const msgBox = document.createElement('div');
             msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
@@ -161,12 +152,11 @@
             }
 
             try {
-                const userCredential = await signInWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
+                await signInWithEmailAndPassword(auth, email, password);
 
-                // Redirect to the main page (or a dashboard) upon successful login
+                // Redirect to the dashboard upon successful login
                 showMessageBox('Login successful! Welcome!', 'info', () => {
-                    window.location.href = 'index.html'; // Change to your desired post-login page
+                    window.location.href = 'dashboard.html'; // Redirect to dashboard page
                 });
 
             } catch (error) {
@@ -175,7 +165,7 @@
                 switch (error.code) {
                     case 'auth/user-not-found':
                     case 'auth/wrong-password':
-                    case 'auth/invalid-credential': // Newer Firebase versions use this
+                    case 'auth/invalid-credential':
                         errorMessage = 'Invalid email or password. Please try again.';
                         break;
                     case 'auth/invalid-email':

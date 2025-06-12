@@ -104,41 +104,31 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
+    <!-- Firebase SDKs and Authentication Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Firebase configuration (provided by Canvas environment)
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+        // Your ACTUAL FIREBASE CONFIGURATION (replace with your project's config)
+        const firebaseConfig = {
+            apiKey: "AIzaSyBjMGNztMbvT-UxacasxvokPrdGkU5pp98",
+            authDomain: "math-lanka.firebaseapp.com",
+            projectId: "math-lanka",
+            storageBucket: "math-lanka.firebasestorage.app",
+            messagingSenderId: "919138495654",
+            appId: "1:919138495654:web:50af907fc5b3f55b9b1867",
+            measurementId: "G-XW99KH0VWM"
+        };
+
+        const appId = firebaseConfig.projectId || 'default-app-id'; // Use your projectId as the appId
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Sign in with custom token or anonymously on load
-        async function authenticateFirebase() {
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                    console.log("Signed in with custom token.");
-                } else {
-                    // Fallback for development outside Canvas, or if custom token isn't provided
-                    // await signInAnonymously(auth); // Not needed for explicit signup/login
-                    console.log("No custom token provided. Firebase will handle auth via signup/login.");
-                }
-            } catch (error) {
-                console.error("Firebase authentication error on load:", error);
-                // Optionally show error message
-            }
-        }
-        authenticateFirebase();
-
-        // Custom message box function (moved here to be accessible)
+        // Custom message box function
         function showMessageBox(message, type = 'info', callback = null) {
             const msgBox = document.createElement('div');
             msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
@@ -155,7 +145,6 @@
                 if (callback) callback();
             };
         }
-
 
         // Handle Sign Up Form Submission
         document.getElementById('signupForm').addEventListener('submit', async function(event) {
