@@ -339,7 +339,8 @@
                     console.error("Error fetching user profile:", error);
                     usernameDisplay.textContent = user.email; // Fallback to email on error
                 }
-            } else {
+            } 
+            else {
                 // User is signed out - redirect to login page
                 console.log('User not logged in. Redirecting to login page.');
                 window.location.href = BASE_PATH + 'login.html'; // Using BASE_PATH
