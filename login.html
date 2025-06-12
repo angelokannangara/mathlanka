@@ -32,7 +32,7 @@
         <form id="loginForm" class="space-y-6">
             <!-- Email/Username Input -->
             <div>
-                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email or Username</label>
+                <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
                 <input
                     type="email"
                     id="email"
@@ -96,39 +96,99 @@
         </div>
     </div>
 
-    <script>
-        // Simple JavaScript to handle form submission (for demonstration)
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        // Firestore is not strictly needed for login, but included for consistency if future user data fetching is desired
+        // import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Firebase configuration (provided by Canvas environment)
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        // const db = getFirestore(app); // Uncomment if you need to fetch user data on login page
+
+        // Sign in with custom token or anonymously on load
+        async function authenticateFirebase() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                    console.log("Signed in with custom token.");
+                } else {
+                    // Fallback for development outside Canvas, or if custom token isn't provided
+                    // await signInAnonymously(auth); // Not needed for explicit signup/login
+                    console.log("No custom token provided. Firebase will handle auth via signup/login.");
+                }
+            } catch (error) {
+                console.error("Firebase authentication error on load:", error);
+                // Optionally show error message
+            }
+        }
+        authenticateFirebase();
+
+        // Custom message box function (moved here to be accessible)
+        function showMessageBox(message, type = 'info', callback = null) {
+            const msgBox = document.createElement('div');
+            msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            msgBox.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+                    <p class="text-lg font-medium ${type === 'error' ? 'text-red-700' : 'text-gray-800'} mb-4">${message}</p>
+                    <button id="msgBoxOkBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">OK</button>
+                </div>
+            `;
+            document.body.appendChild(msgBox);
+
+            document.getElementById('msgBoxOkBtn').onclick = () => {
+                msgBox.remove();
+                if (callback) callback();
+            };
+        }
+
+        // Handle Login Form Submission
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Prevent default form submission
 
-            const email = document.getElementById('email').value;
+            const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
 
-            // In a real application, you would send this data to a server
-            console.log('Email:', email);
-            console.log('Password:', password);
-
-            // You can add a simple message box here instead of console.log
-            // For example:
-            // showMessageBox('Login attempt with Email: ' + email + ' and Password: ' + password);
-
-            // A placeholder for a custom message box function (if needed)
-            function showMessageBox(message) {
-                // Implement your custom modal/message box logic here
-                // For example, create a div and append it to the body
-                const msgBox = document.createElement('div');
-                msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
-                msgBox.innerHTML = `
-                    <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
-                        <p class="text-lg font-medium text-gray-800 mb-4">${message}</p>
-                        <button onclick="this.parentNode.parentNode.remove()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">OK</button>
-                    </div>
-                `;
-                document.body.appendChild(msgBox);
+            if (!email || !password) {
+                showMessageBox('Please enter both email and password.', 'error');
+                return;
             }
 
-             // Example of using the message box after form submission
-            showMessageBox('Login form submitted! (Check console for input values)');
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // Redirect to the main page (or a dashboard) upon successful login
+                showMessageBox('Login successful! Welcome!', 'info', () => {
+                    window.location.href = 'index.html'; // Change to your desired post-login page
+                });
+
+            } catch (error) {
+                console.error("Login error:", error);
+                let errorMessage = "An unknown error occurred.";
+                switch (error.code) {
+                    case 'auth/user-not-found':
+                    case 'auth/wrong-password':
+                    case 'auth/invalid-credential': // Newer Firebase versions use this
+                        errorMessage = 'Invalid email or password. Please try again.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Please enter a valid email address.';
+                        break;
+                    case 'auth/too-many-requests':
+                        errorMessage = 'Too many login attempts. Please try again later.';
+                        break;
+                    default:
+                        errorMessage = `Login failed: ${error.message}`;
+                }
+                showMessageBox(errorMessage, 'error');
+            }
         });
     </script>
 </body>

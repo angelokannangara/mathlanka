@@ -104,41 +104,118 @@
         </div>
     </div>
 
-    <script>
-        // Simple JavaScript to handle form submission (for demonstration)
-        document.getElementById('signupForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
+        // Firebase configuration (provided by Canvas environment)
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
 
-            if (password !== confirmPassword) {
-                showMessageBox('Passwords do not match. Please try again.');
-                return;
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Sign in with custom token or anonymously on load
+        async function authenticateFirebase() {
+            try {
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                    console.log("Signed in with custom token.");
+                } else {
+                    // Fallback for development outside Canvas, or if custom token isn't provided
+                    // await signInAnonymously(auth); // Not needed for explicit signup/login
+                    console.log("No custom token provided. Firebase will handle auth via signup/login.");
+                }
+            } catch (error) {
+                console.error("Firebase authentication error on load:", error);
+                // Optionally show error message
             }
+        }
+        authenticateFirebase();
 
-            // In a real application, you would send this data to a server
-            console.log('Username:', username);
-            console.log('Email:', email);
-            console.log('Password:', password); // In a real app, do not log plain password
-
-            showMessageBox('Account created successfully! (Check console for input values)');
-        });
-
-        // Custom message box function
-        function showMessageBox(message) {
+        // Custom message box function (moved here to be accessible)
+        function showMessageBox(message, type = 'info', callback = null) {
             const msgBox = document.createElement('div');
             msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
             msgBox.innerHTML = `
                 <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
-                    <p class="text-lg font-medium text-gray-800 mb-4">${message}</p>
-                    <button onclick="this.parentNode.parentNode.remove()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">OK</button>
+                    <p class="text-lg font-medium ${type === 'error' ? 'text-red-700' : 'text-gray-800'} mb-4">${message}</p>
+                    <button id="msgBoxOkBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">OK</button>
                 </div>
             `;
             document.body.appendChild(msgBox);
+
+            document.getElementById('msgBoxOkBtn').onclick = () => {
+                msgBox.remove();
+                if (callback) callback();
+            };
         }
+
+
+        // Handle Sign Up Form Submission
+        document.getElementById('signupForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+
+            if (password !== confirmPassword) {
+                showMessageBox('Passwords do not match. Please try again.', 'error');
+                return;
+            }
+
+            if (!username || !email || !password) {
+                showMessageBox('Please fill in all fields.', 'error');
+                return;
+            }
+
+            try {
+                // 1. Create user with Email and Password
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+
+                // 2. Save additional user details to Firestore
+                // Path: /artifacts/{appId}/users/{userId}/user_profiles/{userUid}
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profiles`, user.uid);
+                await setDoc(userProfileRef, {
+                    username: username,
+                    email: email,
+                    createdAt: new Date()
+                });
+
+                showMessageBox('Account created successfully! You can now log in.', 'info', () => {
+                    window.location.href = 'login.html'; // Redirect to login page
+                });
+
+            } catch (error) {
+                console.error("Sign up error:", error);
+                let errorMessage = "An unknown error occurred.";
+                switch (error.code) {
+                    case 'auth/email-already-in-use':
+                        errorMessage = 'This email address is already in use.';
+                        break;
+                    case 'auth/invalid-email':
+                        errorMessage = 'Please enter a valid email address.';
+                        break;
+                    case 'auth/operation-not-allowed':
+                        errorMessage = 'Email/password accounts are not enabled. Please contact support.';
+                        break;
+                    case 'auth/weak-password':
+                        errorMessage = 'Password is too weak. Please choose a stronger password.';
+                        break;
+                    default:
+                        errorMessage = `Sign up failed: ${error.message}`;
+                }
+                showMessageBox(errorMessage, 'error');
+            }
+        });
     </script>
 </body>
 </html>
