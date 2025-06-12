@@ -121,16 +121,23 @@
             measurementId: "G-XW99KH0VWM"
         };
 
-        const appId = firebaseConfig.projectId || 'default-app-id'; // Use your projectId as the appId
+        const appId = firebaseConfig.projectId || 'default-app-id';
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        // Custom message box function
+        // Custom message box function (defined once in the module scope)
         function showMessageBox(message, type = 'info', callback = null) {
+            // Remove any existing message box to prevent multiple
+            const existingMsgBox = document.getElementById('customMessageBox');
+            if (existingMsgBox) {
+                existingMsgBox.remove();
+            }
+
             const msgBox = document.createElement('div');
+            msgBox.id = 'customMessageBox'; // Give it a unique ID for easier removal
             msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
             msgBox.innerHTML = `
                 <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
@@ -140,11 +147,17 @@
             `;
             document.body.appendChild(msgBox);
 
-            document.getElementById('msgBoxOkBtn').onclick = () => {
+            // Use addEventListener for robustness
+            document.getElementById('msgBoxOkBtn').addEventListener('click', function handler() {
                 msgBox.remove();
-                if (callback) callback();
-            };
+                if (callback) {
+                    callback();
+                }
+                // Remove the event listener itself to prevent memory leaks if button is dynamic
+                this.removeEventListener('click', handler);
+            });
         }
+
 
         // Handle Sign Up Form Submission
         document.getElementById('signupForm').addEventListener('submit', async function(event) {
@@ -166,12 +179,9 @@
             }
 
             try {
-                // 1. Create user with Email and Password
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
 
-                // 2. Save additional user details to Firestore
-                // Path: /artifacts/{appId}/users/{userId}/user_profiles/{userUid}
                 const userProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profiles`, user.uid);
                 await setDoc(userProfileRef, {
                     username: username,
