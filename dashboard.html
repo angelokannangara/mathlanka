@@ -1,10 +1,410 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MathLanka - My Dashboard</title>
+    <meta name="description" content="User dashboard for MathLanka to access lessons and games">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .course-card {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        /* Specific styles for game cards similar to index.html */
+        .game-card {
+            background-color: #ffffff; /* Adjusted from gray-50 to white for consistency with course cards */
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+        .game-icon-circle {
+            width: 48px; /* w-12 */
+            height: 48px; /* h-12 */
+            border-radius: 9999px; /* rounded-full */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px; /* mr-4 */
+        }
+    </style>
 </head>
-<body>
-    Heyitworks
+<body class="bg-gray-50 flex flex-col min-h-screen">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="/mathlanka/index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="/mathlanka/index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="/mathlanka/index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="/mathlanka/index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- User Profile/Logout Link -->
+                <a href="/mathlanka/dashboard.html" id="dashboardLink" class="text-gray-700 hover:text-blue-600 font-medium hidden md:block">
+                    My Dashboard
+                </a>
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">Logout</button>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content for Dashboard -->
+    <main class="flex-grow py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12 text-center">
+            <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome, <span id="usernameDisplay" class="text-blue-600">Guest</span>!</h1>
+            <p class="text-gray-600 text-lg mb-8">Your personalized learning journey starts here. Choose a course to begin or continue!</p>
+
+            <h2 class="text-3xl font-bold text-center mb-8 text-gray-800">Our Courses</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
+                <!-- Primary (Grade 1-5) Course Card -->
+                <div class="course-card p-6">
+                    <img src="https://contessa-project.eu/wp-content/uploads/2019/10/primary-school-in-sri-lanka.jpg" alt="Primary mathematics" class="w-full h-40 object-cover rounded-md mb-4" loading="lazy">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Primary (Grade 1-5)</h3>
+                    <p class="text-gray-600 mb-4">Foundational math skills with interactive games and stories.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-blue-600">120 Lessons</span>
+                        <a href="/mathlanka/grade1_lesson1.html" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                    </div>
+                </div>
+                
+                <!-- Secondary (Grade 6-9) Course Card -->
+                <div class="course-card p-6">
+                    <img src="https://www.eduwire.lk/wp-content/uploads/2024/04/Challenges-of-Sri-Lankas-School-Education-System.jpg" alt="Secondary mathematics" class="w-full h-40 object-cover rounded-md mb-4" loading="lazy">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Secondary (Grade 6-9)</h3>
+                    <p class="text-gray-600 mb-4">Comprehensive with practice tests.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-blue-600">250 Lessons</span>
+                        <a href="/mathlanka/grade2_lesson1.html" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                    </div>
+                </div>
+                
+                <!-- O/L Mathematics Course Card -->
+                <div class="course-card p-6">
+                    <img src="https://royalinstitute.org/wp-content/uploads/2021/09/IMG_6310DXO-Edited.jpg" alt="Advanced Level mathematics" class="w-full h-40 object-cover rounded-md mb-4" loading="lazy">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">O/L Mathematics</h3>
+                    <p class="text-gray-600 mb-4">In-depth coverage of O/L syllabus.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-blue-600">180 Lessons</span>
+                        <a href="/mathlanka/ol/ol.html" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                    </div>
+                </div>
+                
+                <!-- Competitive Exams Course Card -->
+                <div class="course-card p-6">
+                    <img src="https://bmkltsly13vb.compat.objectstorage.ap-mumbai-1.oraclecloud.com/cdn.dailymirror.lk/media/images/image_1524158372-08a12ce93d.jpg" alt="Competitive exams preparation" class="w-full h-40 object-cover rounded-md mb-4" loading="lazy">
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Competitive Exams</h3>
+                    <p class="text-gray-600 mb-4">Special preparation for exams.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-blue-600">90 Lessons</span>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-medium">Start</a>
+                    </div>
+                </div>
+            </div>
+
+            <h2 class="text-3xl font-bold text-center mb-8 mt-12 text-gray-800">Learning Games</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Math Duels Game Card -->
+                <div class="game-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="game-icon-circle bg-purple-100">
+                            <i class="fas fa-swords text-purple-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Math Duels</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Challenge friends in real-time math battles. Answer correctly to defeat your opponent!</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-purple-600">Multiplayer</span>
+                        <a href="#" class="text-purple-600 hover:text-purple-800 font-medium">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Puzzle Island Game Card -->
+                <div class="game-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="game-icon-circle bg-green-100">
+                            <i class="fas fa-puzzle-piece text-green-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Puzzle Island</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Solve math puzzles to unlock new islands and collect treasures.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-green-600">Adventure</span>
+                        <a href="#" class="text-green-600 hover:text-green-800 font-medium">Play Now</a>
+                    </div>
+                </div>
+                
+                <!-- Speed Math Game Card -->
+                <div class="game-card p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="game-icon-circle bg-red-100">
+                            <i class="fas fa-stopwatch text-red-600 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800">Speed Math</h3>
+                    </div>
+                    <p class="text-gray-600 mb-4">Test your calculation speed against the clock. How fast can you solve problems?</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm font-medium text-red-600">Timed</span>
+                        <a href="#" class="text-red-600 hover:text-red-800 font-medium">Play Now</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer (Copied from index.html) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="/mathlanka/index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="/mathlanka/index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="/mathlanka/index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="/mathlanka/index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Define BASE_PATH for GitHub Pages sub-directory hosting
+        const BASE_PATH = "/mathlanka/"; // Adjust this if your repo name changes
+
+        // YOUR ACTUAL FIREBASE CONFIGURATION (PASTE IT HERE)
+        // Make sure to replace YOUR_API_KEY, YOUR_AUTH_DOMAIN, etc., with your actual project details
+        const firebaseConfig = {
+          apiKey: "YOUR_API_KEY", 
+          authDomain: "YOUR_AUTH_DOMAIN",
+          projectId: "YOUR_PROJECT_ID",
+          storageBucket: "YOUR_STORAGE_BUCKET",
+          messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+          appId: "YOUR_APP_ID",
+          // measurementId: "YOUR_MEASUREMENT_ID" // Optional
+        };
+
+        const appId = firebaseConfig.projectId || 'default-app-id';
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const usernameDisplay = document.getElementById('usernameDisplay');
+        const dashboardLink = document.getElementById('dashboardLink');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Custom message box function (defined once in the module scope)
+        function showMessageBox(message, type = 'info', callback = null) {
+            // Remove any existing message box to prevent multiple
+            const existingMsgBox = document.getElementById('customMessageBox');
+            if (existingMsgBox) {
+                existingMsgBox.remove();
+            }
+
+            const msgBox = document.createElement('div');
+            msgBox.id = 'customMessageBox'; // Give it a unique ID for easier removal
+            msgBox.className = 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50';
+            msgBox.innerHTML = `
+                <div class="bg-white p-6 rounded-lg shadow-lg max-w-sm text-center">
+                    <p class="text-lg font-medium ${type === 'error' ? 'text-red-700' : 'text-gray-800'} mb-4">${message}</p>
+                    <button id="msgBoxOkBtn" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none">OK</button>
+                </div>
+            `;
+            document.body.appendChild(msgBox);
+
+            // Use addEventListener for robustness
+            document.getElementById('msgBoxOkBtn').addEventListener('click', function handler() {
+                msgBox.remove();
+                if (callback) {
+                    callback();
+                }
+                // Remove the event listener itself to prevent memory leaks if button is dynamic
+                this.removeEventListener('click', handler);
+            });
+        }
+
+
+        // --- Authentication State Listener ---
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in
+                console.log('User logged in:', user.uid);
+                logoutBtn.classList.remove('hidden'); // Ensure logout button is visible on dashboard
+
+                try {
+                    // Fetch username from Firestore
+                    const userProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profiles`, user.uid);
+                    const docSnap = await getDoc(userProfileRef);
+
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        usernameDisplay.textContent = userData.username || user.email; // Fallback to email
+                        console.log('User data from Firestore:', userData);
+                    } else {
+                        console.log("No user profile found in Firestore.");
+                        usernameDisplay.textContent = user.email; // Display email if no profile
+                    }
+                } catch (error) {
+                    console.error("Error fetching user profile:", error);
+                    usernameDisplay.textContent = user.email; // Fallback to email on error
+                }
+            } else {
+                // User is signed out - redirect to login page
+                console.log('User not logged in. Redirecting to login page.');
+                window.location.href = BASE_PATH + 'login.html'; // Using BASE_PATH
+            }
+        });
+
+        // --- Logout Functionality ---
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                console.log('User logged out successfully.');
+                // Redirection is handled by the onAuthStateChanged listener above
+            } catch (error) {
+                console.error("Error logging out:", error);
+                showMessageBox("Error logging out. Please try again.", 'error');
+            }
+        });
+
+        // --- Mobile Menu Toggle (Copied from index.html) ---
+        // Get the mobile menu button (adjust selector if needed for this page's header)
+        const mobileMenuButton = document.querySelector('.md\\:hidden');
+        // Create the mobile menu div if it doesn't exist already
+        let mobileMenuDiv = document.querySelector('.mobile-menu'); // Check if already exists from shared header logic
+        if (!mobileMenuDiv) {
+            mobileMenuDiv = document.createElement('div');
+            mobileMenuDiv.className = 'mobile-menu hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenuDiv.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="${BASE_PATH}index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="${BASE_PATH}index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="${BASE_PATH}index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="${BASE_PATH}index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="${BASE_PATH}dashboard.html" id="mobileDashboardLink" class="text-gray-700 hover:text-blue-600 text-xl font-medium">My Dashboard</a>
+                    <button id="mobileLogoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-6 py-2 rounded-lg font-medium text-xl">Logout</button>
+                </div>
+            `;
+            document.body.appendChild(mobileMenuDiv);
+
+            // Add event listeners for mobile menu buttons
+            mobileMenuDiv.querySelector('button').addEventListener('click', function() {
+                mobileMenuDiv.classList.add('hidden');
+            });
+            mobileMenuDiv.querySelector('#mobileDashboardLink').addEventListener('click', function(e) {
+                e.preventDefault(); // Prevent default link behavior if not needed
+                window.location.href = BASE_PATH + 'dashboard.html'; // Using BASE_PATH
+                mobileMenuDiv.classList.add('hidden');
+            });
+            mobileMenuDiv.querySelector('#mobileLogoutBtn').addEventListener('click', async () => {
+                try {
+                    await signOut(auth);
+                    mobileMenuDiv.classList.add('hidden');
+                } catch (error) {
+                    console.error("Error logging out from mobile menu:", error);
+                }
+            });
+        }
+
+        if (mobileMenuButton) { // Ensure button exists before adding listener
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenuDiv.classList.remove('hidden');
+            });
+        }
+    </script>
 </body>
 </html>
