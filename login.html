@@ -114,7 +114,7 @@
             measurementId: "G-XW99KH0VWM"
         };
 
-        const appId = firebaseConfig.projectId || '1:919138495654:web:50af907fc5b3f55b9b1867'; // Use your projectId as the appId
+        const appId = firebaseConfig.projectId || 'math-lanka'; // Use your projectId as the appId
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -156,7 +156,7 @@
 
                 // Redirect to the dashboard upon successful login
                 showMessageBox('Login successful! Welcome!', 'info', () => {
-                    window.location.href = 'dashboard.html'; // Redirect to dashboard page
+                    window.location.href= BASE_PATH + 'dashboard.html'; // Redirect to dashboard page
                 });
 
             } catch (error) {
