@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka - Grade 2 Lesson 1: Numbers to 20</title>
+    <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .visual-bundle {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 0 5px;
+            background-color: #f0f9ff; /* blue-50 */
+        }
+        .single-unit {
+            width: 25px;
+            height: 25px;
+            background-color: #f59e0b; /* accent */
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .ten-unit {
+            width: 30px;
+            height: 80px; /* Taller to represent a bundle of 10 */
+            background-color: #3b82f6; /* blue-500 */
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .ten-unit::before {
+            content: '10';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* Activity specific styles */
+        .activity-option {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .activity-option:hover {
+            background-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+        .activity-option.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .activity-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+        .activity-option.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation (Copied from index.html) -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 1: 20 දක්වා සංඛ්‍යා (දහයෙ එවා සහ එකෙ එවා)</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">ලොකු ලොකු ඉලක්කම් එකතු කරන්න කැමතිද? දැන් ඉගෙනගමු 10 එවා සහ 1 ඒවා!</p>
+
+            <div class="space-y-10">
+                <!-- Concept 1: Introducing Ten -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-cubes lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">දහයෙ ගොඩවල්! (10)</h3>
+                        <p class="text-gray-700 text-lg">අපිට දේවල් 10ක් තිබ්බොත්, අපිට පුලුවන් දහයෙ ගොඩක් හදන්න එවලින්!</p>
+                        <div class="mt-4 flex justify-center md:justify-start items-center">
+                            <span class="text-5xl font-extrabold text-blue-600 mr-4">10</span>
+                            <div class="visual-bundle">
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Numbers from 11 to 15 -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-dice-d6 lesson-icon text-green-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-green-700 mb-2"> 11 සිට 15</h3>
+                        <p class="text-gray-700 text-lg">දහයට පස්සෙ, අපි  "එකේ" එවා එකතු කරන්ව. බලන්න!</p>
+                        <div class="mt-4 space-y-4">
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-green-600 mr-4">11</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-green-600 mr-4">12</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-green-600 mr-4">13</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-green-600 mr-4">14</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-green-600 mr-4">15</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 3: Numbers from 16 to 20 -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-numeric-up-alt lesson-icon text-purple-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-purple-700 mb-2">තවත් ඉලක්කම්: 16 to 20</h3>
+                        <p class="text-gray-700 text-lg">දහයෙ ගොඩට තව එකතු කරන්නයි තියෙන්නෙ!</p>
+                        <div class="mt-4 space-y-4">
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-purple-600 mr-4">16</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-purple-600 mr-4">17</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-purple-600 mr-4">18</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-purple-600 mr-4">19</span>
+                                <div class="ten-unit"></div>
+                                <div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-purple-600 mr-4">20</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson Activity Section for Grade 2 Lesson 1 -->
+            <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම: දහයෙ ඒවා සහ එකේ එවා ගණන් කරමු!</h2>
+                <p id="activity-instructions" class="text-yellow-700 text-lg mb-8">දහයේ කණ්ඩායම් සහ එකේ කණඩායම් බලන්න, හරිම ඉලක්කම තෝරන්න!</p>
+
+                <div id="counting-activity-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[250px] flex flex-col justify-center items-center">
+                    <div id="tens-ones-display" class="flex justify-center items-end gap-2 mb-6">
+                        <!-- Tens and Ones visuals will be dynamically added here -->
+                    </div>
+                    <div id="options-container" class="flex justify-center items-center gap-4">
+                        <!-- Number options will be dynamically added here -->
+                    </div>
+                    <p id="activity-feedback" class="text-xl font-semibold mt-4"></p>
+                </div>
+
+                <button id="next-activity-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Activity</button>
+            </div>
+
+            <!-- Call to Action for Next Lesson/Quiz (or revisit games) -->
+            <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                <p class="text-green-700 text-lg mb-6">Ready to learn even more or play some fun math games?</p>
+                <!-- This link will eventually go to Grade 2 Lesson 2 or a relevant game/quiz -->
+                <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl opacity-50 cursor-not-allowed">
+                    Next Grade 2 Lesson <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Navigation between lessons (Updated for Grade 2 context) -->
+            <div class="flex justify-between mt-8">
+                <a href="grade1_lesson3.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> Back to Grade 1 Lessons
+                </a>
+                <!-- Link to next Grade 2 Lesson, currently disabled -->
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 opacity-50 cursor-not-allowed">
+                    Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer (Copied from index.html) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality (Copied from index.html)
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // New Activity JavaScript for Grade 2 Lesson 1
+            const tensOnesDisplay = document.getElementById('tens-ones-display');
+            const optionsContainer = document.getElementById('options-container');
+            const activityFeedback = document.getElementById('activity-feedback');
+            const nextActivityBtn = document.getElementById('next-activity-btn');
+
+            let correctAnswer = 0;
+
+            function createSingleUnit() {
+                const div = document.createElement('div');
+                div.className = 'single-unit';
+                return div;
+            }
+
+            function createTenUnit() {
+                const div = document.createElement('div');
+                div.className = 'ten-unit';
+                return div;
+            }
+
+            function generateTensOnesActivity() {
+                tensOnesDisplay.innerHTML = ''; // Clear previous visuals
+
+                // Generate a random number between 10 and 20 (inclusive)
+                correctAnswer = Math.floor(Math.random() * 11) + 10; // (20 - 10 + 1) + 10
+
+                const numTens = Math.floor(correctAnswer / 10); // Should be 1 or 2
+                const numOnes = correctAnswer % 10; // 0-9
+
+                // Display tens units
+                for (let i = 0; i < numTens; i++) {
+                    tensOnesDisplay.appendChild(createTenUnit());
+                }
+
+                // Display ones units (if any)
+                if (numOnes > 0) {
+                    const onesContainer = document.createElement('div');
+                    onesContainer.className = 'visual-bundle';
+                    for (let i = 0; i < numOnes; i++) {
+                        onesContainer.appendChild(createSingleUnit());
+                    }
+                    tensOnesDisplay.appendChild(onesContainer);
+                }
+
+                generateNumberOptions(correctAnswer, 10, 20); // Options for 10-20
+            }
+
+            function generateNumberOptions(correctCount, min, max) {
+                optionsContainer.innerHTML = ''; // Clear previous options
+                let options = new Set();
+                options.add(correctCount);
+
+                // Add incorrect options, ensuring they are between min and max and unique
+                while (options.size < 3) { // Generate 3 options (1 correct, 2 incorrect)
+                    let incorrectOption = Math.floor(Math.random() * (max - min + 1)) + min;
+                    if (incorrectOption !== correctCount) {
+                        options.add(incorrectOption);
+                    }
+                }
+
+                // Convert set to array and shuffle
+                Array.from(options).sort(() => Math.random() - 0.5).forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'activity-option';
+                    button.textContent = option;
+                    button.dataset.value = option;
+                    button.addEventListener('click', handleOptionClick);
+                    optionsContainer.appendChild(button);
+                });
+            }
+
+            function handleOptionClick(event) {
+                const selectedValue = parseInt(event.target.dataset.value);
+                const allOptions = optionsContainer.querySelectorAll('.activity-option');
+
+                // Disable all options after selection
+                allOptions.forEach(btn => btn.classList.add('disabled'));
+
+                if (selectedValue === correctAnswer) {
+                    activityFeedback.textContent = 'හුරේ! ඔයා හරි!';
+                    activityFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    event.target.classList.add('correct');
+                    nextActivityBtn.classList.remove('hidden'); // Show next activity button
+                } else {
+                    activityFeedback.textContent = `හයියෝ! උත්තරේ ${correctAnswer}. ආයෙ උත්සහ කරමු!`;
+                    activityFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    event.target.classList.add('incorrect');
+                    // Highlight the correct answer after a short delay
+                    setTimeout(() => {
+                        allOptions.forEach(btn => {
+                            if (parseInt(btn.dataset.value) === correctAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    }, 500);
+
+                    // Reset activity after a short delay to allow re-trying
+                    setTimeout(() => {
+                        startNewActivity();
+                    }, 2000);
+                }
+            }
+
+            function startNewActivity() {
+                generateTensOnesActivity();
+                activityFeedback.textContent = ''; // Clear feedback
+                activityFeedback.className = 'text-xl font-semibold mt-4'; // Reset classes
+                nextActivityBtn.classList.add('hidden'); // Hide next activity button
+            }
+
+            nextActivityBtn.addEventListener('click', startNewActivity);
+
+            // Start the first activity when the page loads
+            startNewActivity();
+        });
+    </script>
+</body>
+</html>

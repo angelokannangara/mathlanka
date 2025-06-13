@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka - Grade 2 Lesson 2: Numbers to 50 & Ordering</title>
+    <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .visual-bundle {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            padding: 8px;
+            margin: 0 5px;
+            background-color: #f0f9ff; /* blue-50 */
+        }
+        .single-unit {
+            width: 25px;
+            height: 25px;
+            background-color: #f59e0b; /* accent */
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+        }
+        .ten-unit {
+            width: 30px;
+            height: 80px; /* Taller to represent a bundle of 10 */
+            background-color: #3b82f6; /* blue-500 */
+            border-radius: 4px;
+            margin: 2px;
+            display: inline-block;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+        }
+        .ten-unit::before {
+            content: '10';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+
+        /* Activity specific styles */
+        .activity-option {
+            background-color: #e2e8f0;
+            color: #1e293b;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .activity-option:hover {
+            background-color: #cbd5e1;
+            transform: translateY(-2px);
+        }
+        .activity-option.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .activity-option.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+        .activity-option.disabled {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
+        /* Styles for ordering activity */
+        .order-number-item {
+            background-color: #dbeafe; /* blue-100 */
+            border: 2px solid #93c5fd; /* blue-300 */
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e40af; /* secondary */
+            cursor: grab;
+            transition: transform 0.2s, box-shadow 0.2s;
+            touch-action: none; /* Disable default touch actions */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+        }
+        .order-number-item:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        .order-drop-zone {
+            background-color: #f0f9ff; /* blue-50 */
+            border: 2px dashed #93c5fd; /* blue-300 */
+            min-width: 80px;
+            height: 60px;
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #60a5fa; /* blue-400 */
+            margin: 0 5px;
+        }
+        .order-drop-zone.drag-over {
+            background-color: #dbeafe; /* blue-100 */
+            border-color: #2563eb; /* primary */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-purple-50 to-indigo-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 2: 50 දක්වා සංඛ්‍යා!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">අපි දැන් 50 වෙනකන් ගණන් කරල ඒවා අනුපිළිවෙලට තියන්න ඉගෙන ගමු.</p>
+
+            <div class="space-y-10">
+                <!-- Concept 1: Counting Tens (20, 30, 40, 50) -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-layer-group lesson-icon text-teal-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-teal-700 mb-2">දහය බැගින් ගනන් කරමු: 20, 30, 40, 50</h3>
+                        <p class="text-gray-700 text-lg">අපිට දහයේ ගොඩවල් ලේසියෙන් ගණන් කිරිමට පුලුවනි!</p>
+                        <div class="mt-4 space-y-4">
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-teal-600 mr-4">20</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-teal-600 mr-4">30</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-teal-600 mr-4">40</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-teal-600 mr-4">50</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Numbers from 21 to 50 (Mixed Tens and Ones) -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-calculator lesson-icon text-orange-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-orange-700 mb-2">25, 33, 48 වැනි සංඛ්‍යා!</h3>
+                        <p class="text-gray-700 text-lg">සෑම ඉලක්කමක් ම සෑදී තිබෙන්නෙ දහයේ ඒවා සහ එකේ එවා එක් වීමෙනි:</p>
+                        <div class="mt-4 space-y-4">
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-orange-600 mr-4">25</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div>
+                                <div class="visual-bundle"><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-orange-600 mr-4">33</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div>
+                                <div class="visual-bundle"><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div></div>
+                            </div>
+                            <div class="flex justify-center md:justify-start items-center">
+                                <span class="text-4xl font-extrabold text-orange-600 mr-4">48</span>
+                                <div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div><div class="ten-unit"></div>
+                                <div class="visual-bundle"><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div><div class="single-unit"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 3: Ordering Numbers -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-amount-down lesson-icon text-pink-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-pink-700 mb-2">සංඛ්‍යා අනුපිලිවෙලට තබමු</h3>
+                        <p class="text-gray-700 text-lg">අපිට සංඛ්‍යා කුඩාම සංඛ්‍යාවේ සිට විශාලම සංඛ්‍යාව දක්වාත්, විශාලම සංඛ්‍යාවේ සිට කුඩාම සංඛ්‍යාව දක්වාත් සෑදිය හැකියි. </p>
+                        <div class="mt-4 flex flex-col items-center">
+                            <p class="text-xl font-bold text-gray-800 mb-2">Example: Order from Smallest to Biggest</p>
+                            <p class="text-3xl font-extrabold text-pink-600">23, 15, 38</p>
+                            <i class="fas fa-arrow-down text-3xl text-gray-400 my-2"></i>
+                            <p class="text-3xl font-extrabold text-green-600">15, 23, 38</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Lesson Activity Section for Grade 2 Lesson 2 -->
+            <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity: සංඛ්‍යා ගණන් කර පිළිවෙලට තබමු!</h2>
+                <p id="activity-instructions" class="text-yellow-700 text-lg mb-8">දැන් දහයෙ ඒවා සහා එකේ එවා එකතු කර ගණන් කරන්න සහ පිළිවෙලට තැබීමට පුරුදු වෙමු</p>
+
+                <div id="g2l2-activity-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[300px] flex flex-col justify-center items-center">
+                    <div id="g2l2-visual-display" class="flex justify-center items-end gap-2 mb-6">
+                        <!-- Tens and Ones visuals or numbers for ordering will be here -->
+                    </div>
+                    <div id="g2l2-options-container" class="flex justify-center items-center gap-4">
+                        <!-- Number options for counting or drag-drop zones for ordering -->
+                    </div>
+                     <div id="draggable-numbers-container" class="flex flex-wrap justify-center items-center gap-4 hidden mt-6">
+                        <!-- Draggable numbers for ordering -->
+                    </div>
+                    <p id="g2l2-activity-feedback" class="text-xl font-semibold mt-4"></p>
+                </div>
+
+                <button id="g2l2-next-activity-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Activity</button>
+            </div>
+
+            <!-- Call to Action for Next Lesson/Quiz (or revisit games) -->
+            <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-green-800 mb-4">නියමයි!</h3>
+                <p class="text-green-700 text-lg mb-6">Ready for more math challenges?</p>
+                <!-- This link will eventually go to Grade 2 Lesson 3 or a relevant game/quiz -->
+                <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl opacity-50 cursor-not-allowed">
+                    Next Grade 2 Lesson <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Navigation between lessons -->
+            <div class="flex justify-between mt-8">
+                <a href="grade2_lesson1.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                </a>
+                <!-- Link to next Grade 2 Lesson, currently disabled -->
+                <a href="#" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 opacity-50 cursor-not-allowed">
+                    Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality (Copied from index.html)
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Lesson 2 Activity JavaScript
+            const g2l2VisualDisplay = document.getElementById('g2l2-visual-display');
+            const g2l2OptionsContainer = document.getElementById('g2l2-options-container');
+            const g2l2ActivityFeedback = document.getElementById('g2l2-activity-feedback');
+            const g2l2NextActivityBtn = document.getElementById('g2l2-next-activity-btn');
+            const activityInstructions = document.getElementById('activity-instructions');
+            const draggableNumbersContainer = document.getElementById('draggable-numbers-container');
+
+            let currentActivityType = 'counting'; // 'counting' or 'ordering'
+            let g2l2CorrectAnswer = 0;
+            let orderedNumbers = [];
+
+            function createSingleUnit() {
+                const div = document.createElement('div');
+                div.className = 'single-unit';
+                return div;
+            }
+
+            function createTenUnit() {
+                const div = document.createElement('div');
+                div.className = 'ten-unit';
+                return div;
+            }
+
+            function generateCountingActivity() {
+                activityInstructions.textContent = 'Look at the groups of tens and ones, then click on the correct number!';
+                g2l2VisualDisplay.classList.remove('hidden');
+                g2l2OptionsContainer.classList.remove('hidden');
+                draggableNumbersContainer.classList.add('hidden');
+
+                g2l2VisualDisplay.innerHTML = ''; // Clear previous visuals
+                g2l2OptionsContainer.innerHTML = ''; // Clear previous options
+
+                // Generate a random number between 21 and 50 (inclusive)
+                g2l2CorrectAnswer = Math.floor(Math.random() * 30) + 21; // (50 - 21 + 1) + 21
+
+                const numTens = Math.floor(g2l2CorrectAnswer / 10);
+                const numOnes = g2l2CorrectAnswer % 10;
+
+                // Display tens units
+                for (let i = 0; i < numTens; i++) {
+                    g2l2VisualDisplay.appendChild(createTenUnit());
+                }
+
+                // Display ones units (if any)
+                if (numOnes > 0) {
+                    const onesContainer = document.createElement('div');
+                    onesContainer.className = 'visual-bundle';
+                    for (let i = 0; i < numOnes; i++) {
+                        onesContainer.appendChild(createSingleUnit());
+                    }
+                    g2l2VisualDisplay.appendChild(onesContainer);
+                }
+
+                // Generate number options (3 options)
+                let options = new Set();
+                options.add(g2l2CorrectAnswer);
+                while (options.size < 3) {
+                    let incorrectOption = Math.floor(Math.random() * 30) + 21;
+                    if (incorrectOption !== g2l2CorrectAnswer) {
+                        options.add(incorrectOption);
+                    }
+                }
+
+                Array.from(options).sort(() => Math.random() - 0.5).forEach(option => {
+                    const button = document.createElement('button');
+                    button.className = 'activity-option';
+                    button.textContent = option;
+                    button.dataset.value = option;
+                    button.addEventListener('click', handleCountingOptionClick);
+                    g2l2OptionsContainer.appendChild(button);
+                });
+            }
+
+            function generateOrderingActivity() {
+                activityInstructions.textContent = 'Drag and drop the numbers to put them in order from smallest to biggest!';
+                g2l2VisualDisplay.classList.add('hidden');
+                g2l2OptionsContainer.classList.remove('hidden'); // This will hold drop zones
+                draggableNumbersContainer.classList.remove('hidden');
+
+                g2l2VisualDisplay.innerHTML = '';
+                g2l2OptionsContainer.innerHTML = '';
+                draggableNumbersContainer.innerHTML = '';
+
+                // Generate 3 random numbers between 10 and 50 for ordering
+                let numbers = new Set();
+                while (numbers.size < 3) {
+                    numbers.add(Math.floor(Math.random() * 41) + 10); // 10-50
+                }
+                numbers = Array.from(numbers);
+                orderedNumbers = [...numbers].sort((a, b) => a - b); // Correct sorted order
+
+                // Create draggable number items
+                numbers.sort(() => Math.random() - 0.5).forEach(num => { // Shuffle for display
+                    const draggableItem = document.createElement('div');
+                    draggableItem.className = 'order-number-item';
+                    draggableItem.textContent = num;
+                    draggableItem.setAttribute('draggable', true);
+                    draggableItem.addEventListener('dragstart', handleDragStart);
+                    draggableNumbersContainer.appendChild(draggableItem);
+                });
+
+                // Create drop zones
+                for (let i = 0; i < 3; i++) {
+                    const dropZone = document.createElement('div');
+                    dropZone.className = 'order-drop-zone';
+                    dropZone.dataset.index = i; // Store index for validation
+                    dropZone.addEventListener('dragover', handleDragOver);
+                    dropZone.addEventListener('dragleave', handleDragLeave);
+                    dropZone.addEventListener('drop', handleDrop);
+                    g2l2OptionsContainer.appendChild(dropZone);
+                }
+            }
+
+            function handleCountingOptionClick(event) {
+                const selectedValue = parseInt(event.target.dataset.value);
+                const allOptions = g2l2OptionsContainer.querySelectorAll('.activity-option');
+
+                allOptions.forEach(btn => btn.classList.add('disabled'));
+
+                if (selectedValue === g2l2CorrectAnswer) {
+                    g2l2ActivityFeedback.textContent = 'Correct! You understand tens and ones!';
+                    g2l2ActivityFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    event.target.classList.add('correct');
+                    g2l2NextActivityBtn.classList.remove('hidden');
+                } else {
+                    g2l2ActivityFeedback.textContent = `Oops! The answer was ${g2l2CorrectAnswer}. Let's try again!`;
+                    g2l2ActivityFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    event.target.classList.add('incorrect');
+                    setTimeout(() => {
+                        allOptions.forEach(btn => {
+                            if (parseInt(btn.dataset.value) === g2l2CorrectAnswer) {
+                                btn.classList.add('correct');
+                            }
+                        });
+                    }, 500);
+                    setTimeout(startNewActivity, 2000);
+                }
+            }
+
+            // Drag and Drop Handlers
+            let draggedItem = null;
+
+            function handleDragStart(event) {
+                draggedItem = event.target;
+                event.dataTransfer.setData('text/plain', event.target.textContent);
+                event.dataTransfer.effectAllowed = 'move';
+            }
+
+            function handleDragOver(event) {
+                event.preventDefault(); // Necessary to allow drop
+                event.target.classList.add('drag-over');
+                event.dataTransfer.dropEffect = 'move';
+            }
+
+            function handleDragLeave(event) {
+                event.target.classList.remove('drag-over');
+            }
+
+            function handleDrop(event) {
+                event.preventDefault();
+                event.target.classList.remove('drag-over');
+
+                if (draggedItem) {
+                    // If dropping into an empty drop zone
+                    if (!event.target.children.length) {
+                        event.target.appendChild(draggedItem);
+                        checkOrderingCompletion();
+                    } else {
+                        // If dropping into a drop zone that already has an item, swap them
+                        const existingItem = event.target.firstElementChild;
+                        event.target.removeChild(existingItem);
+                        event.target.appendChild(draggedItem);
+                        draggableNumbersContainer.appendChild(existingItem); // Put the swapped item back in the draggable area
+                        checkOrderingCompletion();
+                    }
+                }
+            }
+
+            function checkOrderingCompletion() {
+                const dropZones = Array.from(g2l2OptionsContainer.children);
+                const currentOrder = dropZones.map(zone => {
+                    const item = zone.firstElementChild;
+                    return item ? parseInt(item.textContent) : null;
+                });
+
+                // Check if all drop zones are filled
+                if (currentOrder.includes(null)) {
+                    g2l2ActivityFeedback.textContent = 'Keep arranging them!';
+                    g2l2ActivityFeedback.className = 'text-xl font-semibold mt-4 text-gray-700';
+                    return;
+                }
+
+                // Check if the order is correct
+                const isCorrect = currentOrder.every((num, index) => num === orderedNumbers[index]);
+
+                if (isCorrect) {
+                    g2l2ActivityFeedback.textContent = 'Awesome! Numbers are in the correct order!';
+                    g2l2ActivityFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    // Disable further dragging
+                    draggableNumbersContainer.querySelectorAll('.order-number-item').forEach(item => {
+                        item.setAttribute('draggable', false);
+                        item.style.cursor = 'default';
+                    });
+                    g2l2OptionsContainer.querySelectorAll('.order-drop-zone').forEach(zone => {
+                        zone.removeEventListener('dragover', handleDragOver);
+                        zone.removeEventListener('dragleave', handleDragLeave);
+                        zone.removeEventListener('drop', handleDrop);
+                    });
+                    g2l2NextActivityBtn.classList.remove('hidden');
+                } else {
+                    g2l2ActivityFeedback.textContent = 'Not quite right. Try again!';
+                    g2l2ActivityFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    // Allow user to keep trying, or reset after a delay
+                    setTimeout(() => {
+                        g2l2ActivityFeedback.textContent = 'Keep arranging them!';
+                        g2l2ActivityFeedback.className = 'text-xl font-semibold mt-4 text-gray-700';
+                    }, 1500);
+                }
+            }
+
+
+            function startNewActivity() {
+                g2l2ActivityFeedback.textContent = '';
+                g2l2ActivityFeedback.className = 'text-xl font-semibold mt-4';
+                g2l2NextActivityBtn.classList.add('hidden');
+
+                // Alternate between counting and ordering activities
+                if (currentActivityType === 'counting') {
+                    generateOrderingActivity();
+                    currentActivityType = 'ordering';
+                } else {
+                    generateCountingActivity();
+                    currentActivityType = 'counting';
+                }
+            }
+
+            g2l2NextActivityBtn.addEventListener('click', startNewActivity);
+
+            // Start the first activity when the page loads
+            startNewActivity();
+        });
+    </script>
+</body>
+</html>
