@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MathLanka - Grade 2 Lesson 3: එකතු කිරීම (සංකලනය)</title>
     <meta name="description" content="Learn addition for Grade 2 with interactive examples and a fun Balloon Pop game on MathLanka.">
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
+        // Tailwind CSS configuration - MUST be after the CDN script
         tailwind.config = {
             theme: {
                 extend: {
@@ -25,6 +26,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
         body {
@@ -268,7 +270,7 @@
             <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
                 <p class="text-green-700 text-lg mb-6">ඔයා එකතු කිරීම හොඳට ඉගෙනගත්තා! ඊළඟ පාඩමට යන්න හෝ වෙනත් විනෝදජනක ගණිත ක්‍රීඩා කරන්න සූදානම්ද?</p>
-                <p class="text-green-700 text-lg mb-6">You've learned addition well! Ready for the next lesson or some more fun math games?</p>
+                <p class="text-gray-700 text-lg mb-6">You've learned addition well! Ready for the next lesson or some more fun math games?</p>
 
                 <a href="grade2_lesson4.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
                     ඊළඟ පාඩම (Next Lesson) <i class="fas fa-arrow-right ml-2"></i>
@@ -365,7 +367,8 @@
 
         // Mobile menu toggle functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const mobileMenuButton = document.querySelector('.md\\:hidden button');
+            // Corrected selector to target the button directly
+            const mobileMenuButton = document.querySelector('button.md\\:hidden'); 
             const mobileMenu = document.createElement('div');
             mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
             mobileMenu.innerHTML = `
