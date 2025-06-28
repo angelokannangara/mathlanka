@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka - Grade 2 Lesson 5: වේලාව (කාලය)</title>
+    <meta name="description" content="Learn about time, days, months, and reading clocks for Grade 2 with MathLanka.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS configuration - MUST be after the CDN script
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .time-item-card {
+            background-color: #ecfdf5; /* green-50 */
+            border: 2px solid #34d399; /* green-400 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+        .clock-face {
+            width: 150px;
+            height: 150px;
+            border: 4px solid #1e40af;
+            border-radius: 50%;
+            position: relative;
+            margin: 1rem auto;
+            background-color: white;
+        }
+        .hour-hand, .minute-hand {
+            position: absolute;
+            transform-origin: 50% 100%;
+            background-color: #1e40af;
+            border-radius: 2px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -100%) rotate(0deg);
+        }
+        .hour-hand {
+            width: 6px;
+            height: 40px;
+            margin-top: -35px; /* Adjust to pivot from center */
+        }
+        .minute-hand {
+            width: 4px;
+            height: 60px;
+            margin-top: -55px; /* Adjust to pivot from center */
+        }
+        .center-dot {
+            width: 10px;
+            height: 10px;
+            background-color: #f59e0b;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+        }
+        .hour-mark {
+            position: absolute;
+            width: 2px;
+            height: 10px;
+            background-color: #1e40af;
+            transform-origin: 50% 75px; /* Center of the clock */
+            top: 0;
+            left: 50%;
+            margin-left: -1px;
+        }
+        /* Custom message box for alert() replacement */
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            width: 400px;
+        }
+        .custom-modal-content h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .custom-modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .custom-modal-content button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .custom-modal-content button:hover {
+            background-color: #1e40af;
+        }
+
+        /* Game specific styles */
+        #timeMatchGame {
+            background: linear-gradient(to bottom, #fefce8, #fffbeb); /* Light yellow gradient */
+            border: 5px solid #f59e0b; /* accent color */
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 700px;
+            text-align: center;
+        }
+        .match-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .match-card {
+            background-color: white;
+            border: 2px solid #a78bfa; /* purple-400 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 180px;
+        }
+        .match-card.selected {
+            border-color: #2563eb; /* primary blue */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+            transform: translateY(-3px);
+        }
+        .match-card.matched {
+            background-color: #d1fae5; /* green-100 */
+            border-color: #10b981; /* green-600 */
+            opacity: 0.7;
+            cursor: default;
+        }
+        .match-card.incorrect {
+            background-color: #fee2e2; /* red-100 */
+            border-color: #ef4444; /* red-600 */
+        }
+        .match-card p {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-top: 0.5rem;
+        }
+        .game-status-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            min-height: 40px;
+        }
+        .game-control-buttons {
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="../index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="../index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="../login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="../signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 5 (Grade 2): වේලාව (කාලය) - Time</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">අපි දැන් වේලාව, දවස්, මාස සහ ඔරලෝසු බලන හැටි ඉගෙනගමු!</p>
+            <p class="text-center text-gray-600 text-lg mb-8">Let's learn about time, days, months, and how to read clocks!</p>
+
+            <div class="space-y-10">
+                <!-- Concept 1: Days of the Week -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-calendar-day lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">සතියේ දවස් (Days of the Week)</h3>
+                        <p class="text-gray-700 text-lg">සතියකට දවස් හතක් තියෙනවා. අපි ඒවා එකින් එක බලමු.</p>
+                        <p class="text-gray-700 text-lg mt-2">There are seven days in a week. Let's look at them one by one.</p>
+                        <ul class="list-disc list-inside text-gray-700 text-lg mt-2 text-left mx-auto md:mx-0 max-w-sm">
+                            <li>ඉරිදා (Sunday)</li>
+                            <li>සඳුදා (Monday)</li>
+                            <li>අඟහරුවාදා (Tuesday)</li>
+                            <li>බදාදා (Wednesday)</li>
+                            <li>බ්‍රහස්පතින්දා (Thursday)</li>
+                            <li>සිකුරාදා (Friday)</li>
+                            <li>සෙනසුරාදා (Saturday)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Months of the Year -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-calendar-alt lesson-icon text-purple-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-purple-700 mb-2">වසරේ මාස (Months of the Year)</h3>
+                        <p class="text-gray-700 text-lg">අවුරුද්දකට මාස දොළහක් තියෙනවා. ඒවා මතක තියාගන්න පහසුයි.</p>
+                        <p class="text-gray-700 text-lg mt-2">There are twelve months in a year. They are easy to remember.</p>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-2 text-left mx-auto md:mx-0 max-w-lg">
+                            <span class="text-gray-700 text-lg">ජනවාරි (January)</span>
+                            <span class="text-gray-700 text-lg">පෙබරවාරි (February)</span>
+                            <span class="text-gray-700 text-lg">මාර්තු (March)</span>
+                            <span class="text-gray-700 text-lg">අප්‍රේල් (April)</span>
+                            <span class="text-gray-700 text-lg">මැයි (May)</span>
+                            <span class="text-gray-700 text-lg">ජූනි (June)</span>
+                            <span class="text-gray-700 text-lg">ජූලි (July)</span>
+                            <span class="text-gray-700 text-lg">අගෝස්තු (August)</span>
+                            <span class="text-gray-700 text-lg">සැප්තැම්බර් (September)</span>
+                            <span class="text-gray-700 text-lg">ඔක්තෝබර් (October)</span>
+                            <span class="text-gray-700 text-lg">නොවැම්බර් (November)</span>
+                            <span class="text-gray-700 text-lg">දෙසැම්බර් (December)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Concept 3: Reading Analog Clocks (Hour and Half-Hour) -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-clock lesson-icon text-orange-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-orange-700 mb-2">ඔරලෝසු බලමු (Reading Clocks - Hour and Half-Hour)</h3>
+                        <p class="text-gray-700 text-lg">අපි ඔරලෝසුවේ වෙලාව බලන හැටි ඉගෙනගමු. ඔරලෝසුවේ කටු දෙකක් තියෙනවා: කෙටි කටුව පැය පෙන්නනවා, දිග කටුව මිනිත්තු පෙන්නනවා.</p>
+                        <p class="text-gray-700 text-lg mt-2">Let's learn how to read a clock. A clock has two hands: the short hand tells the hour, and the long hand tells the minutes.</p>
+                        <div class="flex justify-center md:justify-start gap-8 mt-4 flex-wrap">
+                            <!-- Example 1: Full Hour -->
+                            <div class="time-item-card">
+                                <p class="text-xl font-semibold mb-2">වේලාව: 3:00</p>
+                                <div class="clock-face">
+                                    <div class="hour-hand" style="transform: translate(-50%, -100%) rotate(90deg);"></div>
+                                    <div class="minute-hand" style="transform: translate(-50%, -100%) rotate(0deg);"></div>
+                                    <div class="center-dot"></div>
+                                    <!-- Hour marks -->
+                                    <div class="hour-mark" style="transform: rotate(0deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(30deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(60deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(90deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(120deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(150deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(180deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(210deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(240deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(270deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(300deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(330deg);"></div>
+                                </div>
+                                <p class="text-lg">පැය 3යි (3 o'clock)</p>
+                            </div>
+                            <!-- Example 2: Half Hour -->
+                            <div class="time-item-card">
+                                <p class="text-xl font-semibold mb-2">වේලාව: 7:30</p>
+                                <div class="clock-face">
+                                    <div class="hour-hand" style="transform: translate(-50%, -100%) rotate(225deg);"></div>
+                                    <div class="minute-hand" style="transform: translate(-50%, -100%) rotate(180deg);"></div>
+                                    <div class="center-dot"></div>
+                                    <!-- Hour marks -->
+                                    <div class="hour-mark" style="transform: rotate(0deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(30deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(60deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(90deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(120deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(150deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(180deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(210deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(240deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(270deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(300deg);"></div>
+                                    <div class="hour-mark" style="transform: rotate(330deg);"></div>
+                                </div>
+                                <p class="text-lg">පැය 7හමාර (Half past 7)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gamified Activity Section: Time Match -->
+            <div class="text-center mt-12 p-8 bg-indigo-50 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-indigo-800 mb-6">විනෝදජනක ක්‍රීඩාව: වේලා ගැලපීම! (Time Match!)</h2>
+                <p class="text-indigo-700 text-lg mb-4">ඔරලෝසුවේ වෙලාවට ගැලපෙන අංකය හෝ වචනය තෝරන්න!</p>
+
+                <div id="timeMatchGame">
+                    <div class="flex justify-around items-center mb-6">
+                        <div class="text-xl font-bold text-indigo-700">ලකුණු: <span id="gameScore">0</span></div>
+                        <div class="text-xl font-bold text-indigo-700">වේලාව: <span id="gameTime">60</span>s</div>
+                    </div>
+
+                    <div id="matchGrid" class="match-grid">
+                        <!-- Game cards will be generated here -->
+                    </div>
+
+                    <p id="gameStatus" class="game-status-text text-gray-700"></p>
+
+                    <div class="game-control-buttons flex justify-center gap-4">
+                        <button id="startGameBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                            ක්‍රීඩාව පටන් ගමු! (Start Game!)
+                        </button>
+                        <button id="restartGameBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">
+                            ආයෙත් පටන් ගමු! (Restart Game!)
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Modal for game alerts -->
+            <div id="customModal" class="custom-modal">
+                <div class="custom-modal-content">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalMessage"></p>
+                    <button id="modalCloseBtn">හරි (OK)</button>
+                </div>
+            </div>
+
+            <!-- Call to Action for Next Lesson/Quiz -->
+            <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                <p class="text-green-700 text-lg mb-6">ඔයාට දැන් වේලාව ගැන හොඳ අවබෝධයක් තියනවා! ඊළඟ පාඩමට යන්න සූදානම්ද?</p>
+                <p class="text-gray-700 text-lg mb-6">You now have a good understanding of time! Ready for the next lesson?</p>
+
+                <a href="../grade3/lesson1_numbers.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                    ඊළඟ ශ්‍රේණියේ පාඩම (Next Grade Lesson) <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Navigation between lessons -->
+            <div class="flex justify-between mt-8">
+                <a href="grade2_lesson4.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> කලින් පාඩම (Previous Lesson)
+                </a>
+                <a href="../grade3/lesson1_numbers.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                    ඊළඟ ශ්‍රේණියේ පාඩම (Next Grade Lesson) <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="../index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="../index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="../index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Modal for alerts (Replaces alert())
+        function showCustomModal(title, message, callback) {
+            const modal = document.getElementById('customModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            modal.classList.add('show');
+
+            const closeBtn = document.getElementById('modalCloseBtn');
+            const closeHandler = () => {
+                modal.classList.remove('show');
+                closeBtn.removeEventListener('click', closeHandler);
+                if (callback) callback();
+            };
+            closeBtn.addEventListener('click', closeHandler);
+        }
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('button.md\\:hidden'); 
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="../index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="../index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="../index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="../index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="../login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="../signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Time Match Game Logic ---
+            const gameScoreDisplay = document.getElementById('gameScore');
+            const gameTimeDisplay = document.getElementById('gameTime');
+            const matchGrid = document.getElementById('matchGrid');
+            const gameStatusText = document.getElementById('gameStatus');
+            const startGameBtn = document.getElementById('startGameBtn');
+            const restartGameBtn = document.getElementById('restartGameBtn');
+
+            let gamePairs = [];
+            let selectedCards = [];
+            let matchedPairs = 0;
+            let score = 0;
+            let timeLeft = 60;
+            let gameInterval;
+            let gameActive = false;
+
+            // Function to create a clock drawing
+            function createClockSVG(hour, minute) {
+                const hourAngle = (hour % 12) * 30 + (minute / 60) * 30; // 30 degrees per hour, 0.5 deg per minute
+                const minuteAngle = (minute / 60) * 360; // 6 degrees per minute
+
+                return `
+                    <svg width="120" height="120" viewBox="0 0 120 120" class="mx-auto block">
+                        <circle cx="60" cy="60" r="55" stroke="#1e40af" stroke-width="4" fill="white" />
+                        <!-- Hour marks -->
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(0 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(30 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(60 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(90 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(120 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(150 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(180 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(210 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(240 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(270 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(300 60 60)" />
+                        <line x1="60" y1="5" x2="60" y2="15" stroke="#1e40af" stroke-width="2" transform="rotate(330 60 60)" />
+                        
+                        <!-- Hour Hand -->
+                        <line x1="60" y1="60" x2="60" y2="35" stroke="#1e40af" stroke-width="6" stroke-linecap="round" transform="rotate(${hourAngle} 60 60)" />
+                        <!-- Minute Hand -->
+                        <line x1="60" y1="60" x2="60" y2="20" stroke="#1e40af" stroke-width="4" stroke-linecap="round" transform="rotate(${minuteAngle} 60 60)" />
+                        <circle cx="60" cy="60" r="5" fill="#f59e0b" />
+                    </svg>
+                `;
+            }
+
+            function generateGamePairs() {
+                const times = [
+                    { h: 3, m: 0, text: "3:00 / පැය 3යි" },
+                    { h: 7, m: 30, text: "7:30 / පැය 7හමාර" },
+                    { h: 10, m: 0, text: "10:00 / පැය 10යි" },
+                    { h: 1, m: 30, text: "1:30 / පැය 1හමාර" },
+                    { h: 5, m: 0, text: "5:00 / පැය 5යි" },
+                    { h: 8, m: 30, text: "8:30 / පැය 8හමාර" },
+                ];
+
+                gamePairs = [];
+                times.forEach((time, index) => {
+                    const pairId = `time-${index}`;
+                    gamePairs.push({
+                        id: pairId,
+                        type: 'clock',
+                        value: time,
+                        html: createClockSVG(time.h, time.m),
+                        isMatched: false
+                    });
+                    gamePairs.push({
+                        id: pairId, // Same ID to link the pair
+                        type: 'text',
+                        value: time,
+                        html: `<p>${time.text}</p>`,
+                        isMatched: false
+                    });
+                });
+
+                // Shuffle the cards
+                gamePairs.sort(() => Math.random() - 0.5);
+            }
+
+            function renderCards() {
+                matchGrid.innerHTML = '';
+                gamePairs.forEach((card, index) => {
+                    const cardElement = document.createElement('div');
+                    cardElement.className = `match-card ${card.isMatched ? 'matched' : ''}`;
+                    cardElement.dataset.index = index;
+                    cardElement.dataset.pairId = card.id;
+                    cardElement.innerHTML = card.html;
+                    if (!card.isMatched) {
+                        cardElement.addEventListener('click', handleCardClick);
+                    }
+                    matchGrid.appendChild(cardElement);
+                });
+            }
+
+            function handleCardClick(event) {
+                if (!gameActive) return;
+
+                const clickedCardElement = event.currentTarget;
+                if (clickedCardElement.classList.contains('matched') || selectedCards.includes(clickedCardElement)) {
+                    return; // Already matched or already selected
+                }
+
+                clickedCardElement.classList.add('selected');
+                selectedCards.push(clickedCardElement);
+
+                if (selectedCards.length === 2) {
+                    // Disable clicks temporarily
+                    matchGrid.querySelectorAll('.match-card').forEach(card => card.style.pointerEvents = 'none');
+
+                    const [card1, card2] = selectedCards;
+                    const pairId1 = card1.dataset.pairId;
+                    const pairId2 = card2.dataset.pairId;
+
+                    if (pairId1 === pairId2 && card1 !== card2) { // Matched!
+                        matchedPairs++;
+                        score += 50;
+                        gameScoreDisplay.textContent = score;
+                        gameStatusText.textContent = 'ගැලපුණා! (Matched!)';
+                        gameStatusText.style.color = '#10b981'; // green-600
+
+                        card1.classList.add('matched');
+                        card2.classList.add('matched');
+                        gamePairs[card1.dataset.index].isMatched = true;
+                        gamePairs[card2.dataset.index].isMatched = true;
+
+                        setTimeout(() => {
+                            gameStatusText.textContent = '';
+                            selectedCards = [];
+                            matchGrid.querySelectorAll('.match-card').forEach(card => card.style.pointerEvents = 'auto'); // Re-enable clicks
+                            if (matchedPairs === gamePairs.length / 2) {
+                                endGame(true); // All matched
+                            }
+                        }, 700);
+                    } else { // Not a match
+                        score = Math.max(0, score - 10);
+                        gameScoreDisplay.textContent = score;
+                        gameStatusText.textContent = 'ගැලපෙන්නේ නෑ! (Not a match!)';
+                        gameStatusText.style.color = '#dc2626'; // red-600
+
+                        card1.classList.add('incorrect');
+                        card2.classList.add('incorrect');
+
+                        setTimeout(() => {
+                            card1.classList.remove('selected', 'incorrect');
+                            card2.classList.remove('selected', 'incorrect');
+                            gameStatusText.textContent = '';
+                            selectedCards = [];
+                            matchGrid.querySelectorAll('.match-card').forEach(card => card.style.pointerEvents = 'auto'); // Re-enable clicks
+                        }, 700);
+                    }
+                }
+            }
+
+            function startGame() {
+                if (gameActive) return;
+
+                score = 0;
+                timeLeft = 60;
+                matchedPairs = 0;
+                gameActive = true;
+                gameScoreDisplay.textContent = score;
+                gameTimeDisplay.textContent = timeLeft;
+                gameStatusText.textContent = '';
+                startGameBtn.classList.add('hidden');
+                restartGameBtn.classList.remove('hidden');
+
+                generateGamePairs();
+                renderCards();
+
+                gameInterval = setInterval(() => {
+                    timeLeft--;
+                    gameTimeDisplay.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        endGame(false); // Time's up
+                    }
+                }, 1000);
+            }
+
+            function endGame(allMatched) {
+                gameActive = false;
+                clearInterval(gameInterval);
+                matchGrid.querySelectorAll('.match-card').forEach(card => card.style.pointerEvents = 'none'); // Disable clicks
+
+                let modalTitle = 'ක්‍රීඩාව අවසන්! (Game Over!)';
+                let modalMessage = `ඔබේ ලකුණු: ${score}. තවත් පුහුණු වෙමු! (Your Score: ${score}. Let's practice more!)`;
+
+                if (allMatched) {
+                    modalTitle = 'සුබ පැතුම්! (Congratulations!)';
+                    modalMessage = `ඔබ සියලු යුගල ගැලපුවා! ලකුණු: ${score}. (You matched all pairs! Score: ${score}.)`;
+                }
+
+                showCustomModal(modalTitle, modalMessage, () => {
+                    // Reset game for restart
+                    selectedCards = [];
+                    gamePairs = []; // Clear current pairs
+                    renderCards(); // Render empty grid or initial state
+                    gameScoreDisplay.textContent = 0;
+                    gameTimeDisplay.textContent = 60;
+                    gameStatusText.textContent = 'පටන් ගනිමු! (Let\'s start!)';
+                    startGameBtn.classList.remove('hidden');
+                    restartGameBtn.classList.add('hidden');
+                });
+            }
+
+            startGameBtn.addEventListener('click', startGame);
+            restartGameBtn.addEventListener('click', startGame);
+
+            // Initial render
+            gameScoreDisplay.textContent = 0;
+            gameTimeDisplay.textContent = 60;
+            gameStatusText.textContent = 'පටන් ගනිමු! (Let\'s start!)'; // Initial message
+            generateGamePairs(); // Generate pairs once to show initial layout
+            renderCards(); // Render initial shuffled cards (not clickable until game starts)
+            matchGrid.querySelectorAll('.match-card').forEach(card => card.style.pointerEvents = 'none'); // Ensure initially not clickable
+        });
+    </script>
+</body>
+</html>
