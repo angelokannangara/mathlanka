@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 ශ්‍රේණිය ගණිතය - පාඩම 6: මුදල්</title>
+    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා නිර්මාණය කරන ලද ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාව.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted width for input */
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0; /* Lighter blue-gray for activity sections */
+            border-left: 5px solid #3b82f6; /* Blue border on the left */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe; /* Very light blue for examples */
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .money-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .money-problem-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අපි ගැන</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 6: මුදල්</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">3 ශ්‍රේණියේ ගණිතය සඳහා</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-money-bill-wave lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">පාඩමේ අරමුණ:</h3>
+                        <p class="text-gray-700 text-lg">
+                            සිසුන්ට ශ්‍රී ලංකා මුදල් හඳුනා ගැනීමට, මුදල් ගණන් කිරීමට, සහ මුදල් සම්බන්ධ සරල ගැටලු විසඳීමට හැකි වනු ඇත.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Recognizing Sri Lankan Currency -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ශ්‍රී ලංකා මුදල් හඳුනා ගැනීම:</h3>
+                    <p class="text-gray-700 mb-3">
+                        ශ්‍රී ලංකාව රුපියල් (Rs.) සහ සත (Ct.) භාවිතා කරයි. අපට විවිධ කාසි සහ මුදල් නෝට්ටු තිබේ.
+                        මුදල් නිවැරදිව ගණන් කිරීම සඳහා ඒවායේ අගයන් දැනගැනීම වැදගත් වේ.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">පොදු කාසි:</p>
+                        <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
+                            <li>රු. 1, රු. 2, රු. 5, රු. 10, රු. 20</li>
+                        </ul>
+                        <p class="font-semibold text-blue-700 mt-2">පොදු මුදල් නෝට්ටු:</p>
+                        <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
+                            <li>රු. 20, රු. 50, රු. 100, රු. 500, රු. 1000, රු. 5000</li>
+                        </ul>
+                    </div>
+                    <p class="text-gray-700 mt-3">
+                        ඔබ සතුව සැබෑ කාසි සහ නෝට්ටු තිබේ නම්, ඒවායේ පෙනුම පිළිබඳව හුරු වීමට ඒවා බලන්න.
+                    </p>
+                </div>
+
+                <!-- Content: Counting Money -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">මුදල් ගණන් කිරීම:</h3>
+                    <p class="text-gray-700 mb-3">
+                        මුදල් ගණන් කිරීම සඳහා, විශාලතම නිකායන්ගෙන් ආරම්භ කර අගයන් එකතු කරන්න.
+                        උදාහරණයක් ලෙස, ඔබට රු. 50 නෝට්ටුවක්, රු. 10 කාසි දෙකක්, සහ රු. 5 කාසි තුනක් තිබේ නම්:
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය:</p>
+                        <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
+                            <li>රු. 50 (නෝට්ටුව) = රු. 50</li>
+                            <li>රු. 10 කාසි දෙකක් = රු. $10 + 10 = 20$</li>
+                            <li>රු. 5 කාසි තුනක් = රු. $5 + 5 + 5 = 15$</li>
+                            <li>මුළු එකතුව = රු. $50 + 20 + 15 = 85$</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Interactive Lesson Activity 1: Counting Money -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: මුදල් ගණන් කිරීම!</h2>
+                    <p id="money-count-instructions" class="text-yellow-700 text-lg mb-8">පහත දැක්වෙන මුදල්වල මුළු අගය ගණන් කරන්න.</p>
+
+                    <div id="money-count-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="money-count-display" class="money-display">
+                            <!-- Money description will be displayed here -->
+                        </div>
+                        <input type="number" id="money-count-input" class="input-field" placeholder="මුළු එකතුව ඇතුළත් කරන්න (රු.)">
+                        <p id="money-count-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-money-count-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුරු පරීක්ෂා කරන්න</button>
+                    <button id="next-money-count-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+                <!-- Interactive Lesson Activity 2: Simple Money Problems -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: සරල මුදල් ගැටලු!</h2>
+                    <p id="money-problem-instructions" class="text-purple-700 text-lg mb-8">මුදල් ගැටලුව විසඳන්න.</p>
+
+                    <div id="money-problem-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="money-problem-display" class="money-problem-text">
+                            <!-- Money problem text will be displayed here -->
+                        </div>
+                        <input type="number" id="money-problem-input" class="input-field w-32" placeholder="පිළිතුර (රු.)">
+                        <p id="money-problem-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-money-problem-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුරු පරීක්ෂා කරන්න</button>
+                    <button id="next-money-problem-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                    <p class="text-green-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <a href="grade3_lesson7.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade3_lesson5.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> පාඩම 5 වෙත ආපසු
+                    </a>
+                    <a href="grade3_lesson7.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කරයි.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අපි ගැන</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Activity 1: Counting Money
+            let currentMoneyCountCorrectAnswer = 0;
+
+            const currencyDenominations = [
+                { value: 100, label: "රු. 100 නෝට්ටුව" },
+                { value: 50, label: "රු. 50 නෝට්ටුව" },
+                { value: 20, label: "රු. 20 නෝට්ටුව" },
+                { value: 10, label: "රු. 10 කාසිය" },
+                { value: 5, label: "රු. 5 කාසිය" },
+                { value: 2, label: "රු. 2 කාසිය" },
+                { value: 1, label: "රු. 1 කාසිය" }
+            ];
+
+            function generateMoneyCountActivity() {
+                const moneyCountDisplay = document.getElementById('money-count-display');
+                const moneyCountInput = document.getElementById('money-count-input');
+                const moneyCountFeedback = document.getElementById('money-count-feedback');
+                const nextMoneyCountBtn = document.getElementById('next-money-count-btn');
+                const checkMoneyCountBtn = document.getElementById('check-money-count-btn');
+
+                if (!moneyCountDisplay || !moneyCountInput || !moneyCountFeedback || !nextMoneyCountBtn || !checkMoneyCountBtn) {
+                    console.error("මුදල් ගණන් කිරීමේ ක්‍රියාකාරකම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ. තත්පර 1කින් නැවත උත්සාහ කරමු.");
+                    setTimeout(generateMoneyCountActivity, 1000);
+                    return;
+                }
+
+                moneyCountInput.value = '';
+                moneyCountInput.style.borderColor = '#cbd5e0';
+                moneyCountInput.readOnly = false;
+                moneyCountFeedback.textContent = '';
+                moneyCountFeedback.className = 'text-xl font-semibold mt-4';
+                nextMoneyCountBtn.classList.add('hidden');
+                checkMoneyCountBtn.classList.remove('hidden');
+
+                let totalAmount = 0;
+                let descriptionParts = [];
+
+                // Generate a random combination of notes and coins
+                for (let i = 0; i < 3; i++) { // Generate 3 random currency items
+                    const randomDenom = currencyDenominations[Math.floor(Math.random() * currencyDenominations.length)];
+                    const count = Math.floor(Math.random() * 3) + 1; // 1 to 3 items of this denomination
+                    descriptionParts.push(`${count} ${randomDenom.label}${count > 1 ? 's' : ''}`);
+                    totalAmount += randomDenom.value * count;
+                }
+
+                moneyCountDisplay.textContent = descriptionParts.join(", ");
+                currentMoneyCountCorrectAnswer = totalAmount;
+            }
+
+            function checkMoneyCountAnswers() {
+                const moneyCountInput = document.getElementById('money-count-input');
+                const moneyCountFeedback = document.getElementById('money-count-feedback');
+                const nextMoneyCountBtn = document.getElementById('next-money-count-btn');
+                const checkMoneyCountBtn = document.getElementById('check-money-count-btn');
+
+                if (!moneyCountInput || !moneyCountFeedback || !nextMoneyCountBtn || !checkMoneyCountBtn) {
+                    console.error("මුදල් ගණන් කිරීමේ පරීක්ෂා කිරීම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ.");
+                    return;
+                }
+
+                const userAnswer = parseInt(moneyCountInput.value.trim());
+
+                if (userAnswer === currentMoneyCountCorrectAnswer) {
+                    moneyCountFeedback.textContent = 'හරි! ඔයා හරි!';
+                    moneyCountFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    moneyCountInput.style.borderColor = '#10b981';
+                    moneyCountInput.readOnly = true;
+                    nextMoneyCountBtn.classList.remove('hidden');
+                    checkMoneyCountBtn.classList.add('hidden');
+                } else {
+                    moneyCountFeedback.textContent = `වැරදියි. නිවැරදි පිළිතුර රු. ${currentMoneyCountCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    moneyCountFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    moneyCountInput.style.borderColor = '#ef4444';
+                }
+            }
+
+            // Activity 2: Simple Money Problems
+            let currentMoneyProblemCorrectAnswer = 0;
+
+            const moneyProblems = [
+                { question: "ඔබ සතුව රු. {num1} ඇත. ඔබ රු. {num2} උපයයි. දැන් ඔබ සතුව කොපමණ තිබේද?", type: "addition" },
+                { question: "ඔබ සතුව රු. {num1} ඇත. ඔබ රු. {num2} වියදම් කරයි. ඔබට කොපමණ ඉතිරි වී ඇත්ද?", type: "subtraction" },
+                { question: "පෑනක් රු. {num1} ක් වන අතර පොතක් රු. {num2} කි. මුළු පිරිවැය කොපමණද?", type: "addition" }
+            ];
+
+            function generateMoneyProblemActivity() {
+                const moneyProblemDisplay = document.getElementById('money-problem-display');
+                const moneyProblemInput = document.getElementById('money-problem-input');
+                const moneyProblemFeedback = document.getElementById('money-problem-feedback');
+                const nextMoneyProblemBtn = document.getElementById('next-money-problem-btn');
+                const checkMoneyProblemBtn = document.getElementById('check-money-problem-btn');
+
+                if (!moneyProblemDisplay || !moneyProblemInput || !moneyProblemFeedback || !nextMoneyProblemBtn || !checkMoneyProblemBtn) {
+                    console.error("මුදල් ගැටලු ක්‍රියාකාරකම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ. තත්පර 1කින් නැවත උත්සාහ කරමු.");
+                    setTimeout(generateMoneyProblemActivity, 1000);
+                    return;
+                }
+
+                moneyProblemInput.value = '';
+                moneyProblemInput.style.borderColor = '#cbd5e0';
+                moneyProblemInput.readOnly = false;
+                moneyProblemFeedback.textContent = '';
+                moneyProblemFeedback.className = 'text-xl font-semibold mt-4';
+                nextMoneyProblemBtn.classList.add('hidden');
+                checkMoneyProblemBtn.classList.remove('hidden');
+
+                const problem = moneyProblems[Math.floor(Math.random() * moneyProblems.length)];
+                let num1, num2;
+
+                if (problem.type === "addition") {
+                    num1 = Math.floor(Math.random() * 50) + 10; // 10-59
+                    num2 = Math.floor(Math.random() * 40) + 10; // 10-49
+                    currentMoneyProblemCorrectAnswer = num1 + num2;
+                } else { // subtraction
+                    num1 = Math.floor(Math.random() * 50) + 50; // 50-99
+                    num2 = Math.floor(Math.random() * (num1 - 20)) + 10; // 10 to num1-20
+                    currentMoneyProblemCorrectAnswer = num1 - num2;
+                }
+
+                moneyProblemDisplay.textContent = problem.question.replace("{num1}", num1).replace("{num2}", num2);
+            }
+
+            function checkMoneyProblemAnswers() {
+                const moneyProblemInput = document.getElementById('money-problem-input');
+                const moneyProblemFeedback = document.getElementById('money-problem-feedback');
+                const nextMoneyProblemBtn = document.getElementById('next-money-problem-btn');
+                const checkMoneyProblemBtn = document.getElementById('check-money-problem-btn');
+
+                if (!moneyProblemInput || !moneyProblemFeedback || !nextMoneyProblemBtn || !checkMoneyProblemBtn) {
+                    console.error("මුදල් ගැටලු පරීක්ෂා කිරීම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ.");
+                    return;
+                }
+
+                const userAnswer = parseInt(moneyProblemInput.value.trim());
+
+                if (userAnswer === currentMoneyProblemCorrectAnswer) {
+                    moneyProblemFeedback.textContent = 'හරි! ඔයා හරි!';
+                    moneyProblemFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    moneyProblemInput.style.borderColor = '#10b981';
+                    moneyProblemInput.readOnly = true;
+                    nextMoneyProblemBtn.classList.remove('hidden');
+                    checkMoneyProblemBtn.classList.add('hidden');
+                } else {
+                    moneyProblemFeedback.textContent = `වැරදියි. නිවැරදි පිළිතුර රු. ${currentMoneyProblemCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    moneyProblemFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    moneyProblemInput.style.borderColor = '#ef4444';
+                }
+            }
+
+            // Attach event listeners
+            document.getElementById('check-money-count-btn').addEventListener('click', checkMoneyCountAnswers);
+            document.getElementById('next-money-count-btn').addEventListener('click', generateMoneyCountActivity);
+            document.getElementById('check-money-problem-btn').addEventListener('click', checkMoneyProblemAnswers);
+            document.getElementById('next-money-problem-btn').addEventListener('click', generateMoneyProblemActivity);
+
+            // Initialize activities on page load
+            generateMoneyCountActivity();
+            generateMoneyProblemActivity();
+        });
+    </script>
+</body>
+</html>

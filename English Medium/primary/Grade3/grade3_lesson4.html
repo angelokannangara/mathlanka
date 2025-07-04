@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 3 Math - Lesson 3: Addition of Two-Digit Numbers (No Regrouping)</title>
+    <title>Grade 3 Math - Lesson 4: Subtraction of Two-Digit Numbers (No Regrouping)</title>
     <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -92,6 +92,7 @@
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Header with Navigation -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
@@ -114,102 +115,109 @@
         </nav>
     </header>
 
+    <!-- Lesson Content Section -->
     <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
         <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 3: Addition of Two-Digit Numbers (No Regrouping)</h1>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 4: Subtraction of Two-Digit Numbers (No Regrouping)</h1>
             <p class="text-center text-gray-600 text-lg mb-8">For Grade 3 Mathematics</p>
 
             <div class="space-y-10">
+                <!-- Introduction and Objectives -->
                 <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
                     <div class="md:w-1/3 flex justify-center items-center">
-                        <i class="fas fa-plus-circle lesson-icon text-blue-600"></i>
+                        <i class="fas fa-minus-circle lesson-icon text-blue-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-blue-700 mb-2">Lesson Objective:</h3>
                         <p class="text-gray-700 text-lg">
-                            Students will be able to add two-digit numbers without regrouping.
-                            This lesson reinforces the basic concepts of addition by correctly using the tens and ones place values.
+                            Students will be able to subtract two-digit numbers without regrouping.
+                            This lesson reinforces the basic concepts of subtraction by correctly using the tens and ones place values.
                         </p>
                     </div>
                 </div>
 
+                <!-- Content: Understanding Subtraction without Regrouping -->
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Understanding Addition without Regrouping:</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Understanding Subtraction without Regrouping:</h3>
                     <p class="text-gray-700 mb-3">
-                        When adding two-digit numbers, we first add the digits in the ones place.
-                        Then, we add the digits in the tens place.
-                        'Without regrouping' means that the sum of the ones place is not greater than 9.
+                        When subtracting two-digit numbers, we first subtract the digits in the ones place.
+                        Then, we subtract the digits in the tens place.
+                        'Without regrouping' means that the ones digit of the first number is greater than or equal to the ones digit of the second number.
                     </p>
                     <div class="example-box">
-                        <p class="font-semibold text-blue-700">Example: 23 + 14</p>
+                        <p class="font-semibold text-blue-700">Example: 47 - 23</p>
                         <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
-                            <li>First, add the ones place: $3 + 4 = 7$</li>
-                            <li>Second, add the tens place: $2 + 1 = 3$</li>
-                            <li>Answer: 37</li>
+                            <li>First, subtract the ones place: $7 - 3 = 4$</li>
+                            <li>Second, subtract the tens place: $4 - 2 = 2$</li>
+                            <li>Answer: 24</li>
                         </ul>
                         <div class="math-problem">
-                            <span class="number">23</span>
-                            <span class="number">+ 14</span>
+                            <span class="number">47</span>
+                            <span class="number">- 23</span>
                             <div class="line"></div>
-                            <span class="number">37</span>
+                            <span class="number">24</span>
                         </div>
                     </div>
                     <p class="text-gray-700 mt-3">
-                        This method makes adding numbers easy.
+                        This method makes subtracting numbers easy.
                     </p>
                 </div>
 
+                <!-- Interactive Lesson Activity 1: Vertical Subtraction -->
                 <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Vertical Addition!</h2>
-                    <p id="vertical-add-instructions" class="text-yellow-700 text-lg mb-8">Solve the vertical addition problems below and enter the answer.</p>
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Vertical Subtraction!</h2>
+                    <p id="vertical-sub-instructions" class="text-yellow-700 text-lg mb-8">Solve the vertical subtraction problems below and enter the answer.</p>
 
-                    <div id="vertical-add-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[200px] flex flex-col justify-center items-center">
+                    <div id="vertical-sub-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[200px] flex flex-col justify-center items-center">
                         <div class="math-problem">
                             <span id="vertical-num1" class="number"></span>
-                            <span class="number"><span class="operator">+</span> <span id="vertical-num2"></span></span>
+                            <span class="number"><span class="operator">-</span> <span id="vertical-num2"></span></span>
                             <div class="line"></div>
                             <input type="number" id="vertical-answer-input" class="input-field" placeholder="Answer">
                         </div>
-                        <p id="vertical-add-feedback" class="text-xl font-semibold mt-4"></p>
+                        <p id="vertical-sub-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-vertical-add-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
-                    <button id="next-vertical-add-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                    <button id="check-vertical-sub-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-vertical-sub-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
+                <!-- Interactive Lesson Activity 2: Horizontal Subtraction -->
                 <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Horizontal Addition!</h2>
-                    <p id="horizontal-add-instructions" class="text-purple-700 text-lg mb-8">Solve the horizontal addition problems below and enter the answer.</p>
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Horizontal Subtraction!</h2>
+                    <p id="horizontal-sub-instructions" class="text-purple-700 text-lg mb-8">Solve the horizontal subtraction problems below and enter the answer.</p>
 
-                    <div id="horizontal-add-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                    <div id="horizontal-sub-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
                         <div class="horizontal-problem">
                             <span id="horizontal-num1"></span>
-                            <span>+</span>
+                            <span>-</span>
                             <span id="horizontal-num2"></span>
                             <span>=</span>
                             <input type="number" id="horizontal-answer-input" class="input-field w-32" placeholder="Answer">
                         </div>
-                        <p id="horizontal-add-feedback" class="text-xl font-semibold mt-4"></p>
+                        <p id="horizontal-sub-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-horizontal-add-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
-                    <button id="next-horizontal-add-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                    <button id="check-horizontal-sub-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-horizontal-sub-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
 
+                <!-- Call to Action for Next Lesson/Quiz -->
                 <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
                     <h3 class="text-2xl font-bold text-green-800 mb-4">You are doing great!</h3>
                     <p class="text-green-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
-                    <a href="grade3_lesson4.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                    <a href="grade3_lesson5.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
                         Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
 
+                <!-- Navigation between lessons -->
                 <div class="flex justify-between mt-8">
-                    <a href="grade3_lesson2.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 2
+                    <a href="grade3_lesson3.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 3
                     </a>
-                    <a href="grade3_lesson4.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <a href="grade3_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
                         Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -218,6 +226,7 @@
         </div>
     </section>
 
+    <!-- Footer (Copied from template) -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-4">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -304,17 +313,39 @@
                 mobileMenu.classList.add('hidden');
             });
 
-            // Activity 1: Vertical Addition
+            // Function to generate two-digit numbers for subtraction without regrouping
+            function generateSubtractionNumbers() {
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * 90) + 10; // Generate num1 between 10 and 99
+                    num2 = Math.floor(Math.random() * (num1 - 9)) + 10; // Generate num2 such that num1 - num2 >= 10 and num2 >= 10
+
+                    // Ensure num2 is always less than num1 to avoid negative results
+                    if (num2 >= num1) {
+                        // If num2 is greater or equal, regenerate num2 to be smaller
+                        num2 = Math.floor(Math.random() * (num1 - 10)) + 10;
+                    }
+
+                    const ones1 = num1 % 10;
+                    const ones2 = num2 % 10;
+
+                    // Condition for no regrouping: ones digit of num1 must be greater than or equal to ones digit of num2
+                } while (ones1 < ones2); // Keep regenerating if regrouping is needed
+
+                return { num1, num2 };
+            }
+
+            // Activity 1: Vertical Subtraction
             const verticalNum1 = document.getElementById('vertical-num1');
             const verticalNum2 = document.getElementById('vertical-num2');
             const verticalAnswerInput = document.getElementById('vertical-answer-input');
             const verticalAddFeedback = document.getElementById('vertical-add-feedback');
             const nextVerticalAddBtn = document.getElementById('next-vertical-add-btn');
-            const checkVerticalAddBtn = document.getElementById('check-vertical-add-btn');
+            const checkVerticalAddBtn = document.getElementById('check-vertical-sub-btn'); // Corrected ID
 
             let currentVerticalCorrectAnswer = 0;
 
-            function generateVerticalAddActivity() {
+            function generateVerticalSubActivity() {
                 verticalAnswerInput.value = '';
                 verticalAnswerInput.style.borderColor = '#cbd5e0';
                 verticalAnswerInput.readOnly = false;
@@ -323,19 +354,13 @@
                 nextVerticalAddBtn.classList.add('hidden');
                 checkVerticalAddBtn.classList.remove('hidden');
 
-                // Generate two-digit numbers where ones sum and tens sum are less than 10
-                let num1, num2;
-                do {
-                    num1 = Math.floor(Math.random() * 89) + 10; // 10-99
-                    num2 = Math.floor(Math.random() * 89) + 10; // 10-99
-                } while ((num1 % 10) + (num2 % 10) >= 10 || Math.floor(num1 / 10) + Math.floor(num2 / 10) >= 10);
-
+                const { num1, num2 } = generateSubtractionNumbers();
                 verticalNum1.textContent = num1;
                 verticalNum2.textContent = num2;
-                currentVerticalCorrectAnswer = num1 + num2;
+                currentVerticalCorrectAnswer = num1 - num2;
             }
 
-            function checkVerticalAddAnswers() {
+            function checkVerticalSubAnswers() {
                 const userAnswer = parseInt(verticalAnswerInput.value.trim());
 
                 if (userAnswer === currentVerticalCorrectAnswer) {
@@ -352,20 +377,20 @@
                 }
             }
 
-            nextVerticalAddBtn.addEventListener('click', generateVerticalAddActivity);
-            checkVerticalAddBtn.addEventListener('click', checkVerticalAddAnswers);
+            nextVerticalAddBtn.addEventListener('click', generateVerticalSubActivity);
+            checkVerticalAddBtn.addEventListener('click', checkVerticalSubAnswers);
 
-            // Activity 2: Horizontal Addition
+            // Activity 2: Horizontal Subtraction
             const horizontalNum1 = document.getElementById('horizontal-num1');
             const horizontalNum2 = document.getElementById('horizontal-num2');
             const horizontalAnswerInput = document.getElementById('horizontal-answer-input');
             const horizontalAddFeedback = document.getElementById('horizontal-add-feedback');
             const nextHorizontalAddBtn = document.getElementById('next-horizontal-add-btn');
-            const checkHorizontalAddBtn = document.getElementById('check-horizontal-add-btn');
+            const checkHorizontalAddBtn = document.getElementById('check-horizontal-sub-btn'); // Corrected ID
 
             let currentHorizontalCorrectAnswer = 0;
 
-            function generateHorizontalAddActivity() {
+            function generateHorizontalSubActivity() {
                 horizontalAnswerInput.value = '';
                 horizontalAnswerInput.style.borderColor = '#cbd5e0';
                 horizontalAnswerInput.readOnly = false;
@@ -374,19 +399,13 @@
                 nextHorizontalAddBtn.classList.add('hidden');
                 checkHorizontalAddBtn.classList.remove('hidden');
 
-                // Generate two-digit numbers where ones sum and tens sum are less than 10
-                let num1, num2;
-                do {
-                    num1 = Math.floor(Math.random() * 89) + 10; // 10-99
-                    num2 = Math.floor(Math.random() * 89) + 10; // 10-99
-                } while ((num1 % 10) + (num2 % 10) >= 10 || Math.floor(num1 / 10) + Math.floor(num2 / 10) >= 10);
-
+                const { num1, num2 } = generateSubtractionNumbers();
                 horizontalNum1.textContent = num1;
                 horizontalNum2.textContent = num2;
-                currentHorizontalCorrectAnswer = num1 + num2;
+                currentHorizontalCorrectAnswer = num1 - num2;
             }
 
-            function checkHorizontalAddAnswers() {
+            function checkHorizontalSubAnswers() {
                 const userAnswer = parseInt(horizontalAnswerInput.value.trim());
 
                 if (userAnswer === currentHorizontalCorrectAnswer) {
@@ -403,12 +422,12 @@
                 }
             }
 
-            nextHorizontalAddBtn.addEventListener('click', generateHorizontalAddActivity);
-            checkHorizontalAddBtn.addEventListener('click', checkHorizontalAddAnswers);
+            nextHorizontalAddBtn.addEventListener('click', generateHorizontalSubActivity);
+            checkHorizontalAddBtn.addEventListener('click', checkHorizontalSubAnswers);
 
             // Initialize activities on page load
-            generateVerticalAddActivity();
-            generateHorizontalAddActivity();
+            generateVerticalSubActivity();
+            generateHorizontalSubActivity();
         });
     </script>
 </body>
