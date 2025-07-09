@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 11: Money - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about money for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted for input fields */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        /* Styles for the answers section */
+        #answers-section {
+            display: none; /* Hidden by default */
+            background-color: #f0fdf4; /* Light green background */
+            border-left: 5px solid #22c55e; /* Green border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        #answers-section h3 {
+            color: #16a34a; /* Darker green for heading */
+        }
+        #answers-section ol li {
+            margin-bottom: 0.75rem;
+            color: #15803d; /* Green text for answers */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 11: Money - 1</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's learn about money and its value!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-money-bill-wave lesson-icon text-blue-600"></i> <!-- Icon for money -->
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Identify Sri Lankan currency (rupees and cents).</li>
+                                <li>Convert between rupees and cents.</li>
+                                <li>Add and subtract amounts of money.</li>
+                                <li>Solve simple word problems involving money.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Introduction to Money -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Introduction to Money</h3>
+                    <p class="text-700 mb-3">
+                        Hello, young mathematicians! Money is something we use every day to buy things we need and want, like food, clothes, and toys. It comes in different forms, like coins and banknotes.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        In Sri Lanka, our currency is the **Rupee (Rs.)** and **Cents (cts.)**. Just like how we have meters and centimeters for length, we have Rupees and Cents for money!
+                    </p>
+                    <p class="text-gray-700">
+                        Let's learn about our money and how to use it for calculations.
+                    </p>
+                </div>
+
+                <!-- Content: Sri Lankan Currency -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Sri Lankan Currency: Rupees and Cents</h3>
+                    <p class="text-gray-700 mb-3">
+                        Sri Lankan money consists of:
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>**Coins:** $1, 2, 5, 10$ rupees, and $25, 50$ cents (though cents are less commonly used now).</li>
+                            <li>**Banknotes (Paper Money):** $20, 50, 100, 500, 1000, 2000, 5000$ rupees.</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Key Conversion:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>$1$ Rupee (Rs.) = $100$ Cents (cts.)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Content: Converting Money -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Converting Rupees and Cents</h3>
+                    <p class="text-gray-700 mb-3">
+                        We can convert between rupees and cents just like we converted between meters and centimeters.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Convert Rs. $5$ to cents.</p>
+                        <p class="text-gray-700 mt-2">
+                            Since Rs. $1$ = $100$ cts., then Rs. $5$ = $5 \times 100 = 500$ cts.
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700 mb-2">Example 2: Convert $750$ cents to rupees and cents.</p>
+                        <p class="text-gray-700 mt-2">
+                            Since $100$ cts. = Rs. $1$, then $750$ cts. = $700$ cts. + $50$ cts. = Rs. $7$ and $50$ cts.
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 1: Convert the following amounts.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>Rs. $8$ = $\underline{\hspace{2cm}}$ cts.</p>
+                            <input type="text" id="ex1-q1" class="input-field" placeholder="Cents">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$400$ cts. = $\underline{\hspace{2cm}}$ Rs.</p>
+                            <input type="text" id="ex1-q2" class="input-field" placeholder="Rupees">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Rs. $12$ and $25$ cts. = $\underline{\hspace{2cm}}$ cts.</p>
+                            <input type="text" id="ex1-q3" class="input-field" placeholder="Cents">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$1575$ cts. = $\underline{\hspace{1cm}}$ Rs. $\underline{\hspace{1cm}}$ cts.</p>
+                            <input type="text" id="ex1-q4-rs" class="input-field w-1/3" placeholder="Rs.">
+                            <input type="text" id="ex1-q4-cts" class="input-field w-1/3" placeholder="cts.">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Adding and Subtracting Money -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Adding and Subtracting Money</h3>
+                    <p class="text-gray-700 mb-3">
+                        When adding or subtracting money, always align the rupees and cents columns. Remember to regroup (carry over or borrow) $100$ cents as $1$ rupee, or $1$ rupee as $100$ cents.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 3: Add Rs. $25.50$ and Rs. $10.25$.</p>
+                        <pre class="bg-blue-100 p-3 rounded-md text-blue-800 font-mono text-lg text-center">
+    Rs. 25.50
++   Rs. 10.25
+-----------
+    Rs. 35.75
+                        </pre>
+                        <p class="text-gray-700 mt-2">
+                            Add cents: $50 + 25 = 75$ cts.<br>
+                            Add rupees: $25 + 10 = 35$ Rs.<br>
+                            Total: Rs. $35.75$
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700 mb-2">Example 4: Subtract Rs. $12.75$ from Rs. $30.50$.</p>
+                        <pre class="bg-blue-100 p-3 rounded-md text-blue-800 font-mono text-lg text-center">
+    Rs. 30.50  -> Rs. 29.150 (borrow 1 Rupee = 100 cents)
+-   Rs. 12.75
+-----------
+    Rs. 17.75
+                        </pre>
+                        <p class="text-gray-700 mt-2">
+                            We cannot subtract $75$ cts. from $50$ cts. So, we borrow Rs. $1$ from $30$ Rs. (making it $29$ Rs.) and add $100$ cts. to $50$ cts., making it $150$ cts.<br>
+                            Now, $150 - 75 = 75$ cts.<br>
+                            And $29 - 12 = 17$ Rs.<br>
+                            Total: Rs. $17.75$
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 2: Add or subtract the following amounts.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>Rs. $45.20$ + Rs. $15.30$ = $\underline{\hspace{1cm}}$ Rs. $\underline{\hspace{1cm}}$ cts.</p>
+                            <input type="text" id="ex2-q1-rs" class="input-field w-1/3" placeholder="Rs.">
+                            <input type="text" id="ex2-q1-cts" class="input-field w-1/3" placeholder="cts.">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Rs. $7.80$ + Rs. $3.50$ = $\underline{\hspace{1cm}}$ Rs. $\underline{\hspace{1cm}}$ cts.</p>
+                            <input type="text" id="ex2-q2-rs" class="input-field w-1/3" placeholder="Rs.">
+                            <input type="text" id="ex2-q2-cts" class="input-field w-1/3" placeholder="cts.">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Rs. $60.75$ - Rs. $20.25$ = $\underline{\hspace{1cm}}$ Rs. $\underline{\hspace{1cm}}$ cts.</p>
+                            <input type="text" id="ex2-q3-rs" class="input-field w-1/3" placeholder="Rs.">
+                            <input type="text" id="ex2-q3-cts" class="input-field w-1/3" placeholder="cts.">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Rs. $50.00$ - Rs. $18.50$ = $\underline{\hspace{1cm}}$ Rs. $\underline{\hspace{1cm}}$ cts.</p>
+                            <input type="text" id="ex2-q4-rs" class="input-field w-1/3" placeholder="Rs.">
+                            <input type="text" id="ex2-q4-cts" class="input-field w-1/3" placeholder="cts.">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Word Problems -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Problem Solving with Money</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's solve some real-life problems involving money.
+                    </p>
+                    <div class="problem-solving">
+                        <p class="font-semibold text-blue-700 mb-2">Exercise 3: Solve the following word problems.</p>
+                        <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
+                            <li>
+                                <p>You have Rs. $150.00$. You buy a book for Rs. $75.50$. How much money do you have left?</p>
+                                <input type="text" class="input-field" placeholder="Answer (Rs. cts.)">
+                            </li>
+                            <li>
+                                <p>Amal earns Rs. $250.00$ and his sister Nimali earns Rs. $175.50$. How much money do they earn together?</p>
+                                <input type="text" class="input-field" placeholder="Answer (Rs. cts.)">
+                            </li>
+                            <li>
+                                <p>A toy car costs Rs. $350.00$. If you pay with a Rs. $500.00$ note, how much change will you get?</p>
+                                <input type="text" class="input-field" placeholder="Answer (Rs. cts.)">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Check Answers Button -->
+                <div class="text-center mt-8">
+                    <button id="show-answers-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition duration-300 shadow-md hover:shadow-lg">
+                        Check Answers
+                    </button>
+                </div>
+
+                <!-- Content: Answers to Practice Time (Hidden by default) -->
+                <div id="answers-section" class="p-6 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold mb-4">Answers to Practice Time</h3>
+                    <p class="text-gray-700 mb-4">Let's check your answers!</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-3">
+                        <li>
+                            <p class="font-semibold">Exercise 1: Converting Amounts</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>Rs. $8$ = $800$ cts.</li>
+                                <li>$400$ cts. = Rs. $4$</li>
+                                <li>Rs. $12$ and $25$ cts. = $1225$ cts.</li>
+                                <li>$1575$ cts. = Rs. $15$ $75$ cts.</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 2: Adding and Subtracting Amounts</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>Rs. $45.20$ + Rs. $15.30$ = Rs. $60.50$</li>
+                                <li>Rs. $7.80$ + Rs. $3.50$ = Rs. $11.30$ (since $80+50=130$ cts. = Rs. $1.30$)</li>
+                                <li>Rs. $60.75$ - Rs. $20.25$ = Rs. $40.50$</li>
+                                <li>Rs. $50.00$ - Rs. $18.50$ = Rs. $31.50$</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 3: Problem Solving with Money</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>Rs. $150.00 - 75.50 = 74.50$. You have Rs. $74.50$ left.</li>
+                                <li>Rs. $250.00 + 175.50 = 425.50$. They earn Rs. $425.50$ together.</li>
+                                <li>Rs. $500.00 - 350.00 = 150.00$. You will get Rs. $150.00$ change.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 11!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Fantastic work, Math Lanka students! You've learned all about money, from identifying currency to performing calculations and solving real-world problems. Keep practicing to become smart with money!</p>
+                    <a href="grade5_lesson12.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson10.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                    </a>
+                    <a href="grade5_lesson12.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700" id="close-mobile-menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            document.getElementById('close-mobile-menu').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Functionality to show/hide answers
+            const showAnswersButton = document.getElementById('show-answers-button');
+            const answersSection = document.getElementById('answers-section');
+
+            showAnswersButton.addEventListener('click', function() {
+                if (answersSection.style.display === 'none' || answersSection.style.display === '') {
+                    answersSection.style.display = 'block';
+                    showAnswersButton.textContent = 'Hide Answers';
+                    showAnswersButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    showAnswersButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                } else {
+                    answersSection.style.display = 'none';
+                    showAnswersButton.textContent = 'Check Answers';
+                    showAnswersButton.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    showAnswersButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

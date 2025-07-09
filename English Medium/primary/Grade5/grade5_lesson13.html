@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 13: Volume and Capacity - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about volume and capacity for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted for input fields */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        /* Styles for the answers section */
+        #answers-section {
+            display: none; /* Hidden by default */
+            background-color: #f0fdf4; /* Light green background */
+            border-left: 5px solid #22c55e; /* Green border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        #answers-section h3 {
+            color: #16a34a; /* Darker green for heading */
+        }
+        #answers-section ol li {
+            margin-bottom: 0.75rem;
+            color: #15803d; /* Green text for answers */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 13: Volume and Capacity - 1</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's learn about how much space things take up!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-cube lesson-icon text-blue-600"></i> <!-- Icon for volume/capacity -->
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Understand the difference between volume and capacity.</li>
+                                <li>Identify common units of capacity (milliliters and liters).</li>
+                                <li>Convert between liters and milliliters.</li>
+                                <li>Add and subtract capacities.</li>
+                                <li>Solve simple word problems involving capacity.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Introduction to Volume and Capacity -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Introduction to Volume and Capacity</h3>
+                    <p class="text-gray-700 mb-3">
+                        Hello, young mathematicians! Have you ever poured juice into a glass, or filled a bottle with water? When we talk about how much liquid a container can hold, we are talking about its **capacity**.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        **Capacity** is the amount a container can hold. **Volume** is the amount of space an object takes up. For liquids, we often use these terms interchangeably, but it's good to know the difference!
+                    </p>
+                    <p class="text-gray-700">
+                        Let's learn about the units we use to measure liquids and how to perform calculations with them.
+                    </p>
+                </div>
+
+                <!-- Content: Units of Capacity -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Units of Capacity</h3>
+                    <p class="text-gray-700 mb-3">
+                        The most common units of capacity we use are:
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>**Milliliter (ml):** Used for measuring small amounts of liquid, like medicine in a spoon or a small bottle of perfume.</li>
+                            <li>**Liter (L):** Used for measuring larger amounts of liquid, like a bottle of water, a carton of milk, or fuel in a car.</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Key Conversion:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>$1$ liter (L) = $1000$ milliliters (ml)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Content: Converting Units of Capacity -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Converting Units of Capacity</h3>
+                    <p class="text-gray-700 mb-3">
+                        We often need to convert between liters and milliliters.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Convert $4$ liters to milliliters.</p>
+                        <p class="text-gray-700 mt-2">
+                            Since $1$ L = $1000$ ml, then $4$ L = $4 \times 1000 = 4000$ ml.
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700 mb-2">Example 2: Convert $2500$ milliliters to liters and milliliters.</p>
+                        <p class="text-gray-700 mt-2">
+                            Since $1000$ ml = $1$ L, then $2500$ ml = $2000$ ml + $500$ ml = $2$ L $500$ ml.
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 1: Convert the following units.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$7$ L = $\underline{\hspace{2cm}}$ ml</p>
+                            <input type="text" id="ex1-q1" class="input-field" placeholder="ml">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$3000$ ml = $\underline{\hspace{2cm}}$ L</p>
+                            <input type="text" id="ex1-q2" class="input-field" placeholder="L">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$1$ L $250$ ml = $\underline{\hspace{2cm}}$ ml</p>
+                            <input type="text" id="ex1-q3" class="input-field" placeholder="ml">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$4750$ ml = $\underline{\hspace{1cm}}$ L $\underline{\hspace{1cm}}$ ml</p>
+                            <input type="text" id="ex1-q4-l" class="input-field w-1/3" placeholder="L">
+                            <input type="text" id="ex1-q4-ml" class="input-field w-1/3" placeholder="ml">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Adding and Subtracting Capacities -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Adding and Subtracting Capacities</h3>
+                    <p class="text-gray-700 mb-3">
+                        When adding or subtracting capacities, make sure they are in the same unit. If not, convert them first! Remember to regroup (carry over or borrow) $1000$ ml as $1$ L, or $1$ L as $1000$ ml.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 3: Add $2$ L $300$ ml and $1$ L $500$ ml.</p>
+                        <p class="text-gray-700 mt-2">
+                            Add liters: $2$ L + $1$ L = $3$ L<br>
+                            Add milliliters: $300$ ml + $500$ ml = $800$ ml<br>
+                            Total: $3$ L $800$ ml
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700 mb-2">Example 4: Subtract $1$ L $700$ ml from $5$ L $200$ ml.</p>
+                        <p class="text-gray-700 mt-2">
+                            We cannot subtract $700$ ml from $200$ ml. So, we borrow $1$ L from $5$ L (making it $4$ L) and add $1000$ ml to $200$ ml, making it $1200$ ml.<br>
+                            Now, $1200 - 700 = 500$ ml.<br>
+                            And $4 - 1 = 3$ L.<br>
+                            Total: $3$ L $500$ ml
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 2: Add or subtract the following capacities.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$3$ L $450$ ml + $2$ L $100$ ml = $\underline{\hspace{1cm}}$ L $\underline{\hspace{1cm}}$ ml</p>
+                            <input type="text" id="ex2-q1-l" class="input-field w-1/3" placeholder="L">
+                            <input type="text" id="ex2-q1-ml" class="input-field w-1/3" placeholder="ml">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$6$ L $800$ ml + $1$ L $300$ ml = $\underline{\hspace{1cm}}$ L $\underline{\hspace{1cm}}$ ml</p>
+                            <input type="text" id="ex2-q2-l" class="input-field w-1/3" placeholder="L">
+                            <input type="text" id="ex2-q2-ml" class="input-field w-1/3" placeholder="ml">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$7$ L $600$ ml - $4$ L $250$ ml = $\underline{\hspace{1cm}}$ L $\underline{\hspace{1cm}}$ ml</p>
+                            <input type="text" id="ex2-q3-l" class="input-field w-1/3" placeholder="L">
+                            <input type="text" id="ex2-q3-ml" class="input-field w-1/3" placeholder="ml">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$9$ L $100$ ml - $3$ L $400$ ml = $\underline{\hspace{1cm}}$ L $\underline{\hspace{1cm}}$ ml</p>
+                            <input type="text" id="ex2-q4-l" class="input-field w-1/3" placeholder="L">
+                            <input type="text" id="ex2-q4-ml" class="input-field w-1/3" placeholder="ml">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Word Problems -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Problem Solving with Capacity</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's solve some real-life problems involving capacity.
+                    </p>
+                    <div class="problem-solving">
+                        <p class="font-semibold text-blue-700 mb-2">Exercise 3: Solve the following word problems.</p>
+                        <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
+                            <li>
+                                <p>A water bottle holds $1$ L $500$ ml of water. If you drink $700$ ml, how much water is left in the bottle?</p>
+                                <input type="text" class="input-field" placeholder="Answer (L ml)">
+                            </li>
+                            <li>
+                                <p>A chef uses $2$ L $250$ ml of oil for cooking in the morning and $1$ L $800$ ml in the evening. How much oil does he use in total?</p>
+                                <input type="text" class="input-field" placeholder="Answer (L ml)">
+                            </li>
+                            <li>
+                                <p>A jug has a capacity of $3$ liters. If it contains $1500$ ml of juice, how much more juice can it hold?</p>
+                                <input type="text" class="input-field" placeholder="Answer (L ml)">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Check Answers Button -->
+                <div class="text-center mt-8">
+                    <button id="show-answers-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition duration-300 shadow-md hover:shadow-lg">
+                        Check Answers
+                    </button>
+                </div>
+
+                <!-- Content: Answers to Practice Time (Hidden by default) -->
+                <div id="answers-section" class="p-6 rounded-lg shadow-sm">
+                    <h3 class="2xl font-bold mb-4">Answers to Practice Time</h3>
+                    <p class="text-gray-700 mb-4">Let's check your answers!</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-3">
+                        <li>
+                            <p class="font-semibold">Exercise 1: Converting Units</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$7$ L = $7000$ ml</li>
+                                <li>$3000$ ml = $3$ L</li>
+                                <li>$1$ L $250$ ml = $1250$ ml</li>
+                                <li>$4750$ ml = $4$ L $750$ ml</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 2: Adding and Subtracting Capacities</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$3$ L $450$ ml + $2$ L $100$ ml = $5$ L $550$ ml</li>
+                                <li>$6$ L $800$ ml + $1$ L $300$ ml = $8$ L $100$ ml (since $800+300=1100$ ml = $1$ L $100$ ml)</li>
+                                <li>$7$ L $600$ ml - $4$ L $250$ ml = $3$ L $350$ ml</li>
+                                <li>$9$ L $100$ ml - $3$ L $400$ ml = $5$ L $700$ ml (since $100 < 400$, borrow $1$ L from $9$ L, making it $8$ L and $1100$ ml. $1100-400=700$ ml, $8-3=5$ L)</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 3: Problem Solving with Capacity</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$1$ L $500$ ml = $1500$ ml. $1500 - 700 = 800$ ml. So, $800$ ml is left.</li>
+                                <li>$2$ L $250$ ml + $1$ L $800$ ml = $4$ L $50$ ml (since $250+800=1050$ ml = $1$ L $50$ ml). Total oil used is $4$ L $50$ ml.</li>
+                                <li>$3$ liters = $3000$ ml. $3000 - 1500 = 1500$ ml. So, $1$ L $500$ ml more juice can be held.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 13!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Excellent work, Math Lanka students! You've learned about volume and capacity, and how to measure liquids. Keep practicing, and you'll be able to measure anything!</p>
+                    <a href="grade5_lesson14.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson12.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                    </a>
+                    <a href="grade5_lesson14.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-

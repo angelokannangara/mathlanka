@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 8: Time - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about time for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted for input fields */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        /* Styles for the answers section */
+        #answers-section {
+            display: none; /* Hidden by default */
+            background-color: #f0fdf4; /* Light green background */
+            border-left: 5px solid #22c55e; /* Green border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        #answers-section h3 {
+            color: #16a34a; /* Darker green for heading */
+        }
+        #answers-section ol li {
+            margin-bottom: 0.75rem;
+            color: #15803d; /* Green text for answers */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 8: Time - 1</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's learn to tell and manage time!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-clock lesson-icon text-blue-600"></i> <!-- Icon for time -->
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Read and write time using analog and digital clocks.</li>
+                                <li>Understand the concepts of AM and PM.</li>
+                                <li>Convert between hours and minutes.</li>
+                                <li>Solve simple word problems involving time.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Introduction to Time -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Introduction to Time</h3>
+                    <p class="text-gray-700 mb-3">
+                        Hello, young mathematicians! Time is a very important part of our daily lives. We use time to know when to wake up, when to go to school, when to play, and when to sleep.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        Understanding time helps us plan our day and be punctual. Today, we will learn how to read time from different types of clocks and understand how time is measured.
+                    </p>
+                    <p class="text-gray-700">
+                        Do you know how many minutes are in an hour? Or how many hours are in a day? Let's find out!
+                    </p>
+                </div>
+
+                <!-- Content: Reading Time (Analog Clock) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Reading Time: Analog Clock</h3>
+                    <p class="text-gray-700 mb-3">
+                        An **analog clock** has two main hands:
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>The **short hand** is the **hour hand**. It points to the hour.</li>
+                            <li>The **long hand** is the **minute hand**. It points to the minutes.</li>
+                        </ul>
+                        Each number on the clock face represents 5 minutes for the minute hand.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Reading Analog Clock</p>
+                        <p class="text-gray-700 mb-2">
+                            If the hour hand is pointing to $3$ and the minute hand is pointing to $12$, the time is **$3$ o'clock**.
+                        </p>
+                        <p class="text-gray-700 mb-2">
+                            If the hour hand is just past $7$ and the minute hand is pointing to $6$, the time is **$7:30$** (seven thirty or half past seven).
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 1: Write the time shown on the analog clock (assume standard clock faces).</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>Hour hand at 9, Minute hand at 12.</p>
+                            <input type="text" id="ex1-q1" class="input-field" placeholder="Time (e.g., 9:00)">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Hour hand between 2 and 3, Minute hand at 6.</p>
+                            <input type="text" id="ex1-q2" class="input-field" placeholder="Time (e.g., 2:30)">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Hour hand just past 11, Minute hand at 3.</p>
+                            <input type="text" id="ex1-q3" class="input-field" placeholder="Time (e.g., 11:15)">
+                        </div>
+                        <div class="exercise-item">
+                            <p>Hour hand between 4 and 5, Minute hand at 9.</p>
+                            <input type="text" id="ex1-q4" class="input-field" placeholder="Time (e.g., 4:45)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Reading Time (Digital Clock) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Reading Time: Digital Clock</h3>
+                    <p class="text-gray-700 mb-3">
+                        A **digital clock** shows time using numbers, usually separated by a colon (:). The numbers on the left show the hours, and the numbers on the right show the minutes.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example: $08:35$ means 8 hours and 35 minutes.</p>
+                        <p class="text-gray-700 mt-2">
+                            Digital clocks often use the 24-hour format or specify AM/PM.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: AM and PM -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Understanding AM and PM</h3>
+                    <p class="text-gray-700 mb-3">
+                        A day has 24 hours. To avoid confusion between morning and evening times, we use **AM** and **PM**.
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>**AM** stands for "ante meridiem," which means **before noon**. It covers time from midnight ($12:00$ AM) to just before noon ($12:00$ PM).</li>
+                            <li>**PM** stands for "post meridiem," which means **after noon**. It covers time from noon ($12:00$ PM) to just before midnight ($12:00$ AM).</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Examples:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>$7:00$ AM is seven in the morning (when you wake up).</li>
+                            <li>$7:00$ PM is seven in the evening (when you might have dinner).</li>
+                            <li>$12:00$ PM is Noon.</li>
+                            <li>$12:00$ AM is Midnight.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Content: Converting Time -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Converting Time: Hours and Minutes</h3>
+                    <p class="text-gray-700 mb-3">
+                        We know that:
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>$1$ hour = $60$ minutes</li>
+                            <li>$1$ minute = $60$ seconds</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 3: Convert $2$ hours to minutes.</p>
+                        <p class="text-gray-700 mt-2">
+                            Since $1$ hour = $60$ minutes, then $2$ hours = $2 \times 60 = 120$ minutes.
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700 mb-2">Example 4: Convert $90$ minutes to hours and minutes.</p>
+                        <p class="text-gray-700 mt-2">
+                            We know $60$ minutes make $1$ hour. So, $90$ minutes = $60$ minutes + $30$ minutes = $1$ hour and $30$ minutes.
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 2: Convert hours to minutes.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$3$ hours = $\underline{\hspace{2cm}}$ minutes</p>
+                            <input type="text" id="ex2-q1" class="input-field" placeholder="Minutes">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$5$ hours = $\underline{\hspace{2cm}}$ minutes</p>
+                            <input type="text" id="ex2-q2" class="input-field" placeholder="Minutes">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$10$ hours = $\underline{\hspace{2cm}}$ minutes</p>
+                            <input type="text" id="ex2-q3" class="input-field" placeholder="Minutes">
+                        </div>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 3: Convert minutes to hours and minutes.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$75$ minutes = $\underline{\hspace{1cm}}$ hour $\underline{\hspace{1cm}}$ minutes</p>
+                            <input type="text" id="ex3-q1-h" class="input-field w-1/3" placeholder="H">
+                            <input type="text" id="ex3-q1-m" class="input-field w-1/3" placeholder="M">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$130$ minutes = $\underline{\hspace{1cm}}$ hours $\underline{\hspace{1cm}}$ minutes</p>
+                            <input type="text" id="ex3-q2-h" class="input-field w-1/3" placeholder="H">
+                            <input type="text" id="ex3-q2-m" class="input-field w-1/3" placeholder="M">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$200$ minutes = $\underline{\hspace{1cm}}$ hours $\underline{\hspace{1cm}}$ minutes</p>
+                            <input type="text" id="ex3-q3-h" class="input-field w-1/3" placeholder="H">
+                            <input type="text" id="ex3-q3-m" class="input-field w-1/3" placeholder="M">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Word Problems -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Problem Solving with Time</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's apply what we've learned to solve some real-life problems involving time.
+                    </p>
+                    <div class="problem-solving">
+                        <p class="font-semibold text-blue-700 mb-2">Exercise 4: Solve the following word problems.</p>
+                        <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
+                            <li>
+                                <p>A movie started at $3:00$ PM and ended at $5:00$ PM. How long was the movie?</p>
+                                <input type="text" class="input-field" placeholder="Answer (e.g., 2 hours)">
+                            </li>
+                            <li>
+                                <p>You started studying at $6:30$ PM and finished at $7:15$ PM. How many minutes did you study?</p>
+                                <input type="text" class="input-field" placeholder="Answer (e.g., 45 minutes)">
+                            </li>
+                            <li>
+                                <p>If a train journey takes $3$ hours and $20$ minutes, how many minutes is the journey in total?</p>
+                                <input type="text" class="input-field" placeholder="Answer (e.g., 200 minutes)">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Check Answers Button -->
+                <div class="text-center mt-8">
+                    <button id="show-answers-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition duration-300 shadow-md hover:shadow-lg">
+                        Check Answers
+                    </button>
+                </div>
+
+                <!-- Content: Answers to Practice Time (Hidden by default) -->
+                <div id="answers-section" class="p-6 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold mb-4">Answers to Practice Time</h3>
+                    <p class="text-gray-700 mb-4">Let's check your answers!</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-3">
+                        <li>
+                            <p class="font-semibold">Exercise 1: Reading Analog Clock</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>1. $9:00$</li>
+                                <li>2. $2:30$</li>
+                                <li>3. $11:15$</li>
+                                <li>4. $4:45$</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 2: Convert hours to minutes</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$3$ hours = $180$ minutes</li>
+                                <li>$5$ hours = $300$ minutes</li>
+                                <li>$10$ hours = $600$ minutes</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 3: Convert minutes to hours and minutes</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$75$ minutes = $1$ hour $15$ minutes</li>
+                                <li>$130$ minutes = $2$ hours $10$ minutes</li>
+                                <li>$200$ minutes = $3$ hours $20$ minutes</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 4: Problem Solving with Time</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>The movie was $2$ hours long.</li>
+                                <li>You studied for $45$ minutes.</li>
+                                <li>The journey is $200$ minutes in total.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 8!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Excellent work, Math Lanka students! You've successfully learned to read time, understand AM/PM, and convert between units of time. Keep practicing, and you'll always be on time!</p>
+                    <a href="grade5_lesson9.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson7.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                    </a>
+                    <a href="grade5_lesson9.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700" id="close-mobile-menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            document.getElementById('close-mobile-menu').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Functionality to show/hide answers
+            const showAnswersButton = document.getElementById('show-answers-button');
+            const answersSection = document.getElementById('answers-section');
+
+            showAnswersButton.addEventListener('click', function() {
+                if (answersSection.style.display === 'none' || answersSection.style.display === '') {
+                    answersSection.style.display = 'block';
+                    showAnswersButton.textContent = 'Hide Answers';
+                    showAnswersButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    showAnswersButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                } else {
+                    answersSection.style.display = 'none';
+                    showAnswersButton.textContent = 'Check Answers';
+                    showAnswersButton.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    showAnswersButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
