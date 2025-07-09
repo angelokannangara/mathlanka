@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 4: Number Patterns</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about number patterns for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 300px; /* Adjusted for slightly longer inputs for rules */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        /* Styles for the answers section */
+        #answers-section {
+            display: none; /* Hidden by default */
+            background-color: #f0fdf4; /* Light green background */
+            border-left: 5px solid #22c55e; /* Green border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        #answers-section h3 {
+            color: #16a34a; /* Darker green for heading */
+        }
+        #answers-section ol li {
+            margin-bottom: 0.75rem;
+            color: #15803d; /* Green text for answers */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 4: Number Patterns</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's discover the rules behind number sequences!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-project-diagram lesson-icon text-blue-600"></i> <!-- Changed icon for patterns -->
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Identify number patterns.</li>
+                                <li>Determine the rule of a number pattern (addition, subtraction, multiplication, division).</li>
+                                <li>Extend number patterns by applying the rule.</li>
+                                <li>Solve simple problems involving number patterns.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Introduction to Number Patterns -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Introduction to Number Patterns</h3>
+                    <p class="text-gray-700 mb-3">
+                        Hello, young mathematicians! Welcome to Lesson 4 of Math Lanka. Today, we're going to explore the exciting world of <strong>number patterns</strong>.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        What are number patterns? Imagine a line of numbers that follow a special rule. If you can figure out the rule, you can predict what numbers come next! It's like solving a secret code.
+                    </p>
+                    <p class="text-gray-700">
+                        Number patterns are all around us, not just in math, but also in nature, music, and art. Understanding them helps us think logically and solve problems.
+                    </p>
+                </div>
+
+                <!-- Content: What is a Number Pattern? -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What is a Number Pattern?</h3>
+                    <p class="text-gray-700">
+                        A <strong>number pattern</strong> is a sequence of numbers that are arranged according to a specific rule. This rule can involve addition, subtraction, multiplication, division, or even a combination of these operations.
+                    </p>
+                    <p class="text-gray-700 mt-3">
+                        Let's look at some examples to understand this better.
+                    </p>
+                </div>
+
+                <!-- Content: Examples of Number Patterns -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Examples of Number Patterns</h3>
+
+                    <div class="example-box mb-6">
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Simple Addition Pattern</p>
+                        <p class="text-gray-700 mb-2">Consider the sequence: $2, 4, 6, 8, \dots$</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>What do you notice about these numbers?</li>
+                            <li>How do you get from $2$ to $4$? (Add $2$)</li>
+                            <li>How do you get from $4$ to $6$? (Add $2$)</li>
+                            <li>How do you get from $6$ to $8$? (Add $2$)</li>
+                        </ul>
+                        <p class="text-blue-600 text-lg font-mono mt-3">The rule for this pattern is <strong>"Add 2 to the previous number"</strong>.</p>
+                        <p class="text-gray-700 mt-2">So, the next number would be $8 + 2 = 10$.</p>
+                        <p class="text-gray-700">The pattern continues: $2, 4, 6, 8, 10, 12, 14, \dots$</p>
+                    </div>
+
+                    <div class="example-box mb-6">
+                        <p class="font-semibold text-blue-700 mb-2">Example 2: Simple Subtraction Pattern</p>
+                        <p class="text-gray-700 mb-2">Consider the sequence: $20, 18, 16, 14, \dots$</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>Are the numbers getting bigger or smaller? (Smaller)</li>
+                            <li>How do you get from $20$ to $18$? (Subtract $2$)</li>
+                            <li>How do you get from $18$ to $16$? (Subtract $2$)</li>
+                            <li>How do you get from $16$ to $14$? (Subtract $2$)</li>
+                        </ul>
+                        <p class="text-blue-600 text-lg font-mono mt-3">The rule for this pattern is <strong>"Subtract 2 from the previous number"</strong>.</p>
+                        <p class="text-gray-700 mt-2">So, the next number would be $14 - 2 = 12$.</p>
+                        <p class="text-gray-700">The pattern continues: $20, 18, 16, 14, 12, 10, 8, \dots$</p>
+                    </div>
+
+                    <div class="example-box mb-6">
+                        <p class="font-semibold text-blue-700 mb-2">Example 3: Simple Multiplication Pattern</p>
+                        <p class="text-gray-700 mb-2">Consider the sequence: $3, 6, 12, 24, \dots$</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>How do you get from $3$ to $6$? (Multiply by $2$)</li>
+                            <li>How do you get from $6$ to $12$? (Multiply by $2$)</li>
+                            <li>How do you get from $12$ to $24$? (Multiply by $2$)</li>
+                        </ul>
+                        <p class="text-blue-600 text-lg font-mono mt-3">The rule for this pattern is <strong>"Multiply the previous number by 2"</strong>.</p>
+                        <p class="text-gray-700 mt-2">So, the next number would be $24 \times 2 = 48$.</p>
+                        <p class="text-gray-700">The pattern continues: $3, 6, 12, 24, 48, 96, \dots$</p>
+                    </div>
+
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 4: Mixed Operation Pattern</p>
+                        <p class="text-gray-700 mb-2">Sometimes, patterns can be a bit trickier and involve more than one operation.</p>
+                        <p class="text-gray-700 mb-2">Consider the sequence: $1, 2, 4, 7, 11, \dots$</p>
+                        <p class="text-gray-700 mb-2">Let's find the difference between consecutive numbers:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>$2 - 1 = 1$</li>
+                            <li>$4 - 2 = 2$</li>
+                            <li>$7 - 4 = 3$</li>
+                            <li>$11 - 7 = 4$</li>
+                        </ul>
+                        <p class="text-gray-700 mt-2">The differences themselves form a pattern: $1, 2, 3, 4, \dots$ (adding $1$ each time).</p>
+                        <p class="text-blue-600 text-lg font-mono mt-3">So, the next difference will be $5$.</p>
+                        <p class="text-gray-700 mt-2">Therefore, the next number in the original sequence is $11 + 5 = 16$.</p>
+                        <p class="text-gray-700">The pattern continues: $1, 2, 4, 7, 11, 16, 22, \dots$</p>
+                    </div>
+                </div>
+
+                <!-- Content: How to Find the Rule of a Pattern -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">How to Find the Rule of a Pattern</h3>
+                    <p class="text-gray-700 mb-3">
+                        Here are some steps to help you find the rule of a number pattern:
+                    </p>
+                    <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-2">
+                        <li><strong>Look at the difference between consecutive numbers:</strong>
+                            <ul class="list-disc list-inside ml-6 mt-1">
+                                <li>If the numbers are increasing, try addition or multiplication.</li>
+                                <li>If the numbers are decreasing, try subtraction or division.</li>
+                            </ul>
+                        </li>
+                        <li><strong>Check if the difference is constant:</strong> If you add or subtract the same number each time, that's your rule!</li>
+                        <li><strong>Check for multiplication or division:</strong> If the numbers are growing or shrinking very quickly, try multiplying or dividing.</li>
+                        <li><strong>Look for a pattern in the differences:</strong> If the first differences aren't constant, find the differences between those differences. Sometimes, the pattern is in the "pattern of patterns"!</li>
+                    </ol>
+                </div>
+
+                <!-- Content: Practice Time -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Practice Time!</h3>
+                    <p class="text-gray-700 mb-6">
+                        Now it's your turn to find the rule and the next three numbers for each pattern. Write your answers in the boxes below.
+                    </p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$1. \quad 5, 10, 15, 20, \dots$</p>
+                            <label for="q1-rule" class="block text-sm font-medium text-gray-700 mb-1">Rule:</label>
+                            <input type="text" id="q1-rule" class="input-field" placeholder="e.g., Add 5">
+                            <label for="q1-next" class="block text-sm font-medium text-gray-700 mt-3 mb-1">Next three numbers:</label>
+                            <input type="text" id="q1-next" class="input-field" placeholder="e.g., 25, 30, 35">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$2. \quad 30, 27, 24, 21, \dots$</p>
+                            <label for="q2-rule" class="block text-sm font-medium text-gray-700 mb-1">Rule:</label>
+                            <input type="text" id="q2-rule" class="input-field" placeholder="e.g., Subtract 3">
+                            <label for="q2-next" class="block text-sm font-medium text-gray-700 mt-3 mb-1">Next three numbers:</label>
+                            <input type="text" id="q2-next" class="input-field" placeholder="e.g., 18, 15, 12">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$3. \quad 2, 6, 18, 54, \dots$</p>
+                            <label for="q3-rule" class="block text-sm font-medium text-gray-700 mb-1">Rule:</label>
+                            <input type="text" id="q3-rule" class="input-field" placeholder="e.g., Multiply by 3">
+                            <label for="q3-next" class="block text-sm font-medium text-gray-700 mt-3 mb-1">Next three numbers:</label>
+                            <input type="text" id="q3-next" class="input-field" placeholder="e.g., 162, 486, 1458">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$4. \quad 1, 4, 9, 16, \dots$ (Hint: Think about what happens when you multiply a number by itself)</p>
+                            <label for="q4-rule" class="block text-sm font-medium text-gray-700 mb-1">Rule:</label>
+                            <input type="text" id="q4-rule" class="input-field" placeholder="e.g., Square the position number">
+                            <label for="q4-next" class="block text-sm font-medium text-gray-700 mt-3 mb-1">Next three numbers:</label>
+                            <input type="text" id="q4-next" class="input-field" placeholder="e.g., 25, 36, 49">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$5. \quad 100, 90, 80, 70, \dots$</p>
+                            <label for="q5-rule" class="block text-sm font-medium text-gray-700 mb-1">Rule:</label>
+                            <input type="text" id="q5-rule" class="input-field" placeholder="e.g., Subtract 10">
+                            <label for="q5-next" class="block text-sm font-medium text-gray-700 mt-3 mb-1">Next three numbers:</label>
+                            <input type="text" id="q5-next" class="input-field" placeholder="e.g., 60, 50, 40">
+                        </div>
+                    </div>
+                    <div class="text-center mt-8">
+                        <button id="show-answers-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition duration-300 shadow-md hover:shadow-lg">
+                            Check Answers
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content: Answers to Practice Time (Hidden by default) -->
+                <div id="answers-section" class="p-6 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold mb-4">Answers to Practice Time</h3>
+                    <p class="text-gray-700 mb-4">Let's check your answers!</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-3">
+                        <li>
+                            <p class="font-semibold">Pattern: $5, 10, 15, 20, \dots$</p>
+                            <p><strong>Rule:</strong> Add 5</p>
+                            <p><strong>Next three numbers:</strong> $25, 30, 35$</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Pattern: $30, 27, 24, 21, \dots$</p>
+                            <p><strong>Rule:</strong> Subtract 3</p>
+                            <p><strong>Next three numbers:</strong> $18, 15, 12$</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Pattern: $2, 6, 18, 54, \dots$</p>
+                            <p><strong>Rule:</strong> Multiply by 3</p>
+                            <p><strong>Next three numbers:</strong> $162, 486, 1458$</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Pattern: $1, 4, 9, 16, \dots$</p>
+                            <p><strong>Rule:</strong> The numbers are $1 \times 1, 2 \times 2, 3 \times 3, 4 \times 4$. So, the rule is "Square the position number" or "Add consecutive odd numbers" ($1+3=4, 4+5=9, 9+7=16$).</p>
+                            <p><strong>Next three numbers:</strong> $25 (5 \times 5), 36 (6 \times 6), 49 (7 \times 7)$</p>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Pattern: $100, 90, 80, 70, \dots$</p>
+                            <p><strong>Rule:</strong> Subtract 10</p>
+                            <p><strong>Next three numbers:</strong> $60, 50, 40$</p>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 4!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Great job, Math Lanka students! You've learned how to identify and extend number patterns. This skill is very important in mathematics and will help you in many ways as you continue your learning journey. Keep practicing and looking for patterns everywhere!</p>
+                    <a href="grade5_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson3.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                    </a>
+                    <a href="grade5_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700" id="close-mobile-menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            document.getElementById('close-mobile-menu').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Functionality to show/hide answers
+            const showAnswersButton = document.getElementById('show-answers-button');
+            const answersSection = document.getElementById('answers-section');
+
+            showAnswersButton.addEventListener('click', function() {
+                if (answersSection.style.display === 'none' || answersSection.style.display === '') {
+                    answersSection.style.display = 'block';
+                    showAnswersButton.textContent = 'Hide Answers';
+                    showAnswersButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    showAnswersButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                } else {
+                    answersSection.style.display = 'none';
+                    showAnswersButton.textContent = 'Check Answers';
+                    showAnswersButton.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    showAnswersButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

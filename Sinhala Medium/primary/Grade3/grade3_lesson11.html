@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 ශ්‍රේණිය ගණිතය - පාඩම 11: දිශා</title>
+    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා නිර්මාණය කරන ලද ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාව.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .direction-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .direction-problem-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .direction-button {
+            background-color: #e2e8f0;
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .direction-button:hover {
+            background-color: #cbd5e0;
+        }
+        .direction-button.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .direction-button.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+        .direction-button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .compass-rose {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin: 20px auto;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .compass-rose div {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            color: #333;
+        }
+        .compass-rose .north { top: 0%; left: 50%; }
+        .compass-rose .south { bottom: 0%; left: 50%; }
+        .compass-rose .east { right: 0%; top: 50%; transform: translate(50%, -50%); }
+        .compass-rose .west { left: 0%; top: 50%; transform: translate(-50%, -50%); }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අපි ගැන</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 11: දිශා - ඔබේ මාර්ගය සොයා ගනිමු!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">3 ශ්‍රේණියේ සිසුන් සඳහා (වයස 9) - අපි එකට දිශා ගැන ඉගෙන ගනිමු!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-compass lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">අද අපි ඉගෙන ගන්නේ කුමක්ද:</h3>
+                        <p class="text-gray-700 text-lg">
+                            උද්‍යානයට හෝ ඔබේ මිතුරාගේ නිවසට යා යුත්තේ කුමන මාර්ගයෙන්දැයි ඔබ කවදා හෝ කල්පනා කර තිබේද? දිශා අපට අපගේ මාර්ගය සොයා ගැනීමට උපකාරී වේ!
+                            මෙම පාඩමේදී, ඔබ ඉගෙන ගනු ඇත:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>ප්‍රධාන දිශා හතර: උතුර, දකුණ, නැගෙනහිර, සහ බටහිර.</li>
+                                <li>ස්ථාන සහ චලනයන් විස්තර කිරීමට දිශා භාවිතා කරන්නේ කෙසේද.</li>
+                                <li>දෛනික ජීවිතයේදී දිශා දැන ගැනීම වැදගත් වන්නේ ඇයි.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: The Four Main Directions -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ප්‍රධාන දිශා හතර:</h3>
+                    <p class="text-gray-700 mb-3">
+                        දේවල් කොහේද සහ කොහේ යා යුතුද යන්න දැන ගැනීමට අපට උපකාර වන ප්‍රධාන දිශා හතරක් ඇත. ඒවා නම්:
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                            <li>**උතුර (N):** සාමාන්‍යයෙන් සිතියමක ඉහළට යොමු වේ.</li>
+                            <li>**දකුණ (S):** උතුරට ප්‍රතිවිරුද්ධව, සිතියමක පහළට යොමු වේ.</li>
+                            <li>**නැගෙනහිර (E):** හිරු උදාවන දිශාව.</li>
+                            <li>**බටහිර (W):** හිරු බැස යන දිශාව. නැගෙනහිරට ප්‍රතිවිරුද්ධය.</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 text-center">කොම්පාස් රෝස බලන්න!</p>
+                        <div class="compass-rose border-2 border-gray-700 rounded-full">
+                            <div class="north">උ</div>
+                            <div class="south">ද</div>
+                            <div class="east">නැ</div>
+                            <div class="west">බ</div>
+                        </div>
+                        <p class="text-gray-700 text-center mt-2">
+                            ඔබ උතුරට මුහුණලා සිටී නම්, නැගෙනහිර ඔබේ දකුණට වන අතර, බටහිර ඔබේ වමට වේ. දකුණ ඔබේ පිටුපසින් වේ.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Using Directions in Real Life -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">සැබෑ ජීවිතයේ දිශා භාවිතා කිරීම:</h3>
+                    <p class="text-gray-700 mb-3">
+                        අපි හැම විටම දිශා භාවිතා කරමු!
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                            <li>යමෙකුට දිශා දීමට: "බ්ලොක් දෙකක් **උතුරට** කෙලින් ගොස්, පසුව **නැගෙනහිරට** හැරෙන්න."</li>
+                            <li>සිතියමක් කියවීමට: සිතියම්වල සෑම විටම උතුර කුමන දිශාවටදැයි පෙන්වීමට කොම්පාස් රෝසක් ඇත.</li>
+                            <li>දේවල් කොහේදැයි විස්තර කිරීමට: "පුස්තකාලය පාසලට **බටහිරින්** පිහිටා ඇත."</li>
+                            <li>කාලගුණය තේරුම් ගැනීමට: "සුළඟ හමන්නේ **දකුණෙන්**."</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය: උද්‍යානය සොයා ගැනීම</p>
+                        <p class="text-gray-700">
+                            ඔබ නිවසේ සිටින අතර උද්‍යානය නැගෙනහිරට පිහිටා තිබේ නම්, ඔබට එහි යාමට **නැගෙනහිරට** ඇවිද යා යුතුය.
+                            ඔබ උද්‍යානයේ සිටින විට, ඔබේ නිවස **බටහිරට** වනු ඇත.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Lesson Activity 1: Identify Opposite Direction -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: ප්‍රතිවිරුද්ධ දිශා!</h2>
+                    <p id="opposite-direction-instructions" class="text-yellow-700 text-lg mb-8">ප්‍රතිවිරුද්ධ දිශාව කුමක්ද?</p>
+
+                    <div id="opposite-direction-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="current-direction-display" class="direction-display">
+                            <!-- Current direction will be displayed here -->
+                        </div>
+                        <input type="text" id="opposite-direction-input" class="input-field" placeholder="ප්‍රතිවිරුද්ධ දිශාව ඇතුළත් කරන්න">
+                        <p id="opposite-direction-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-opposite-direction-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">මගේ පිළිතුර පරීක්ෂා කරන්න</button>
+                    <button id="next-opposite-direction-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+                <!-- Interactive Lesson Activity 2: Simple Directional Movement -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: දිශා අනුගමනය කරන්න!</h2>
+                    <p id="directional-movement-instructions" class="text-purple-700 text-lg mb-8">පියවර කියවා අවසාන දිශාව අපට කියන්න.</p>
+
+                    <div id="directional-movement-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="movement-problem-display" class="direction-problem-text text-center">
+                            <!-- Movement problem will be displayed here -->
+                        </div>
+                        <div id="direction-options" class="flex flex-wrap justify-center gap-4 mt-4">
+                            <button class="direction-button" data-direction="North">උතුර</button>
+                            <button class="direction-button" data-direction="South">දකුණ</button>
+                            <button class="direction-button" data-direction="East">නැගෙනහිර</button>
+                            <button class="direction-button" data-direction="West">බටහිර</button>
+                        </div>
+                        <p id="directional-movement-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-directional-movement-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                    <p class="text-green-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <a href="grade3_lesson12.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade3_lesson10.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> පාඩම 10 වෙත ආපසු
+                    </a>
+                    <a href="grade3_lesson12.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කරයි.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අපි ගැන</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Activity 1: Identify Opposite Direction
+            let currentOppositeDirectionCorrectAnswer = '';
+
+            const directionsOpposites = {
+                "උතුර": "දකුණ",
+                "දකුණ": "උතුර",
+                "නැගෙනහිර": "බටහිර",
+                "බටහිර": "නැගෙනහිර"
+            };
+
+            function generateOppositeDirectionActivity() {
+                const currentDirectionDisplay = document.getElementById('current-direction-display');
+                const oppositeDirectionInput = document.getElementById('opposite-direction-input');
+                const oppositeDirectionFeedback = document.getElementById('opposite-direction-feedback');
+                const nextOppositeDirectionBtn = document.getElementById('next-opposite-direction-btn');
+                const checkOppositeDirectionBtn = document.getElementById('check-opposite-direction-btn');
+
+                if (!currentDirectionDisplay || !oppositeDirectionInput || !oppositeDirectionFeedback || !nextOppositeDirectionBtn || !checkOppositeDirectionBtn) {
+                    console.error("ප්‍රතිවිරුද්ධ දිශා ක්‍රියාකාරකම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ. තත්පර 1කින් නැවත උත්සාහ කරමු.");
+                    setTimeout(generateOppositeDirectionActivity, 1000);
+                    return;
+                }
+
+                oppositeDirectionInput.value = '';
+                oppositeDirectionInput.style.borderColor = '#cbd5e0';
+                oppositeDirectionInput.readOnly = false;
+                oppositeDirectionFeedback.textContent = '';
+                oppositeDirectionFeedback.className = 'text-xl font-semibold mt-4';
+                nextOppositeDirectionBtn.classList.add('hidden');
+                checkOppositeDirectionBtn.classList.remove('hidden');
+
+                const directions = Object.keys(directionsOpposites);
+                const randomDirection = directions[Math.floor(Math.random() * directions.length)];
+                currentDirectionDisplay.textContent = `${randomDirection}ට ප්‍රතිවිරුද්ධ දිශාව කුමක්ද?`;
+                currentOppositeDirectionCorrectAnswer = directionsOpposites[randomDirection].toLowerCase();
+            }
+
+            function checkOppositeDirectionAnswers() {
+                const oppositeDirectionInput = document.getElementById('opposite-direction-input');
+                const oppositeDirectionFeedback = document.getElementById('opposite-direction-feedback');
+                const nextOppositeDirectionBtn = document.getElementById('next-opposite-direction-btn');
+                const checkOppositeDirectionBtn = document.getElementById('check-opposite-direction-btn');
+
+                if (!oppositeDirectionInput || !oppositeDirectionFeedback || !nextOppositeDirectionBtn || !checkOppositeDirectionBtn) {
+                    console.error("ප්‍රතිවිරුද්ධ දිශා පරීක්ෂා කිරීම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ.");
+                    return;
+                }
+
+                const userAnswer = oppositeDirectionInput.value.trim().toLowerCase();
+
+                if (userAnswer === currentOppositeDirectionCorrectAnswer) {
+                    oppositeDirectionFeedback.textContent = 'හරි! ඔයා හරි!';
+                    oppositeDirectionFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    oppositeDirectionInput.style.borderColor = '#10b981';
+                    oppositeDirectionInput.readOnly = true;
+                    nextOppositeDirectionBtn.classList.remove('hidden');
+                    checkOppositeDirectionBtn.classList.add('hidden');
+                } else {
+                    oppositeDirectionFeedback.textContent = `අප්සට්! නිවැරදි පිළිතුර "${currentOppositeDirectionCorrectAnswer}". තවත් එකක් උත්සාහ කරමු!`;
+                    oppositeDirectionFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    oppositeDirectionInput.style.borderColor = '#ef4444';
+                    setTimeout(generateOppositeDirectionActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Activity 2: Simple Directional Movement
+            let currentDirectionalMovementCorrectAnswer = '';
+
+            const movementProblems = [
+                {
+                    start: "ඔබ උතුරට මුහුණලා සිටී. ඔබ දකුණට හැරෙයි. ඔබ දැන් මුහුණලා සිටින්නේ කුමන දිශාවටද?",
+                    answer: "නැගෙනහිර"
+                },
+                {
+                    start: "ඔබ බටහිරට මුහුණලා සිටී. ඔබ වමට හැරෙයි. ඔබ දැන් මුහුණලා සිටින්නේ කුමන දිශාවටද?",
+                    answer: "දකුණ"
+                },
+                {
+                    start: "ඔබ දකුණට මුහුණලා සිටී. ඔබ හැරී යයි. ඔබ දැන් මුහුණලා සිටින්නේ කුමන දිශාවටද?",
+                    answer: "උතුර"
+                },
+                {
+                    start: "ඔබ නැගෙනහිරට මුහුණලා සිටී. ඔබ වමට හැරෙයි. ඔබ දැන් මුහුණලා සිටින්නේ කුමන දිශාවටද?",
+                    answer: "උතුර"
+                }
+            ];
+
+            function generateDirectionalMovementActivity() {
+                const movementProblemDisplay = document.getElementById('movement-problem-display');
+                const directionOptionsContainer = document.getElementById('direction-options');
+                const directionalMovementFeedback = document.getElementById('directional-movement-feedback');
+                const nextDirectionalMovementBtn = document.getElementById('next-directional-movement-btn');
+                const directionButtons = document.querySelectorAll('#direction-options .direction-button');
+
+                if (!movementProblemDisplay || !directionOptionsContainer || !directionalMovementFeedback || !nextDirectionalMovementBtn || directionButtons.length === 0) {
+                    console.error("දිශානුගත චලන ක්‍රියාකාරකම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ. තත්පර 1කින් නැවත උත්සාහ කරමු.");
+                    setTimeout(generateDirectionalMovementActivity, 1000);
+                    return;
+                }
+
+                directionalMovementFeedback.textContent = '';
+                directionalMovementFeedback.className = 'text-xl font-semibold mt-4';
+                nextDirectionalMovementBtn.classList.add('hidden');
+
+                directionButtons.forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect', 'disabled');
+                    btn.disabled = false;
+                });
+
+                const randomProblem = movementProblems[Math.floor(Math.random() * movementProblems.length)];
+                movementProblemDisplay.textContent = randomProblem.start;
+                currentDirectionalMovementCorrectAnswer = randomProblem.answer.toLowerCase();
+            }
+
+            function checkDirectionalMovementAnswer(selectedDirection) {
+                const directionalMovementFeedback = document.getElementById('directional-movement-feedback');
+                const nextDirectionalMovementBtn = document.getElementById('next-directional-movement-btn');
+                const directionButtons = document.querySelectorAll('#direction-options .direction-button');
+
+                if (!directionalMovementFeedback || !nextDirectionalMovementBtn || directionButtons.length === 0) {
+                    console.error("දිශානුගත චලන පරීක්ෂා කිරීම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ.");
+                    return;
+                }
+
+                directionButtons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.direction.toLowerCase() === currentDirectionalMovementCorrectAnswer) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('disabled');
+                    }
+                });
+
+                if (selectedDirection === currentDirectionalMovementCorrectAnswer) {
+                    directionalMovementFeedback.textContent = 'නියම වැඩක්! එය හරි!';
+                    directionalMovementFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextDirectionalMovementBtn.classList.remove('hidden');
+                } else {
+                    directionalMovementFeedback.textContent = `හරියටම හරි නෑ. නිවැරදි පිළිතුර "${currentDirectionalMovementCorrectAnswer}". තවත් එකක් උත්සාහ කරමු!`;
+                    directionalMovementFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateDirectionalMovementActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Attach event listeners
+            document.getElementById('check-opposite-direction-btn').addEventListener('click', checkOppositeDirectionAnswers);
+            document.getElementById('next-opposite-direction-btn').addEventListener('click', generateOppositeDirectionActivity);
+
+            document.querySelectorAll('#direction-options .direction-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    checkDirectionalMovementAnswer(event.target.dataset.direction.toLowerCase());
+                });
+            });
+            document.getElementById('next-directional-movement-btn').addEventListener('click', generateDirectionalMovementActivity);
+
+
+            // Initialize activities on page load
+            generateOppositeDirectionActivity();
+            generateDirectionalMovementActivity();
+        });
+    </script>
+</body>
+</html>

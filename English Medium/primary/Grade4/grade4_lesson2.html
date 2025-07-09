@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 ශ්‍රේණිය ගණිතය - පාඩම 2: එකතු කිරීම - 1</title>
+    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා නිර්මාණය කරන ලද ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාව.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .math-problem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .math-problem .number {
+            text-align: right;
+            width: 150px; /* Fixed width for alignment */
+        }
+        .math-problem .number-with-operator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align content to the right within its width */
+            width: 150px; /* Match the width of the top number for alignment */
+        }
+        .math-problem .operator {
+            margin-right: 5px; /* Space between operator and number */
+        }
+        .math-problem .line {
+            border-bottom: 2px solid #333;
+            width: 150px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අපි ගැන</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 2: එකතු කිරීම - 1 - විශාල සංඛ්‍යා එකතු කරමු!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">4 ශ්‍රේණියේ සිසුන් සඳහා (වයස 9-10) - ඉලක්කම් 4 දක්වා සංඛ්‍යා එකතු කිරීමට ඉගෙන ගනිමු!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-plus-circle lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">අද අපි ඉගෙන ගන්නේ කුමක්ද:</h3>
+                        <p class="text-gray-700 text-lg">
+                            ඔබ 3 ශ්‍රේණියේදී එකතු කිරීම් ගැන ඉගෙන ගත්තා. දැන් අපි ඊටත් වඩා විශාල සංඛ්‍යා එකතු කරන්නේ කෙසේදැයි ඉගෙන ගනිමු, විශේෂයෙන් අපට "ගෙන යාමට" (carrying) අවශ්‍ය වූ විට!
+                            මෙම පාඩමේදී, ඔබ ඉගෙන ගනු ඇත:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>**ඉලක්කම් 3ක සංඛ්‍යා ගෙන යාමක් සමඟ එකතු කිරීමට**.</li>
+                                <li>**ඉලක්කම් 4ක සංඛ්‍යා ගෙන යාමක් සමඟ එකතු කිරීමට**.</li>
+                                <li>එකතු කිරීමේදී **ස්ථානීය අගයන්** නිවැරදිව භාවිතා කරන්නේ කෙසේද.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Adding 3-Digit Numbers with Carrying -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ගෙන යාමක් සමඟ ඉලක්කම් 3ක සංඛ්‍යා එකතු කිරීම:</h3>
+                    <p class="text-gray-700 mb-3">
+                        අපි සංඛ්‍යා එකතු කරන විට, එක් ස්ථානීය අගයක එකතුව 9ට වඩා වැඩි නම්, අපි අමතර දහය හෝ සියය ඊළඟ ස්ථානයට "ගෙන යමු".
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය: 345 + 178</p>
+                        <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
+                            <li>**පියවර 1: එකේ ස්ථානය එකතු කරන්න.** $5 + 8 = 13$. 13 යනු 1 දහය සහ 3 එකයි. 3 එකේ ස්ථානයේ ලියා, 1 දහය දහයේ ස්ථානයට ගෙන යන්න.</li>
+                            <li>**පියවර 2: දහයේ ස්ථානය එකතු කරන්න.** (ගෙන ආ 1) $+ 4 + 7 = 12$. 12 යනු 1 සියය සහ 2 දහයයි. 2 දහයේ ස්ථානයේ ලියා, 1 සියය සියයේ ස්ථානයට ගෙන යන්න.</li>
+                            <li>**පියවර 3: සියයේ ස්ථානය එකතු කරන්න.** (ගෙන ආ 1) $+ 3 + 1 = 5$. 5 සියයේ ස්ථානයේ ලියන්න.</li>
+                            <li>**පිළිතුර: 523**</li>
+                        </ul>
+                        <div class="math-problem">
+                            <span class="number">  11  </span> <!-- Carrying numbers -->
+                            <span class="number">345</span>
+                            <span class="number-with-operator">
+                                <span class="operator">+</span> <span id="example-num2-3digit">178</span>
+                            </span>
+                            <div class="line"></div>
+                            <span class="number">523</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Adding 4-Digit Numbers with Carrying -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ගෙන යාමක් සමඟ ඉලක්කම් 4ක සංඛ්‍යා එකතු කිරීම:</h3>
+                    <p class="text-gray-700 mb-3">
+                        ඉලක්කම් 4ක සංඛ්‍යා එකතු කිරීමේදී ද එම නීති අදාළ වේ. අපි එකේ ස්ථානයෙන් පටන් ගෙන, අවශ්‍ය විටෙක ගෙන යමින්, දහස් ස්ථානය දක්වා ඉදිරියට යමු.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය: 1234 + 5678</p>
+                        <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
+                            <li>**පියවර 1: එකේ ස්ථානය:** $4 + 8 = 12$. 2 ලියා, 1 ගෙන යන්න.</li>
+                            <li>**පියවර 2: දහයේ ස්ථානය:** (ගෙන ආ 1) $+ 3 + 7 = 11$. 1 ලියා, 1 ගෙන යන්න.</li>
+                            <li>**පියවර 3: සියයේ ස්ථානය:** (ගෙන ආ 1) $+ 2 + 6 = 9$. 9 ලියන්න.</li>
+                            <li>**පියවර 4: දහසේ ස්ථානය:** $1 + 5 = 6$. 6 ලියන්න.</li>
+                            <li>**පිළිතුර: 6912**</li>
+                        </ul>
+                        <div class="math-problem">
+                            <span class="number">  11  </span> <!-- Carrying numbers -->
+                            <span class="number">1234</span>
+                            <span class="number-with-operator">
+                                <span class="operator">+</span> <span id="example-num2-4digit">5678</span>
+                            </span>
+                            <div class="line"></div>
+                            <span class="number">6912</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Vertical Addition (3-Digit) -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: සිරස් එකතු කිරීම (ඉලක්කම් 3)!</h2>
+                    <p id="vertical-add-3digit-instructions" class="text-yellow-700 text-lg mb-8">පහත සිරස් එකතු කිරීමේ ගැටලු විසඳා පිළිතුර ඇතුළත් කරන්න.</p>
+
+                    <div id="vertical-add-3digit-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[200px] flex flex-col justify-center items-center">
+                        <div class="math-problem">
+                            <span id="vertical-add-3digit-num1" class="number"></span>
+                            <span class="number-with-operator">
+                                <span class="operator">+</span> <span id="vertical-add-3digit-num2" class="number"></span>
+                            </span>
+                            <div class="line"></div>
+                            <input type="number" id="vertical-add-3digit-answer-input" class="input-field" placeholder="පිළිතුර">
+                        </div>
+                        <p id="vertical-add-3digit-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-vertical-add-3digit-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුර පරීක්ෂා කරන්න</button>
+                    <button id="next-vertical-add-3digit-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                </div>
+
+                <!-- Interactive Activity 2: Vertical Addition (4-Digit) -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: සිරස් එකතු කිරීම (ඉලක්කම් 4)!</h2>
+                    <p id="vertical-add-4digit-instructions" class="text-purple-700 text-lg mb-8">පහත සිරස් එකතු කිරීමේ ගැටලු විසඳා පිළිතුර ඇතුළත් කරන්න.</p>
+
+                    <div id="vertical-add-4digit-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[200px] flex flex-col justify-center items-center">
+                        <div class="math-problem">
+                            <span id="vertical-add-4digit-num1" class="number"></span>
+                            <span class="number-with-operator">
+                                <span class="operator">+</span> <span id="vertical-add-4digit-num2" class="number"></span>
+                            </span>
+                            <div class="line"></div>
+                            <input type="number" id="vertical-add-4digit-answer-input" class="input-field" placeholder="පිළිතුර">
+                        </div>
+                        <p id="vertical-add-4digit-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-vertical-add-4digit-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුර පරීක්ෂා කරන්න</button>
+                    <button id="next-vertical-add-4digit-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                    <p class="text-green-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <a href="grade4_lesson3.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson1.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> පාඩම 1 වෙත ආපසු
+                    </a>
+                    <a href="grade4_lesson3.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කරයි.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අපි ගැන</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Function to generate 3-digit numbers for addition with carrying
+            function generate3DigitAdditionNumbers() {
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100-999
+                    num2 = Math.floor(Math.random() * 900) + 100; // 100-999
+                    // Ensure carrying happens in at least one place
+                    const onesSum = (num1 % 10) + (num2 % 10);
+                    const tensSum = (Math.floor(num1 / 10) % 10) + (Math.floor(num2 / 10) % 10) + (onesSum >= 10 ? 1 : 0);
+                    const hundredsSum = (Math.floor(num1 / 100) % 10) + (Math.floor(num2 / 100) % 10) + (tensSum >= 10 ? 1 : 0);
+                    if (onesSum >= 10 || tensSum >= 10 || hundredsSum >= 10) {
+                        break; // Carrying is ensured
+                    }
+                } while (true);
+                return { num1, num2 };
+            }
+
+            // Function to generate 4-digit numbers for addition with carrying
+            function generate4DigitAdditionNumbers() {
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * 9000) + 1000; // 1000-9999
+                    num2 = Math.floor(Math.random() * 9000) + 1000; // 1000-9999
+                    // Ensure carrying happens in at least one place
+                    const onesSum = (num1 % 10) + (num2 % 10);
+                    const tensSum = (Math.floor(num1 / 10) % 10) + (Math.floor(num2 / 10) % 10) + (onesSum >= 10 ? 1 : 0);
+                    const hundredsSum = (Math.floor(num1 / 100) % 10) + (Math.floor(num2 / 100) % 10) + (tensSum >= 10 ? 1 : 0);
+                    const thousandsSum = (Math.floor(num1 / 1000) % 10) + (Math.floor(num2 / 1000) % 10) + (hundredsSum >= 10 ? 1 : 0);
+                    if (onesSum >= 10 || tensSum >= 10 || hundredsSum >= 10 || thousandsSum >= 10) {
+                        break; // Carrying is ensured
+                    }
+                } while (true);
+                return { num1, num2 };
+            }
+
+            // Activity 1: Vertical Addition (3-Digit)
+            let currentVertical3DigitCorrectAnswer = 0;
+
+            function generateVerticalAdd3DigitActivity() {
+                const verticalNum1 = document.getElementById('vertical-add-3digit-num1');
+                const verticalNum2 = document.getElementById('vertical-add-3digit-num2');
+                const verticalAnswerInput = document.getElementById('vertical-add-3digit-answer-input');
+                const verticalFeedback = document.getElementById('vertical-add-3digit-feedback');
+                const nextBtn = document.getElementById('next-vertical-add-3digit-btn');
+                const checkBtn = document.getElementById('check-vertical-add-3digit-btn');
+
+                if (!verticalNum1 || !verticalNum2 || !verticalAnswerInput || !verticalFeedback || !nextBtn || !checkBtn) {
+                    console.error("3-digit vertical addition elements not found. Retrying in 1 second.");
+                    setTimeout(generateVerticalAdd3DigitActivity, 1000);
+                    return;
+                }
+
+                verticalAnswerInput.value = '';
+                verticalAnswerInput.style.borderColor = '#cbd5e0';
+                verticalAnswerInput.readOnly = false;
+                verticalFeedback.textContent = '';
+                verticalFeedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const { num1, num2 } = generate3DigitAdditionNumbers();
+                verticalNum1.textContent = num1;
+                verticalNum2.textContent = num2;
+                currentVertical3DigitCorrectAnswer = num1 + num2;
+            }
+
+            function checkVerticalAdd3DigitAnswers() {
+                const verticalAnswerInput = document.getElementById('vertical-add-3digit-answer-input');
+                const verticalFeedback = document.getElementById('vertical-add-3digit-feedback');
+                const nextBtn = document.getElementById('next-vertical-add-3digit-btn');
+                const checkBtn = document.getElementById('check-vertical-add-3digit-btn');
+
+                if (!verticalAnswerInput || !verticalFeedback || !nextBtn || !checkBtn) {
+                    console.error("3-digit vertical addition check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(verticalAnswerInput.value.trim());
+
+                if (userAnswer === currentVertical3DigitCorrectAnswer) {
+                    verticalFeedback.textContent = 'නියමයි! එය නිවැරදියි!';
+                    verticalFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    verticalAnswerInput.style.borderColor = '#10b981';
+                    verticalAnswerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    verticalFeedback.textContent = `අප්සට්! නිවැරදි පිළිතුර ${currentVertical3DigitCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    verticalFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    verticalAnswerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateVerticalAdd3DigitActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Activity 2: Vertical Addition (4-Digit)
+            let currentVertical4DigitCorrectAnswer = 0;
+
+            function generateVerticalAdd4DigitActivity() {
+                const verticalNum1 = document.getElementById('vertical-add-4digit-num1');
+                const verticalNum2 = document.getElementById('vertical-add-4digit-num2');
+                const verticalAnswerInput = document.getElementById('vertical-add-4digit-answer-input');
+                const verticalFeedback = document.getElementById('vertical-add-4digit-feedback');
+                const nextBtn = document.getElementById('next-vertical-add-4digit-btn');
+                const checkBtn = document.getElementById('check-vertical-add-4digit-btn');
+
+                if (!verticalNum1 || !verticalNum2 || !verticalAnswerInput || !verticalFeedback || !nextBtn || !checkBtn) {
+                    console.error("4-digit vertical addition elements not found. Retrying in 1 second.");
+                    setTimeout(generateVerticalAdd4DigitActivity, 1000);
+                    return;
+                }
+
+                verticalAnswerInput.value = '';
+                verticalAnswerInput.style.borderColor = '#cbd5e0';
+                verticalAnswerInput.readOnly = false;
+                verticalFeedback.textContent = '';
+                verticalFeedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const { num1, num2 } = generate4DigitAdditionNumbers();
+                verticalNum1.textContent = num1;
+                verticalNum2.textContent = num2;
+                currentVertical4DigitCorrectAnswer = num1 + num2;
+            }
+
+            function checkVerticalAdd4DigitAnswers() {
+                const verticalAnswerInput = document.getElementById('vertical-add-4digit-answer-input');
+                const verticalFeedback = document.getElementById('vertical-add-4digit-feedback');
+                const nextBtn = document.getElementById('next-vertical-add-4digit-btn');
+                const checkBtn = document.getElementById('check-vertical-add-4digit-btn');
+
+                if (!verticalAnswerInput || !verticalFeedback || !nextBtn || !checkBtn) {
+                    console.error("4-digit vertical addition check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(verticalAnswerInput.value.trim());
+
+                if (userAnswer === currentVertical4DigitCorrectAnswer) {
+                    verticalFeedback.textContent = 'නියමයි! එය නිවැරදියි!';
+                    verticalFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    verticalAnswerInput.style.borderColor = '#10b981';
+                    verticalAnswerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    verticalFeedback.textContent = `අප්සට්! නිවැරදි පිළිතුර ${currentVertical4DigitCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    verticalFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    verticalAnswerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateVerticalAdd4DigitActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Attach event listeners for activities
+            document.getElementById('check-vertical-add-3digit-btn').addEventListener('click', checkVerticalAdd3DigitAnswers);
+            document.getElementById('next-vertical-add-3digit-btn').addEventListener('click', generateVerticalAdd3DigitActivity);
+
+            document.getElementById('check-vertical-add-4digit-btn').addEventListener('click', checkVerticalAdd4DigitAnswers);
+            document.getElementById('next-vertical-add-4digit-btn').addEventListener('click', generateVerticalAdd4DigitActivity);
+
+            // Initialize all activities on page load
+            generateVerticalAdd3DigitActivity();
+            generateVerticalAdd4DigitActivity();
+        });
+    </script>
+</body>
+</html>

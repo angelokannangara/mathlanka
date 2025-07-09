@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 3: Addition</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about addition for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        .addition-problem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .addition-problem .number {
+            text-align: right;
+            width: 180px; /* Fixed width for alignment */
+        }
+        .addition-problem .number-with-operator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align content to the right within its width */
+            width: 180px; /* Match the width of the top number for alignment */
+        }
+        .addition-problem .operator {
+            margin-right: 5px; /* Space between operator and number */
+        }
+        .addition-problem .line {
+            border-bottom: 2px solid #333;
+            width: 180px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .addition-problem .input-group {
+            display: flex;
+            gap: 10px;
+            width: 180px;
+            justify-content: center;
+        }
+        .addition-problem .input-group input {
+            max-width: 180px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 3: Addition</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's learn to add larger numbers!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-plus-circle lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Add numbers up to **5 digits** with and without carrying over.</li>
+                                <li>Solve **word problems** involving addition.</li>
+                                <li>Estimate sums by **rounding** numbers.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Addition without Carrying Over -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Addition without Carrying Over</h3>
+                    <p class="text-gray-700 mb-3">
+                        When we add numbers without carrying over, we simply add the digits in each place value column.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example:</p>
+                        <pre class="text-blue-600 text-lg font-mono bg-blue-50 p-2 rounded-md">
+  2345
++ 1234
+-------
+  3579
+                        </pre>
+                        <p class="font-semibold text-blue-700 mt-3">Exercise 1: Add the following numbers.</p>
+                        <div class="exercise-grid">
+                            <div class="exercise-item">
+                                <p>4521 + 3210 = <input type="text" class="input-field w-32 inline-block"></p>
+                            </div>
+                            <div class="exercise-item">
+                                <p>10567 + 2312 = <input type="text" class="input-field w-32 inline-block"></p>
+                            </div>
+                            <div class="exercise-item">
+                                <p>54321 + 12345 = <input type="text" class="input-field w-32 inline-block"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Addition without Carrying -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Add without Carrying!</h2>
+                    <p id="add-no-carry-instructions" class="text-yellow-700 text-lg mb-8">Add the numbers and enter the sum.</p>
+
+                    <div id="add-no-carry-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[180px] flex flex-col justify-center items-center">
+                        <div class="addition-problem">
+                            <span id="add-no-carry-num1" class="number"></span>
+                            <span class="number-with-operator">
+                                <span class="operator">+</span> <span id="add-no-carry-num2" class="number"></span>
+                            </span>
+                            <div class="line"></div>
+                            <div class="input-group">
+                                <input type="number" id="add-no-carry-answer-input" class="input-field" placeholder="Sum">
+                            </div>
+                        </div>
+                        <p id="add-no-carry-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-add-no-carry-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-add-no-carry-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Content: Addition with Carrying Over -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Addition with Carrying Over</h3>
+                    <p class="text-gray-700 mb-3">
+                        When the sum of digits in a column is 10 or more, we carry over the tens digit to the next place value column.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example:</p>
+                        <pre class="text-blue-600 text-lg font-mono bg-blue-50 p-2 rounded-md">
+  1  (carry over)
+  4567
++ 2895
+-------
+  7462
+                        </pre>
+                        <p class="font-semibold text-blue-700 mt-3">Exercise 2: Add the following numbers.</p>
+                        <div class="exercise-grid">
+                            <div class="exercise-item">
+                                <p>6789 + 1234 = <input type="text" class="input-field w-32 inline-block"></p>
+                            </div>
+                            <div class="exercise-item">
+                                <p>25678 + 14325 = <input type="text" class="input-field w-32 inline-block"></p>
+                            </div>
+                            <div class="exercise-item">
+                                <p>89012 + 10988 = <input type="text" class="input-field w-32 inline-block"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 2: Addition with Carrying -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Add with Carrying!</h2>
+                    <p id="add-with-carry-instructions" class="text-purple-700 text-lg mb-8">Add the numbers and enter the sum.</p>
+
+                    <div id="add-with-carry-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[180px] flex flex-col justify-center items-center">
+                        <div class="addition-problem">
+                            <span id="add-with-carry-num1" class="number"></span>
+                            <span class="number-with-operator">
+                                <span class="operator">+</span> <span id="add-with-carry-num2" class="number"></span>
+                            </span>
+                            <div class="line"></div>
+                            <div class="input-group">
+                                <input type="number" id="add-with-carry-answer-input" class="input-field" placeholder="Sum">
+                            </div>
+                        </div>
+                        <p id="add-with-carry-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-add-with-carry-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-add-with-carry-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Word Problems Section -->
+                <div class="problem-solving">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Addition</h3>
+                    <ol>
+                        <li>
+                            <strong>A library has 12,500 story books and 8,750 science books. How many books are there in total?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>In a village, there are 25,670 men and 28,155 women. What is the total population of the village?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>A farmer harvested 3,450 kg of rice in the first season and 4,890 kg in the second season. What is the total harvest?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 3!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to move on to the next lesson or test your knowledge?</p>
+                    <a href="grade5_lesson4.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson2.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 2
+                    </a>
+                    <a href="grade5_lesson4.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Addition without Carrying ---
+            let currentAddNoCarryCorrectAnswer = 0;
+
+            function generateAddNoCarryActivity() {
+                const num1Span = document.getElementById('add-no-carry-num1');
+                const num2Span = document.getElementById('add-no-carry-num2');
+                const answerInput = document.getElementById('add-no-carry-answer-input');
+                const feedback = document.getElementById('add-no-carry-feedback');
+                const nextBtn = document.getElementById('next-add-no-carry-btn');
+                const checkBtn = document.getElementById('check-add-no-carry-btn');
+
+                if (!num1Span || !num2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Add no carry elements not found. Retrying in 1 second.");
+                    setTimeout(generateAddNoCarryActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                let num1, num2;
+                // Generate numbers such that no carrying is required
+                const generateNoCarryNumber = (maxDigits) => {
+                    let num = '';
+                    for (let i = 0; i < maxDigits; i++) {
+                        num += Math.floor(Math.random() * 4); // Digits 0-3 to avoid carrying
+                    }
+                    return parseInt(num);
+                };
+
+                num1 = generateNoCarryNumber(Math.floor(Math.random() * 3) + 3); // 3 to 5 digits
+                num2 = generateNoCarryNumber(Math.floor(Math.random() * 3) + 3); // 3 to 5 digits
+
+                // Ensure numbers are large enough and have similar number of digits for visual appeal
+                if (num1 < 1000) num1 += 1000;
+                if (num2 < 1000) num2 += 1000;
+
+                num1Span.textContent = num1;
+                num2Span.textContent = num2;
+                currentAddNoCarryCorrectAnswer = num1 + num2;
+            }
+
+            function checkAddNoCarryAnswers() {
+                const answerInput = document.getElementById('add-no-carry-answer-input');
+                const feedback = document.getElementById('add-no-carry-feedback');
+                const nextBtn = document.getElementById('next-add-no-carry-btn');
+                const checkBtn = document.getElementById('check-add-no-carry-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Add no carry check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentAddNoCarryCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentAddNoCarryCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateAddNoCarryActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Addition with Carrying ---
+            let currentAddWithCarryCorrectAnswer = 0;
+
+            function generateAddWithCarryActivity() {
+                const num1Span = document.getElementById('add-with-carry-num1');
+                const num2Span = document.getElementById('add-with-carry-num2');
+                const answerInput = document.getElementById('add-with-carry-answer-input');
+                const feedback = document.getElementById('add-with-carry-feedback');
+                const nextBtn = document.getElementById('next-add-with-carry-btn');
+                const checkBtn = document.getElementById('check-add-with-carry-btn');
+
+                if (!num1Span || !num2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Add with carry elements not found. Retrying in 1 second.");
+                    setTimeout(generateAddWithCarryActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                let num1, num2;
+                // Generate numbers that will likely require carrying
+                num1 = Math.floor(Math.random() * 90000) + 10000; // 5-digit number
+                num2 = Math.floor(Math.random() * 90000) + 10000; // 5-digit number
+
+                num1Span.textContent = num1;
+                num2Span.textContent = num2;
+                currentAddWithCarryCorrectAnswer = num1 + num2;
+            }
+
+            function checkAddWithCarryAnswers() {
+                const answerInput = document.getElementById('add-with-carry-answer-input');
+                const feedback = document.getElementById('add-with-carry-feedback');
+                const nextBtn = document.getElementById('next-add-with-carry-btn');
+                const checkBtn = document.getElementById('check-add-with-carry-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Add with carry check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentAddWithCarryCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentAddWithCarryCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateAddWithCarryActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-add-no-carry-btn').addEventListener('click', checkAddNoCarryAnswers);
+            document.getElementById('next-add-no-carry-btn').addEventListener('click', generateAddNoCarryActivity);
+
+            document.getElementById('check-add-with-carry-btn').addEventListener('click', checkAddWithCarryAnswers);
+            document.getElementById('next-add-with-carry-btn').addEventListener('click', generateAddWithCarryActivity);
+
+
+            // Initialize all activities on page load
+            generateAddNoCarryActivity();
+            generateAddWithCarryActivity();
+        });
+    </script>
+</body>
+</html>

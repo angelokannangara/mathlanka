@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 ශ්‍රේණිය ගණිතය - පාඩම 1: සංඛ්‍යා - 1</title>
+    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා නිර්මාණය කරන ලද ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාව.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .concept-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .option-button {
+            background-color: #e2e8f0;
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .option-button:hover {
+            background-color: #cbd5e0;
+        }
+        .option-button.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .option-button.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+        .option-button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        .bead-frame {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background-color: #f0f4f8;
+            border-radius: 0.75rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.06);
+        }
+        .bead-rod {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+            background-color: #cbd5e0;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            min-width: 60px;
+            height: 150px;
+            justify-content: flex-end; /* Beads stack from bottom */
+        }
+        .bead {
+            width: 40px;
+            height: 40px;
+            background-color: #4299e1; /* Blue beads */
+            border-radius: 50%;
+            border: 2px solid #2b6cb0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .bead-label {
+            font-weight: bold;
+            margin-top: 0.5rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අපි ගැන</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 1: සංඛ්‍යා - 1 - 1000න් එහාට ගණන් කරමු!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">4 ශ්‍රේණියේ සිසුන් සඳහා (වයස 9-10) - විශාල සංඛ්‍යා කියවීමට, ලිවීමට සහ තේරුම් ගැනීමට ඉගෙන ගනිමු!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-numeric-up-alt lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">අද අපි ඉගෙන ගන්නේ කුමක්ද:</h3>
+                        <p class="text-gray-700 text-lg">
+                            3 ශ්‍රේණියේදී ඔබ 1000 දක්වා සංඛ්‍යා ගැන ඉගෙන ගත්තා. දැන් අපි ඊටත් වඩා විශාල සංඛ්‍යා ගවේෂණය කිරීමට සූදානම්!
+                            මෙම පාඩමේදී, ඔබ ඉගෙන ගනු ඇත:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>**1000න් එහාට සංඛ්‍යා කියවීමට සහ ලිවීමට** (දහස් දක්වා).</li>
+                                <li>සංඛ්‍යාවක **ස්ථානීය අගය** (එක, දහය, සියය, දහස) හඳුනා ගැනීමට.</li>
+                                <li>සංඛ්‍යා **ආරෝහණ (කුඩාම සිට විශාලතම දක්වා)** සහ **අවරෝහණ (විශාලතම සිට කුඩාම දක්වා)** පිළිවෙලට සැකසීමට.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Numbers beyond 999 -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">999න් එහාට සංඛ්‍යා: 1000 සහ දහස්!</h3>
+                    <p class="text-gray-700 mb-3">
+                        අපි 999ට 1ක් එකතු කළ විට, අපට 1000 ලැබේ. මෙය **දහස** ලෙස හැඳින්වේ.
+                        දහස යනු 4-අංක සංඛ්‍යාවකි.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය:</p>
+                        <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                            <li>1000 - එක් දහස (One Thousand)</li>
+                            <li>2000 - දෙදහස (Two Thousand)</li>
+                            <li>3000 - තුන්දහස (Three Thousand)</li>
+                            <li>4000 - හාරදහස (Four Thousand)</li>
+                            <li>5000 - පන්දහස (Five Thousand)</li>
+                            <li>... සහ එසේ ය!</li>
+                        </ul>
+                    </div>
+                    <p class="text-gray-700 mt-4">
+                        ඕනෑම 4-අංක සංඛ්‍යාවක් කියවීමට, අපි දහස් ස්ථානයෙන් පටන් ගනිමු.
+                    </p>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700">උදාහරණය: 3248</p>
+                        <p class="text-gray-700">මෙය කියවන්නේ "**තුන්දහස් දෙසිය හතළිස් අට**" ලෙසයි.</p>
+                        <p class="text-gray-700 mt-2">
+                            <span class="font-bold">3</span> (දහස්) <span class="font-bold">2</span> (සිය) <span class="font-bold">4</span> (දහය) <span class="font-bold">8</span> (එක)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Place Value -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ස්ථානීය අගය - එක් එක් ඉලක්කම කොපමණ වටිනවාද?</h3>
+                    <p class="text-gray-700 mb-3">
+                        සංඛ්‍යාවක එක් එක් ඉලක්කම පිහිටා ඇති ස්ථානය අනුව එහි අගය වෙනස් වේ. මෙය **ස්ථානීය අගය** ලෙස හැඳින්වේ.
+                        අපි දැන් දහස් ස්ථානය ද එකතු කරමු!
+                    </p>
+                    <div class="bead-frame">
+                        <div class="bead-rod">
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead-label">එක</div>
+                        </div>
+                        <div class="bead-rod">
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead-label">දහය</div>
+                        </div>
+                        <div class="bead-rod">
+                            <div class="bead"></div>
+                            <div class="bead"></div>
+                            <div class="bead-label">සියය</div>
+                        </div>
+                        <div class="bead-rod">
+                            <div class="bead"></div>
+                            <div class="bead-label">දහස</div>
+                        </div>
+                    </div>
+                    <p class="text-center text-gray-700 mt-4">
+                        ඉහත පින්තූරයේ පෙන්වා ඇති සංඛ්‍යාව **1245** වේ.
+                    </p>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700">උදාහරණය: 5462</p>
+                        <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                            <li>2 යනු එකේ ස්ථානයේ, එහි අගය 2 වේ.</li>
+                            <li>6 යනු දහයේ ස්ථානයේ, එහි අගය 60 වේ.</li>
+                            <li>4 යනු සියයේ ස්ථානයේ, එහි අගය 400 වේ.</li>
+                            <li>5 යනු දහසේ ස්ථානයේ, එහි අගය 5000 වේ.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Read and Write Numbers -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: සංඛ්‍යා කියවමු සහ ලියමු!</h2>
+                    <p id="num-word-instructions" class="text-yellow-700 text-lg mb-8">ඉලක්කම් වලින් දී ඇති සංඛ්‍යාව වචන වලින් ලියන්න.</p>
+
+                    <div id="num-word-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="num-word-problem-display" class="concept-display">
+                            <!-- Number will be displayed here -->
+                        </div>
+                        <input type="text" id="num-word-input" class="input-field mt-4" placeholder="වචන වලින් ලියන්න...">
+                        <button id="check-num-word-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mt-4">පිළිතුර පරීක්ෂා කරන්න</button>
+                        <p id="num-word-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-num-word-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+                <!-- Interactive Activity 2: Place Value Identification -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: ස්ථානීය අගය හඳුනා ගනිමු!</h2>
+                    <p id="place-value-instructions" class="text-purple-700 text-lg mb-8">යටින් ඉරි ඇඳ ඇති ඉලක්කමේ ස්ථානීය අගය කුමක්දැයි කියන්න.</p>
+
+                    <div id="place-value-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="place-value-problem-display" class="concept-display">
+                            <!-- Problem will be displayed here -->
+                        </div>
+                        <div id="place-value-options" class="flex flex-wrap justify-center gap-4 mt-4">
+                            <button class="option-button" data-value="එක">එක</button>
+                            <button class="option-button" data-value="දහය">දහය</button>
+                            <button class="option-button" data-value="සියය">සියය</button>
+                            <button class="option-button" data-value="දහස">දහස</button>
+                        </div>
+                        <p id="place-value-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-place-value-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+                <!-- Interactive Activity 3: Ordering Numbers -->
+                <div class="text-center mt-12 p-8 bg-blue-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-blue-800 mb-6">ක්‍රියාකාරකම 3: සංඛ්‍යා පෙළගස්වමු!</h2>
+                    <p id="ordering-instructions" class="text-blue-700 text-lg mb-8">සංඛ්‍යා ආරෝහණ (කුඩාම සිට විශාලතම දක්වා) පිළිවෙලට සකසන්න.</p>
+
+                    <div id="ordering-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[180px] flex flex-col justify-center items-center">
+                        <div id="numbers-to-order" class="flex flex-wrap justify-center gap-4 mb-6">
+                            <!-- Numbers will be displayed as draggable items -->
+                        </div>
+                        <div id="ordered-numbers-target" class="flex flex-wrap justify-center gap-4 p-4 border-2 border-dashed border-gray-300 rounded-lg min-h-[60px] w-full max-w-lg">
+                            <!-- Drop target for ordered numbers -->
+                        </div>
+                        <button id="check-ordering-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mt-4">පිළිතුර පරීක්ෂා කරන්න</button>
+                        <p id="ordering-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-ordering-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                    <p class="text-green-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <a href="grade4_lesson2.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <!-- No previous lesson for Lesson 1 -->
+                    <a href="grade4_lesson2.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 ml-auto">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කරයි.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අපි ගැන</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Helper function to convert number to Sinhala words
+            function numberToSinhalaWords(num) {
+                const units = ['', 'එක', 'දෙක', 'තුන', 'හතර', 'පහ', 'හය', 'හත', 'අට', 'නවය'];
+                const tens = ['', 'දහය', 'විස්ස', 'තිහ', 'හතළිහ', 'පනහ', 'හැට', 'හැත්තෑව', 'අසූව', 'අනූව'];
+                const hundreds = ['', 'සියය', 'දෙසිය', 'තුන්සිය', 'හාරසිය', 'පන්සිය', 'හයසිය', 'හත්සිය', 'අටසිය', 'නවසිය'];
+                const thousands = ['', 'දහස', 'දෙදහස', 'තුන්දහස', 'හාරදහස', 'පන්දහස', 'හයදහස', 'හත්දහස', 'අටදහස', 'නවදහස'];
+
+                if (num === 0) return 'ශුන්‍ය';
+
+                let words = '';
+
+                const th = Math.floor(num / 1000);
+                if (th > 0) {
+                    words += thousands[th];
+                }
+
+                const h = Math.floor((num % 1000) / 100);
+                if (h > 0) {
+                    words += (words ? ' ' : '') + hundreds[h];
+                }
+
+                const t = Math.floor((num % 100) / 10);
+                const u = num % 10;
+
+                if (t > 1) { // For 20-99
+                    words += (words ? ' ' : '') + tens[t];
+                    if (u > 0) {
+                        words += (words ? ' ' : '') + units[u];
+                    }
+                } else if (t === 1) { // For 10-19
+                    if (u === 0) words += (words ? ' ' : '') + 'දහය';
+                    else if (u === 1) words += (words ? ' ' : '') + 'එකොළහ';
+                    else if (u === 2) words += (words ? ' ' : '') + 'දොළහ';
+                    else if (u === 3) words += (words ? ' ' : '') + 'දෙළොස්'; // This might need more specific handling for 'දෙළොස්' vs 'දොළහ'
+                    else if (u === 4) words += (words ? ' ' : '') + 'දහහතර';
+                    else if (u === 5) words += (words ? ' ' : '') + 'දහපහළොව';
+                    else if (u === 6) words += (words ? ' ' : '') + 'දහසය';
+                    else if (u === 7) words += (words ? ' ' : '') + 'දහහත';
+                    else if (u === 8) words += (words ? ' ' : '') + 'දහඅට';
+                    else if (u === 9) words += (words ? ' ' : '') + 'දහනවය';
+                } else { // For 1-9
+                    if (u > 0) {
+                        words += (words ? ' ' : '') + units[u];
+                    }
+                }
+                return words.trim();
+            }
+
+
+            // Activity 1: Read and Write Numbers
+            const numWordProblems = [
+                { number: 1234, word: "එක්දහස් දෙසිය තිස් හතර" },
+                { number: 2500, word: "දෙදහස් පන්සිය" },
+                { number: 3075, word: "තුන්දහස් හැත්තෑපහ" },
+                { number: 4109, word: "හාරදහස් එක්සිය නවය" },
+                { number: 5678, word: "පන්දහස් හයසිය හැත්තෑඅට" },
+                { number: 7001, word: "හත්දහස් එක" },
+                { number: 9999, word: "නවදහස් නවසිය අනූනවය" },
+            ];
+            let currentNumWordProblem = {};
+
+            function generateNumWordActivity() {
+                const numWordProblemDisplay = document.getElementById('num-word-problem-display');
+                const numWordInput = document.getElementById('num-word-input');
+                const numWordFeedback = document.getElementById('num-word-feedback');
+                const checkNumWordBtn = document.getElementById('check-num-word-btn');
+                const nextNumWordBtn = document.getElementById('next-num-word-btn');
+
+                // Error handling for missing elements
+                if (!numWordProblemDisplay || !numWordInput || !numWordFeedback || !checkNumWordBtn || !nextNumWordBtn) {
+                    console.error("Number to word activity elements not found. Retrying in 1 second.");
+                    setTimeout(generateNumWordActivity, 1000);
+                    return;
+                }
+
+                numWordInput.value = '';
+                numWordFeedback.textContent = '';
+                numWordFeedback.className = 'text-xl font-semibold mt-4';
+                checkNumWordBtn.classList.remove('hidden');
+                nextNumWordBtn.classList.add('hidden');
+                numWordInput.disabled = false;
+
+                const randomProblem = numWordProblems[Math.floor(Math.random() * numWordProblems.length)];
+                numWordProblemDisplay.textContent = randomProblem.number;
+                currentNumWordProblem = randomProblem;
+            }
+
+            function checkNumWordAnswer() {
+                const numWordInput = document.getElementById('num-word-input');
+                const numWordFeedback = document.getElementById('num-word-feedback');
+                const checkNumWordBtn = document.getElementById('check-num-word-btn');
+                const nextNumWordBtn = document.getElementById('next-num-word-btn');
+
+                if (!numWordInput || !numWordFeedback || !checkNumWordBtn || !nextNumWordBtn) {
+                    console.error("Number to word check elements not found.");
+                    return;
+                }
+
+                const userAnswer = numWordInput.value.trim().toLowerCase();
+                const correctAnswer = currentNumWordProblem.word.toLowerCase();
+
+                numWordInput.disabled = true;
+                checkNumWordBtn.classList.add('hidden');
+
+                if (userAnswer === correctAnswer) {
+                    numWordFeedback.textContent = 'නියමයි! එය නිවැරදියි!';
+                    numWordFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextNumWordBtn.classList.remove('hidden');
+                } else {
+                    numWordFeedback.textContent = `අප්සට්! නිවැරදි පිළිතුර "${currentNumWordProblem.word}". නැවත උත්සාහ කරන්න!`;
+                    numWordFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateNumWordActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Activity 2: Place Value Identification
+            const placeValueProblems = [
+                { number: 3456, underlinedIndex: 0, place: "දහස" },
+                { number: 1234, underlinedIndex: 1, place: "සියය" },
+                { number: 7890, underlinedIndex: 2, place: "දහය" },
+                { number: 5678, underlinedIndex: 3, place: "එක" },
+                { number: 9012, underlinedIndex: 0, place: "දහස" },
+                { number: 4321, underlinedIndex: 2, place: "දහය" },
+                { number: 6705, underlinedIndex: 1, place: "සියය" },
+            ];
+            let currentPlaceValueProblem = {};
+
+            function generatePlaceValueActivity() {
+                const placeValueProblemDisplay = document.getElementById('place-value-problem-display');
+                const placeValueOptionsContainer = document.getElementById('place-value-options');
+                const placeValueFeedback = document.getElementById('place-value-feedback');
+                const nextPlaceValueBtn = document.getElementById('next-place-value-btn');
+                const optionButtons = placeValueOptionsContainer.querySelectorAll('.option-button');
+
+                if (!placeValueProblemDisplay || !placeValueOptionsContainer || !placeValueFeedback || !nextPlaceValueBtn || optionButtons.length === 0) {
+                    console.error("Place value activity elements not found. Retrying in 1 second.");
+                    setTimeout(generatePlaceValueActivity, 1000);
+                    return;
+                }
+
+                placeValueFeedback.textContent = '';
+                placeValueFeedback.className = 'text-xl font-semibold mt-4';
+                nextPlaceValueBtn.classList.add('hidden');
+
+                optionButtons.forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect', 'disabled');
+                    btn.disabled = false;
+                });
+
+                const randomProblem = placeValueProblems[Math.floor(Math.random() * placeValueProblems.length)];
+                currentPlaceValueProblem = randomProblem;
+
+                const numStr = String(randomProblem.number);
+                let displayHtml = '';
+                for (let i = 0; i < numStr.length; i++) {
+                    if (i === randomProblem.underlinedIndex) {
+                        displayHtml += `<span class="underline text-blue-700">${numStr[i]}</span>`;
+                    } else {
+                        displayHtml += numStr[i];
+                    }
+                }
+                placeValueProblemDisplay.innerHTML = displayHtml;
+            }
+
+            function checkPlaceValueAnswer(selectedAnswer) {
+                const placeValueFeedback = document.getElementById('place-value-feedback');
+                const nextPlaceValueBtn = document.getElementById('next-place-value-btn');
+                const placeValueOptionsContainer = document.getElementById('place-value-options');
+                const optionButtons = placeValueOptionsContainer.querySelectorAll('.option-button');
+
+                if (!placeValueFeedback || !nextPlaceValueBtn || optionButtons.length === 0) {
+                    console.error("Place value check elements not found.");
+                    return;
+                }
+
+                optionButtons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.value === currentPlaceValueProblem.place) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('disabled');
+                    }
+                });
+
+                if (selectedAnswer === currentPlaceValueProblem.place) {
+                    placeValueFeedback.textContent = 'නියමයි! එය නිවැරදියි!';
+                    placeValueFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextPlaceValueBtn.classList.remove('hidden');
+                } else {
+                    placeValueFeedback.textContent = `අප්සට්! නිවැරදි පිළිතුර "${currentPlaceValueProblem.place}". නැවත උත්සාහ කරන්න!`;
+                    placeValueFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generatePlaceValueActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Activity 3: Ordering Numbers
+            const orderingProblems = [
+                [1234, 1023, 1324, 1100],
+                [5678, 5000, 5800, 5600],
+                [9001, 8999, 9010, 8900],
+                [2345, 2354, 2435, 2453],
+                [7123, 7321, 7132, 7213],
+            ];
+            let currentOrderingNumbers = [];
+            let correctOrderedNumbers = [];
+
+            function generateOrderingActivity() {
+                const numbersToOrderContainer = document.getElementById('numbers-to-order');
+                const orderedNumbersTarget = document.getElementById('ordered-numbers-target');
+                const orderingFeedback = document.getElementById('ordering-feedback');
+                const checkOrderingBtn = document.getElementById('check-ordering-btn');
+                const nextOrderingBtn = document.getElementById('next-ordering-btn');
+
+                if (!numbersToOrderContainer || !orderedNumbersTarget || !orderingFeedback || !checkOrderingBtn || !nextOrderingBtn) {
+                    console.error("Ordering activity elements not found. Retrying in 1 second.");
+                    setTimeout(generateOrderingActivity, 1000);
+                    return;
+                }
+
+                numbersToOrderContainer.innerHTML = '';
+                orderedNumbersTarget.innerHTML = '';
+                orderingFeedback.textContent = '';
+                orderingFeedback.className = 'text-xl font-semibold mt-4';
+                checkOrderingBtn.classList.remove('hidden');
+                nextOrderingBtn.classList.add('hidden');
+
+                const randomProblemSet = orderingProblems[Math.floor(Math.random() * orderingProblems.length)];
+                currentOrderingNumbers = [...randomProblemSet];
+                correctOrderedNumbers = [...randomProblemSet].sort((a, b) => a - b);
+
+                // Shuffle the numbers for display
+                const shuffledNumbers = [...currentOrderingNumbers].sort(() => Math.random() - 0.5);
+
+                shuffledNumbers.forEach(num => {
+                    const numDiv = document.createElement('div');
+                    numDiv.textContent = num;
+                    numDiv.className = 'bg-blue-200 text-blue-800 px-4 py-2 rounded-lg font-bold cursor-grab draggable';
+                    numDiv.setAttribute('draggable', true);
+                    numDiv.dataset.value = num;
+                    numbersToOrderContainer.appendChild(numDiv);
+                });
+
+                addDragDropListeners();
+            }
+
+            function addDragDropListeners() {
+                const draggables = document.querySelectorAll('.draggable');
+                const dropTarget = document.getElementById('ordered-numbers-target');
+
+                draggables.forEach(draggable => {
+                    draggable.addEventListener('dragstart', (e) => {
+                        e.dataTransfer.setData('text/plain', e.target.dataset.value);
+                        e.target.classList.add('opacity-50');
+                    });
+                    draggable.addEventListener('dragend', (e) => {
+                        e.target.classList.remove('opacity-50');
+                    });
+                });
+
+                dropTarget.addEventListener('dragover', (e) => {
+                    e.preventDefault(); // Allow drop
+                    dropTarget.classList.add('border-blue-500');
+                });
+
+                dropTarget.addEventListener('dragleave', () => {
+                    dropTarget.classList.remove('border-blue-500');
+                });
+
+                dropTarget.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    dropTarget.classList.remove('border-blue-500');
+                    const data = e.dataTransfer.getData('text/plain');
+                    const droppedNum = parseInt(data);
+
+                    // Find the original draggable element and append its clone to the target
+                    const originalDraggable = document.querySelector(`.draggable[data-value="${droppedNum}"]`);
+                    if (originalDraggable) {
+                        const clonedNode = originalDraggable.cloneNode(true);
+                        clonedNode.classList.remove('draggable', 'cursor-grab', 'opacity-50'); // Remove drag properties
+                        clonedNode.setAttribute('draggable', false); // Make it not draggable in the target
+                        clonedNode.style.cursor = 'default';
+                        dropTarget.appendChild(clonedNode);
+                        originalDraggable.remove(); // Remove original from source
+                    }
+                });
+            }
+
+            function checkOrderingAnswer() {
+                const orderedNumbersTarget = document.getElementById('ordered-numbers-target');
+                const orderingFeedback = document.getElementById('ordering-feedback');
+                const checkOrderingBtn = document.getElementById('check-ordering-btn');
+                const nextOrderingBtn = document.getElementById('next-ordering-btn');
+
+                if (!orderedNumbersTarget || !orderingFeedback || !checkOrderingBtn || !nextOrderingBtn) {
+                    console.error("Ordering check elements not found.");
+                    return;
+                }
+
+                const userOrderedNums = Array.from(orderedNumbersTarget.children).map(div => parseInt(div.dataset.value));
+
+                checkOrderingBtn.classList.add('hidden');
+
+                if (userOrderedNums.length !== correctOrderedNumbers.length) {
+                    orderingFeedback.textContent = 'සියලුම සංඛ්‍යා පෙළගස්වන්න!';
+                    orderingFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateOrderingActivity, 2000); // Regenerate after a delay
+                    return;
+                }
+
+                let isCorrect = true;
+                for (let i = 0; i < correctOrderedNumbers.length; i++) {
+                    if (userOrderedNums[i] !== correctOrderedNumbers[i]) {
+                        isCorrect = false;
+                        break;
+                    }
+                }
+
+                if (isCorrect) {
+                    orderingFeedback.textContent = 'නියමයි! ඔබ සංඛ්‍යා නිවැරදිව පෙළගැස්වූවා!';
+                    orderingFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextOrderingBtn.classList.remove('hidden');
+                } else {
+                    orderingFeedback.textContent = `අප්සට්! නිවැරදි පිළිවෙල: ${correctOrderedNumbers.join(', ')}. නැවත උත්සාහ කරන්න!`;
+                    orderingFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateOrderingActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for activities
+            document.getElementById('check-num-word-btn').addEventListener('click', checkNumWordAnswer);
+            document.getElementById('next-num-word-btn').addEventListener('click', generateNumWordActivity);
+
+            document.querySelectorAll('#place-value-options .option-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    checkPlaceValueAnswer(event.target.dataset.value);
+                });
+            });
+            document.getElementById('next-place-value-btn').addEventListener('click', generatePlaceValueActivity);
+
+            document.getElementById('check-ordering-btn').addEventListener('click', checkOrderingAnswer);
+            document.getElementById('next-ordering-btn').addEventListener('click', generateOrderingActivity);
+
+
+            // Initialize all activities on page load
+            generateNumWordActivity();
+            generatePlaceValueActivity();
+            generateOrderingActivity();
+        });
+    </script>
+</body>
+</html>

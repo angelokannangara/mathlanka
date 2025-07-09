@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>4 ශ්‍රේණිය ගණිතය - පාඩම 4: අඩු කිරීම - 1</title>
+    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාවක්. අඩු කිරීම ගැන ඉගෙන ගනිමු.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .math-problem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .math-problem .number {
+            text-align: right;
+            width: 150px; /* Fixed width for alignment */
+        }
+        .math-problem .number-with-operator {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end; /* Align content to the right within its width */
+            width: 150px; /* Match the width of the top number for alignment */
+        }
+        .math-problem .operator {
+            margin-right: 5px; /* Space between operator and number */
+        }
+        .math-problem .line {
+            border-bottom: 2px solid #333;
+            width: 150px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        /* Specific styles for subtraction problems */
+        .subtraction-problem {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .subtraction-problem .num-row {
+            display: flex;
+            justify-content: flex-end;
+            width: 180px;
+        }
+        .subtraction-problem .num-row .num-val {
+            width: 100%;
+            text-align: right;
+        }
+        .subtraction-problem .operator {
+            margin-right: 5px;
+        }
+        .subtraction-problem .line {
+            border-bottom: 2px solid #333;
+            width: 180px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .subtraction-problem .input-group {
+            display: flex;
+            gap: 10px;
+            width: 180px;
+            justify-content: center;
+        }
+        .subtraction-problem .input-group input {
+            max-width: 150px;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc; /* Lighter background for exercise items */
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff; /* Very light blue border */
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568; /* Grayish-blue text */
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0; /* Light gray border */
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748; /* Darker gray text */
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        .grid-col-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අප ගැන</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 4: අඩු කිරීම - 1 - අඩු කිරීම පුරුදු වෙමු!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">4 ශ්‍රේණියේ සිසුන් සඳහා (වයස 9-10) - මූලික අඩු කිරීම් සහ වචන ගැටළු විසඳීම ඉගෙන ගනිමු!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-minus lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">අද අප ඉගෙන ගන්නා දේ:</h3>
+                        <p class="text-gray-700 text-lg">
+                            මෙම පාඩමෙන් ඔබ ඉගෙන ගනු ඇත:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>පූර්ණ සංඛ්‍යා වල **මූලික අඩු කිරීම්** සිදු කිරීමට.</li>
+                                <li>අඩු කිරීම **"ඉවත් කිරීමක්"** හෝ **"වෙනස"** සොයා ගැනීමක් ලෙස තේරුම් ගැනීමට.</li>
+                                <li>අඩු කිරීම් සම්බන්ධ **වචන ගැටළු** විසඳීමට.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Basic Subtraction -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">මූලික අඩු කිරීම:</h3>
+                    <p class="text-gray-700 mb-3">
+                        අඩු කිරීම යනු එක් සංඛ්‍යාවක් තවත් සංඛ්‍යාවකින් ඉවත් කිරීමයි. ඔබ අඩු කරන විට, ඔබ සංඛ්‍යා දෙකක් අතර **වෙනස** සොයා ගනී.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය:</p>
+                        <pre class="text-blue-600 text-lg font-mono">
+  87
+- 35
+  ----
+  52
+                        </pre>
+                        <p class="text-blue-600">මෙහිදී 87 න් 35 ක් අඩු කර ඇති අතර, වෙනස 52 කි.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Simple Subtraction -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: සරල අඩු කිරීම!</h2>
+                    <p id="simple-subtraction-instructions" class="text-yellow-700 text-lg mb-8">සංඛ්‍යා අඩු කර පිළිතුර ඇතුළත් කරන්න.</p>
+
+                    <div id="simple-subtraction-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="subtraction-problem">
+                            <span id="subtraction-num1" class="num-row num-val"></span>
+                            <span class="num-row">
+                                <span class="operator">-</span> <span id="subtraction-num2" class="num-val"></span>
+                            </span>
+                            <div class="line"></div>
+                            <div class="input-group">
+                                <input type="number" id="subtraction-answer-input" class="input-field" placeholder="පිළිතුර">
+                            </div>
+                        </div>
+                        <p id="simple-subtraction-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-simple-subtraction-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුර පරීක්ෂා කරන්න</button>
+                    <button id="next-simple-subtraction-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                </div>
+
+                <!-- Interactive Activity 2: Subtraction with Borrowing -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: ඉලක්කම් ඉල්ලා අඩු කිරීම!</h2>
+                    <p id="borrowing-subtraction-instructions" class="text-purple-700 text-lg mb-8">සංඛ්‍යා අඩු කරන්න, ඔබට ඉලක්කම් ඉල්ලා ගැනීමට අවශ්‍ය විය හැකිය!</p>
+
+                    <div id="borrowing-subtraction-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="subtraction-problem">
+                            <span id="borrowing-subtraction-num1" class="num-row num-val"></span>
+                            <span class="num-row">
+                                <span class="operator">-</span> <span id="borrowing-subtraction-num2" class="num-val"></span>
+                            </span>
+                            <div class="line"></div>
+                            <div class="input-group">
+                                <input type="number" id="borrowing-subtraction-answer-input" class="input-field" placeholder="පිළිතුර">
+                            </div>
+                        </div>
+                        <p id="borrowing-subtraction-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-borrowing-subtraction-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුර පරීක්ෂා කරන්න</button>
+                    <button id="next-borrowing-subtraction-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                </div>
+
+
+                <!-- Exercise Section 1: Textbook Exercise 1 - Direct Subtraction -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">1. අඩු කරන්න (Subtract)</h3>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය (Example):</p>
+                        <pre class="text-blue-600 text-lg font-mono">
+  87
+- 35
+  ----
+  52
+                        </pre>
+                    </div>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>243 - 121</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>928 - 520</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>457 - 255</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>605 - 302</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>894 - 842</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>978 - 723</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>899 - 550</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>765 - 341</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>900 - 600</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                        <div class="exercise-item">
+                            <p>780 - 450</p>
+                            <input type="text" placeholder="පිළිතුර">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Section 2: Textbook Exercise 2 - Subtract from Box/Row -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">2. කොටුවේ ඇති ඕනෑම සංඛ්‍යාවකින් පේළියේ ඇති ඕනෑම සංඛ්‍යාවක් අඩු කර පිළිතුර ලබා ගන්න. (එවැනි ගණන් 5ක් සාදන්න)</h3>
+                    <p class="text-gray-600 mb-4">Subtract any number in the row from any number in the box. (Create 5 such calculations)</p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය (Example):</p>
+                        <pre class="text-blue-600 text-lg font-mono">
+  68
+- 23
+  ----
+  45
+                        </pre>
+                    </div>
+                    <div class="flex flex-col items-center space-y-4">
+                        <div class="bg-blue-100 p-4 rounded-lg shadow-md">
+                            <p class="text-xl font-bold text-blue-800">කොටුව (Box): 5, 99, 57, 76, 68</p>
+                        </div>
+                        <div class="bg-green-100 p-4 rounded-lg shadow-md">
+                            <p class="text-xl font-bold text-green-800">පේළිය (Row): 30, 23, 51, 12</p>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 w-full mt-4">
+                            <div class="exercise-item">
+                                <p>ගණනය 1:</p>
+                                <input type="text" placeholder="උදා: 99 - 12 = 87">
+                            </div>
+                            <div class="exercise-item">
+                                <p>ගණනය 2:</p>
+                                <input type="text" placeholder="ගණනය">
+                            </div>
+                            <div class="exercise-item">
+                                <p>ගණනය 3:</p>
+                                <input type="text" placeholder="ගණනය">
+                            </div>
+                            <div class="exercise-item">
+                                <p>ගණනය 4:</p>
+                                <input type="text" placeholder="ගණනය">
+                            </div>
+                            <div class="exercise-item">
+                                <p>ගණනය 5:</p>
+                                <input type="text" placeholder="ගණනය">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Section 3: Textbook Exercise 3 - Horizontal and Vertical Subtraction -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">3. හරස් අතට සහ පහළට අඩු කර පිළිතුර ලබා ගන්න. (Subtract horizontally and vertically and get the answer)</h3>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය (Example):</p>
+                        <pre class="text-blue-600 text-lg font-mono">
+79 - 27 = 52
+-  -  -
+30 - 20 = 10
+-----
+49 - 07 = 42
+                        </pre>
+                    </div>
+                    <div class="exercise-grid grid-col-2">
+                        <div class="exercise-item text-left">
+                            <p>(1) 79 − 27 = <input type="text" class="w-24 inline-block"></p>
+                            <p>- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</p>
+                            <p>30 − 20 = <input type="text" class="w-24 inline-block"></p>
+                            <p>-------------</p>
+                            <p><input type="text" class="w-24 inline-block"> − <input type="text" class="w-24 inline-block"> = <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item text-left">
+                            <p>(2) 48 − 24 = <input type="text" class="w-24 inline-block"></p>
+                            <p>- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</p>
+                            <p>11 − 10 = <input type="text" class="w-24 inline-block"></p>
+                            <p>-------------</p>
+                            <p><input type="text" class="w-24 inline-block"> − <input type="text" class="w-24 inline-block"> = <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item text-left">
+                            <p>(3) 84 − <input type="text" class="w-24 inline-block"> = 4</p>
+                            <p>- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</p>
+                            <p>23 − 11 = <input type="text" class="w-24 inline-block"></p>
+                            <p>-------------</p>
+                            <p><input type="text" class="w-24 inline-block"> − <input type="text" class="w-24 inline-block"> = <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item text-left">
+                            <p>(4) 93 − <input type="text" class="w-24 inline-block"> = 3</p>
+                            <p>- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</p>
+                            <p>23 − 10 = <input type="text" class="w-24 inline-block"></p>
+                            <p>-------------</p>
+                            <p><input type="text" class="w-24 inline-block"> − <input type="text" class="w-24 inline-block"> = <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item text-left">
+                            <p>(5) 89 − 42 = <input type="text" class="w-24 inline-block"></p>
+                            <p>- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-</p>
+                            <p>20 − 10 = <input type="text" class="w-24 inline-block"></p>
+                            <p>-------------</p>
+                            <p><input type="text" class="w-24 inline-block"> − <input type="text" class="w-24 inline-block"> = <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Problem Solving Section -->
+                <div class="problem-solving">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">4. ගැටළු ලියා විසඳන්න (Write and solve problems)</h3>
+                    <ol>
+                        <li>
+                            <strong>පන්තියක සිටි සිසුන් 45 දෙනාගෙන් 12 දෙනෙක් ක්‍රීඩා පිටියට ගියහ. පන්තියේ දැන් සිටින සිසුන් ගණන කීයද?</strong><br>
+                            (Out of 45 students in a class, 12 went to the playground. How many students are now in the class?)<br>
+                            <input type="text" placeholder="පිළිතුර" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>අත්තක පිපුණු මල් ගණන 34 කි. එයින් මල් 24ක් කඩා ගන්නා ලදී නම් අත්තෙහි ඉතිරි මල් ගණන කීයද?</strong><br>
+                            (There were 34 flowers bloomed on a branch. If 24 flowers were plucked from it, how many flowers are left on the branch?)<br>
+                            <input type="text" placeholder="පිළිතුර" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>බිමක සිටුවිය හැකි පොල් පැළ සංඛ්‍යාව 98කි. දැනට පැළ 53ක් සිටුවා ඇත. තවත් පැළ කීයක් සිටුවිය හැකිද?</strong><br>
+                            (The number of coconut saplings that can be planted on a land is 98. 53 saplings have been planted so far. How many more saplings can be planted?)<br>
+                            <input type="text" placeholder="පිළිතුර" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>බෝතලයක ටොෆි 89ක් තිබුණි. ළමයින්ට බෙදා දුන් පසු එහි 37ක් ඉතිරි විය. බෙදා දුන් ටොෆි ගණන කීයද?</strong><br>
+                            (There were 89 toffees in a bottle. After distributing to children, 37 were left. How many toffees were distributed?)<br>
+                            <input type="text" placeholder="පිළිතුර" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>එක් අඹ ගසක අඹ ගෙඩි 96කි. තවත් අඹ ගසක අඹ ගෙඩි 72කි. අඹ ගස් දෙකෙහි ඇති අඹ ගෙඩි ගණන අතර වෙනස කීයද?</strong><br>
+                            (One mango tree has 96 mangoes. Another mango tree has 72 mangoes. What is the difference between the number of mangoes on the two trees?)<br>
+                            <input type="text" placeholder="පිළිතුර" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>ශාලාවක තබා ඇති පුටු ගණන 45කි. එහි තැබිය හැකි මුළු පුටු ගණන 96කි. තවත් පුටු කීයක් තැබිය හැකිද?</strong><br>
+                            (The number of chairs placed in a hall is 45. The total number of chairs that can be placed there is 96. How many more chairs can be placed?)<br>
+                            <input type="text" placeholder="පිළිතුර" class="input-field max-w-full">
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">ඔබ ඉතා හොඳින් කරනවා!</h3>
+                    <p class="text-blue-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <a href="grade4_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson3.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> 3 වන පාඩමට ආපසු
+                    </a>
+                    <a href="grade4_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">මැත්ලංකා</h3>
+                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කිරීම.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අප ගැන</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Simple Subtraction ---
+            let currentSimpleSubtractionCorrectAnswer = 0;
+
+            function generateSimpleSubtractionActivity() {
+                const num1Span = document.getElementById('subtraction-num1');
+                const num2Span = document.getElementById('subtraction-num2');
+                const answerInput = document.getElementById('subtraction-answer-input');
+                const feedback = document.getElementById('simple-subtraction-feedback');
+                const nextBtn = document.getElementById('next-simple-subtraction-btn');
+                const checkBtn = document.getElementById('check-simple-subtraction-btn');
+
+                if (!num1Span || !num2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Simple subtraction elements not found. Retrying in 1 second.");
+                    setTimeout(generateSimpleSubtractionActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num2 = Math.floor(Math.random() * (num1 - 50)) + 10; // Ensure num2 is smaller and not too small
+                } while (num1 % 10 < num2 % 10 || Math.floor(num1 / 10) % 10 < Math.floor(num2 / 10) % 10); // Ensure no borrowing for simplicity
+
+                num1Span.textContent = num1;
+                num2Span.textContent = num2;
+                currentSimpleSubtractionCorrectAnswer = num1 - num2;
+            }
+
+            function checkSimpleSubtractionAnswers() {
+                const answerInput = document.getElementById('subtraction-answer-input');
+                const feedback = document.getElementById('simple-subtraction-feedback');
+                const nextBtn = document.getElementById('next-simple-subtraction-btn');
+                const checkBtn = document.getElementById('check-simple-subtraction-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Simple subtraction check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentSimpleSubtractionCorrectAnswer) {
+                    feedback.textContent = 'නිවැරදියි! ඉතා හොඳයි!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `අයියෝ! නිවැරදි පිළිතුර ${currentSimpleSubtractionCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateSimpleSubtractionActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Subtraction with Borrowing ---
+            let currentBorrowingSubtractionCorrectAnswer = 0;
+
+            function generateBorrowingSubtractionActivity() {
+                const num1Span = document.getElementById('borrowing-subtraction-num1');
+                const num2Span = document.getElementById('borrowing-subtraction-num2');
+                const answerInput = document.getElementById('borrowing-subtraction-answer-input');
+                const feedback = document.getElementById('borrowing-subtraction-feedback');
+                const nextBtn = document.getElementById('next-borrowing-subtraction-btn');
+                const checkBtn = document.getElementById('check-borrowing-subtraction-btn');
+
+                if (!num1Span || !num2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Borrowing subtraction elements not found. Retrying in 1 second.");
+                    setTimeout(generateBorrowingSubtractionActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                let num1, num2;
+                do {
+                    num1 = Math.floor(Math.random() * 900) + 100; // 100 to 999
+                    num2 = Math.floor(Math.random() * (num1 - 50)) + 10; // Ensure num2 is smaller
+                } while (num1 <= num2 || (num1 % 10 >= num2 % 10 && Math.floor(num1 / 10) % 10 >= Math.floor(num2 / 10) % 10 && Math.floor(num1 / 100) % 10 >= Math.floor(num2 / 100) % 10)); // Ensure at least one borrowing is likely
+
+                num1Span.textContent = num1;
+                num2Span.textContent = num2;
+                currentBorrowingSubtractionCorrectAnswer = num1 - num2;
+            }
+
+            function checkBorrowingSubtractionAnswers() {
+                const answerInput = document.getElementById('borrowing-subtraction-answer-input');
+                const feedback = document.getElementById('borrowing-subtraction-feedback');
+                const nextBtn = document.getElementById('next-borrowing-subtraction-btn');
+                const checkBtn = document.getElementById('check-borrowing-subtraction-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Borrowing subtraction check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentBorrowingSubtractionCorrectAnswer) {
+                    feedback.textContent = 'නිවැරදියි! ඉතා හොඳයි!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `අයියෝ! නිවැරදි පිළිතුර ${currentBorrowingSubtractionCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateBorrowingSubtractionActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-simple-subtraction-btn').addEventListener('click', checkSimpleSubtractionAnswers);
+            document.getElementById('next-simple-subtraction-btn').addEventListener('click', generateSimpleSubtractionActivity);
+
+            document.getElementById('check-borrowing-subtraction-btn').addEventListener('click', checkBorrowingSubtractionAnswers);
+            document.getElementById('next-borrowing-subtraction-btn').addEventListener('click', generateBorrowingSubtractionActivity);
+
+
+            // Initialize all activities on page load
+            generateSimpleSubtractionActivity();
+            generateBorrowingSubtractionActivity();
+        });
+    </script>
+</body>
+</html>

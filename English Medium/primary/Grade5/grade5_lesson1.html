@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 1: Numbers - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about numbers for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted for slightly longer inputs */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .abacus-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .abacus-rods {
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background-color: #f0f4f8;
+            border-radius: 8px;
+            border: 1px solid #cbd5e0;
+        }
+        .abacus-rod {
+            width: 30px;
+            height: 100px;
+            background-color: #a0aec0;
+            position: relative;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column-reverse; /* Beads stack from bottom */
+            justify-content: flex-start;
+            align-items: center;
+            padding-top: 5px;
+        }
+        .abacus-bead {
+            width: 25px;
+            height: 25px;
+            background-color: #f59e0b;
+            border-radius: 50%;
+            margin-bottom: 2px;
+            border: 1px solid #d97706;
+        }
+        .abacus-label {
+            margin-top: 5px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #4a5568;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 1: Numbers - 1</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's explore numbers and their properties!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-numeric-up-alt lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Identify and write numbers up to 100,000.</li>
+                                <li>Understand place value of digits in numbers.</li>
+                                <li>Write numbers in expanded form.</li>
+                                <li>Compare and order numbers.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Writing Numbers from Digits -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Writing Numbers from Given Digits</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's use the digits in the box to form numbers. You can use each digit only once for each number.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Exercise 1: Use 4 digits from the box to write 5 numbers.</p>
+                        <div class="flex flex-wrap justify-center gap-4 text-2xl font-bold text-blue-800 my-4">
+                            <span class="p-2 border rounded-md bg-blue-100">1</span>
+                            <span class="p-2 border rounded-md bg-blue-100">4</span>
+                            <span class="p-2 border rounded-md bg-blue-100">8</span>
+                            <span class="p-2 border rounded-md bg-blue-100">9</span>
+                            <span class="p-2 border rounded-md bg-blue-100">5</span>
+                            <span class="p-2 border rounded-md bg-blue-100">2</span>
+                            <span class="p-2 border rounded-md bg-blue-100">7</span>
+                            <span class="p-2 border rounded-md bg-blue-100">0</span>
+                            <span class="p-2 border rounded-md bg-blue-100">6</span>
+                            <span class="p-2 border rounded-md bg-blue-100">3</span>
+                        </div>
+                        <p class="text-blue-600 text-lg font-mono mb-2">Example: 3058</p>
+                        <div class="space-y-3">
+                            <input type="text" class="input-field" placeholder="Your Number 1">
+                            <input type="text" class="input-field" placeholder="Your Number 2">
+                            <input type="text" class="input-field" placeholder="Your Number 3">
+                            <input type="text" class="input-field" placeholder="Your Number 4">
+                            <input type="text" class="input-field" placeholder="Your Number 5">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Number Names and Numerals -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Number Names and Numerals</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's practice writing numbers in digits and words.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Exercise 2: Complete the table.</p>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Number Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>6528</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number name"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number"></td>
+                                    <td>දෙදාහයි හාරසිය තිස් තුන</td> <!-- Two thousand four hundred thirty three -->
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number"></td>
+                                    <td>තුන්දාහයි එකසිය අසූ දෙක</td> <!-- Three thousand one hundred eighty two -->
+                                </tr>
+                                <tr>
+                                    <td>5060</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number name"></td>
+                                </tr>
+                                <tr>
+                                    <td>9015</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number name"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number"></td>
+                                    <td>දස දහසයි හාරසිය තිස් තුන</td> <!-- Ten thousand four hundred thirty three -->
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number"></td>
+                                    <td>තුන්දහස් එකසිය අට</td> <!-- Three thousand eight -->
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Write number"></td>
+                                    <td>එක්දහස් අට</td> <!-- One thousand eight -->
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Content: Place Value -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Understanding Place Value</h3>
+                    <p class="text-gray-700 mb-3">
+                        Each digit in a number has a specific place value. Let's complete the table.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Exercise 3: Complete the table.</p>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Digit</th>
+                                    <th>Place</th>
+                                    <th>Place Value</th>
+                                    <th>Value Represented by Digit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2348</td>
+                                    <td>2</td>
+                                    <td>දහස් ස්ථානය (Thousands)</td>
+                                    <td>1000</td>
+                                    <td>2000</td>
+                                </tr>
+                                <tr>
+                                    <td>6572</td>
+                                    <td>6</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>5024</td>
+                                    <td>4</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>8700</td>
+                                    <td>0</td>
+                                    <td>සිය දහස් ස්ථානය (Ten Thousands)</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>9605</td>
+                                    <td>9</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>7003</td>
+                                    <td>7</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Content: Abacus Representation -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Numbers on the Abacus</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's write the number and its number name represented on the abacus.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Exercise 4: Write the number and number name for each abacus.</p>
+                        <div class="flex flex-wrap justify-center gap-8 mt-4">
+                            <!-- Example Abacus -->
+                            <div class="abacus-container">
+                                <p class="text-lg font-bold mb-2">Example: 2311</p>
+                                <div class="abacus-rods">
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">T</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">H</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">T</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">O</div>
+                                    </div>
+                                </div>
+                                <p class="text-lg mt-2">දෙදාහයි තුන්සිය එකොළහ (Two thousand three hundred eleven)</p>
+                            </div>
+
+                            <!-- Abacus 1 -->
+                            <div class="abacus-container">
+                                <div class="abacus-rods">
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">TTh</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">Th</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">H</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">T</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">O</div>
+                                    </div>
+                                </div>
+                                <input type="text" class="input-field mt-2" placeholder="Number">
+                                <input type="text" class="input-field mt-2" placeholder="Number Name">
+                            </div>
+                             <!-- Abacus 2 -->
+                             <div class="abacus-container">
+                                <div class="abacus-rods">
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">TTh</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">Th</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">H</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">T</div>
+                                    </div>
+                                    <div class="abacus-rod">
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-bead"></div>
+                                        <div class="abacus-label">O</div>
+                                    </div>
+                                </div>
+                                <input type="text" class="input-field mt-2" placeholder="Number">
+                                <input type="text" class="input-field mt-2" placeholder="Number Name">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Expanded Form -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Writing Numbers in Expanded Form</h3>
+                    <p class="text-gray-700 mb-3">
+                        Writing a number in expanded form means showing the value of each digit.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: 4031 = 4000 + 0 + 30 + 1</p>
+                        <p class="font-semibold text-blue-700">Exercise 5: Write the following numbers in expanded form.</p>
+                        <div class="space-y-3">
+                            <p>7658 = <input type="text" class="input-field w-1/2" placeholder="Thousands"> + <input type="text" class="input-field w-1/2" placeholder="Hundreds"> + 50 + 8</p>
+                            <p>5090 = <input type="text" class="input-field w-1/2" placeholder="Thousands"> + <input type="text" class="input-field w-1/2" placeholder="Hundreds"> + 90 + 0</p>
+                            <p>8027 = <input type="text" class="input-field w-1/2" placeholder="Thousands"> + <input type="text" class="input-field w-1/2" placeholder="Hundreds"> + 20 + <input type="text" class="input-field w-1/2" placeholder="Units"></p>
+                            <p>1200 = <input type="text" class="input-field w-1/2" placeholder="Thousands"> + <input type="text" class="input-field w-1/2" placeholder="Hundreds"> + <input type="text" class="input-field w-1/2" placeholder="Tens"> + <input type="text" class="input-field w-1/2" placeholder="Units"></p>
+                            <p>6005 = <input type="text" class="input-field w-1/2" placeholder="Thousands"> + <input type="text" class="input-field w-1/2" placeholder="Hundreds"> + <input type="text" class="input-field w-1/2" placeholder="Tens"> + <input type="text" class="input-field w-1/2" placeholder="Units"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Numbers and Number Names (Larger Numbers) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Numbers up to 100,000</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's learn about numbers beyond 9,999.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: 9999 + 1 = 10,000 (දහ දහස - Ten Thousand)</p>
+                        <p class="font-semibold text-blue-700">Exercise 6: Write the number and number name.</p>
+                        <div class="space-y-3">
+                            <p>69 999 + 1 = <input type="text" class="input-field w-1/3" placeholder="Number"> - <input type="text" class="input-field w-1/2" placeholder="Number Name"></p>
+                            <p>79 999 + 1 = <input type="text" class="input-field w-1/3" placeholder="Number"> - <input type="text" class="input-field w-1/2" placeholder="Number Name"></p>
+                            <p>89 999 + 1 = <input type="text" class="input-field w-1/3" placeholder="Number"> - <input type="text" class="input-field w-1/2" placeholder="Number Name"></p>
+                            <p>99 999 + 1 = <input type="text" class="input-field w-1/3" placeholder="Number"> - <input type="text" class="input-field w-1/2" placeholder="Number Name"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Numerals from Number Names -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Writing Numerals from Number Names</h3>
+                    <p class="text-gray-700 mb-3">
+                        Convert the given number names into numerals.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: හැත්තෑ දෙදහස් නවසිය තිස් දෙක (Seventy two thousand nine hundred thirty two) - 72 932</p>
+                        <p class="font-semibold text-blue-700">Exercise 7: Write the numeral corresponding to the number name.</p>
+                        <div class="space-y-3">
+                            <p>දහ දහසයි එකසිය දහතුන (Ten thousand one hundred thirteen) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                            <p>දහ තුන්දාහයි දෙසිය විසි (Thirteen thousand two hundred twenty) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                            <p>විසි අටදාහයි පන්සියය (Twenty eight thousand five hundred) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                            <p>හැට එක්දාහයි හාරසිය අසූ පහ (Sixty one thousand four hundred eighty five) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                            <p>හැට නවදාහයි තුන්සිය හැත්තෑ හත (Sixty nine thousand three hundred seventy seven) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                            <p>තිස් හතරදාහයි දහඅට (Thirty four thousand eighteen) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                            <p>පනස් දහසයි පහ (Fifty thousand five) - <input type="text" class="input-field" placeholder="Numeral"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Place Value Questions -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Place Value Questions</h3>
+                    <p class="text-gray-700 mb-3">
+                        Answer the following questions related to place value.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: දස දහස් ස්ථානය 2, දහස් ස්ථානය 7, සිය ස්ථානය 3, දහයේ ස්ථානය 9 සහ එකේ ස්ථානය 4 ලෙස වන සංඛ්‍යාව කුමක්ද? (What is the number with 2 in the ten thousands place, 7 in the thousands place, 3 in the hundreds place, 9 in the tens place, and 4 in the units place?) - 27 394</p>
+                        <p class="font-semibold text-blue-700">Exercise 8: Answer the questions.</p>
+                        <div class="space-y-3">
+                            <p>(a) දස දහස් ස්ථානය 3, දහස් ස්ථානය 5, සිය ස්ථානය 1, දහයේ ස්ථානය 4 සහ එකේ ස්ථානය 7 ලෙස වන සංඛ්‍යාව කුමක්ද? (What is the number with 3 in the ten thousands place, 5 in the thousands place, 1 in the hundreds place, 4 in the tens place, and 7 in the units place?) - <input type="text" class="input-field" placeholder="Answer"></p>
+                            <p>(b) එකේ ස්ථානය 6, දහයේ ස්ථානය 0, සිය ස්ථානය 4, දහස් ස්ථානය 2 සහ දස දහස් ස්ථානය 8 ලෙස වන සංඛ්‍යාව කුමක්ද? (What is the number with 6 in the units place, 0 in the tens place, 4 in the hundreds place, 2 in the thousands place, and 8 in the ten thousands place?) - <input type="text" class="input-field" placeholder="Answer"></p>
+                            <p>(c) දස දහස් ස්ථානය 4, දහස් ස්ථානය 0, සිය ස්ථානය 1, දහයේ ස්ථානය සහ එකේ ස්ථානය ඕනෑම ඉලක්කම් දෙකක් ලෙස වන සංඛ්‍යාවක් ලියන්න. (Write a number with 4 in the ten thousands place, 0 in the thousands place, 1 in the hundreds place, and any two digits for the tens and units place.) - <input type="text" class="input-field" placeholder="Answer"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Before and After Numbers -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Before and After Numbers</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's fill in the missing numbers.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Exercise 9: Complete the table.</p>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th>Before Number</th>
+                                    <th>Number</th>
+                                    <th>After Number</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Before"></td>
+                                    <td>9 999</td>
+                                    <td>10 000</td>
+                                </tr>
+                                <tr>
+                                    <td>85 099</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Number"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="After"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Before"></td>
+                                    <td>40 000</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="After"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Before"></td>
+                                    <td>59 600</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="After"></td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Before"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Number"></td>
+                                    <td>70 000</td>
+                                </tr>
+                                <tr>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Before"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Number"></td>
+                                    <td>100 000</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Content: Place Value (Advanced) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Advanced Place Value</h3>
+                    <p class="text-gray-700 mb-3">
+                        Let's complete the table for larger numbers.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Exercise 10: Complete the table.</p>
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr>
+                                    <th>Number</th>
+                                    <th>Digit</th>
+                                    <th>Place</th>
+                                    <th>Place Value</th>
+                                    <th>Value Represented by Digit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>38 237</td>
+                                    <td>3</td>
+                                    <td>දහස් ස්ථානය (Thousands)</td>
+                                    <td>10 000</td>
+                                    <td>30 000</td>
+                                </tr>
+                                <tr>
+                                    <td>24 150</td>
+                                    <td>5</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>40 856</td>
+                                    <td>0</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>67 400</td>
+                                    <td>4</td>
+                                    <td>සිය ස්ථානය (Hundreds)</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                                <tr>
+                                    <td>79 008</td>
+                                    <td>7</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td>7000</td>
+                                </tr>
+                                <tr>
+                                    <td>97 541</td>
+                                    <td>1</td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Place Value"></td>
+                                    <td><input type="text" class="input-field max-w-full" placeholder="Value"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Content: Expanded Form (Advanced) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Expanded Form for Larger Numbers</h3>
+                    <p class="text-gray-700 mb-3">
+                        Write the following numbers in expanded form.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: 99 999 = 90 000 + 9 000 + 900 + 90 + 9</p>
+                        <p class="font-semibold text-blue-700">Exercise 11: Write the given numbers in expanded form.</p>
+                        <div class="space-y-3">
+                            <p>19 435 = <input type="text" class="input-field w-1/5" placeholder="TTh"> + <input type="text" class="input-field w-1/5" placeholder="Th"> + <input type="text" class="input-field w-1/5" placeholder="H"> + <input type="text" class="input-field w-1/5" placeholder="T"> + <input type="text" class="input-field w-1/5" placeholder="O"></p>
+                            <p>38 249 = <input type="text" class="input-field w-1/5" placeholder="TTh"> + <input type="text" class="input-field w-1/5" placeholder="Th"> + <input type="text" class="input-field w-1/5" placeholder="H"> + <input type="text" class="input-field w-1/5" placeholder="T"> + <input type="text" class="input-field w-1/5" placeholder="O"></p>
+                            <p>56 080 = <input type="text" class="input-field w-1/5" placeholder="TTh"> + <input type="text" class="input-field w-1/5" placeholder="Th"> + <input type="text" class="input-field w-1/5" placeholder="H"> + <input type="text" class="input-field w-1/5" placeholder="T"> + <input type="text" class="input-field w-1/5" placeholder="O"></p>
+                            <p>69 100 = <input type="text" class="input-field w-1/5" placeholder="TTh"> + <input type="text" class="input-field w-1/5" placeholder="Th"> + <input type="text" class="input-field w-1/5" placeholder="H"> + <input type="text" class="input-field w-1/5" placeholder="T"> + <input type="text" class="input-field w-1/5" placeholder="O"></p>
+                            <p>81 577 = <input type="text" class="input-field w-1/5" placeholder="TTh"> + <input type="text" class="input-field w-1/5" placeholder="Th"> + <input type="text" class="input-field w-1/5" placeholder="H"> + <input type="text" class="input-field w-1/5" placeholder="T"> + <input type="text" class="input-field w-1/5" placeholder="O"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 1!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to move on to the next lesson or test your knowledge?</p>
+                    <a href="grade5_lesson2.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson12.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Grade 4 Lessons
+                    </a>
+                    <a href="grade5_lesson2.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Function to generate abacus beads (simple representation)
+            function generateAbacus(containerId, values) {
+                const container = document.querySelector(`#${containerId} .abacus-rods`);
+                if (!container) return;
+                container.innerHTML = ''; // Clear previous beads
+
+                const labels = ['TTh', 'Th', 'H', 'T', 'O']; // Ten Thousands, Thousands, Hundreds, Tens, Ones
+                const paddedValues = String(values).padStart(labels.length, '0').split('').map(Number);
+
+                paddedValues.forEach((value, index) => {
+                    const rod = document.createElement('div');
+                    rod.className = 'abacus-rod';
+                    for (let i = 0; i < value; i++) {
+                        const bead = document.createElement('div');
+                        bead.className = 'abacus-bead';
+                        rod.appendChild(bead);
+                    }
+                    const label = document.createElement('div');
+                    label.className = 'abacus-label';
+                    label.textContent = labels[index];
+                    rod.appendChild(label);
+                    container.appendChild(rod);
+                });
+            }
+
+            // Example Abacus generation (for demonstration, not interactive exercise)
+            // generateAbacus('abacus-example', 2311); // This is already static HTML, no need to generate dynamically for example
+
+            // You can add more JavaScript here for interactive exercises if needed,
+            // similar to the Grade 4 lesson's interactive activities.
+            // For now, the exercises are primarily input fields for manual entry.
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 ශ්‍රේණිය ගණිතය - පාඩම 13: පරිමාව සහ ධාරිතාව</title>
+    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා නිර්මාණය කරන ලද ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාව.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .concept-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .option-button {
+            background-color: #e2e8f0;
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .option-button:hover {
+            background-color: #cbd5e0;
+        }
+        .option-button.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .option-button.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+        .option-button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අපි ගැන</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 13: පරිමාව සහ ධාරිතාව - කොපමණ ඉඩක්ද? කොපමණ ප්‍රමාණයක් රඳවා ගත හැකිද?</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">3 ශ්‍රේණියේ සිසුන් සඳහා (වයස 9) - පරිමාව සහ ධාරිතාව ගවේෂණය කරමු!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-fill-drip lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">අද අපි ඉගෙන ගන්නේ කුමක්ද:</h3>
+                        <p class="text-gray-700 text-lg">
+                            ඔබ කවදා හෝ වතුර වීදුරුවක් පුරවා හෝ ඔබේ සෙල්ලම් බඩු පෙට්ටියක දමා තිබේද? අද, දේවල් කොපමණ ඉඩක් ගනීද සහ බහාලුම්වල කොපමණ ප්‍රමාණයක් රඳවා ගත හැකිද යන්න ගැන කතා කිරීමට අපි විශේෂ වචන ඉගෙන ගනිමු!
+                            මෙම පාඩමේදී, ඔබ ඉගෙන ගනු ඇත:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>**පරිමාව** යනු කුමක්ද (යම් දෙයක් ගන්නා ඉඩ ප්‍රමාණය).</li>
+                                <li>**ධාරිතාව** යනු කුමක්ද (බහාලුමකට රඳවා ගත හැකි ප්‍රමාණය).</li>
+                                <li>දියර මැනීම සඳහා පොදු ඒකක ගැන: **ලීටර (L)** සහ **මිලිලීටර (mL)**.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: What is Volume? -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">පරිමාව යනු කුමක්ද? - වස්තුවක් ගන්නා ඉඩ ප්‍රමාණය!</h3>
+                    <p class="text-gray-700 mb-3">
+                        **පරිමාව** යනු වස්තුවක් ගන්නා ඉඩ ප්‍රමාණයයි. ඔබ වටා ඇති සෑම දෙයකටම පරිමාවක් ඇත!
+                        එය ඝන, දියර හෝ වායුව වුවත් කමක් නැත, එය එහි තිබේ නම්, එය ඉඩක් ගනී.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය 1: ඔබේ ගණිත පොත</p>
+                        <p class="text-gray-700">ඔබේ ගණිත පොත ඔබේ මේසය මත ඉඩක් ගනී. එම ඉඩ එහි **පරිමාවයි**.</p>
+                        <img src="https://placehold.co/150x100/ADD8E6/000000?text=Math+Book" alt="Math Book" class="mx-auto mt-2 rounded-md">
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700">උදාහරණය 2: සෙල්ලම් කාර් එකක්</p>
+                        <p class="text-gray-700">සෙල්ලම් කාර් එකක් බිම හෝ සෙල්ලම් පෙට්ටියක ඉඩක් ගනී. එම ඉඩ එහි **පරිමාවයි**.</p>
+                        <img src="https://placehold.co/150x100/FFD700/000000?text=Toy+Car" alt="Toy Car" class="mx-auto mt-2 rounded-md">
+                    </div>
+                </div>
+
+                <!-- Content: What is Capacity? -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ධාරිතාව යනු කුමක්ද? - බහාලුමකට රඳවා ගත හැකි ප්‍රමාණය!</h3>
+                    <p class="text-gray-700 mb-3">
+                        **ධාරිතාව** යනු බහාලුමකට රඳවා ගත හැකි ප්‍රමාණයයි. අපි සාමාන්‍යයෙන් ජලය, යුෂ හෝ කිරි වැනි දියර ගැන කතා කිරීමට ධාරිතාව භාවිතා කරමු.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">උදාහරණය 1: වතුර බෝතලයක්</p>
+                        <p class="text-gray-700">වතුර බෝතලයකට ජලය රඳවා ගැනීමට නිශ්චිත **ධාරිතාවක්** ඇත. එය විශාල බෝතලයක් නම්, එයට බොහෝ දේ රඳවා ගත හැකිය!</p>
+                        <img src="https://placehold.co/100x150/87CEEB/000000?text=Water+Bottle" alt="Water Bottle" class="mx-auto mt-2 rounded-md">
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700">උදාහරණය 2: යුෂ පෙට්ටියක්</p>
+                        <p class="text-gray-700">කුඩා යුෂ පෙට්ටියක විශාල වතුර බෝතලයකට වඩා කුඩා **ධාරිතාවක්** ඇත.</p>
+                        <img src="https://placehold.co/80x120/FF6347/FFFFFF?text=Juice+Box" alt="Juice Box" class="mx-auto mt-2 rounded-md">
+                    </div>
+                </div>
+
+                <!-- Content: Units of Capacity (Liters and Milliliters) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">ධාරිතා ඒකක: ලීටර (L) සහ මිලිලීටර (mL)!</h3>
+                    <p class="text-gray-700 mb-3">
+                        අපි ධාරිතාව මනින විට, අපි විශේෂ ඒකක භාවිතා කරමු:
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                            <li>**ලීටර (L):** අපි **විශාල** දියර ප්‍රමාණ සඳහා ලීටර භාවිතා කරමු.</li>
+                            <li>**මිලිලීටර (mL):** අපි **කුඩා** දියර ප්‍රමාණ සඳහා මිලිලීටර භාවිතා කරමු.</li>
+                        </ul>
+                        ලීටර 1ක මිලිලීටර 1000ක් ඇත! එබැවින්, $1 \text{ L} = 1000 \text{ mL}$.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">ලීටර (L) භාවිතා කළ යුත්තේ කවදාද:</p>
+                        <p class="text-gray-700">විශාල සෝඩා බෝතලයක්, කිරි පෙට්ටියක් හෝ වතුර බාල්දියක් වැනි දේ සඳහා.</p>
+                        <div class="flex justify-around items-center mt-2">
+                             <img src="https://placehold.co/80x120/A020F0/FFFFFF?text=Milk+Carton" alt="Milk Carton" class="rounded-md">
+                             <img src="https://placehold.co/80x120/FF4500/FFFFFF?text=Soda+Bottle" alt="Soda Bottle" class="rounded-md">
+                        </div>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700">මිලිලීටර (mL) භාවිතා කළ යුත්තේ කවදාද:</p>
+                        <p class="text-gray-700">බෙහෙත් හැන්දක්, කුඩා යුෂ කෝප්පයක් හෝ අයිඩ්‍රොප්ස් වැනි දේ සඳහා.</p>
+                        <div class="flex justify-around items-center mt-2">
+                            <img src="https://placehold.co/80x80/20B2AA/FFFFFF?text=Medicine+Spoon" alt="Medicine Spoon" class="rounded-md">
+                            <img src="https://placehold.co/80x80/DAA520/FFFFFF?text=Small+Juice" alt="Small Juice" class="rounded-md">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Lesson Activity 1: Volume or Capacity? -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: පරිමාවද ධාරිතාවද?</h2>
+                    <p id="vol-cap-instructions" class="text-yellow-700 text-lg mb-8">වාක්‍යය කියවන්න. එය කතා කරන්නේ **පරිමාව** ගැනද නැතහොත් **ධාරිතාව** ගැනද?</p>
+
+                    <div id="vol-cap-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="vol-cap-problem-display" class="concept-display">
+                            <!-- Problem will be displayed here -->
+                        </div>
+                        <div id="vol-cap-options" class="flex flex-wrap justify-center gap-4 mt-4">
+                            <button class="option-button" data-answer="volume">පරිමාව</button>
+                            <button class="option-button" data-answer="capacity">ධාරිතාව</button>
+                        </div>
+                        <p id="vol-cap-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-vol-cap-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+                <!-- Interactive Lesson Activity 2: Choose the Right Unit -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: නිවැරදි ඒකකය තෝරන්න!</h2>
+                    <p id="unit-choice-instructions" class="text-purple-700 text-lg mb-8">මෙය මැනීමට ඔබ භාවිතා කරන්නේ කුමන ඒකකයද? ලීටර (L) ද නැතහොත් මිලිලීටර (mL) ද?</p>
+
+                    <div id="unit-choice-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="unit-choice-problem-display" class="concept-display">
+                            <!-- Problem will be displayed here -->
+                        </div>
+                        <div id="unit-choice-options" class="flex flex-wrap justify-center gap-4 mt-4">
+                            <button class="option-button" data-answer="liters">ලීටර (L)</button>
+                            <button class="option-button" data-answer="milliliters">මිලිලීටර (mL)</button>
+                        </div>
+                        <p id="unit-choice-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-unit-choice-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ප්‍රශ්නය</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                    <p class="text-green-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <a href="grade3_lesson14.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade3_lesson12.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> පාඩම 12 වෙත ආපසු
+                    </a>
+                    <a href="grade3_lesson14.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කරයි.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අපි ගැන</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Activity 1: Volume or Capacity?
+            let currentVolCapCorrectAnswer = '';
+
+            const volCapProblems = [
+                { question: "පිහිනුම් තටාකයකට රඳවා ගත හැකි ජල ප්‍රමාණය.", answer: "ධාරිතාව" },
+                { question: "සෙල්ලම් කාර් එකක් මේසයක් මත ගන්නා ඉඩ ප්‍රමාණය.", answer: "පරිමාව" },
+                { question: "යුෂ පෙට්ටියක ඇති යුෂ ප්‍රමාණය.", answer: "ධාරිතාව" },
+                { question: "ඔබේ පැන්සල ඔබේ පැන්සල් පෙට්ටියේ ගන්නා ඉඩ ප්‍රමාණය.", answer: "පරිමාව" },
+                { question: "බැලූනයක් තුළ ඇති වාතය ප්‍රමාණය.", answer: "පරිමාව" }, // Air takes up space (volume)
+                { question: "වීදුරුවකට රඳවා ගත හැකි කිරි ප්‍රමාණය.", answer: "ධාරිතාව" }
+            ];
+
+            function generateVolCapActivity() {
+                const volCapProblemDisplay = document.getElementById('vol-cap-problem-display');
+                const volCapOptionsContainer = document.getElementById('vol-cap-options');
+                const volCapFeedback = document.getElementById('vol-cap-feedback');
+                const nextVolCapBtn = document.getElementById('next-vol-cap-btn');
+                const optionButtons = volCapOptionsContainer.querySelectorAll('.option-button');
+
+                if (!volCapProblemDisplay || !volCapOptionsContainer || !volCapFeedback || !nextVolCapBtn || optionButtons.length === 0) {
+                    console.error("පරිමාව හෝ ධාරිතා ක්‍රියාකාරකම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ. තත්පර 1කින් නැවත උත්සාහ කරමු.");
+                    setTimeout(generateVolCapActivity, 1000);
+                    return;
+                }
+
+                volCapFeedback.textContent = '';
+                volCapFeedback.className = 'text-xl font-semibold mt-4';
+                nextVolCapBtn.classList.add('hidden');
+
+                optionButtons.forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect', 'disabled');
+                    btn.disabled = false;
+                });
+
+                const randomProblem = volCapProblems[Math.floor(Math.random() * volCapProblems.length)];
+                volCapProblemDisplay.textContent = randomProblem.question;
+                currentVolCapCorrectAnswer = randomProblem.answer.toLowerCase();
+            }
+
+            function checkVolCapAnswer(selectedAnswer) {
+                const volCapFeedback = document.getElementById('vol-cap-feedback');
+                const nextVolCapBtn = document.getElementById('next-vol-cap-btn');
+                const volCapOptionsContainer = document.getElementById('vol-cap-options');
+                const optionButtons = volCapOptionsContainer.querySelectorAll('.option-button');
+
+                if (!volCapFeedback || !nextVolCapBtn || optionButtons.length === 0) {
+                    console.error("පරිමාව හෝ ධාරිතා පරීක්ෂා කිරීම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ.");
+                    return;
+                }
+
+                optionButtons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.answer === currentVolCapCorrectAnswer) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('disabled');
+                    }
+                });
+
+                if (selectedAnswer === currentVolCapCorrectAnswer) {
+                    volCapFeedback.textContent = 'නියමයි! එය නිවැරදියි!';
+                    volCapFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextVolCapBtn.classList.remove('hidden');
+                } else {
+                    volCapFeedback.textContent = `අප්සට්! නිවැරදි පිළිතුර "${currentVolCapCorrectAnswer}". තවත් එකක් උත්සාහ කරමු!`;
+                    volCapFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateVolCapActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Activity 2: Choose the Right Unit
+            let currentUnitChoiceCorrectAnswer = '';
+
+            const unitChoiceProblems = [
+                { item: "විශාල සෝඩා බෝතලයක්", unit: "ලීටර" },
+                { item: "බෙහෙත් හැන්දක්", unit: "මිලිලීටර" },
+                { item: "කුඩා තේ කෝප්පයක්", unit: "මිලිලීටර" },
+                { item: "වතුර බාල්දියක්", unit: "ලීටර" },
+                { item: "පිහිනුම් තටාකයක්", unit: "ලීටර" },
+                { item: "දියර බින්දුවක්", unit: "මිලිලීටර" }
+            ];
+
+            function generateUnitChoiceActivity() {
+                const unitChoiceProblemDisplay = document.getElementById('unit-choice-problem-display');
+                const unitChoiceOptionsContainer = document.getElementById('unit-choice-options');
+                const unitChoiceFeedback = document.getElementById('unit-choice-feedback');
+                const nextUnitChoiceBtn = document.getElementById('next-unit-choice-btn');
+                const optionButtons = unitChoiceOptionsContainer.querySelectorAll('.option-button');
+
+                if (!unitChoiceProblemDisplay || !unitChoiceOptionsContainer || !unitChoiceFeedback || !nextUnitChoiceBtn || optionButtons.length === 0) {
+                    console.error("නිවැරදි ඒකකය තෝරන්න ක්‍රියාකාරකම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ. තත්පර 1කින් නැවත උත්සාහ කරමු.");
+                    setTimeout(generateUnitChoiceActivity, 1000);
+                    return;
+                }
+
+                unitChoiceFeedback.textContent = '';
+                unitChoiceFeedback.className = 'text-xl font-semibold mt-4';
+                nextUnitChoiceBtn.classList.add('hidden');
+
+                optionButtons.forEach(btn => {
+                    btn.classList.remove('correct', 'incorrect', 'disabled');
+                    btn.disabled = false;
+                });
+
+                const randomProblem = unitChoiceProblems[Math.floor(Math.random() * unitChoiceProblems.length)];
+                unitChoiceProblemDisplay.textContent = randomProblem.item;
+                currentUnitChoiceCorrectAnswer = randomProblem.unit.toLowerCase();
+            }
+
+            function checkUnitChoiceAnswer(selectedAnswer) {
+                const unitChoiceFeedback = document.getElementById('unit-choice-feedback');
+                const nextUnitChoiceBtn = document.getElementById('next-unit-choice-btn');
+                const unitChoiceOptionsContainer = document.getElementById('unit-choice-options');
+                const optionButtons = unitChoiceOptionsContainer.querySelectorAll('.option-button');
+
+                if (!unitChoiceFeedback || !nextUnitChoiceBtn || optionButtons.length === 0) {
+                    console.error("නිවැරදි ඒකකය තෝරන්න පරීක්ෂා කිරීම සඳහා එක් හෝ වැඩි මූලද්‍රව්‍ය ශුන්‍ය වේ.");
+                    return;
+                }
+
+                optionButtons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.answer === currentUnitChoiceCorrectAnswer) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('disabled');
+                    }
+                });
+
+                if (selectedAnswer === currentUnitChoiceCorrectAnswer) {
+                    unitChoiceFeedback.textContent = 'නියමයි! ඔබට ඒකක ගැන දැනුමක් ඇත!';
+                    unitChoiceFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextUnitChoiceBtn.classList.remove('hidden');
+                } else {
+                    unitChoiceFeedback.textContent = `හරියටම හරි නෑ. හොඳම ඒකකය "${currentUnitChoiceCorrectAnswer}". තවත් එකක් උත්සාහ කරමු!`;
+                    unitChoiceFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateUnitChoiceActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Attach event listeners
+            document.querySelectorAll('#vol-cap-options .option-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    checkVolCapAnswer(event.target.dataset.answer);
+                });
+            });
+            document.getElementById('next-vol-cap-btn').addEventListener('click', generateVolCapActivity);
+
+            document.querySelectorAll('#unit-choice-options .option-button').forEach(button => {
+                button.addEventListener('click', (event) => {
+                    checkUnitChoiceAnswer(event.target.dataset.answer);
+                });
+            });
+            document.getElementById('next-unit-choice-btn').addEventListener('click', generateUnitChoiceActivity);
+
+
+            // Initialize activities on page load
+            generateVolCapActivity();
+            generateUnitChoiceActivity();
+        });
+    </script>
+</body>
+</html>

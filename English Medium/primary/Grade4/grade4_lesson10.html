@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Lesson 10: Time</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about time.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .time-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #2c5282;
+            margin-bottom: 1rem;
+        }
+        .time-input {
+            width: 150px;
+            padding: 0.5rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 10: Time - Let's learn about clocks and calendars!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn to read time, convert units, and solve time problems!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-clock lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Read time on **analog and digital clocks**.</li>
+                                <li>Convert between **hours, minutes, and seconds**.</li>
+                                <li>Calculate **duration** of events.</li>
+                                <li>Solve **word problems** involving time.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Units of Time -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Units of Time:</h3>
+                    <p class="text-gray-700 mb-3">
+                        Time is measured in different units. Here are some important conversions:
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Conversions:</p>
+                        <p class="text-blue-600 text-lg font-mono">1 minute = 60 seconds</p>
+                        <p class="text-blue-600 text-lg font-mono">1 hour = 60 minutes</p>
+                        <p class="text-blue-600 text-lg font-mono">1 day = 24 hours</p>
+                        <p class="text-blue-600 text-lg font-mono">1 week = 7 days</p>
+                        <p class="text-blue-600 text-lg font-mono">1 year = 12 months = 365 days (366 in a leap year)</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Read Time -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Read the Time!</h2>
+                    <p id="read-time-instructions" class="text-yellow-700 text-lg mb-8">What time is shown on the clock? Enter in HH:MM format (e.g., 03:45).</p>
+
+                    <div id="read-time-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="time-display">
+                            <span id="clock-time-display">--:--</span>
+                        </div>
+                        <input type="text" id="time-answer-input" class="time-input" placeholder="HH:MM">
+                        <p id="read-time-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-read-time-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-read-time-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 2: Convert Time Units -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Convert Time Units!</h2>
+                    <p id="convert-time-instructions" class="text-purple-700 text-lg mb-8">Convert the given time unit and enter the answer.</p>
+
+                    <div id="convert-time-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="time-display">
+                            <span id="convert-value"></span> <span id="convert-unit-from"></span> = <input type="number" id="convert-answer-input" class="time-input" placeholder="Value"> <span id="convert-unit-to"></span>
+                        </div>
+                        <p id="convert-time-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-convert-time-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-convert-time-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+
+                <!-- Exercise Section: Static Time Exercises -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Time Calculations</h3>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>1. How many minutes are in 2 hours? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>2. How many hours are in 3 days? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>3. Convert 180 seconds to minutes. <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>4. Convert 240 minutes to hours. <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Problems Section -->
+                <div class="problem-solving">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Time</h3>
+                    <ol>
+                        <li>
+                            <strong>A train journey starts at 8:00 AM and ends at 11:30 AM. How long is the journey?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>You spend 45 minutes on homework and 30 minutes reading. How much time do you spend in total?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
+                    <p class="text-blue-700 text-lg mb-6">You have completed all Grade 4 lessons! Keep practicing!</p>
+                    <a href="index.html#courses" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Explore More Courses <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson9.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 9
+                    </a>
+                    <!-- No "Next Lesson" button for the last lesson -->
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality (from template)
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Read Time ---
+            let currentCorrectTime = '';
+
+            function generateReadTimeActivity() {
+                const clockTimeDisplay = document.getElementById('clock-time-display');
+                const answerInput = document.getElementById('time-answer-input');
+                const feedback = document.getElementById('read-time-feedback');
+                const nextBtn = document.getElementById('next-read-time-btn');
+                const checkBtn = document.getElementById('check-read-time-btn');
+
+                if (!clockTimeDisplay || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Read time elements not found. Retrying in 1 second.");
+                    setTimeout(generateReadTimeActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const hour = Math.floor(Math.random() * 12) + 1; // 1 to 12
+                const minute = Math.floor(Math.random() * 12) * 5; // 0, 5, 10, ..., 55 (multiples of 5)
+
+                const formattedHour = hour.toString().padStart(2, '0');
+                const formattedMinute = minute.toString().padStart(2, '0');
+
+                currentCorrectTime = `${formattedHour}:${formattedMinute}`;
+                clockTimeDisplay.textContent = currentCorrectTime;
+            }
+
+            function checkReadTimeAnswers() {
+                const answerInput = document.getElementById('time-answer-input');
+                const feedback = document.getElementById('read-time-feedback');
+                const nextBtn = document.getElementById('next-read-time-btn');
+                const checkBtn = document.getElementById('check-read-time-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Read time check elements not found.");
+                    return;
+                }
+
+                const userAnswer = answerInput.value.trim();
+
+                if (userAnswer === currentCorrectTime) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct time is ${currentCorrectTime}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateReadTimeActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Convert Time Units ---
+            let currentConvertCorrectAnswer = 0;
+            let currentConvertUnitFrom = '';
+            let currentConvertUnitTo = '';
+
+            function generateConvertTimeActivity() {
+                const valueSpan = document.getElementById('convert-value');
+                const unitFromSpan = document.getElementById('convert-unit-from');
+                const unitToSpan = document.getElementById('convert-unit-to');
+                const answerInput = document.getElementById('convert-answer-input');
+                const feedback = document.getElementById('convert-time-feedback');
+                const nextBtn = document.getElementById('next-convert-time-btn');
+                const checkBtn = document.getElementById('check-convert-time-btn');
+
+                if (!valueSpan || !unitFromSpan || !unitToSpan || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Convert time elements not found. Retrying in 1 second.");
+                    setTimeout(generateConvertTimeActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const conversions = [
+                    { from: 'minutes', to: 'seconds', factor: 60, minVal: 1, maxVal: 5 },
+                    { from: 'hours', to: 'minutes', factor: 60, minVal: 1, maxVal: 3 },
+                    { from: 'days', to: 'hours', factor: 24, minVal: 1, maxVal: 2 },
+                    { from: 'seconds', to: 'minutes', factor: 1/60, minVal: 60, maxVal: 300, step: 60 },
+                    { from: 'minutes', to: 'hours', factor: 1/60, minVal: 60, maxVal: 180, step: 60 }
+                ];
+                const randomConversion = conversions[Math.floor(Math.random() * conversions.length)];
+
+                let value = randomConversion.minVal + Math.floor(Math.random() * (randomConversion.maxVal - randomConversion.minVal + 1));
+                if (randomConversion.step) {
+                    value = Math.floor(value / randomConversion.step) * randomConversion.step;
+                }
+
+                valueSpan.textContent = value;
+                unitFromSpan.textContent = randomConversion.from;
+                unitToSpan.textContent = randomConversion.to;
+                currentConvertCorrectAnswer = value * randomConversion.factor;
+                currentConvertUnitFrom = randomConversion.from;
+                currentConvertUnitTo = randomConversion.to;
+            }
+
+            function checkConvertTimeAnswers() {
+                const answerInput = document.getElementById('convert-answer-input');
+                const feedback = document.getElementById('convert-time-feedback');
+                const nextBtn = document.getElementById('next-convert-time-btn');
+                const checkBtn = document.getElementById('check-convert-time-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Convert time check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseFloat(answerInput.value.trim());
+
+                if (userAnswer === currentConvertCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentConvertCorrectAnswer} ${currentConvertUnitTo}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateConvertTimeActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-read-time-btn').addEventListener('click', checkReadTimeAnswers);
+            document.getElementById('next-read-time-btn').addEventListener('click', generateReadTimeActivity);
+
+            document.getElementById('check-convert-time-btn').addEventListener('click', checkConvertTimeAnswers);
+            document.getElementById('next-convert-time-btn').addEventListener('click', generateConvertTimeActivity);
+
+
+            // Initialize all activities on page load
+            generateReadTimeActivity();
+            generateConvertTimeActivity();
+        });
+    </script>
+</body>
+</html>

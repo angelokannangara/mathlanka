@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Lesson 11: Graphs</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about graphs.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .graph-display {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            height: 200px;
+            width: 100%;
+            max-width: 400px;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 10px;
+            margin: 0 auto 1.5rem;
+            position: relative;
+        }
+        .bar {
+            width: 40px;
+            background-color: #4299e1;
+            margin: 0 5px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: height 0.5s ease-in-out;
+        }
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            font-size: 0.8rem;
+            color: #4a5568;
+        }
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            font-size: 0.9rem;
+            color: #2d3748;
+            font-weight: bold;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 11: Graphs - Let's visualize data!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn to read and interpret simple bar graphs and pictographs!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-chart-bar lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Understand what **graphs** are and why we use them.</li>
+                                <li>Read and interpret data from **bar graphs**.</li>
+                                <li>Read and interpret data from **pictographs**.</li>
+                                <li>Answer questions based on simple graphs.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: What are Graphs -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What are Graphs?</h3>
+                    <p class="text-gray-700 mb-3">
+                        Graphs are visual tools that help us organize and understand information easily. They make it simple to compare different things.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: Favorite Fruits (Bar Graph)</p>
+                        <div class="graph-display" style="height: 150px; align-items: flex-end; border: none; padding: 0; margin-bottom: 30px;">
+                            <div class="bar" style="height: 80px; background-color: #f59e0b;">
+                                <span class="bar-value">8</span>
+                                <span class="bar-label" style="bottom: -20px;">Apple</span>
+                            </div>
+                            <div class="bar" style="height: 120px; background-color: #10b981;">
+                                <span class="bar-value">12</span>
+                                <span class="bar-label" style="bottom: -20px;">Banana</span>
+                            </div>
+                            <div class="bar" style="height: 60px; background-color: #ef4444;">
+                                <span class="bar-value">6</span>
+                                <span class="bar-label" style="bottom: -20px;">Orange</span>
+                            </div>
+                        </div>
+                        <p class="text-blue-600 text-lg font-mono">This bar graph shows that 12 people like Bananas the most.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Read Bar Graph -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Read the Bar Graph!</h2>
+                    <p id="bar-graph-instructions" class="text-yellow-700 text-lg mb-8">Look at the graph and answer the question.</p>
+
+                    <div id="bar-graph-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[250px] flex flex-col justify-center items-center">
+                        <h3 class="text-xl font-bold mb-4" id="graph-title">Number of Books Read</h3>
+                        <div class="graph-display" id="interactive-bar-graph" style="height: 180px;">
+                            <!-- Bars will be generated by JS -->
+                        </div>
+                        <p class="text-xl font-semibold mt-4" id="graph-question"></p>
+                        <input type="number" id="graph-answer-input" class="input-field mt-4" placeholder="Your Answer">
+                        <p id="bar-graph-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-bar-graph-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-bar-graph-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 2: Read Pictograph -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Read the Pictograph!</h2>
+                    <p id="pictograph-instructions" class="text-purple-700 text-lg mb-8">Look at the pictograph and answer the question.</p>
+
+                    <div id="pictograph-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[250px] flex flex-col justify-center items-center">
+                        <h3 class="text-xl font-bold mb-4" id="pictograph-title">Favorite Pets</h3>
+                        <div id="interactive-pictograph" class="text-left w-full max-w-sm mx-auto">
+                            <!-- Pictograph items will be generated by JS -->
+                            <p class="text-sm text-gray-600 mt-2">Key: Each <i class="fas fa-paw"></i> represents 2 pets.</p>
+                        </div>
+                        <p class="text-xl font-semibold mt-4" id="pictograph-question"></p>
+                        <input type="number" id="pictograph-answer-input" class="input-field mt-4" placeholder="Your Answer">
+                        <p id="pictograph-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-pictograph-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-pictograph-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+
+                <!-- Exercise Section: Static Graph Exercises -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Interpret Graphs</h3>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>1. Bar Graph: Students' Favorite Colors</p>
+                            <img src="https://placehold.co/200x150/ADD8E6/000000?text=Bar+Graph" alt="Placeholder Bar Graph" class="mx-auto my-2">
+                            <p>How many students like Blue? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>2. Pictograph: Apples Eaten</p>
+                            <img src="https://placehold.co/200x150/ADD8E6/000000?text=Pictograph" alt="Placeholder Pictograph" class="mx-auto my-2">
+                            <p>If each apple icon is 2 apples, how many apples were eaten on Monday? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Problems Section -->
+                <div class="problem-solving">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Graphs</h3>
+                    <ol>
+                        <li>
+                            <strong>A bar graph shows that Class A collected 25 cans and Class B collected 30 cans for recycling. How many more cans did Class B collect than Class A?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>A pictograph shows that 1 car icon represents 5 cars. If there are 4 car icons for "Red Cars", how many red cars are there?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
+                    <a href="grade4_lesson12.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson10.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 10
+                    </a>
+                    <a href="grade4_lesson12.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality (from template)
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Read Bar Graph ---
+            let currentBarGraphData = [];
+            let currentBarGraphQuestion = '';
+            let currentBarGraphCorrectAnswer = 0;
+
+            function generateBarGraphActivity() {
+                const graphContainer = document.getElementById('interactive-bar-graph');
+                const graphTitle = document.getElementById('graph-title');
+                const graphQuestion = document.getElementById('graph-question');
+                const answerInput = document.getElementById('graph-answer-input');
+                const feedback = document.getElementById('bar-graph-feedback');
+                const nextBtn = document.getElementById('next-bar-graph-btn');
+                const checkBtn = document.getElementById('check-bar-graph-btn');
+
+                if (!graphContainer || !graphTitle || !graphQuestion || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Bar graph elements not found. Retrying in 1 second.");
+                    setTimeout(generateBarGraphActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                graphContainer.innerHTML = ''; // Clear previous bars
+
+                const categories = ['Red', 'Blue', 'Green', 'Yellow'];
+                currentBarGraphData = categories.map(cat => ({
+                    label: cat,
+                    value: Math.floor(Math.random() * 15) + 5 // Values from 5 to 19
+                }));
+
+                currentBarGraphData.forEach(item => {
+                    const bar = document.createElement('div');
+                    bar.className = 'bar';
+                    bar.style.height = `${item.value * 8}px`; // Scale height for display
+                    bar.style.backgroundColor = {
+                        'Red': '#ef4444',
+                        'Blue': '#3b82f6',
+                        'Green': '#10b981',
+                        'Yellow': '#f59e0b'
+                    }[item.label];
+                    bar.innerHTML = `<span class="bar-value">${item.value}</span><span class="bar-label">${item.label}</span>`;
+                    graphContainer.appendChild(bar);
+                });
+
+                const questionType = Math.floor(Math.random() * 3); // 0: specific value, 1: total, 2: difference
+
+                if (questionType === 0) {
+                    const randomItem = currentBarGraphData[Math.floor(Math.random() * currentBarGraphData.length)];
+                    currentBarGraphQuestion = `How many ${randomItem.label} items are there?`;
+                    currentBarGraphCorrectAnswer = randomItem.value;
+                } else if (questionType === 1) {
+                    currentBarGraphQuestion = `What is the total number of items?`;
+                    currentBarGraphCorrectAnswer = currentBarGraphData.reduce((sum, item) => sum + item.value, 0);
+                } else { // questionType === 2
+                    const item1 = currentBarGraphData[Math.floor(Math.random() * currentBarGraphData.length)];
+                    let item2 = currentBarGraphData[Math.floor(Math.random() * currentBarGraphData.length)];
+                    while (item1.label === item2.label) {
+                        item2 = currentBarGraphData[Math.floor(Math.random() * currentBarGraphData.length)];
+                    }
+                    currentBarGraphQuestion = `What is the difference between ${item1.label} and ${item2.label} items?`;
+                    currentBarGraphCorrectAnswer = Math.abs(item1.value - item2.value);
+                }
+                graphQuestion.textContent = currentBarGraphQuestion;
+            }
+
+            function checkBarGraphAnswers() {
+                const answerInput = document.getElementById('graph-answer-input');
+                const feedback = document.getElementById('bar-graph-feedback');
+                const nextBtn = document.getElementById('next-bar-graph-btn');
+                const checkBtn = document.getElementById('check-bar-graph-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Bar graph check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentBarGraphCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentBarGraphCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateBarGraphActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Read Pictograph ---
+            let currentPictographData = [];
+            let currentPictographQuestion = '';
+            let currentPictographCorrectAnswer = 0;
+            const pictographKey = 2; // Each icon represents 2 items
+
+            function generatePictographActivity() {
+                const pictographContainer = document.getElementById('interactive-pictograph');
+                const pictographTitle = document.getElementById('pictograph-title');
+                const pictographQuestion = document.getElementById('pictograph-question');
+                const answerInput = document.getElementById('pictograph-answer-input');
+                const feedback = document.getElementById('pictograph-feedback');
+                const nextBtn = document.getElementById('next-pictograph-btn');
+                const checkBtn = document.getElementById('check-pictograph-btn');
+
+                if (!pictographContainer || !pictographTitle || !pictographQuestion || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Pictograph elements not found. Retrying in 1 second.");
+                    setTimeout(generatePictographActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                pictographContainer.innerHTML = '<p class="text-sm text-gray-600 mt-2">Key: Each <i class="fas fa-star text-yellow-500"></i> represents 2 items.</p>'; // Reset and add key
+
+                const categories = ['Apples', 'Oranges', 'Pears'];
+                currentPictographData = categories.map(cat => ({
+                    label: cat,
+                    count: (Math.floor(Math.random() * 5) + 2) * pictographKey // Count from 4 to 12, always a multiple of key
+                }));
+
+                currentPictographData.forEach(item => {
+                    const row = document.createElement('p');
+                    row.className = 'text-lg flex items-center mb-2';
+                    let icons = '';
+                    for (let i = 0; i < item.count / pictographKey; i++) {
+                        icons += '<i class="fas fa-star text-yellow-500 mx-1"></i>';
+                    }
+                    row.innerHTML = `<span class="w-24 font-semibold">${item.label}:</span> ${icons}`;
+                    pictographContainer.appendChild(row);
+                });
+
+                const questionType = Math.floor(Math.random() * 2); // 0: specific value, 1: total
+
+                if (questionType === 0) {
+                    const randomItem = currentPictographData[Math.floor(Math.random() * currentPictographData.length)];
+                    currentPictographQuestion = `How many ${randomItem.label} are there?`;
+                    currentPictographCorrectAnswer = randomItem.count;
+                } else { // questionType === 1
+                    currentPictographQuestion = `What is the total number of items?`;
+                    currentPictographCorrectAnswer = currentPictographData.reduce((sum, item) => sum + item.count, 0);
+                }
+                pictographQuestion.textContent = currentPictographQuestion;
+            }
+
+            function checkPictographAnswers() {
+                const answerInput = document.getElementById('pictograph-answer-input');
+                const feedback = document.getElementById('pictograph-feedback');
+                const nextBtn = document.getElementById('next-pictograph-btn');
+                const checkBtn = document.getElementById('check-pictograph-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Pictograph check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentPictographCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentPictographCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generatePictographActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-bar-graph-btn').addEventListener('click', checkBarGraphAnswers);
+            document.getElementById('next-bar-graph-btn').addEventListener('click', generateBarGraphActivity);
+
+            document.getElementById('check-pictograph-btn').addEventListener('click', checkPictographAnswers);
+            document.getElementById('next-pictograph-btn').addEventListener('click', generatePictographActivity);
+
+
+            // Initialize all activities on page load
+            generateBarGraphActivity();
+            generatePictographActivity();
+        });
+    </script>
+</body>
+</html>

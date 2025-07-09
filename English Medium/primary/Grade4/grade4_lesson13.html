@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Lesson 13: Directions</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about directions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .compass-display {
+            width: 200px;
+            height: 200px;
+            border: 4px solid #333;
+            border-radius: 50%;
+            position: relative;
+            margin: 0 auto 1.5rem;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .compass-point {
+            position: absolute;
+            color: #2d3748;
+        }
+        .compass-point.N { top: 10px; }
+        .compass-point.S { bottom: 10px; }
+        .compass-point.E { right: 10px; }
+        .compass-point.W { left: 10px; }
+        .compass-point.NE { top: 40px; right: 40px; transform: translate(50%, -50%); }
+        .compass-point.NW { top: 40px; left: 40px; transform: translate(-50%, -50%); }
+        .compass-point.SE { bottom: 40px; right: 40px; transform: translate(50%, 50%); }
+        .compass-point.SW { bottom: 40px; left: 40px; transform: translate(-50%, 50%); }
+
+        .direction-arrow {
+            font-size: 4rem;
+            color: #ef4444;
+            margin-bottom: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 13: Directions - Let's find our way!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn about cardinal and intercardinal directions!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-compass lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Identify the four main **cardinal directions**: North, South, East, West.</li>
+                                <li>Identify the **intercardinal directions**: Northeast, Northwest, Southeast, Southwest.</li>
+                                <li>Use directions to describe **locations and movements**.</li>
+                                <li>Understand how a **compass** helps with directions.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Cardinal Directions -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Cardinal and Intercardinal Directions:</h3>
+                    <p class="text-gray-700 mb-3">
+                        The four main directions are North, South, East, and West. We can also find directions in between!
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Compass Rose:</p>
+                        <div class="compass-display">
+                            <span class="compass-point N">N</span>
+                            <span class="compass-point S">S</span>
+                            <span class="compass-point E">E</span>
+                            <span class="compass-point W">W</span>
+                            <span class="compass-point NE">NE</span>
+                            <span class="compass-point NW">NW</span>
+                            <span class="compass-point SE">SE</span>
+                            <span class="compass-point SW">SW</span>
+                        </div>
+                        <p class="text-blue-600 text-lg font-mono">North is usually at the top of a map.</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Identify Cardinal Direction -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Identify the Cardinal Direction!</h2>
+                    <p id="cardinal-instructions" class="text-yellow-700 text-lg mb-8">What direction is the arrow pointing?</p>
+
+                    <div id="cardinal-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="direction-arrow-display" class="direction-arrow"></div>
+                        <input type="text" id="cardinal-answer-input" class="input-field" placeholder="North, South, East, West">
+                        <p id="cardinal-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-cardinal-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-cardinal-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 2: Identify Intercardinal Direction -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Identify the Intercardinal Direction!</h2>
+                    <p id="intercardinal-instructions" class="text-purple-700 text-lg mb-8">What direction is the arrow pointing?</p>
+
+                    <div id="intercardinal-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="inter-direction-arrow-display" class="direction-arrow"></div>
+                        <input type="text" id="intercardinal-answer-input" class="input-field" placeholder="Northeast, Northwest, etc.">
+                        <p id="intercardinal-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-intercardinal-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-intercardinal-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+
+                <!-- Exercise Section: Static Directions Exercises -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Directions</h3>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>1. If the sun rises in the East, what direction is opposite to East? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>2. If you are facing North and turn right, what direction are you facing? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>3. What direction is between North and West? <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>4. What are the four cardinal directions? <input type="text" class="w-full inline-block"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Problems Section -->
+                <div class="problem-solving">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Directions</h3>
+                    <ol>
+                        <li>
+                            <strong>You walk 5 steps North, then 3 steps East. In which general direction are you from your starting point?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>A map shows a treasure chest 2 blocks South and 1 block West from your current location. What intercardinal direction is the treasure chest from you?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
+                    <a href="grade4_lesson14.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson12.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 12
+                    </a>
+                    <a href="grade4_lesson14.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality (from template)
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Identify Cardinal Direction ---
+            const cardinalDirections = ['North', 'South', 'East', 'West'];
+            const cardinalArrows = {
+                'North': '&#8593;', // Up arrow
+                'South': '&#8595;', // Down arrow
+                'East': '&#8594;',  // Right arrow
+                'West': '&#8592;'   // Left arrow
+            };
+            let currentCardinalCorrectAnswer = '';
+
+            function generateCardinalActivity() {
+                const arrowDisplay = document.getElementById('direction-arrow-display');
+                const answerInput = document.getElementById('cardinal-answer-input');
+                const feedback = document.getElementById('cardinal-feedback');
+                const nextBtn = document.getElementById('next-cardinal-btn');
+                const checkBtn = document.getElementById('check-cardinal-btn');
+
+                if (!arrowDisplay || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Cardinal direction elements not found. Retrying in 1 second.");
+                    setTimeout(generateCardinalActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const randomIndex = Math.floor(Math.random() * cardinalDirections.length);
+                currentCardinalCorrectAnswer = cardinalDirections[randomIndex];
+                arrowDisplay.innerHTML = cardinalArrows[currentCardinalCorrectAnswer];
+            }
+
+            function checkCardinalAnswers() {
+                const answerInput = document.getElementById('cardinal-answer-input');
+                const feedback = document.getElementById('cardinal-feedback');
+                const nextBtn = document.getElementById('next-cardinal-btn');
+                const checkBtn = document.getElementById('check-cardinal-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Cardinal direction check elements not found.");
+                    return;
+                }
+
+                const userAnswer = answerInput.value.trim().toLowerCase();
+                const correctAnswerLower = currentCardinalCorrectAnswer.toLowerCase();
+
+                if (userAnswer === correctAnswerLower) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentCardinalCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateCardinalActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Identify Intercardinal Direction ---
+            const intercardinalDirections = ['Northeast', 'Northwest', 'Southeast', 'Southwest'];
+            const intercardinalArrows = {
+                'Northeast': '&#8599;', // Up-right arrow
+                'Northwest': '&#8598;', // Up-left arrow
+                'Southeast': '&#8600;', // Down-right arrow
+                'Southwest': '&#8601;'  // Down-left arrow
+            };
+            let currentIntercardinalCorrectAnswer = '';
+
+            function generateIntercardinalActivity() {
+                const arrowDisplay = document.getElementById('inter-direction-arrow-display');
+                const answerInput = document.getElementById('intercardinal-answer-input');
+                const feedback = document.getElementById('intercardinal-feedback');
+                const nextBtn = document.getElementById('next-intercardinal-btn');
+                const checkBtn = document.getElementById('check-intercardinal-btn');
+
+                if (!arrowDisplay || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Intercardinal direction elements not found. Retrying in 1 second.");
+                    setTimeout(generateIntercardinalActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const randomIndex = Math.floor(Math.random() * intercardinalDirections.length);
+                currentIntercardinalCorrectAnswer = intercardinalDirections[randomIndex];
+                arrowDisplay.innerHTML = intercardinalArrows[currentIntercardinalCorrectAnswer];
+            }
+
+            function checkIntercardinalAnswers() {
+                const answerInput = document.getElementById('intercardinal-answer-input');
+                const feedback = document.getElementById('intercardinal-feedback');
+                const nextBtn = document.getElementById('next-intercardinal-btn');
+                const checkBtn = document.getElementById('check-intercardinal-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Intercardinal direction check elements not found.");
+                    return;
+                }
+
+                const userAnswer = answerInput.value.trim().toLowerCase();
+                const correctAnswerLower = currentIntercardinalCorrectAnswer.toLowerCase();
+
+                if (userAnswer === correctAnswerLower) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentIntercardinalCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateIntercardinalActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-cardinal-btn').addEventListener('click', checkCardinalAnswers);
+            document.getElementById('next-cardinal-btn').addEventListener('click', generateCardinalActivity);
+
+            document.getElementById('check-intercardinal-btn').addEventListener('click', checkIntercardinalAnswers);
+            document.getElementById('next-intercardinal-btn').addEventListener('click', generateIntercardinalActivity);
+
+
+            // Initialize all activities on page load
+            generateCardinalActivity();
+            generateIntercardinalActivity();
+        });
+    </script>
+</body>
+</html>

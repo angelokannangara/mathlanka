@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 3 Math - Lesson 12: Number Patterns</title>
+    <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .pattern-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+        }
+        .pattern-display span {
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+        .pattern-problem-text {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+        .rule-button {
+            background-color: #e2e8f0;
+            color: #333;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+        }
+        .rule-button:hover {
+            background-color: #cbd5e0;
+        }
+        .rule-button.correct {
+            background-color: #10b981;
+            color: white;
+        }
+        .rule-button.incorrect {
+            background-color: #ef4444;
+            color: white;
+        }
+        .rule-button.disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 12: Number Patterns - Finding the Order!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 3 Students (Age 9) - Let's learn about number patterns together!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-numeric-up-alt lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What We'll Learn Today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            Number patterns are ways that numbers are arranged in a special order. They have a secret rule!
+                            In this lesson, you will learn:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>To identify what number patterns are.</li>
+                                <li>To find the secret rule (or "rule") of a number pattern.</li>
+                                <li>To guess what the next number in a pattern will be to continue the pattern.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: What are Number Patterns? -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What are Number Patterns? - Secret Rules!</h3>
+                    <p class="text-gray-700 mb-3">
+                        A number pattern is a group of numbers that are arranged in an order by following a certain rule.
+                        You can find the rule to figure out the pattern!
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example 1: Addition Pattern</p>
+                        <p class="text-gray-700">Look at this pattern: 2, 4, 6, 8, ...</p>
+                        <div class="pattern-display mt-2">
+                            <span>2</span> <span>4</span> <span>6</span> <span>8</span> <span>...</span>
+                        </div>
+                        <p class="text-gray-700 mt-2">
+                            The rule for this pattern is to always add 2. ($2+2=4$, $4+2=6$, $6+2=8$)
+                            So, the next number would be 10 ($8+2=10$).
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700">Example 2: Subtraction Pattern</p>
+                        <p class="text-gray-700">Look at this pattern: 15, 12, 9, 6, ...</p>
+                        <div class="pattern-display mt-2">
+                            <span>15</span> <span>12</span> <span>9</span> <span>6</span> <span>...</span>
+                        </div>
+                        <p class="text-gray-700 mt-2">
+                            The rule for this pattern is to always subtract 3. ($15-3=12$, $12-3=9$, $9-3=6$)
+                            So, the next number would be 3 ($6-3=3$).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Interactive Lesson Activity 1: Find the Next Number -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Find the Next Number!</h2>
+                    <p id="next-number-instructions" class="text-yellow-700 text-lg mb-8">Look at the pattern. What number comes next?</p>
+
+                    <div id="next-number-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="pattern-display-activity1" class="pattern-display">
+                            <!-- Pattern will be displayed here -->
+                        </div>
+                        <input type="number" id="next-number-input" class="input-field" placeholder="Next number">
+                        <p id="next-number-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-next-number-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check My Answer</button>
+                    <button id="next-next-number-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Question</button>
+                </div>
+
+                <!-- Interactive Lesson Activity 2: Identify the Rule -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Identify the Rule!</h2>
+                    <p id="identify-rule-instructions" class="text-purple-700 text-lg mb-8">What is the rule for this number pattern?</p>
+
+                    <div id="identify-rule-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div id="pattern-display-activity2" class="pattern-display">
+                            <!-- Pattern will be displayed here -->
+                        </div>
+                        <div id="rule-options" class="flex flex-wrap justify-center gap-4 mt-4">
+                            <!-- Rule options will be dynamically generated here -->
+                        </div>
+                        <p id="identify-rule-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="next-identify-rule-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Question</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">You are doing great!</h3>
+                    <p class="text-green-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
+                    <a href="grade3_lesson13.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade3_lesson11.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 11
+                    </a>
+                    <a href="grade3_lesson13.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Activity 1: Find the Next Number
+            let currentNextNumberCorrectAnswer = 0;
+
+            const numberPatterns = [
+                { pattern: [2, 4, 6, 8], rule: "+2" },
+                { pattern: [5, 10, 15, 20], rule: "+5" },
+                { pattern: [10, 9, 8, 7], rule: "-1" },
+                { pattern: [20, 18, 16, 14], rule: "-2" },
+                { pattern: [3, 6, 9, 12], rule: "+3" },
+                { pattern: [25, 20, 15, 10], rule: "-5" }
+            ];
+
+            function generateNextNumberActivity() {
+                const patternDisplay = document.getElementById('pattern-display-activity1');
+                const nextNumberInput = document.getElementById('next-number-input');
+                const nextNumberFeedback = document.getElementById('next-number-feedback');
+                const nextNextNumberBtn = document.getElementById('next-next-number-btn');
+                const checkNextNumberBtn = document.getElementById('check-next-number-btn');
+
+                if (!patternDisplay || !nextNumberInput || !nextNumberFeedback || !nextNextNumberBtn || !checkNextNumberBtn) {
+                    console.error("One or more elements for Find the Next Number activity are null. Retrying in 1 second.");
+                    setTimeout(generateNextNumberActivity, 1000);
+                    return;
+                }
+
+                nextNumberInput.value = '';
+                nextNumberInput.style.borderColor = '#cbd5e0';
+                nextNumberInput.readOnly = false;
+                nextNumberFeedback.textContent = '';
+                nextNumberFeedback.className = 'text-xl font-semibold mt-4';
+                nextNextNumberBtn.classList.add('hidden');
+                checkNextNumberBtn.classList.remove('hidden');
+
+                const randomProblem = numberPatterns[Math.floor(Math.random() * numberPatterns.length)];
+                patternDisplay.innerHTML = '';
+                randomProblem.pattern.forEach(num => {
+                    const span = document.createElement('span');
+                    span.textContent = num;
+                    patternDisplay.appendChild(span);
+                });
+                const questionMark = document.createElement('span');
+                questionMark.textContent = '?';
+                patternDisplay.appendChild(questionMark);
+
+                const lastNumber = randomProblem.pattern[randomProblem.pattern.length - 1];
+                let nextNumber;
+                if (randomProblem.rule.startsWith('+')) {
+                    nextNumber = lastNumber + parseInt(randomProblem.rule.substring(1));
+                } else if (randomProblem.rule.startsWith('-')) {
+                    nextNumber = lastNumber - parseInt(randomProblem.rule.substring(1));
+                }
+                currentNextNumberCorrectAnswer = nextNumber;
+            }
+
+            function checkNextNumberAnswers() {
+                const nextNumberInput = document.getElementById('next-number-input');
+                const nextNumberFeedback = document.getElementById('next-number-feedback');
+                const nextNextNumberBtn = document.getElementById('next-next-number-btn');
+                const checkNextNumberBtn = document.getElementById('check-next-number-btn');
+
+                if (!nextNumberInput || !nextNumberFeedback || !nextNextNumberBtn || !checkNextNumberBtn) {
+                    console.error("One or more elements for Find the Next Number check are null.");
+                    return;
+                }
+
+                const userAnswer = parseInt(nextNumberInput.value.trim());
+
+                if (userAnswer === currentNextNumberCorrectAnswer) {
+                    nextNumberFeedback.textContent = 'Awesome! You got it!';
+                    nextNumberFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextNumberInput.style.borderColor = '#10b981';
+                    nextNumberInput.readOnly = true;
+                    nextNextNumberBtn.classList.remove('hidden');
+                    checkNextNumberBtn.classList.add('hidden');
+                } else {
+                    nextNumberFeedback.textContent = `Oops! The correct answer is ${currentNextNumberCorrectAnswer}. Let's try another one!`;
+                    nextNumberFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    nextNumberInput.style.borderColor = '#ef4444';
+                    setTimeout(generateNextNumberActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Activity 2: Identify the Rule
+            let currentIdentifyRuleCorrectAnswer = '';
+
+            const rulePatterns = [
+                { pattern: [10, 12, 14, 16], rule: "Adds 2 (+2)" },
+                { pattern: [1, 5, 9, 13], rule: "Adds 4 (+4)" },
+                { pattern: [30, 27, 24, 21], rule: "Subtracts 3 (-3)" },
+                { pattern: [50, 45, 40, 35], rule: "Subtracts 5 (-5)" },
+                { pattern: [7, 14, 21, 28], rule: "Adds 7 (+7)" }
+            ];
+
+            function generateIdentifyRuleActivity() {
+                const patternDisplay = document.getElementById('pattern-display-activity2');
+                const ruleOptionsContainer = document.getElementById('rule-options');
+                const identifyRuleFeedback = document.getElementById('identify-rule-feedback');
+                const nextIdentifyRuleBtn = document.getElementById('next-identify-rule-btn');
+                const ruleButtons = document.querySelectorAll('#rule-options .rule-button');
+
+                if (!patternDisplay || !ruleOptionsContainer || !identifyRuleFeedback || !nextIdentifyRuleBtn || ruleButtons.length === 0) {
+                    console.error("One or more elements for Identify the Rule activity are null. Retrying in 1 second.");
+                    setTimeout(generateIdentifyRuleActivity, 1000);
+                    return;
+                }
+
+                identifyRuleFeedback.textContent = '';
+                identifyRuleFeedback.className = 'text-xl font-semibold mt-4';
+                nextIdentifyRuleBtn.classList.add('hidden');
+                ruleOptionsContainer.innerHTML = ''; // Clear previous options
+
+                const randomProblem = rulePatterns[Math.floor(Math.random() * rulePatterns.length)];
+                patternDisplay.innerHTML = '';
+                randomProblem.pattern.forEach(num => {
+                    const span = document.createElement('span');
+                    span.textContent = num;
+                    patternDisplay.appendChild(span);
+                });
+                currentIdentifyRuleCorrectAnswer = randomProblem.rule.toLowerCase();
+
+                // Generate options, including the correct one
+                let options = new Set();
+                options.add(randomProblem.rule); // Add correct answer
+                while (options.size < 4) { // Get 3 more unique incorrect options
+                    const randomRule = rulePatterns[Math.floor(Math.random() * rulePatterns.length)].rule;
+                    if (randomRule !== randomProblem.rule) {
+                        options.add(randomRule);
+                    }
+                }
+                const shuffledOptions = Array.from(options).sort(() => Math.random() - 0.5);
+
+                shuffledOptions.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.className = 'rule-button';
+                    button.dataset.rule = option.toLowerCase();
+                    button.addEventListener('click', () => checkIdentifyRuleAnswer(button, option.toLowerCase()));
+                    ruleOptionsContainer.appendChild(button);
+                });
+            }
+
+            function checkIdentifyRuleAnswer(selectedButton, userAnswer) {
+                const identifyRuleFeedback = document.getElementById('identify-rule-feedback');
+                const nextIdentifyRuleBtn = document.getElementById('next-identify-rule-btn');
+                const ruleButtons = document.querySelectorAll('#rule-options .rule-button');
+
+                if (!identifyRuleFeedback || !nextIdentifyRuleBtn || ruleButtons.length === 0) {
+                    console.error("One or more elements for Identify the Rule check are null.");
+                    return;
+                }
+
+                ruleButtons.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.rule === currentIdentifyRuleCorrectAnswer) {
+                        btn.classList.add('correct');
+                    } else {
+                        btn.classList.add('disabled');
+                    }
+                });
+
+                if (userAnswer === currentIdentifyRuleCorrectAnswer) {
+                    identifyRuleFeedback.textContent = 'Awesome! You got it!';
+                    identifyRuleFeedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    nextIdentifyRuleBtn.classList.remove('hidden');
+                } else {
+                    identifyRuleFeedback.textContent = `Not quite. The correct rule is "${currentIdentifyRuleCorrectAnswer}". Let's try another one!`;
+                    identifyRuleFeedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    setTimeout(generateIdentifyRuleActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // Attach event listeners
+            document.getElementById('check-next-number-btn').addEventListener('click', checkNextNumberAnswers);
+            document.getElementById('next-next-number-btn').addEventListener('click', generateNextNumberActivity);
+
+            document.getElementById('next-identify-rule-btn').addEventListener('click', generateIdentifyRuleActivity);
+
+
+            // Initialize activities on page load
+            generateNextNumberActivity();
+            generateIdentifyRuleActivity();
+        });
+    </script>
+</body>
+</html>

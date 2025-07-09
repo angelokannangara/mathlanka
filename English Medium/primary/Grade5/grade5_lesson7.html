@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 7: Multiplication - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about basic multiplication for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted for input fields */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        /* Styles for the answers section */
+        #answers-section {
+            display: none; /* Hidden by default */
+            background-color: #f0fdf4; /* Light green background */
+            border-left: 5px solid #22c55e; /* Green border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        #answers-section h3 {
+            color: #16a34a; /* Darker green for heading */
+        }
+        #answers-section ol li {
+            margin-bottom: 0.75rem;
+            color: #15803d; /* Green text for answers */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 7: Multiplication - 1</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's learn to multiply numbers!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-times lesson-icon text-blue-600"></i> <!-- Icon for multiplication -->
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Understand multiplication as repeated addition.</li>
+                                <li>Multiply numbers by a single-digit number.</li>
+                                <li>Multiply numbers by $10, 100,$ and $1000$.</li>
+                                <li>Solve simple word problems involving multiplication.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Introduction to Multiplication -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Introduction to Multiplication</h3>
+                    <p class="text-gray-700 mb-3">
+                        Welcome, young mathematicians! After learning about addition, subtraction, and number patterns, it's time to explore another important operation: <strong>multiplication</strong>.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        Multiplication is a quick way of doing repeated addition. For example, if you have 3 groups of 4 apples, you can add $4+4+4$ or simply multiply $3 \times 4$. Both give you the same answer!
+                    </p>
+                    <p class="text-gray-700">
+                        Let's learn how to multiply numbers efficiently.
+                    </p>
+                </div>
+
+                <!-- Content: Multiplication by Single-Digit Numbers -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Multiplication by Single-Digit Numbers</h3>
+                    <p class="text-gray-700 mb-3">
+                        To multiply a number by a single-digit number, we multiply each digit of the larger number by the single-digit number, starting from the Ones place and moving left. We carry over if needed, just like in addition.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Multiply $123$ by $3$.</p>
+                        <pre class="bg-blue-100 p-3 rounded-md text-blue-800 font-mono text-lg text-center">
+    123
+  x   3
+  -----
+    369
+                        </pre>
+                        <p class="text-gray-700 mt-2">
+                            Here: <br>
+                            $3 \times 3 = 9$ (Ones)<br>
+                            $3 \times 2 = 6$ (Tens)<br>
+                            $3 \times 1 = 3$ (Hundreds)<br>
+                            So, $123 \times 3 = 369$.
+                        </p>
+                    </div>
+                    <div class="example-box mt-4">
+                        <p class="font-semibold text-blue-700 mb-2">Example 2: Multiply $245$ by $4$.</p>
+                        <pre class="bg-blue-100 p-3 rounded-md text-blue-800 font-mono text-lg text-center">
+    245
+  x   4
+  -----
+    980
+                        </pre>
+                        <p class="text-gray-700 mt-2">
+                            Here: <br>
+                            $4 \times 5 = 20$ (Write $0$, carry over $2$ to Tens)<br>
+                            $4 \times 4 = 16$. Add carried $2$: $16 + 2 = 18$ (Write $8$, carry over $1$ to Hundreds)<br>
+                            $4 \times 2 = 8$. Add carried $1$: $8 + 1 = 9$ (Write $9$)<br>
+                            So, $245 \times 4 = 980$.
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 1: Multiply the following numbers.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$34 \times 2 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex1-q1" class="input-field" placeholder="Answer">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$156 \times 3 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex1-q2" class="input-field" placeholder="Answer">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$728 \times 5 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex1-q3" class="input-field" placeholder="Answer">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$1045 \times 6 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex1-q4" class="input-field" placeholder="Answer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Multiplication by 10, 100, 1000 -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Multiplication by $10, 100,$ and $1000$</h3>
+                    <p class="text-gray-700 mb-3">
+                        Multiplying by $10, 100,$ or $1000$ is very easy! You just need to add zeros to the end of the number.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Rule:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>To multiply by $10$, add one zero ($0$) to the end of the number.</li>
+                            <li>To multiply by $100$, add two zeros ($00$) to the end of the number.</li>
+                            <li>To multiply by $1000$, add three zeros ($000$) to the end of the number.</li>
+                        </ul>
+                        <p class="font-semibold text-blue-700 mt-4 mb-2">Examples:</p>
+                        <ul class="list-disc list-inside text-gray-700 ml-4">
+                            <li>$25 \times 10 = 250$</li>
+                            <li>$7 \times 100 = 700$</li>
+                            <li>$12 \times 1000 = 12000$</li>
+                        </ul>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 2: Multiply the following numbers.</p>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>$58 \times 10 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex2-q1" class="input-field" placeholder="Answer">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$9 \times 100 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex2-q2" class="input-field" placeholder="Answer">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$34 \times 1000 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex2-q3" class="input-field" placeholder="Answer">
+                        </div>
+                        <div class="exercise-item">
+                            <p>$120 \times 100 = \underline{\hspace{2cm}}$</p>
+                            <input type="text" id="ex2-q4" class="input-field" placeholder="Answer">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Word Problems -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Problem Solving with Multiplication</h3>
+                    <p class="text-gray-700 mb-3">
+                        Multiplication is very useful for solving real-life problems.
+                    </p>
+                    <div class="problem-solving">
+                        <p class="font-semibold text-blue-700 mb-2">Exercise 3: Solve the following word problems.</p>
+                        <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
+                            <li>
+                                <p>A box contains $12$ pencils. If you buy $5$ such boxes, how many pencils do you have in total?</p>
+                                <input type="text" class="input-field" placeholder="Answer">
+                            </li>
+                            <li>
+                                <p>A bus can carry $45$ passengers. If $8$ buses are full, how many passengers are there in total?</p>
+                                <input type="text" class="input-field" placeholder="Answer">
+                            </li>
+                            <li>
+                                <p>A factory produces $250$ toys per hour. How many toys will it produce in $10$ hours?</p>
+                                <input type="text" class="input-field" placeholder="Answer">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Check Answers Button -->
+                <div class="text-center mt-8">
+                    <button id="show-answers-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition duration-300 shadow-md hover:shadow-lg">
+                        Check Answers
+                    </button>
+                </div>
+
+                <!-- Content: Answers to Practice Time (Hidden by default) -->
+                <div id="answers-section" class="p-6 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold mb-4">Answers to Practice Time</h3>
+                    <p class="text-gray-700 mb-4">Let's check your answers!</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-3">
+                        <li>
+                            <p class="font-semibold">Exercise 1: Multiplication by Single-Digit Numbers</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$34 \times 2 = 68$</li>
+                                <li>$156 \times 3 = 468$</li>
+                                <li>$728 \times 5 = 3640$</li>
+                                <li>$1045 \times 6 = 6270$</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 2: Multiplication by $10, 100,$ and $1000$</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$58 \times 10 = 580$</li>
+                                <li>$9 \times 100 = 900$</li>
+                                <li>$34 \times 1000 = 34000$</li>
+                                <li>$120 \times 100 = 12000$</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 3: Problem Solving with Multiplication</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>$12 \times 5 = 60$ pencils in total.</li>
+                                <li>$45 \times 8 = 360$ passengers in total.</li>
+                                <li>$250 \times 10 = 2500$ toys will be produced.</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 7!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Excellent work, Math Lanka students! You've successfully learned the basics of multiplication. Keep practicing your multiplication facts, and you'll be a math whiz in no time!</p>
+                    <a href="grade5_lesson8.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson6.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                    </a>
+                    <a href="grade5_lesson8.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700" id="close-mobile-menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            document.getElementById('close-mobile-menu').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Functionality to show/hide answers
+            const showAnswersButton = document.getElementById('show-answers-button');
+            const answersSection = document.getElementById('answers-section');
+
+            showAnswersButton.addEventListener('click', function() {
+                if (answersSection.style.display === 'none' || answersSection.style.display === '') {
+                    answersSection.style.display = 'block';
+                    showAnswersButton.textContent = 'Hide Answers';
+                    showAnswersButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    showAnswersButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                } else {
+                    answersSection.style.display = 'none';
+                    showAnswersButton.textContent = 'Check Answers';
+                    showAnswersButton.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    showAnswersButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
