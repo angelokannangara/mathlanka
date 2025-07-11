@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka - Grade 2 Lesson 4: අඩු කිරීම (වියෝජනය)</title>
+    <meta name="description" content="Learn subtraction for Grade 2 with interactive examples and a fun Subtraction Race game on MathLanka.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS configuration - MUST be after the CDN script
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .subtraction-problem-card {
+            background-color: #ecfdf5; /* green-50 */
+            border: 2px solid #34d399; /* green-400 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            display: inline-block;
+            margin: 0.5rem;
+            font-family: 'Roboto Mono', monospace; /* Monospace for numbers */
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: bold;
+            color: #065f46; /* green-800 */
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        }
+        .underline {
+            border-bottom: 3px solid #065f46;
+            display: inline-block;
+            width: 100%;
+        }
+
+        /* Game specific styles */
+        #gameCanvas {
+            background: linear-gradient(to bottom, #d1eaff, #f0f8ff); /* Light blue to very light blue */
+            border: 5px solid #2563eb;
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            display: block; /* Ensures no extra space below canvas */
+            margin: 0 auto;
+            touch-action: none; /* Prevent default touch actions like scrolling/zooming */
+        }
+        .game-info-box {
+            background-color: #e0f2fe; /* blue-50 */
+            border-radius: 0.75rem;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .game-score, .game-time, .game-problem {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e40af;
+        }
+        .game-message {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #dc2626; /* red-600 */
+            margin-top: 1rem;
+        }
+        /* Custom message box for alert() replacement */
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            width: 400px;
+        }
+        .custom-modal-content h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .custom-modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .custom-modal-content button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .custom-modal-content button:hover {
+            background-color: #1e40af;
+        }
+        .falling-object {
+            background-color: #ffcc00; /* Yellow */
+            border-radius: 50%; /* Circle shape */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            position: absolute; /* Managed by JS for canvas rendering */
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 4: අඩු කිරීම (වියෝජනය) - Subtraction</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">අපිට තිබුණ දේවල් වලින් ටිකක් ගියාම කීයක් ඉතිරි වෙනවද කියලා හොයමු! අපි '-' ලකුණ භාවිතා කරනවා.</p>
+            <p class="text-center text-gray-600 text-lg mb-8">Let's find out how many things are left when some are taken away! We use the '-' sign for subtraction.</p>
+
+            <div class="space-y-10">
+                <!-- Concept 1: What is Subtraction? -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-minus-circle lesson-icon text-red-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-red-700 mb-2">අඩු කිරීම යනු කුමක්ද? (What is Subtraction?)</h3>
+                        <p class="text-gray-700 text-lg">අඩු කිරීම කියන්නේ සම්පූර්ණ ගානකින් කොටසක් අයින් කරලා ඉතුරු ගාන හොයන එකයි. අපි '-' ලකුණ භාවිතා කරනවා.</p>
+                        <p class="text-gray-700 text-lg mt-2">Subtraction means taking away a part from a whole to find out how much is left. We use the '-' sign.</p>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Examples -->
+                <div class="flex flex-col items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="w-full text-center">
+                        <h3 class="text-2xl font-bold text-green-700 mb-4">උදාහරණ බලමු! (Let's See Examples!)</h3>
+                        <p class="text-gray-700 text-lg mb-6">පහත උදාහරණ බලලා අඩු කිරීම පුහුණු වෙමු.</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 justify-items-center">
+                            <!-- Simple Subtraction Problems -->
+                            <div class="subtraction-problem-card">
+                                <span>8</span><br>
+                                - 5<br>
+                                <span class="underline"></span><br>
+                                <span>3</span>
+                            </div>
+                            <div class="subtraction-problem-card">
+                                <span>10</span><br>
+                                - 4<br>
+                                <span class="underline"></span><br>
+                                <span>6</span>
+                            </div>
+                            <div class="subtraction-problem-card">
+                                <span>15</span><br>
+                                - 7<br>
+                                <span class="underline"></span><br>
+                                <span>8</span>
+                            </div>
+                            <div class="subtraction-problem-card">
+                                <span>20</span><br>
+                                - 10<br>
+                                <span class="underline"></span><br>
+                                <span>10</span>
+                            </div>
+                            <div class="subtraction-problem-card">
+                                <span>12</span><br>
+                                - 3<br>
+                                <span class="underline"></span><br>
+                                <span>9</span>
+                            </div>
+                            <div class="subtraction-problem-card">
+                                <span>9</span><br>
+                                - 2<br>
+                                <span class="underline"></span><br>
+                                <span>7</span>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 text-lg mt-6">ඔයාට මේ ගණන් හදන්න පුලුවන්ද? උත්තර බලන්න කලින් හදල බලන්න!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gamified Activity Section: Subtraction Race -->
+            <div class="text-center mt-12 p-8 bg-pink-50 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-pink-800 mb-6">විනෝදජනක ක්‍රීඩාව: අඩු කිරීමේ තරගය!</h2>
+                <p class="text-pink-700 text-lg mb-4">ගණිත ගැටලුවට නිවැරදි උත්තරය සහිත වැටෙන අංකය මත ක්ලික් කරන්න!</p>
+
+                <div class="flex justify-center items-center space-x-6 mb-6">
+                    <div class="game-info-box">
+                        <span class="game-score">ලකුණු: <span id="raceScore">0</span></span>
+                    </div>
+                    <div class="game-info-box">
+                        <span class="game-time">වේලාව: <span id="raceTime">60</span>s</span>
+                    </div>
+                </div>
+
+                <div class="bg-white p-4 rounded-lg shadow-inner mb-6">
+                    <p id="raceProblem" class="game-problem mb-4">Ready?</p>
+                    <canvas id="raceCanvas" width="600" height="400" class="w-full max-w-lg"></canvas>
+                    <p id="raceMessage" class="game-message mt-4"></p>
+                </div>
+
+                <div class="flex justify-center gap-4">
+                    <button id="startRaceBtn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        ක්‍රීඩාව පටන් ගමු! (Start Game!)
+                    </button>
+                    <button id="restartRaceBtn" class="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">
+                        ආයෙත් පටන් ගමු! (Restart Game!)
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Modal for game alerts -->
+            <div id="customModal" class="custom-modal">
+                <div class="custom-modal-content">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalMessage"></p>
+                    <button id="modalCloseBtn">හරි (OK)</button>
+                </div>
+            </div>
+
+            <!-- Call to Action for Next Lesson/Quiz -->
+            <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                <p class="text-green-700 text-lg mb-6">ඔයා අඩු කිරීම හොඳට ඉගෙනගත්තා! ඊළඟ පාඩමට යන්න හෝ වෙනත් විනෝදජනක ගණිත ක්‍රීඩා කරන්න සූදානම්ද?</p>
+                <p class="text-gray-700 text-lg mb-6">You've learned subtraction well! Ready for the next lesson or some more fun math games?</p>
+
+                <a href="grade2_lesson5.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                    ඊළඟ පාඩම (Next Lesson) <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Navigation between lessons -->
+            <div class="flex justify-between mt-8">
+                <a href="grade2_lesson3.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> කලින් පාඩම (Previous Lesson)
+                </a>
+                <a href="grade2_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                    ඊළඟ පාඩම (Next Lesson) <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Modal for alerts (Replaces alert())
+        function showCustomModal(title, message, callback) {
+            const modal = document.getElementById('customModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            modal.classList.add('show');
+
+            const closeBtn = document.getElementById('modalCloseBtn');
+            const closeHandler = () => {
+                modal.classList.remove('show');
+                closeBtn.removeEventListener('click', closeHandler);
+                if (callback) callback();
+            };
+            closeBtn.addEventListener('click', closeHandler);
+        }
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('button.md\\:hidden'); 
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Subtraction Race Game Logic ---
+            const canvas = document.getElementById('raceCanvas');
+            const ctx = canvas.getContext('2d');
+            const scoreDisplay = document.getElementById('raceScore');
+            const timeDisplay = document.getElementById('raceTime');
+            const gameProblemDisplay = document.getElementById('raceProblem');
+            const gameMessageDisplay = document.getElementById('raceMessage');
+            const startGameBtn = document.getElementById('startRaceBtn');
+            const restartGameBtn = document.getElementById('restartRaceBtn');
+
+            let fallingObjects = [];
+            let currentProblem = { num1: 0, num2: 0, difference: 0 };
+            let score = 0;
+            let timeLeft = 60; // seconds
+            let gameInterval;
+            let gameActive = false;
+            let animationFrameId;
+
+            const objectColors = ['#ffcc00', '#ff9933', '#cc66ff', '#66ccff', '#99ff66', '#ff6666']; // Yellow, Orange, Purple, Light Blue, Light Green, Red
+            const maxObjects = 5; // Max objects on screen at once
+            const objectRadius = 30; // Radius of the falling circular objects
+            const objectSpeed = 1; // Pixels per frame
+
+            // Function to generate a new subtraction problem
+            function generateProblem() {
+                let num1, num2, difference;
+                do {
+                    num1 = Math.floor(Math.random() * 20) + 5; // Minuend from 5 to 24
+                    num2 = Math.floor(Math.random() * (num1 - 1)) + 1; // Subtrahend from 1 to num1-1
+                    difference = num1 - num2;
+                } while (difference <= 0); // Ensure difference is positive
+
+                currentProblem = { num1, num2, difference };
+                gameProblemDisplay.textContent = `${num1} - ${num2} = ?`;
+            }
+
+            // Function to create a falling object
+            function createFallingObject(number) {
+                return {
+                    x: Math.random() * (canvas.width - objectRadius * 2) + objectRadius,
+                    y: -objectRadius, // Start above canvas
+                    radius: objectRadius,
+                    number: number,
+                    color: objectColors[Math.floor(Math.random() * objectColors.length)],
+                    caught: false,
+                    id: Math.random().toString(36).substr(2, 9) // Unique ID
+                };
+            }
+
+            // Function to generate falling objects
+            function generateFallingObjects() {
+                fallingObjects = [];
+
+                // Add correct answer object
+                fallingObjects.push(createFallingObject(currentProblem.difference));
+
+                // Add incorrect answer objects (distractors)
+                while (fallingObjects.length < maxObjects) {
+                    let distractor;
+                    do {
+                        // Generate distractors within a reasonable range
+                        distractor = Math.floor(Math.random() * 20) + 1; // Numbers from 1 to 20
+                    } while (distractor === currentProblem.difference || fallingObjects.some(obj => obj.number === distractor)); // Ensure unique and not correct
+                    fallingObjects.push(createFallingObject(distractor));
+                }
+
+                // Randomize positions further
+                fallingObjects.sort(() => Math.random() - 0.5);
+            }
+
+            // Draw everything on the canvas
+            function draw() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+                fallingObjects.forEach(obj => {
+                    if (obj.caught) return;
+
+                    // Draw object body (circle)
+                    ctx.beginPath();
+                    ctx.arc(obj.x, obj.y, obj.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = obj.color;
+                    ctx.fill();
+                    ctx.strokeStyle = '#333';
+                    ctx.lineWidth = 2;
+                    ctx.stroke();
+
+                    // Draw number
+                    ctx.fillStyle = 'white'; // Changed text color for better contrast
+                    ctx.font = 'bold 24px Roboto';
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(obj.number, obj.x, obj.y);
+                });
+            }
+
+            // Update game state (object movement)
+            function update() {
+                fallingObjects.forEach(obj => {
+                    if (!obj.caught) {
+                        obj.y += objectSpeed; // Make objects fall
+                    }
+                });
+
+                // Remove objects that go off screen without being caught
+                fallingObjects = fallingObjects.filter(obj => obj.y < canvas.height + obj.radius);
+
+                // If all objects are gone or only caught ones remain, generate new ones
+                if (fallingObjects.length === 0 || fallingObjects.every(obj => obj.caught)) {
+                    generateProblem();
+                    generateFallingObjects();
+                }
+            }
+
+            // Game loop
+            function gameLoop() {
+                if (!gameActive) return;
+
+                update();
+                draw();
+                animationFrameId = requestAnimationFrame(gameLoop);
+            }
+
+            // Handle object clicks
+            function handleCanvasClick(event) {
+                if (!gameActive) return;
+
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                const mouseX = (event.clientX - rect.left) * scaleX;
+                const mouseY = (event.clientY - rect.top) * scaleY;
+
+                let clickedObject = null;
+                for (let i = fallingObjects.length - 1; i >= 0; i--) { // Iterate backwards to catch top-most if overlapping
+                    const obj = fallingObjects[i];
+                    const dist = Math.sqrt((mouseX - obj.x)**2 + (mouseY - obj.y)**2);
+                    if (dist < obj.radius && !obj.caught) {
+                        clickedObject = obj;
+                        break;
+                    }
+                }
+
+                if (clickedObject) {
+                    if (clickedObject.number === currentProblem.difference) {
+                        score += 10;
+                        scoreDisplay.textContent = score;
+                        gameMessageDisplay.textContent = 'නියමයි! (Correct!)';
+                        gameMessageDisplay.style.color = '#10b981'; // green-600
+                    } else {
+                        score = Math.max(0, score - 5); // Deduct points, but not below zero
+                        scoreDisplay.textContent = score;
+                        gameMessageDisplay.textContent = `වැරදියි! හරි උත්තරේ ${currentProblem.difference} (Incorrect! Correct answer is ${currentProblem.difference})`;
+                        gameMessageDisplay.style.color = '#dc2626'; // red-600
+                    }
+                    clickedObject.caught = true; // Mark as caught
+                    // Remove caught object after a short delay to allow visual feedback
+                    setTimeout(() => {
+                        fallingObjects = fallingObjects.filter(obj => obj.id !== clickedObject.id);
+                    }, 300);
+
+                    // If all visible objects are processed, generate a new set
+                    if (fallingObjects.filter(obj => !obj.caught).length === 0) {
+                        generateProblem();
+                        generateFallingObjects();
+                    }
+                }
+            }
+
+            // Start game
+            function startGame() {
+                if (gameActive) return;
+
+                score = 0;
+                timeLeft = 60;
+                gameActive = true;
+                scoreDisplay.textContent = score;
+                timeDisplay.textContent = timeLeft;
+                gameMessageDisplay.textContent = '';
+                startGameBtn.classList.add('hidden');
+                restartGameBtn.classList.remove('hidden');
+
+                generateProblem();
+                generateFallingObjects();
+                gameLoop(); // Start animation loop
+
+                gameInterval = setInterval(() => {
+                    timeLeft--;
+                    timeDisplay.textContent = timeLeft;
+                    if (timeLeft <= 0) {
+                        endGame();
+                    }
+                }, 1000);
+            }
+
+            // End game
+            function endGame() {
+                gameActive = false;
+                clearInterval(gameInterval);
+                cancelAnimationFrame(animationFrameId);
+                gameMessageDisplay.textContent = ''; // Clear temporary message
+
+                showCustomModal('ක්‍රීඩාව අවසන්! (Game Over!)', `ඔබේ ලකුණු: ${score}. තවත් පුහුණු වෙමු! (Your Score: ${score}. Let's practice more!)`, () => {
+                    // Optional: Reset game state on modal close if not automatically restarting
+                });
+            }
+
+            // Event Listeners
+            startGameBtn.addEventListener('click', startGame);
+            restartGameBtn.addEventListener('click', startGame); // Restart also calls startGame to reset
+            canvas.addEventListener('click', handleCanvasClick);
+
+            // Responsive Canvas (adjust size on load and resize)
+            function resizeCanvas() {
+                const containerWidth = canvas.parentElement.offsetWidth;
+                canvas.width = Math.min(600, containerWidth - 40); // Max 600px, responsive to parent
+                canvas.height = canvas.width * (2 / 3); // Maintain aspect ratio (e.g., 3:2)
+            }
+
+            // Initial resize and add resize listener
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+        });
+    </script>
+</body>
+</html>

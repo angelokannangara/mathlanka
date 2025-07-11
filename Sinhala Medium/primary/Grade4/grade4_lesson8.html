@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Lesson 8: Fractions - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about basic fractions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .fraction-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .fraction-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .fraction-line {
+            border-bottom: 3px solid #333;
+            width: 60px;
+            margin: 0 10px;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 8: Fractions - 1 - Let's learn about parts of a whole!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn about basic fractions and identify them!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-pizza-slice lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Understand what **fractions** are.</li>
+                                <li>Identify the **numerator** and **denominator**.</li>
+                                <li>Represent fractions using **diagrams**.</li>
+                                <li>Compare **simple fractions**.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: What are Fractions -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What are Fractions?</h3>
+                    <p class="text-gray-700 mb-3">
+                        A fraction represents a part of a whole. When something is divided into equal parts, a fraction tells us how many of those parts we are talking about.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example:</p>
+                        <p class="text-blue-600 text-lg font-mono">If a pizza is cut into 8 equal slices, and you eat 3 slices, you have eaten $3/8$ of the pizza.</p>
+                        <p class="text-blue-600 text-lg font-mono">In $3/8$, 3 is the **numerator** (how many parts we have) and 8 is the **denominator** (total equal parts).</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Identify Numerator and Denominator -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Identify Numerator and Denominator!</h2>
+                    <p id="fraction-identify-instructions" class="text-yellow-700 text-lg mb-8">For the given fraction, enter the numerator and denominator.</p>
+
+                    <div id="fraction-identify-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="fraction-display">
+                            <span id="numerator-display"></span>
+                            <div class="fraction-line"></div>
+                            <span id="denominator-display"></span>
+                        </div>
+                        <p class="text-xl font-semibold mb-2">Numerator: <input type="number" id="num-input" class="fraction-input" placeholder="Num"></p>
+                        <p class="text-xl font-semibold">Denominator: <input type="number" id="den-input" class="fraction-input" placeholder="Den"></p>
+                        <p id="fraction-identify-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-fraction-identify-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-fraction-identify-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 2: Compare Fractions (Simple) -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Compare Fractions!</h2>
+                    <p id="fraction-compare-instructions" class="text-purple-700 text-lg mb-8">Compare the fractions using >, <, or =.</p>
+
+                    <div id="fraction-compare-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="fraction-display">
+                            <span id="compare-num1"></span>
+                            <div class="fraction-line"></div>
+                            <span id="compare-den1"></span>
+                            <input type="text" id="compare-operator-input" class="input-field max-w-[60px] text-3xl mx-4" placeholder=">, <, or =">
+                            <span id="compare-num2"></span>
+                            <div class="fraction-line"></div>
+                            <span id="compare-den2"></span>
+                        </div>
+                        <p id="fraction-compare-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-fraction-compare-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-fraction-compare-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+
+                <!-- Exercise Section: Static Fraction Exercises -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Identify and Compare Fractions</h3>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>1. What fraction is shaded?</p>
+                            <img src="https://placehold.co/100x100/ADD8E6/000000?text=1/2" alt="Shaded Circle 1/2" class="mx-auto my-2">
+                            <input type="text" placeholder="Fraction" class="input-field max-w-full">
+                        </div>
+                        <div class="exercise-item">
+                            <p>2. What fraction is shaded?</p>
+                            <img src="https://placehold.co/100x100/ADD8E6/000000?text=1/4" alt="Shaded Square 1/4" class="mx-auto my-2">
+                            <input type="text" placeholder="Fraction" class="input-field max-w-full">
+                        </div>
+                        <div class="exercise-item">
+                            <p>3. Compare: $1/2$ <input type="text" class="w-16 inline-block text-center" placeholder=">, <, ="> $1/4$</p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>4. Compare: $3/5$ <input type="text" class="w-16 inline-block text-center" placeholder=">, <, ="> $2/5$</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Word Problems Section -->
+                <div class="problem-solving">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Fractions</h3>
+                    <ol>
+                        <li>
+                            <strong>A cake is cut into 6 equal slices. If you eat 2 slices, what fraction of the cake did you eat?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                        <li>
+                            <strong>There are 10 fruits in a basket. If 3 are apples, what fraction of the fruits are apples?</strong><br>
+                            <input type="text" placeholder="Answer" class="input-field max-w-full">
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
+                    <a href="grade4_lesson9.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson7.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 7
+                    </a>
+                    <a href="grade4_lesson9.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality (from template)
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Identify Numerator and Denominator ---
+            let currentFractionNum = 0;
+            let currentFractionDen = 0;
+
+            function generateFractionIdentifyActivity() {
+                const numDisplay = document.getElementById('numerator-display');
+                const denDisplay = document.getElementById('denominator-display');
+                const numInput = document.getElementById('num-input');
+                const denInput = document.getElementById('den-input');
+                const feedback = document.getElementById('fraction-identify-feedback');
+                const nextBtn = document.getElementById('next-fraction-identify-btn');
+                const checkBtn = document.getElementById('check-fraction-identify-btn');
+
+                if (!numDisplay || !denDisplay || !numInput || !denInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Fraction identify elements not found. Retrying in 1 second.");
+                    setTimeout(generateFractionIdentifyActivity, 1000);
+                    return;
+                }
+
+                numInput.value = '';
+                denInput.value = '';
+                numInput.style.borderColor = '#cbd5e0';
+                denInput.style.borderColor = '#cbd5e0';
+                numInput.readOnly = false;
+                denInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                currentFractionDen = Math.floor(Math.random() * 7) + 2; // Denominator from 2 to 8
+                currentFractionNum = Math.floor(Math.random() * (currentFractionDen - 1)) + 1; // Numerator less than denominator
+
+                numDisplay.textContent = currentFractionNum;
+                denDisplay.textContent = currentFractionDen;
+            }
+
+            function checkFractionIdentifyAnswers() {
+                const numInput = document.getElementById('num-input');
+                const denInput = document.getElementById('den-input');
+                const feedback = document.getElementById('fraction-identify-feedback');
+                const nextBtn = document.getElementById('next-fraction-identify-btn');
+                const checkBtn = document.getElementById('check-fraction-identify-btn');
+
+                if (!numInput || !denInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Fraction identify check elements not found.");
+                    return;
+                }
+
+                const userNum = parseInt(numInput.value.trim());
+                const userDen = parseInt(denInput.value.trim());
+
+                if (userNum === currentFractionNum && userDen === currentFractionDen) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    numInput.style.borderColor = '#10b981';
+                    denInput.style.borderColor = '#10b981';
+                    numInput.readOnly = true;
+                    denInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct fraction is ${currentFractionNum}/${currentFractionDen}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    numInput.style.borderColor = '#ef4444';
+                    denInput.style.borderColor = '#ef4444';
+                    setTimeout(generateFractionIdentifyActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Compare Fractions (Simple) ---
+            let currentCompareNum1 = 0;
+            let currentCompareDen1 = 0;
+            let currentCompareNum2 = 0;
+            let currentCompareDen2 = 0;
+            let currentCorrectOperator = '';
+
+            function generateFractionCompareActivity() {
+                const num1Display = document.getElementById('compare-num1');
+                const den1Display = document.getElementById('compare-den1');
+                const num2Display = document.getElementById('compare-num2');
+                const den2Display = document.getElementById('compare-den2');
+                const operatorInput = document.getElementById('compare-operator-input');
+                const feedback = document.getElementById('fraction-compare-feedback');
+                const nextBtn = document.getElementById('next-fraction-compare-btn');
+                const checkBtn = document.getElementById('check-fraction-compare-btn');
+
+                if (!num1Display || !den1Display || !num2Display || !den2Display || !operatorInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Fraction compare elements not found. Retrying in 1 second.");
+                    setTimeout(generateFractionCompareActivity, 1000);
+                    return;
+                }
+
+                operatorInput.value = '';
+                operatorInput.style.borderColor = '#cbd5e0';
+                operatorInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                // Generate fractions with common denominators or simple relationships
+                currentCompareDen1 = Math.floor(Math.random() * 4) + 2; // Denominator from 2 to 5
+                currentCompareDen2 = currentCompareDen1; // Keep denominators same for simplicity
+                currentCompareNum1 = Math.floor(Math.random() * (currentCompareDen1 - 1)) + 1;
+                currentCompareNum2 = Math.floor(Math.random() * (currentCompareDen2 - 1)) + 1;
+
+                // Ensure fractions are different unless they are equal
+                if (currentCompareNum1 === currentCompareNum2) {
+                    if (currentCompareNum1 < currentCompareDen1 - 1) {
+                        currentCompareNum2++;
+                    } else if (currentCompareNum1 > 1) {
+                        currentCompareNum2--;
+                    }
+                }
+
+                num1Display.textContent = currentCompareNum1;
+                den1Display.textContent = currentCompareDen1;
+                num2Display.textContent = currentCompareNum2;
+                den2Display.textContent = currentCompareDen2;
+
+                if (currentCompareNum1 / currentCompareDen1 > currentCompareNum2 / currentCompareDen2) {
+                    currentCorrectOperator = '>';
+                } else if (currentCompareNum1 / currentCompareDen1 < currentCompareNum2 / currentCompareDen2) {
+                    currentCorrectOperator = '<';
+                } else {
+                    currentCorrectOperator = '=';
+                }
+            }
+
+            function checkFractionCompareAnswers() {
+                const operatorInput = document.getElementById('compare-operator-input');
+                const feedback = document.getElementById('fraction-compare-feedback');
+                const nextBtn = document.getElementById('next-fraction-compare-btn');
+                const checkBtn = document.getElementById('check-fraction-compare-btn');
+
+                if (!operatorInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Fraction compare check elements not found.");
+                    return;
+                }
+
+                const userAnswer = operatorInput.value.trim();
+
+                if (userAnswer === currentCorrectOperator) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    operatorInput.style.borderColor = '#10b981';
+                    operatorInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentCorrectOperator}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    operatorInput.style.borderColor = '#ef4444';
+                    setTimeout(generateFractionCompareActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-fraction-identify-btn').addEventListener('click', checkFractionIdentifyAnswers);
+            document.getElementById('next-fraction-identify-btn').addEventListener('click', generateFractionIdentifyActivity);
+
+            document.getElementById('check-fraction-compare-btn').addEventListener('click', checkFractionCompareAnswers);
+            document.getElementById('next-fraction-compare-btn').addEventListener('click', generateFractionCompareActivity);
+
+
+            // Initialize all activities on page load
+            generateFractionIdentifyActivity();
+            generateFractionCompareActivity();
+        });
+    </script>
+</body>
+</html>

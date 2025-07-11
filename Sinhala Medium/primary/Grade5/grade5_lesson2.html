@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 2: Numbers - 2</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about comparing, ordering, and rounding numbers for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        .compare-numbers {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .compare-input {
+            width: 80px;
+            padding: 0.5rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 2: Numbers - 2</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's compare, order, and round numbers!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-numeric-down-alt lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>**Compare** numbers using >, <, or =.</li>
+                                <li>**Order** numbers from smallest to largest and largest to smallest.</li>
+                                <li>**Round numbers** to the nearest 10, 100, and 1,000.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Comparing Numbers -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Comparing Numbers</h3>
+                    <p class="text-gray-700 mb-3">
+                        We use symbols to compare numbers:
+                        <ul>
+                            <li>**>** (greater than)</li>
+                            <li>**<** (less than)</li>
+                            <li>**=** (equal to)</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: 5432 > 1234</p>
+                        <p class="font-semibold text-blue-700">Exercise 1: Fill in the blank with >, <, or =.</p>
+                        <div class="space-y-3">
+                            <p>3456 <input type="text" class="input-field w-24 inline-block" placeholder=">, <, or ="> 3465</p>
+                            <p>12890 <input type="text" class="input-field w-24 inline-block" placeholder=">, <, or ="> 12809</p>
+                            <p>78005 <input type="text" class="input-field w-24 inline-block" placeholder=">, <, or ="> 78005</p>
+                            <p>9999 <input type="text" class="input-field w-24 inline-block" placeholder=">, <, or ="> 10000</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Compare Numbers -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Compare the Numbers!</h2>
+                    <p id="compare-numbers-instructions" class="text-yellow-700 text-lg mb-8">Fill in the blank with >, <, or =.</p>
+
+                    <div id="compare-numbers-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="compare-numbers">
+                            <span id="compare-num1"></span>
+                            <input type="text" id="compare-operator-input" class="compare-input" placeholder=">, <, or =">
+                            <span id="compare-num2"></span>
+                        </div>
+                        <p id="compare-numbers-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-compare-numbers-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-compare-numbers-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Content: Ordering Numbers -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Ordering Numbers</h3>
+                    <p class="text-gray-700 mb-3">
+                        We can order numbers from smallest to largest (ascending order) or largest to smallest (descending order).
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: Order 500, 120, 800, 350 in ascending order: 120, 350, 500, 800</p>
+                        <p class="font-semibold text-blue-700">Exercise 2: Order the following numbers as requested.</p>
+                        <div class="space-y-3">
+                            <p>Order 4567, 4765, 4675, 4576 in ascending order: <input type="text" class="input-field w-full" placeholder="Separate with commas"></p>
+                            <p>Order 89123, 89321, 89213, 89132 in descending order: <input type="text" class="input-field w-full" placeholder="Separate with commas"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content: Rounding Numbers -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Rounding Numbers</h3>
+                    <p class="text-gray-700 mb-3">
+                        Rounding helps us estimate numbers.
+                        <ul>
+                            <li>**To the nearest 10:** Look at the units digit. If it's 5 or more, round up. If it's less than 5, round down.</li>
+                            <li>**To the nearest 100:** Look at the tens digit. If it's 50 or more, round up. If it's less than 50, round down.</li>
+                            <li>**To the nearest 1,000:** Look at the hundreds digit. If it's 500 or more, round up. If it's less than 500, round down.</li>
+                        </ul>
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example: Round 347 to the nearest 10: 350</p>
+                        <p class="font-semibold text-blue-700">Exercise 3: Round the numbers as requested.</p>
+                        <div class="space-y-3">
+                            <p>Round 567 to the nearest 10: <input type="text" class="input-field w-24 inline-block"></p>
+                            <p>Round 1234 to the nearest 100: <input type="text" class="input-field w-24 inline-block"></p>
+                            <p>Round 7890 to the nearest 1000: <input type="text" class="input-field w-24 inline-block"></p>
+                            <p>Round 23456 to the nearest 1000: <input type="text" class="input-field w-24 inline-block"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 2: Rounding Numbers -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Round the Number!</h2>
+                    <p id="rounding-instructions" class="text-purple-700 text-lg mb-8">Round the number to the specified place value.</p>
+
+                    <div id="rounding-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <p class="text-2xl font-bold mb-4"><span id="round-number"></span> to the nearest <span id="round-place"></span></p>
+                        <input type="number" id="round-answer-input" class="input-field" placeholder="Rounded Number">
+                        <p id="rounding-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-rounding-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-rounding-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 2!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to move on to the next lesson or test your knowledge?</p>
+                    <a href="grade5_lesson3.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson1.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 1
+                    </a>
+                    <a href="grade5_lesson3.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Compare Numbers ---
+            let currentCompareCorrectOperator = '';
+
+            function generateCompareNumbersActivity() {
+                const num1Span = document.getElementById('compare-num1');
+                const num2Span = document.getElementById('compare-num2');
+                const operatorInput = document.getElementById('compare-operator-input');
+                const feedback = document.getElementById('compare-numbers-feedback');
+                const nextBtn = document.getElementById('next-compare-numbers-btn');
+                const checkBtn = document.getElementById('check-compare-numbers-btn');
+
+                if (!num1Span || !num2Span || !operatorInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Compare numbers elements not found. Retrying in 1 second.");
+                    setTimeout(generateCompareNumbersActivity, 1000);
+                    return;
+                }
+
+                operatorInput.value = '';
+                operatorInput.style.borderColor = '#cbd5e0';
+                operatorInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const num1 = Math.floor(Math.random() * 90000) + 10000; // 5-digit number
+                let num2 = Math.floor(Math.random() * 90000) + 10000; // 5-digit number
+
+                // Ensure numbers are not identical too often, but allow equality
+                if (Math.random() < 0.2 && num1 !== num2) { // 20% chance of making them equal
+                    num2 = num1;
+                } else if (Math.random() < 0.5) { // 50% chance of making them slightly different
+                    num2 = num1 + (Math.random() > 0.5 ? 1 : -1) * (Math.floor(Math.random() * 50) + 1);
+                    if (num2 < 10000) num2 = 10000; // Keep it 5-digit
+                    if (num2 > 99999) num2 = 99999; // Keep it 5-digit
+                }
+
+
+                num1Span.textContent = num1;
+                num2Span.textContent = num2;
+
+                if (num1 > num2) {
+                    currentCompareCorrectOperator = '>';
+                } else if (num1 < num2) {
+                    currentCompareCorrectOperator = '<';
+                } else {
+                    currentCompareCorrectOperator = '=';
+                }
+            }
+
+            function checkCompareNumbersAnswers() {
+                const operatorInput = document.getElementById('compare-operator-input');
+                const feedback = document.getElementById('compare-numbers-feedback');
+                const nextBtn = document.getElementById('next-compare-numbers-btn');
+                const checkBtn = document.getElementById('check-compare-numbers-btn');
+
+                if (!operatorInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Compare numbers check elements not found.");
+                    return;
+                }
+
+                const userAnswer = operatorInput.value.trim();
+
+                if (userAnswer === currentCompareCorrectOperator) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    operatorInput.style.borderColor = '#10b981';
+                    operatorInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is '${currentCompareCorrectOperator}'. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    operatorInput.style.borderColor = '#ef4444';
+                    setTimeout(generateCompareNumbersActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Rounding Numbers ---
+            let currentRoundCorrectAnswer = 0;
+            let currentRoundPlace = '';
+
+            function generateRoundingActivity() {
+                const roundNumberSpan = document.getElementById('round-number');
+                const roundPlaceSpan = document.getElementById('round-place');
+                const answerInput = document.getElementById('round-answer-input');
+                const feedback = document.getElementById('rounding-feedback');
+                const nextBtn = document.getElementById('next-rounding-btn');
+                const checkBtn = document.getElementById('check-rounding-btn');
+
+                if (!roundNumberSpan || !roundPlaceSpan || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Rounding elements not found. Retrying in 1 second.");
+                    setTimeout(generateRoundingActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const places = ['10', '100', '1000'];
+                currentRoundPlace = places[Math.floor(Math.random() * places.length)];
+
+                let num;
+                if (currentRoundPlace === '10') {
+                    num = Math.floor(Math.random() * 999) + 10; // 10 to 1008
+                } else if (currentRoundPlace === '100') {
+                    num = Math.floor(Math.random() * 9900) + 100; // 100 to 10000
+                } else { // '1000'
+                    num = Math.floor(Math.random() * 90000) + 1000; // 1000 to 91000
+                }
+
+                roundNumberSpan.textContent = num;
+                roundPlaceSpan.textContent = currentRoundPlace;
+
+                if (currentRoundPlace === '10') {
+                    currentRoundCorrectAnswer = Math.round(num / 10) * 10;
+                } else if (currentRoundPlace === '100') {
+                    currentRoundCorrectAnswer = Math.round(num / 100) * 100;
+                } else { // '1000'
+                    currentRoundCorrectAnswer = Math.round(num / 1000) * 1000;
+                }
+            }
+
+            function checkRoundingAnswers() {
+                const answerInput = document.getElementById('round-answer-input');
+                const feedback = document.getElementById('rounding-feedback');
+                const nextBtn = document.getElementById('next-rounding-btn');
+                const checkBtn = document.getElementById('check-rounding-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Rounding check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentRoundCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentRoundCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateRoundingActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-compare-numbers-btn').addEventListener('click', checkCompareNumbersAnswers);
+            document.getElementById('next-compare-numbers-btn').addEventListener('click', generateCompareNumbersActivity);
+
+            document.getElementById('check-rounding-btn').addEventListener('click', checkRoundingAnswers);
+            document.getElementById('next-rounding-btn').addEventListener('click', generateRoundingActivity);
+
+
+            // Initialize all activities on page load
+            generateCompareNumbersActivity();
+            generateRoundingActivity();
+        });
+    </script>
+</body>
+</html>

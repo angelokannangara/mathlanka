@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="si">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3 ශ්‍රේණිය ගණිතය - පාඩම 4: ඉලක්කම් දෙකේ සංඛ්‍යා අඩු කිරීම (නැවත කාණ්ඩ කිරීමකින් තොරව)</title>
-    <meta name="description" content="ශ්‍රී ලාංකික සිසුන් සඳහා නිර්මාණය කරන ලද ප්‍රශ්නාවලිය සහ ක්‍රීඩා සහිත අන්තර්ක්‍රියාකාරී ගණිත ඉගෙනුම් වේදිකාව.">
+    <title>Grade 3 Math - Lesson 4: Subtraction of Two-Digit Numbers (No Regrouping)</title>
+    <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
@@ -68,16 +68,11 @@
         }
         .math-problem .number {
             text-align: right;
-            width: 100px; /* Fixed width for alignment */
-        }
-        .math-problem .number-with-operator {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end; /* Align content to the right within its width */
-            width: 100px; /* Match the width of the top number for alignment */
+            width: 100px;
         }
         .math-problem .operator {
-            margin-right: 5px; /* Space between operator and number */
+            align-self: flex-start;
+            margin-right: 10px;
         }
         .math-problem .line {
             border-bottom: 2px solid #333;
@@ -105,14 +100,14 @@
                 <span class="text-xl font-bold text-blue-600">MathLanka</span>
             </div>
             <div class="hidden md:flex space-x-6">
-                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">විශේෂාංග</a>
-                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">පාඨමාලා</a>
-                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">ක්‍රීඩා</a>
-                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">අපි ගැන</a>
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">පිවිසෙන්න</a>
-                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">ලියාපදිංචි වන්න</a>
+                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
                 <button class="md:hidden text-gray-700">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -123,8 +118,8 @@
     <!-- Lesson Content Section -->
     <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
         <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">පාඩම 4: ඉලක්කම් දෙකේ සංඛ්‍යා අඩු කිරීම (නැවත කාණ්ඩ කිරීමකින් තොරව)</h1>
-            <p class="text-center text-gray-600 text-lg mb-8">3 ශ්‍රේණියේ ගණිතය සඳහා</p>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 4: Subtraction of Two-Digit Numbers (No Regrouping)</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 3 Mathematics</p>
 
             <div class="space-y-10">
                 <!-- Introduction and Objectives -->
@@ -133,68 +128,64 @@
                         <i class="fas fa-minus-circle lesson-icon text-blue-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-blue-700 mb-2">පාඩමේ අරමුණ:</h3>
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">Lesson Objective:</h3>
                         <p class="text-gray-700 text-lg">
-                            සිසුන්ට ඉලක්කම් දෙකේ සංඛ්‍යා නැවත කාණ්ඩ කිරීමකින් තොරව අඩු කිරීමට හැකි වනු ඇත.
-                            මෙම පාඩම දහයේ සහ එකේ ස්ථානීය අගයන් නිවැරදිව භාවිතා කරමින් අඩු කිරීමේ මූලික සංකල්ප තහවුරු කරයි.
+                            Students will be able to subtract two-digit numbers without regrouping.
+                            This lesson reinforces the basic concepts of subtraction by correctly using the tens and ones place values.
                         </p>
                     </div>
                 </div>
 
                 <!-- Content: Understanding Subtraction without Regrouping -->
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">නැවත කාණ්ඩ කිරීමකින් තොරව අඩු කිරීම අවබෝධ කර ගැනීම:</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Understanding Subtraction without Regrouping:</h3>
                     <p class="text-gray-700 mb-3">
-                        ඉලක්කම් දෙකේ සංඛ්‍යා අඩු කිරීමේදී, අපි මුලින්ම එකේ ස්ථානයේ ඇති ඉලක්කම් අඩු කරමු.
-                        ඉන්පසු, දහයේ ස්ථානයේ ඇති ඉලක්කම් අඩු කරමු.
-                        'නැවත කාණ්ඩ කිරීමකින් තොරව' යන්නෙන් අදහස් වන්නේ පළමු සංඛ්‍යාවේ එකේ ඉලක්කම දෙවන සංඛ්‍යාවේ එකේ ඉලක්කමට වඩා වැඩි හෝ සමාන වන බවයි.
+                        When subtracting two-digit numbers, we first subtract the digits in the ones place.
+                        Then, we subtract the digits in the tens place.
+                        'Without regrouping' means that the ones digit of the first number is greater than or equal to the ones digit of the second number.
                     </p>
                     <div class="example-box">
-                        <p class="font-semibold text-blue-700">උදාහරණය: 47 - 23</p>
+                        <p class="font-semibold text-blue-700">Example: 47 - 23</p>
                         <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
-                            <li>පළමුව, එකේ ස්ථානය අඩු කරන්න: $7 - 3 = 4$</li>
-                            <li>දෙවනුව, දහයේ ස්ථානය අඩු කරන්න: $4 - 2 = 2$</li>
-                            <li>පිළිතුර: 24</li>
+                            <li>First, subtract the ones place: $7 - 3 = 4$</li>
+                            <li>Second, subtract the tens place: $4 - 2 = 2$</li>
+                            <li>Answer: 24</li>
                         </ul>
                         <div class="math-problem">
                             <span class="number">47</span>
-                            <span class="number-with-operator">
-                                <span class="operator">-</span> <span id="example-num2">23</span>
-                            </span>
+                            <span class="number">- 23</span>
                             <div class="line"></div>
                             <span class="number">24</span>
                         </div>
                     </div>
                     <p class="text-gray-700 mt-3">
-                        මෙම ක්‍රමය මගින් සංඛ්‍යා අඩු කිරීම පහසු වේ.
+                        This method makes subtracting numbers easy.
                     </p>
                 </div>
 
                 <!-- Interactive Lesson Activity 1: Vertical Subtraction -->
                 <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">ක්‍රියාකාරකම 1: සිරස් අඩු කිරීම!</h2>
-                    <p id="vertical-sub-instructions" class="text-yellow-700 text-lg mb-8">පහත සිරස් අඩු කිරීමේ ගැටලු විසඳා පිළිතුර ඇතුළත් කරන්න.</p>
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Vertical Subtraction!</h2>
+                    <p id="vertical-sub-instructions" class="text-yellow-700 text-lg mb-8">Solve the vertical subtraction problems below and enter the answer.</p>
 
                     <div id="vertical-sub-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[200px] flex flex-col justify-center items-center">
                         <div class="math-problem">
                             <span id="vertical-num1" class="number"></span>
-                            <span class="number-with-operator">
-                                <span class="operator">-</span> <span id="vertical-num2"></span>
-                            </span>
+                            <span class="number"><span class="operator">-</span> <span id="vertical-num2"></span></span>
                             <div class="line"></div>
-                            <input type="number" id="vertical-answer-input" class="input-field" placeholder="පිළිතුර">
+                            <input type="number" id="vertical-answer-input" class="input-field" placeholder="Answer">
                         </div>
                         <p id="vertical-sub-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-vertical-sub-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුරු පරීක්ෂා කරන්න</button>
-                    <button id="next-vertical-sub-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                    <button id="check-vertical-sub-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-vertical-sub-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
                 <!-- Interactive Lesson Activity 2: Horizontal Subtraction -->
                 <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-purple-800 mb-6">ක්‍රියාකාරකම 2: තිරස් අඩු කිරීම!</h2>
-                    <p id="horizontal-sub-instructions" class="text-purple-700 text-lg mb-8">පහත තිරස් අඩු කිරීමේ ගැටලු විසඳා පිළිතුර ඇතුළත් කරන්න.</p>
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Horizontal Subtraction!</h2>
+                    <p id="horizontal-sub-instructions" class="text-purple-700 text-lg mb-8">Solve the horizontal subtraction problems below and enter the answer.</p>
 
                     <div id="horizontal-sub-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
                         <div class="horizontal-problem">
@@ -202,32 +193,32 @@
                             <span>-</span>
                             <span id="horizontal-num2"></span>
                             <span>=</span>
-                            <input type="number" id="horizontal-answer-input" class="input-field w-32" placeholder="පිළිතුර">
+                            <input type="number" id="horizontal-answer-input" class="input-field w-32" placeholder="Answer">
                         </div>
                         <p id="horizontal-sub-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-horizontal-sub-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">පිළිතුරු පරීක්ෂා කරන්න</button>
-                    <button id="next-horizontal-sub-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">ඊළඟ ගැටලුව</button>
+                    <button id="check-horizontal-sub-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-horizontal-sub-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
 
                 <!-- Call to Action for Next Lesson/Quiz -->
                 <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
-                    <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
-                    <p class="text-green-700 text-lg mb-6">තවත් ගණිත පාඩම් ඉගෙන ගැනීමට හෝ විනෝදජනක ක්‍රීඩා කිරීමට සූදානම්ද?</p>
+                    <h3 class="text-2xl font-bold text-green-800 mb-4">You are doing great!</h3>
+                    <p class="text-green-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
                     <a href="grade3_lesson5.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
-                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
 
                 <!-- Navigation between lessons -->
                 <div class="flex justify-between mt-8">
                     <a href="grade3_lesson3.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
-                        <i class="fas fa-arrow-left mr-2"></i> පාඩම 3 වෙත ආපසු
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 3
                     </a>
                     <a href="grade3_lesson5.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
-                        ඊළඟ පාඩම <i class="fas fa-arrow-right ml-2"></i>
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
 
@@ -241,7 +232,7 @@
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
                     <h3 class="text-xl font-bold mb-4">MathLanka</h3>
-                    <p class="text-gray-400">2025 සිට ශ්‍රී ලාංකික සිසුන් සඳහා ගණිතය ඉගෙනීම විනෝදජනක සහ ඵලදායී කරයි.</p>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
                     <div class="flex space-x-4 mt-4">
                         <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
@@ -250,27 +241,27 @@
                     </div>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">ඉක්මන් සබැඳි</h4>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white">මුල් පිටුව</a></li>
-                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">විශේෂාංග</a></li>
-                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">පාඨමාලා</a></li>
-                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">ක්‍රීඩා</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">මිල ගණන්</a></li>
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">සම්පත්</h4>
+                    <h4 class="font-bold mb-4">Resources</h4>
                     <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">බ්ලොග්</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">උදව් මධ්‍යස්ථානය</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">නිබන්ධන</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">අභ්‍යාස පත්‍ර</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">ශිෂ්‍යත්ව තොරතුරු</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">අප අමතන්න</h4>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
                     <ul class="space-y-2">
                         <li class="flex items-center">
                             <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
@@ -288,7 +279,7 @@
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 MathLanka. සියලුම හිමිකම් ඇවිරිණි.</p>
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
             </div>
         </div>
     </footer>
@@ -304,12 +295,12 @@
                     <i class="fas fa-times text-2xl"></i>
                 </button>
                 <div class="flex flex-col items-center space-y-6">
-                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">විශේෂාංග</a>
-                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පාඨමාලා</a>
-                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">ක්‍රීඩා</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">අපි ගැන</a>
-                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">පිවිසෙන්න</a>
-                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">ලියාපදිංචි වන්න</a>
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
                 </div>
             `;
             document.body.appendChild(mobileMenu);
@@ -326,7 +317,7 @@
             function generateSubtractionNumbers() {
                 let num1, num2;
                 do {
-                    num1 = Math.floor(Math.random() * 89) + 10; // Generate num1 between 10 and 99
+                    num1 = Math.floor(Math.random() * 90) + 10; // Generate num1 between 10 and 99
                     num2 = Math.floor(Math.random() * (num1 - 9)) + 10; // Generate num2 such that num1 - num2 >= 10 and num2 >= 10
 
                     // Ensure num2 is always less than num1 to avoid negative results
@@ -345,29 +336,23 @@
             }
 
             // Activity 1: Vertical Subtraction
+            const verticalNum1 = document.getElementById('vertical-num1');
+            const verticalNum2 = document.getElementById('vertical-num2');
+            const verticalAnswerInput = document.getElementById('vertical-answer-input');
+            const verticalAddFeedback = document.getElementById('vertical-add-feedback');
+            const nextVerticalAddBtn = document.getElementById('next-vertical-add-btn');
+            const checkVerticalAddBtn = document.getElementById('check-vertical-sub-btn'); // Corrected ID
+
             let currentVerticalCorrectAnswer = 0;
 
             function generateVerticalSubActivity() {
-                const verticalNum1 = document.getElementById('vertical-num1');
-                const verticalNum2 = document.getElementById('vertical-num2');
-                const verticalAnswerInput = document.getElementById('vertical-answer-input');
-                const verticalAddFeedback = document.getElementById('vertical-add-feedback');
-                const nextVerticalSubBtn = document.getElementById('next-vertical-sub-btn');
-                const checkVerticalSubBtn = document.getElementById('check-vertical-sub-btn');
-
-                if (!verticalNum1 || !verticalNum2 || !verticalAnswerInput || !verticalAddFeedback || !nextVerticalSubBtn || !checkVerticalSubBtn) {
-                    console.error("One or more elements for vertical subtraction activity are null. Retrying in 1 second.");
-                    setTimeout(generateVerticalSubActivity, 1000); // Retry after a short delay
-                    return;
-                }
-
                 verticalAnswerInput.value = '';
                 verticalAnswerInput.style.borderColor = '#cbd5e0';
                 verticalAnswerInput.readOnly = false;
                 verticalAddFeedback.textContent = '';
                 verticalAddFeedback.className = 'text-xl font-semibold mt-4';
-                nextVerticalSubBtn.classList.add('hidden');
-                checkVerticalSubBtn.classList.remove('hidden');
+                nextVerticalAddBtn.classList.add('hidden');
+                checkVerticalAddBtn.classList.remove('hidden');
 
                 const { num1, num2 } = generateSubtractionNumbers();
                 verticalNum1.textContent = num1;
@@ -376,56 +361,43 @@
             }
 
             function checkVerticalSubAnswers() {
-                const verticalAnswerInput = document.getElementById('vertical-answer-input');
-                const verticalAddFeedback = document.getElementById('vertical-add-feedback');
-                const nextVerticalSubBtn = document.getElementById('next-vertical-sub-btn');
-                const checkVerticalSubBtn = document.getElementById('check-vertical-sub-btn');
-
-                if (!verticalAnswerInput || !verticalAddFeedback || !nextVerticalSubBtn || !checkVerticalSubBtn) {
-                    console.error("One or more elements for vertical subtraction check are null.");
-                    return;
-                }
-
                 const userAnswer = parseInt(verticalAnswerInput.value.trim());
 
                 if (userAnswer === currentVerticalCorrectAnswer) {
-                    verticalAddFeedback.textContent = 'හරි! ඔයා හරි!';
+                    verticalAddFeedback.textContent = 'Correct! You are right!';
                     verticalAddFeedback.className = 'text-xl font-bold text-green-600 mt-4';
                     verticalAnswerInput.style.borderColor = '#10b981';
                     verticalAnswerInput.readOnly = true;
-                    nextVerticalSubBtn.classList.remove('hidden');
-                    checkVerticalSubBtn.classList.add('hidden');
+                    nextVerticalAddBtn.classList.remove('hidden');
+                    checkVerticalAddBtn.classList.add('hidden');
                 } else {
-                    verticalAddFeedback.textContent = `වැරදියි. නිවැරදි පිළිතුර ${currentVerticalCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    verticalAddFeedback.textContent = `Incorrect. The correct answer is ${currentVerticalCorrectAnswer}. Try again!`;
                     verticalAddFeedback.className = 'text-xl font-bold text-red-600 mt-4';
                     verticalAnswerInput.style.borderColor = '#ef4444';
                 }
             }
 
+            nextVerticalAddBtn.addEventListener('click', generateVerticalSubActivity);
+            checkVerticalAddBtn.addEventListener('click', checkVerticalSubAnswers);
+
             // Activity 2: Horizontal Subtraction
+            const horizontalNum1 = document.getElementById('horizontal-num1');
+            const horizontalNum2 = document.getElementById('horizontal-num2');
+            const horizontalAnswerInput = document.getElementById('horizontal-answer-input');
+            const horizontalAddFeedback = document.getElementById('horizontal-add-feedback');
+            const nextHorizontalAddBtn = document.getElementById('next-horizontal-add-btn');
+            const checkHorizontalAddBtn = document.getElementById('check-horizontal-sub-btn'); // Corrected ID
+
             let currentHorizontalCorrectAnswer = 0;
 
             function generateHorizontalSubActivity() {
-                const horizontalNum1 = document.getElementById('horizontal-num1');
-                const horizontalNum2 = document.getElementById('horizontal-num2');
-                const horizontalAnswerInput = document.getElementById('horizontal-answer-input');
-                const horizontalAddFeedback = document.getElementById('horizontal-add-feedback');
-                const nextHorizontalSubBtn = document.getElementById('next-horizontal-sub-btn');
-                const checkHorizontalSubBtn = document.getElementById('check-horizontal-sub-btn');
-
-                if (!horizontalNum1 || !horizontalNum2 || !horizontalAnswerInput || !horizontalAddFeedback || !nextHorizontalSubBtn || !checkHorizontalSubBtn) {
-                    console.error("One or more elements for horizontal subtraction activity are null. Retrying in 1 second.");
-                    setTimeout(generateHorizontalSubActivity, 1000); // Retry after a short delay
-                    return;
-                }
-
                 horizontalAnswerInput.value = '';
                 horizontalAnswerInput.style.borderColor = '#cbd5e0';
                 horizontalAnswerInput.readOnly = false;
                 horizontalAddFeedback.textContent = '';
                 horizontalAddFeedback.className = 'text-xl font-semibold mt-4';
-                nextHorizontalSubBtn.classList.add('hidden');
-                checkHorizontalSubBtn.classList.remove('hidden');
+                nextHorizontalAddBtn.classList.add('hidden');
+                checkHorizontalAddBtn.classList.remove('hidden');
 
                 const { num1, num2 } = generateSubtractionNumbers();
                 horizontalNum1.textContent = num1;
@@ -434,38 +406,24 @@
             }
 
             function checkHorizontalSubAnswers() {
-                const horizontalAnswerInput = document.getElementById('horizontal-answer-input');
-                const horizontalAddFeedback = document.getElementById('horizontal-add-feedback');
-                const nextHorizontalSubBtn = document.getElementById('next-horizontal-sub-btn');
-                const checkHorizontalSubBtn = document.getElementById('check-horizontal-sub-btn');
-
-                if (!horizontalAnswerInput || !horizontalAddFeedback || !nextHorizontalSubBtn || !checkHorizontalSubBtn) {
-                    console.error("One or more elements for horizontal subtraction check are null.");
-                    return;
-                }
-
                 const userAnswer = parseInt(horizontalAnswerInput.value.trim());
 
                 if (userAnswer === currentHorizontalCorrectAnswer) {
-                    horizontalAddFeedback.textContent = 'හරි! ඔයා හරි!';
+                    horizontalAddFeedback.textContent = 'Correct! You are right!';
                     horizontalAddFeedback.className = 'text-xl font-bold text-green-600 mt-4';
                     horizontalAnswerInput.style.borderColor = '#10b981';
                     horizontalAnswerInput.readOnly = true;
-                    nextHorizontalSubBtn.classList.remove('hidden');
-                    checkHorizontalSubBtn.classList.add('hidden');
+                    nextHorizontalAddBtn.classList.remove('hidden');
+                    checkHorizontalAddBtn.classList.add('hidden');
                 } else {
-                    horizontalAddFeedback.textContent = `වැරදියි. නිවැරදි පිළිතුර ${currentHorizontalCorrectAnswer}. නැවත උත්සාහ කරන්න!`;
+                    horizontalAddFeedback.textContent = `Incorrect. The correct answer is ${currentHorizontalCorrectAnswer}. Try again!`;
                     horizontalAddFeedback.className = 'text-xl font-bold text-red-600 mt-4';
                     horizontalAnswerInput.style.borderColor = '#ef4444';
                 }
             }
 
-            // Attach event listeners after functions are defined
-            document.getElementById('check-vertical-sub-btn').addEventListener('click', checkVerticalSubAnswers);
-            document.getElementById('next-vertical-sub-btn').addEventListener('click', generateVerticalSubActivity);
-            document.getElementById('check-horizontal-sub-btn').addEventListener('click', checkHorizontalSubAnswers);
-            document.getElementById('next-horizontal-sub-btn').addEventListener('click', generateHorizontalSubActivity);
-
+            nextHorizontalAddBtn.addEventListener('click', generateHorizontalSubActivity);
+            checkHorizontalAddBtn.addEventListener('click', checkHorizontalSubAnswers);
 
             // Initialize activities on page load
             generateVerticalSubActivity();

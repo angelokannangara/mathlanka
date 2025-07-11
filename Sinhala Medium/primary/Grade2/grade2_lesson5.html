@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLanka - Grade 3 Lesson 1: 500 දක්වා සංඛ්‍යා (ස්ථානීය අගය)</title>
+    <meta name="description" content="Learn numbers up to 500 and place value for Grade 3 with MathLanka.">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS configuration - MUST be after the CDN script
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .place-value-box {
+            background-color: #e0f2fe; /* blue-50 */
+            border: 2px solid #93c5fd; /* blue-300 */
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+        }
+        .place-value-unit {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #1e40af;
+            margin-bottom: 0.5rem;
+        }
+        .place-value-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        .place-value-breakdown {
+            font-size: 1.1rem;
+            color: #4a5568;
+            margin-top: 1rem;
+        }
+
+        /* Game specific styles */
+        #numberBuilderGame {
+            background: linear-gradient(to bottom, #fefce8, #fffbeb); /* Light yellow gradient */
+            border: 5px solid #f59e0b; /* accent color */
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px rgba(0,0,0,0.2);
+            padding: 1.5rem;
+            margin: 0 auto;
+            max-width: 600px;
+            text-align: center;
+        }
+        .digit-pool, .number-slots {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
+            min-height: 80px; /* To prevent layout shift */
+        }
+        .digit-card {
+            background-color: #f59e0b; /* accent */
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            cursor: grab;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            user-select: none;
+            transition: transform 0.2s;
+        }
+        .digit-card:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+        .number-slot {
+            width: 80px;
+            height: 80px;
+            border: 3px dashed #cbd5e1; /* gray-300 */
+            border-radius: 0.75rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #475569; /* slate-600 */
+            background-color: #f1f5f9; /* slate-100 */
+        }
+        .number-slot.active-drop {
+            border-color: #2563eb;
+            background-color: #dbeafe; /* blue-100 */
+        }
+        .game-buttons button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .game-buttons button:hover {
+            background-color: #1e40af;
+        }
+        .game-buttons button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .game-feedback {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1rem;
+        }
+        /* Custom message box for alert() replacement */
+        .custom-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            max-width: 90%;
+            width: 400px;
+        }
+        .custom-modal-content h3 {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .custom-modal-content p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        .custom-modal-content button {
+            background-color: #2563eb;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .custom-modal-content button:hover {
+            background-color: #1e40af;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="../index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="../index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="../index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="../index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <a href="../login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Login</a>
+                <a href="../signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 1 (Grade 3): 500 දක්වා සංඛ්‍යා සහ ස්ථානීය අගය</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">දැන් අපි 100ට වඩා ලොකු ඉලක්කම් ඉගෙනගමු! 500 දක්වා සංඛ්‍යා සහ ඒවායේ ස්ථානීය අගය ගැන දැනගනිමු.</p>
+            <p class="text-center text-gray-600 text-lg mb-8">Now let's learn numbers bigger than 100! We'll explore numbers up to 500 and their place values.</p>
+
+            <div class="space-y-10">
+                <!-- Concept 1: Counting and Writing Numbers (101-500) -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-sort-numeric-up-alt lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">100 සිට 500 දක්වා ගණන් කිරීම සහ ලිවීම (Counting and Writing from 100 to 500)</h3>
+                        <p class="text-gray-700 text-lg">අපි 100 දක්වා ගණන් කරන්න දන්නවා. දැන් අපි 101 සිට 500 දක්වා සංඛ්‍යා ගණන් කරලා, කියවලා, ලියන්න ඉගෙනගමු.</p>
+                        <p class="text-gray-700 text-lg mt-2">Examples:</p>
+                        <ul class="list-disc list-inside text-gray-700 text-lg mt-2 text-left mx-auto md:mx-0 max-w-sm">
+                            <li>101 - එකසිය එක (Ekasiya Eka)</li>
+                            <li>125 - එකසිය විසිපහ (Ekasiya Visi Paha)</li>
+                            <li>230 - දෙසිය තිහ (Desiya Thiha)</li>
+                            <li>345 - තුන්සිය හතළිස්පහ (Thunsiya Hathalis Paha)</li>
+                            <li>489 - හාරසිය අසූනවය (Haarasiya Asu Navaya)</li>
+                            <li>500 - පන්සියය (Pansiya)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Concept 2: Place Value: Hundreds, Tens, and Ones -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-layer-group lesson-icon text-purple-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-purple-700 mb-2">ස්ථානීය අගය: සියයේ, දහයේ සහ එකේ තැන් (Place Value: Hundreds, Tens, Ones)</h3>
+                        <p class="text-gray-700 text-lg">අංකයක ඉලක්කම් තුනක් තියනකොට, පළවෙනි එක එකේ තැන, දෙවෙනි එක දහයේ තැන, තුන්වෙනි එක සියයේ තැන.</p>
+                        <p class="text-gray-700 text-lg mt-2">When a number has three digits, the first is the ones place, the second is the tens place, and the third is the hundreds place.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+                            <div class="place-value-box">
+                                <p class="place-value-unit">සියයේ තැන (Hundreds)</p>
+                                <p class="place-value-number">2</p>
+                                <p class="place-value-breakdown">200</p>
+                            </div>
+                            <div class="place-value-box">
+                                <p class="place-value-unit">දහයේ තැන (Tens)</p>
+                                <p class="place-value-number">4</p>
+                                <p class="place-value-breakdown">40</p>
+                            </div>
+                            <div class="place-value-box">
+                                <p class="place-value-unit">එකේ තැන (Ones)</p>
+                                <p class="place-value-number">7</p>
+                                <p class="place-value-breakdown">7</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 text-lg mt-4">247 = 200 + 40 + 7</p>
+                    </div>
+                </div>
+
+                <!-- Concept 3: Comparing and Ordering Numbers -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-balance-scale lesson-icon text-orange-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-orange-700 mb-2">සංඛ්‍යා සංසන්දනය කිරීම සහ පෙළගැස්වීම (Comparing and Ordering Numbers)</h3>
+                        <p class="text-gray-700 text-lg">අපි `>` (වඩා වැඩිය), `<` (වඩා අඩුයි), `=` (සමානයි) යන ලකුණු භාවිත කරලා සංඛ්‍යා සංසන්දනය කරමු. ඊට පස්සේ කුඩාම එකේ ඉඳන් ලොකුම එකට හෝ ලොකුම එකේ ඉඳන් කුඩාම එකට පෙළගස්වමු.</p>
+                        <p class="text-gray-700 text-lg mt-2">Examples: 250 > 180, 315 < 351, 400 = 400</p>
+                        <p class="text-gray-700 text-lg mt-2">Order from smallest to largest: 120, 105, 115 &rarr; 105, 115, 120</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gamified Activity Section: Number Builder -->
+            <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                <h2 class="text-3xl font-bold text-yellow-800 mb-6">විනෝදජනක ක්‍රීඩාව: අංක සාදමු! (Number Builder!)</h2>
+                <p class="text-yellow-700 text-lg mb-4">පහත අංක කොටු ඇදගෙන ගිහින් හිස් කොටුවල තියලා දීලා තියන අංකය හදන්න!</p>
+
+                <div id="numberBuilderGame">
+                    <p class="text-2xl font-bold text-blue-700 mb-4">අංකය සාදන්න: <span id="targetNumber" class="text-primary text-4xl"></span></p>
+
+                    <div id="numberSlots" class="number-slots">
+                        <div class="number-slot" data-place="hundreds"></div>
+                        <div class="number-slot" data-place="tens"></div>
+                        <div class="number-slot" data-place="ones"></div>
+                    </div>
+
+                    <div id="digitPool" class="digit-pool">
+                        <!-- Digits will be generated here -->
+                    </div>
+
+                    <p id="gameFeedback" class="game-feedback"></p>
+
+                    <div class="game-buttons mt-6 flex justify-center gap-4">
+                        <button id="checkAnswerBtn" class="bg-green-600 hover:bg-green-700">උත්තරේ බලමු! (Check Answer!)</button>
+                        <button id="newGameBtn">අලුත් ගේමක්! (New Game!)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Custom Modal for game alerts -->
+            <div id="customModal" class="custom-modal">
+                <div class="custom-modal-content">
+                    <h3 id="modalTitle"></h3>
+                    <p id="modalMessage"></p>
+                    <button id="modalCloseBtn">හරි (OK)</button>
+                </div>
+            </div>
+
+            <!-- Call to Action for Next Lesson/Quiz -->
+            <div class="text-center mt-12 p-6 bg-green-50 rounded-lg shadow-md">
+                <h3 class="text-2xl font-bold text-green-800 mb-4">ඔයා හරිම දක්ෂයි!</h3>
+                <p class="text-green-700 text-lg mb-6">ඔයාට දැන් 500 දක්වා සංඛ්‍යා සහ ස්ථානීය අගය ගැන හොඳ අවබෝධයක් තියනවා! ඊළඟ පාඩමට යන්න සූදානම්ද?</p>
+                <p class="text-gray-700 text-lg mb-6">You now have a good understanding of numbers up to 500 and place value! Ready for the next lesson?</p>
+
+                <a href="grade3_lesson2.html" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                    ඊළඟ පාඩම (Next Lesson) <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+            <!-- Navigation between lessons (Updated for Grade 3 context) -->
+            <div class="flex justify-between mt-8">
+                <a href="../grade2/grade2_lesson4.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <i class="fas fa-arrow-left mr-2"></i> කලින් ශ්‍රේණියේ පාඩමක් (Previous Grade Lesson)
+                </a>
+                <a href="grade3_lesson2.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                    ඊළඟ පාඩම (Next Lesson) <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="../index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="../index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="../index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Custom Modal for alerts (Replaces alert())
+        function showCustomModal(title, message, callback) {
+            const modal = document.getElementById('customModal');
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalMessage').textContent = message;
+            modal.classList.add('show');
+
+            const closeBtn = document.getElementById('modalCloseBtn');
+            const closeHandler = () => {
+                modal.classList.remove('show');
+                closeBtn.removeEventListener('click', closeHandler);
+                if (callback) callback();
+            };
+            closeBtn.addEventListener('click', closeHandler);
+        }
+
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('button.md\\:hidden'); 
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="../index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="../index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="../index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="../index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="../login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="../signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Number Builder Game Logic ---
+            const targetNumberDisplay = document.getElementById('targetNumber');
+            const digitPool = document.getElementById('digitPool');
+            const numberSlots = document.getElementById('numberSlots');
+            const gameFeedback = document.getElementById('gameFeedback');
+            const checkAnswerBtn = document.getElementById('checkAnswerBtn');
+            const newGameBtn = document.getElementById('newGameBtn');
+
+            let currentTargetNumber;
+            let draggedDigitValue = null;
+            let draggedDigitElement = null;
+            let placedDigits = {
+                hundreds: null,
+                tens: null,
+                ones: null
+            };
+
+            function generateNewGame() {
+                // Generate a random 3-digit number between 101 and 500
+                currentTargetNumber = Math.floor(Math.random() * 400) + 101;
+                targetNumberDisplay.textContent = currentTargetNumber;
+
+                // Clear previous state
+                digitPool.innerHTML = '';
+                numberSlots.querySelectorAll('.number-slot').forEach(slot => {
+                    slot.textContent = '';
+                    slot.classList.remove('active-drop');
+                });
+                gameFeedback.textContent = '';
+                placedDigits = { hundreds: null, tens: null, ones: null };
+                checkAnswerBtn.disabled = true;
+
+                // Extract digits and shuffle them
+                let numStr = currentTargetNumber.toString();
+                let digits = numStr.split('').map(Number);
+
+                // Add some extra random digits as distractors
+                while (digits.length < 6) { // Ensure at least 6 digits in the pool
+                    let randomDigit = Math.floor(Math.random() * 10);
+                    if (!digits.includes(randomDigit)) { // Avoid duplicates for distractors as well
+                        digits.push(randomDigit);
+                    }
+                }
+                digits.sort(() => Math.random() - 0.5); // Shuffle all digits
+
+                digits.forEach(digit => {
+                    const digitCard = document.createElement('div');
+                    digitCard.className = 'digit-card';
+                    digitCard.textContent = digit;
+                    digitCard.draggable = true;
+                    digitCard.dataset.value = digit;
+                    digitCard.addEventListener('dragstart', handleDragStart);
+                    digitPool.appendChild(digitCard);
+                });
+            }
+
+            function handleDragStart(e) {
+                draggedDigitValue = parseInt(e.target.dataset.value);
+                draggedDigitElement = e.target;
+                e.dataTransfer.setData('text/plain', draggedDigitValue); // For compatibility
+
+                // Add visual feedback for drop targets
+                numberSlots.querySelectorAll('.number-slot').forEach(slot => {
+                    if (!slot.textContent) { // Only show as active if empty
+                        slot.classList.add('active-drop');
+                    }
+                });
+            }
+
+            numberSlots.addEventListener('dragover', e => {
+                e.preventDefault(); // Allow drop
+                e.target.classList.add('active-drop'); // Highlight current drop target
+            });
+
+            numberSlots.addEventListener('dragleave', e => {
+                e.target.classList.remove('active-drop');
+            });
+
+            numberSlots.addEventListener('drop', e => {
+                e.preventDefault();
+                e.target.classList.remove('active-drop');
+
+                // Ensure it's a valid slot (empty)
+                if (e.target.classList.contains('number-slot') && !e.target.textContent) {
+                    const place = e.target.dataset.place;
+                    placedDigits[place] = draggedDigitValue;
+                    e.target.textContent = draggedDigitValue;
+                    draggedDigitElement.remove(); // Remove from pool
+
+                    checkIfReadyToSubmit();
+                }
+                // Remove all active drop highlights regardless of successful drop
+                numberSlots.querySelectorAll('.number-slot').forEach(slot => {
+                    slot.classList.remove('active-drop');
+                });
+            });
+
+            function checkIfReadyToSubmit() {
+                if (placedDigits.hundreds !== null && placedDigits.tens !== null && placedDigits.ones !== null) {
+                    checkAnswerBtn.disabled = false;
+                } else {
+                    checkAnswerBtn.disabled = true;
+                }
+            }
+
+            checkAnswerBtn.addEventListener('click', () => {
+                const formedNumber = parseInt(`${placedDigits.hundreds}${placedDigits.tens}${placedDigits.ones}`);
+                if (formedNumber === currentTargetNumber) {
+                    gameFeedback.textContent = 'නියමයි! ඔයා හරි! (Excellent! You are correct!)';
+                    gameFeedback.style.color = '#10b981'; // green-600
+                    checkAnswerBtn.disabled = true;
+                    showCustomModal('හරිම හරි! (Correct!)', `ඔයා සාදපු අංකය ${formedNumber} නියමයි! (The number you built, ${formedNumber}, is perfect!)`, generateNewGame);
+                } else {
+                    gameFeedback.textContent = `වැරදියි! ආයෙ උත්සහ කරමු! (Incorrect! Let's try again!)`;
+                    gameFeedback.style.color = '#dc2626'; // red-600
+                    showCustomModal('වැරදියි! (Incorrect!)', `ඔයා හදපු අංකය ${formedNumber}. හරි උත්තරේ ${currentTargetNumber}. ආයෙ උත්සහ කරමු! (The number you built was ${formedNumber}. The correct answer is ${currentTargetNumber}. Let's try again!)`, () => {
+                        // Reset the game on modal close for retry
+                        generateNewGame();
+                    });
+                }
+            });
+
+            newGameBtn.addEventListener('click', generateNewGame);
+
+            // Initial game setup
+            generateNewGame();
+        });
+    </script>
+</body>
+</html>
