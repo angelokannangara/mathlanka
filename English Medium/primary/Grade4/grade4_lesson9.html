@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 4 Math - Lesson 10: Time</title>
-    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about time.">
+    <title>Grade 4 Math - Lesson 9: Money</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about money.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
@@ -58,14 +58,26 @@
             border-radius: 0.5rem;
             margin-top: 1rem;
         }
-        .time-display {
-            font-size: 3.5rem;
+        .money-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2.5rem;
             font-weight: bold;
-            color: #2c5282;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
         }
-        .time-input {
-            width: 150px;
+        .money-item {
+            background-color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            min-width: 80px;
+            text-align: center;
+        }
+        .money-input {
+            width: 120px;
             padding: 0.5rem;
             border: 2px solid #cbd5e0;
             border-radius: 0.5rem;
@@ -139,8 +151,9 @@
                 <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
-                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <!-- User Profile/Logout Link -->
+                <h1 class="text-4xl font-bold text-gray-800 mb-4"> <span id="usernameDisplay" class="text-blue-300">Guest</span>!</h1> 
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">Logout</button>
                 <button class="md:hidden text-gray-700">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -151,108 +164,122 @@
     <!-- Lesson Content Section -->
     <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
         <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 10: Time - Let's learn about clocks and calendars!</h1>
-            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn to read time, convert units, and solve time problems!</p>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 9: Money - Let's learn about currency!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn to count, add, and subtract money!</p>
 
             <div class="space-y-10">
                 <!-- Introduction and Objectives -->
                 <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
                     <div class="md:w-1/3 flex justify-center items-center">
-                        <i class="fas fa-clock lesson-icon text-blue-600"></i>
+                        <i class="fas fa-money-bill-wave lesson-icon text-blue-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
                         <p class="text-gray-700 text-lg">
                             In this lesson, you will learn to:
                             <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
-                                <li>Read time on **analog and digital clocks**.</li>
-                                <li>Convert between **hours, minutes, and seconds**.</li>
-                                <li>Calculate **duration** of events.</li>
-                                <li>Solve **word problems** involving time.</li>
+                                <li>Identify different **denominations of currency** (notes and coins).</li>
+                                <li>**Count money** in various combinations.</li>
+                                <li>**Add and subtract money** amounts.</li>
+                                <li>Solve **word problems** involving money.</li>
                             </ul>
                         </p>
                     </div>
                 </div>
 
-                <!-- Content: Units of Time -->
+                <!-- Content: Identifying Money -->
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Units of Time:</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Identifying Money:</h3>
                     <p class="text-gray-700 mb-3">
-                        Time is measured in different units. Here are some important conversions:
+                        Money comes in different forms: coins and notes. In Sri Lanka, we use Sri Lankan Rupees (LKR).
                     </p>
                     <div class="example-box">
-                        <p class="font-semibold text-blue-700">Conversions:</p>
-                        <p class="text-blue-600 text-lg font-mono">1 minute = 60 seconds</p>
-                        <p class="text-blue-600 text-lg font-mono">1 hour = 60 minutes</p>
-                        <p class="text-blue-600 text-lg font-mono">1 day = 24 hours</p>
-                        <p class="text-blue-600 text-lg font-mono">1 week = 7 days</p>
-                        <p class="text-blue-600 text-lg font-mono">1 year = 12 months = 365 days (366 in a leap year)</p>
+                        <p class="font-semibold text-blue-700">Example:</p>
+                        <p class="text-blue-600 text-lg font-mono">Coins: Rs. 1, Rs. 2, Rs. 5, Rs. 10</p>
+                        <p class="text-blue-600 text-lg font-mono">Notes: Rs. 20, Rs. 50, Rs. 100, Rs. 500, Rs. 1000, Rs. 5000</p>
                     </div>
                 </div>
 
-                <!-- Interactive Activity 1: Read Time -->
+                <!-- Interactive Activity 1: Count Money -->
                 <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Read the Time!</h2>
-                    <p id="read-time-instructions" class="text-yellow-700 text-lg mb-8">What time is shown on the clock? Enter in HH:MM format (e.g., 03:45).</p>
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Count the Money!</h2>
+                    <p id="count-money-instructions" class="text-yellow-700 text-lg mb-8">Count the total amount of money shown and enter the answer.</p>
 
-                    <div id="read-time-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
-                        <div class="time-display">
-                            <span id="clock-time-display">--:--</span>
+                    <div id="count-money-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="money-display">
+                            <!-- Placeholder for money images/text -->
+                            <span id="money-display-area" class="text-2xl text-gray-700"></span>
                         </div>
-                        <input type="text" id="time-answer-input" class="time-input" placeholder="HH:MM">
-                        <p id="read-time-feedback" class="text-xl font-semibold mt-4"></p>
+                        <input type="number" id="money-answer-input" class="money-input" placeholder="Total Rs.">
+                        <p id="count-money-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-read-time-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
-                    <button id="next-read-time-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                    <button id="check-count-money-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-count-money-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
-                <!-- Interactive Activity 2: Convert Time Units -->
+                <!-- Interactive Activity 2: Add Money -->
                 <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Convert Time Units!</h2>
-                    <p id="convert-time-instructions" class="text-purple-700 text-lg mb-8">Convert the given time unit and enter the answer.</p>
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Add Money Amounts!</h2>
+                    <p id="add-money-instructions" class="text-purple-700 text-lg mb-8">Add the two money amounts and enter the total.</p>
 
-                    <div id="convert-time-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
-                        <div class="time-display">
-                            <span id="convert-value"></span> <span id="convert-unit-from"></span> = <input type="number" id="convert-answer-input" class="time-input" placeholder="Value"> <span id="convert-unit-to"></span>
+                    <div id="add-money-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="money-display">
+                            Rs. <span id="add-money-val1"></span> + Rs. <span id="add-money-val2"></span> = Rs. <input type="number" id="add-money-answer-input" class="money-input" placeholder="Total">
                         </div>
-                        <p id="convert-time-feedback" class="text-xl font-semibold mt-4"></p>
+                        <p id="add-money-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-convert-time-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
-                    <button id="next-convert-time-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                    <button id="check-add-money-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-add-money-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 3: Subtract Money -->
+                <div class="text-center mt-12 p-8 bg-green-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-green-800 mb-6">Activity 3: Subtract Money Amounts!</h2>
+                    <p id="subtract-money-instructions" class="text-green-700 text-lg mb-8">Subtract the money amounts and enter the difference.</p>
+
+                    <div id="subtract-money-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="money-display">
+                            Rs. <span id="sub-money-val1"></span> - Rs. <span id="sub-money-val2"></span> = Rs. <input type="number" id="sub-money-answer-input" class="money-input" placeholder="Difference">
+                        </div>
+                        <p id="subtract-money-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-subtract-money-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-subtract-money-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
 
-                <!-- Exercise Section: Static Time Exercises -->
+                <!-- Exercise Section: Static Money Exercises -->
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Time Calculations</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Money Calculations</h3>
                     <div class="exercise-grid">
                         <div class="exercise-item">
-                            <p>1. How many minutes are in 2 hours? <input type="text" class="w-24 inline-block"></p>
+                            <p>1. Rs. 50 + Rs. 25 = Rs. <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>2. How many hours are in 3 days? <input type="text" class="w-24 inline-block"></p>
+                            <p>2. Rs. 100 - Rs. 40 = Rs. <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>3. Convert 180 seconds to minutes. <input type="text" class="w-24 inline-block"></p>
+                            <p>3. Count: Two Rs. 20 notes and three Rs. 5 coins. Total Rs. <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>4. Convert 240 minutes to hours. <input type="text" class="w-24 inline-block"></p>
+                            <p>4. Count: One Rs. 500 note and four Rs. 10 coins. Total Rs. <input type="text" class="w-24 inline-block"></p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Word Problems Section -->
                 <div class="problem-solving">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Time</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve using Money</h3>
                     <ol>
                         <li>
-                            <strong>A train journey starts at 8:00 AM and ends at 11:30 AM. How long is the journey?</strong><br>
+                            <strong>You have Rs. 75. You buy a pen for Rs. 30. How much money do you have left?</strong><br>
                             <input type="text" placeholder="Answer" class="input-field max-w-full">
                         </li>
                         <li>
-                            <strong>You spend 45 minutes on homework and 30 minutes reading. How much time do you spend in total?</strong><br>
+                            <strong>Your mother gives you Rs. 150, and your father gives you Rs. 80. How much money do you have in total?</strong><br>
                             <input type="text" placeholder="Answer" class="input-field max-w-full">
                         </li>
                     </ol>
@@ -260,19 +287,21 @@
 
                 <!-- Call to Action for Next Lesson/Quiz -->
                 <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
-                    <h3 class="2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
-                    <p class="text-blue-700 text-lg mb-6">You have completed all Grade 4 lessons! Keep practicing!</p>
-                    <a href="index.html#courses" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
-                        Explore More Courses <i class="fas fa-arrow-right ml-2"></i>
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
+                    <a href="grade4_lesson10.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
 
                 <!-- Navigation between lessons -->
                 <div class="flex justify-between mt-8">
-                    <a href="grade4_lesson9.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 9
+                    <a href="grade4_lesson8.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 8
                     </a>
-                    <!-- No "Next Lesson" button for the last lesson -->
+                    <a href="grade4_lesson10.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
                 </div>
 
             </div>
@@ -366,19 +395,19 @@
                 mobileMenu.classList.add('hidden');
             });
 
-            // --- Activity 1: Read Time ---
-            let currentCorrectTime = '';
+            // --- Activity 1: Count Money ---
+            let currentMoneyAmount = 0;
 
-            function generateReadTimeActivity() {
-                const clockTimeDisplay = document.getElementById('clock-time-display');
-                const answerInput = document.getElementById('time-answer-input');
-                const feedback = document.getElementById('read-time-feedback');
-                const nextBtn = document.getElementById('next-read-time-btn');
-                const checkBtn = document.getElementById('check-read-time-btn');
+            function generateCountMoneyActivity() {
+                const moneyDisplay = document.getElementById('money-display-area');
+                const answerInput = document.getElementById('money-answer-input');
+                const feedback = document.getElementById('count-money-feedback');
+                const nextBtn = document.getElementById('next-count-money-btn');
+                const checkBtn = document.getElementById('check-count-money-btn');
 
-                if (!clockTimeDisplay || !answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Read time elements not found. Retrying in 1 second.");
-                    setTimeout(generateReadTimeActivity, 1000);
+                if (!moneyDisplay || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Count money elements not found. Retrying in 1 second.");
+                    setTimeout(generateCountMoneyActivity, 1000);
                     return;
                 }
 
@@ -390,30 +419,34 @@
                 nextBtn.classList.add('hidden');
                 checkBtn.classList.remove('hidden');
 
-                const hour = Math.floor(Math.random() * 12) + 1; // 1 to 12
-                const minute = Math.floor(Math.random() * 12) * 5; // 0, 5, 10, ..., 55 (multiples of 5)
+                const denominations = [1, 2, 5, 10, 20, 50, 100, 500]; // Simplified denominations for activity
+                let totalAmount = 0;
+                let displayHtml = '';
+                const numItems = Math.floor(Math.random() * 4) + 2; // 2 to 5 items
 
-                const formattedHour = hour.toString().padStart(2, '0');
-                const formattedMinute = minute.toString().padStart(2, '0');
-
-                currentCorrectTime = `${formattedHour}:${formattedMinute}`;
-                clockTimeDisplay.textContent = currentCorrectTime;
+                for (let i = 0; i < numItems; i++) {
+                    const randomDenomination = denominations[Math.floor(Math.random() * denominations.length)];
+                    totalAmount += randomDenomination;
+                    displayHtml += `Rs. ${randomDenomination} &nbsp; `;
+                }
+                moneyDisplay.innerHTML = displayHtml;
+                currentMoneyAmount = totalAmount;
             }
 
-            function checkReadTimeAnswers() {
-                const answerInput = document.getElementById('time-answer-input');
-                const feedback = document.getElementById('read-time-feedback');
-                const nextBtn = document.getElementById('next-read-time-btn');
-                const checkBtn = document.getElementById('check-read-time-btn');
+            function checkCountMoneyAnswers() {
+                const answerInput = document.getElementById('money-answer-input');
+                const feedback = document.getElementById('count-money-feedback');
+                const nextBtn = document.getElementById('next-count-money-btn');
+                const checkBtn = document.getElementById('check-count-money-btn');
 
                 if (!answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Read time check elements not found.");
+                    console.error("Count money check elements not found.");
                     return;
                 }
 
-                const userAnswer = answerInput.value.trim();
+                const userAnswer = parseInt(answerInput.value.trim());
 
-                if (userAnswer === currentCorrectTime) {
+                if (userAnswer === currentMoneyAmount) {
                     feedback.textContent = 'Correct! Well done!';
                     feedback.className = 'text-xl font-bold text-green-600 mt-4';
                     answerInput.style.borderColor = '#10b981';
@@ -421,30 +454,27 @@
                     nextBtn.classList.remove('hidden');
                     checkBtn.classList.add('hidden');
                 } else {
-                    feedback.textContent = `Oops! The correct time is ${currentCorrectTime}. Try again!`;
+                    feedback.textContent = `Oops! The correct answer is Rs. ${currentMoneyAmount}. Try again!`;
                     feedback.className = 'text-xl font-bold text-red-600 mt-4';
                     answerInput.style.borderColor = '#ef4444';
-                    setTimeout(generateReadTimeActivity, 2000); // Regenerate after a delay
+                    setTimeout(generateCountMoneyActivity, 2000); // Regenerate after a delay
                 }
             }
 
-            // --- Activity 2: Convert Time Units ---
-            let currentConvertCorrectAnswer = 0;
-            let currentConvertUnitFrom = '';
-            let currentConvertUnitTo = '';
+            // --- Activity 2: Add Money ---
+            let currentAddMoneyCorrectAnswer = 0;
 
-            function generateConvertTimeActivity() {
-                const valueSpan = document.getElementById('convert-value');
-                const unitFromSpan = document.getElementById('convert-unit-from');
-                const unitToSpan = document.getElementById('convert-unit-to');
-                const answerInput = document.getElementById('convert-answer-input');
-                const feedback = document.getElementById('convert-time-feedback');
-                const nextBtn = document.getElementById('next-convert-time-btn');
-                const checkBtn = document.getElementById('check-convert-time-btn');
+            function generateAddMoneyActivity() {
+                const val1Span = document.getElementById('add-money-val1');
+                const val2Span = document.getElementById('add-money-val2');
+                const answerInput = document.getElementById('add-money-answer-input');
+                const feedback = document.getElementById('add-money-feedback');
+                const nextBtn = document.getElementById('next-add-money-btn');
+                const checkBtn = document.getElementById('check-add-money-btn');
 
-                if (!valueSpan || !unitFromSpan || !unitToSpan || !answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Convert time elements not found. Retrying in 1 second.");
-                    setTimeout(generateConvertTimeActivity, 1000);
+                if (!val1Span || !val2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Add money elements not found. Retrying in 1 second.");
+                    setTimeout(generateAddMoneyActivity, 1000);
                     return;
                 }
 
@@ -456,42 +486,28 @@
                 nextBtn.classList.add('hidden');
                 checkBtn.classList.remove('hidden');
 
-                const conversions = [
-                    { from: 'minutes', to: 'seconds', factor: 60, minVal: 1, maxVal: 5 },
-                    { from: 'hours', to: 'minutes', factor: 60, minVal: 1, maxVal: 3 },
-                    { from: 'days', to: 'hours', factor: 24, minVal: 1, maxVal: 2 },
-                    { from: 'seconds', to: 'minutes', factor: 1/60, minVal: 60, maxVal: 300, step: 60 },
-                    { from: 'minutes', to: 'hours', factor: 1/60, minVal: 60, maxVal: 180, step: 60 }
-                ];
-                const randomConversion = conversions[Math.floor(Math.random() * conversions.length)];
+                const amount1 = Math.floor(Math.random() * 200) + 10; // Rs. 10 to 209
+                const amount2 = Math.floor(Math.random() * 100) + 5;  // Rs. 5 to 104
 
-                let value = randomConversion.minVal + Math.floor(Math.random() * (randomConversion.maxVal - randomConversion.minVal + 1));
-                if (randomConversion.step) {
-                    value = Math.floor(value / randomConversion.step) * randomConversion.step;
-                }
-
-                valueSpan.textContent = value;
-                unitFromSpan.textContent = randomConversion.from;
-                unitToSpan.textContent = randomConversion.to;
-                currentConvertCorrectAnswer = value * randomConversion.factor;
-                currentConvertUnitFrom = randomConversion.from;
-                currentConvertUnitTo = randomConversion.to;
+                val1Span.textContent = amount1;
+                val2Span.textContent = amount2;
+                currentAddMoneyCorrectAnswer = amount1 + amount2;
             }
 
-            function checkConvertTimeAnswers() {
-                const answerInput = document.getElementById('convert-answer-input');
-                const feedback = document.getElementById('convert-time-feedback');
-                const nextBtn = document.getElementById('next-convert-time-btn');
-                const checkBtn = document.getElementById('check-convert-time-btn');
+            function checkAddMoneyAnswers() {
+                const answerInput = document.getElementById('add-money-answer-input');
+                const feedback = document.getElementById('add-money-feedback');
+                const nextBtn = document.getElementById('next-add-money-btn');
+                const checkBtn = document.getElementById('check-add-money-btn');
 
                 if (!answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Convert time check elements not found.");
+                    console.error("Add money check elements not found.");
                     return;
                 }
 
-                const userAnswer = parseFloat(answerInput.value.trim());
+                const userAnswer = parseInt(answerInput.value.trim());
 
-                if (userAnswer === currentConvertCorrectAnswer) {
+                if (userAnswer === currentAddMoneyCorrectAnswer) {
                     feedback.textContent = 'Correct! Well done!';
                     feedback.className = 'text-xl font-bold text-green-600 mt-4';
                     answerInput.style.borderColor = '#10b981';
@@ -499,25 +515,93 @@
                     nextBtn.classList.remove('hidden');
                     checkBtn.classList.add('hidden');
                 } else {
-                    feedback.textContent = `Oops! The correct answer is ${currentConvertCorrectAnswer} ${currentConvertUnitTo}. Try again!`;
+                    feedback.textContent = `Oops! The correct answer is Rs. ${currentAddMoneyCorrectAnswer}. Try again!`;
                     feedback.className = 'text-xl font-bold text-red-600 mt-4';
                     answerInput.style.borderColor = '#ef4444';
-                    setTimeout(generateConvertTimeActivity, 2000); // Regenerate after a delay
+                    setTimeout(generateAddMoneyActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 3: Subtract Money ---
+            let currentSubtractMoneyCorrectAnswer = 0;
+
+            function generateSubtractMoneyActivity() {
+                const val1Span = document.getElementById('sub-money-val1');
+                const val2Span = document.getElementById('sub-money-val2');
+                const answerInput = document.getElementById('sub-money-answer-input');
+                const feedback = document.getElementById('subtract-money-feedback');
+                const nextBtn = document.getElementById('next-subtract-money-btn');
+                const checkBtn = document.getElementById('check-subtract-money-btn');
+
+                if (!val1Span || !val2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Subtract money elements not found. Retrying in 1 second.");
+                    setTimeout(generateSubtractMoneyActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                let amount1, amount2;
+                do {
+                    amount1 = Math.floor(Math.random() * 300) + 50; // Rs. 50 to 349
+                    amount2 = Math.floor(Math.random() * (amount1 - 20)) + 10; // Ensure amount2 is smaller
+                } while (amount1 <= amount2);
+
+                val1Span.textContent = amount1;
+                val2Span.textContent = amount2;
+                currentSubtractMoneyCorrectAnswer = amount1 - amount2;
+            }
+
+            function checkSubtractMoneyAnswers() {
+                const answerInput = document.getElementById('sub-money-answer-input');
+                const feedback = document.getElementById('subtract-money-feedback');
+                const nextBtn = document.getElementById('next-subtract-money-btn');
+                const checkBtn = document.getElementById('check-subtract-money-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Subtract money check elements not found.");
+                    return;
+                }
+
+                const userAnswer = parseInt(answerInput.value.trim());
+
+                if (userAnswer === currentSubtractMoneyCorrectAnswer) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is Rs. ${currentSubtractMoneyCorrectAnswer}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateSubtractMoneyActivity, 2000); // Regenerate after a delay
                 }
             }
 
 
             // Attach event listeners for all activities
-            document.getElementById('check-read-time-btn').addEventListener('click', checkReadTimeAnswers);
-            document.getElementById('next-read-time-btn').addEventListener('click', generateReadTimeActivity);
+            document.getElementById('check-count-money-btn').addEventListener('click', checkCountMoneyAnswers);
+            document.getElementById('next-count-money-btn').addEventListener('click', generateCountMoneyActivity);
 
-            document.getElementById('check-convert-time-btn').addEventListener('click', checkConvertTimeAnswers);
-            document.getElementById('next-convert-time-btn').addEventListener('click', generateConvertTimeActivity);
+            document.getElementById('check-add-money-btn').addEventListener('click', checkAddMoneyAnswers);
+            document.getElementById('next-add-money-btn').addEventListener('click', generateAddMoneyActivity);
+
+            document.getElementById('check-subtract-money-btn').addEventListener('click', checkSubtractMoneyAnswers);
+            document.getElementById('next-subtract-money-btn').addEventListener('click', generateSubtractMoneyActivity);
 
 
             // Initialize all activities on page load
-            generateReadTimeActivity();
-            generateConvertTimeActivity();
+            generateCountMoneyActivity();
+            generateAddMoneyActivity();
+            generateSubtractMoneyActivity();
         });
     </script>
 </body>

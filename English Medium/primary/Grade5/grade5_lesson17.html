@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 5 Math - Lesson 17: Data Handling - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about collecting and organizing data for Grade 5.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 250px; /* Adjusted for input fields */
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        /* Styles for the answers section */
+        #answers-section {
+            display: none; /* Hidden by default */
+            background-color: #f0fdf4; /* Light green background */
+            border-left: 5px solid #22c55e; /* Green border */
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        #answers-section h3 {
+            color: #16a34a; /* Darker green for heading */
+        }
+        #answers-section ol li {
+            margin-bottom: 0.75rem;
+            color: #15803d; /* Green text for answers */
+        }
+        .data-table {
+            width: 80%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #cbd5e0;
+            padding: 0.75rem;
+            text-align: center;
+        }
+        .data-table th {
+            background-color: #e2e8f0;
+            font-weight: bold;
+            color: #2d3748;
+        }
+        .data-table td {
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- User Profile/Logout Link -->
+                <h1 class="text-4xl font-bold text-gray-800 mb-4"> <span id="usernameDisplay" class="text-blue-300">Guest</span>!</h1> 
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">Logout</button>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 17: Data Handling - 1</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 5 Students (Ages 10-11) - Let's learn to collect, organize, and understand information!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-chart-bar lesson-icon text-blue-600"></i> <!-- Icon for data handling -->
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Understand what data is.</li>
+                                <li>Collect data using simple methods.</li>
+                                <li>Organize data in tables.</li>
+                                <li>Represent data using pictograms and bar graphs.</li>
+                                <li>Interpret information from simple graphs.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Introduction to Data Handling -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Introduction to Data Handling</h3>
+                    <p class="text-gray-700 mb-3">
+                        Hello, young mathematicians! Have you ever counted how many students in your class like apples, or how many different colored pens you have? When you collect and organize information like this, you are doing **data handling**!
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        **Data** is simply information or facts. Data handling is about collecting, organizing, representing, and interpreting this information to make sense of it. It helps us answer questions and make decisions.
+                    </p>
+                    <p class="text-gray-700">
+                        Let's learn how to become data detectives!
+                    </p>
+                </div>
+
+                <!-- Content: Collecting and Organizing Data -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Collecting and Organizing Data</h3>
+                    <p class="text-gray-700 mb-3">
+                        The first step in data handling is to **collect** the information. You can do this by asking questions, observing, or counting.
+                    </p>
+                    <p class="text-gray-700 mb-3">
+                        Once you have collected data, it's important to **organize** it so it's easy to read and understand. A common way to organize data is using a **table**.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Favorite Fruits in a Class</p>
+                        <p class="text-gray-700 mb-2">Imagine you asked your friends about their favorite fruit and got these answers: Apple, Orange, Banana, Apple, Grape, Orange, Apple, Banana, Apple, Grape.</p>
+                        <p class="text-gray-700 mb-2">We can organize this data in a table using **tally marks** and **frequency**.</p>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Fruit</th>
+                                    <th>Tally Marks</th>
+                                    <th>Frequency (Number of Students)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Apple</td>
+                                    <td>IIII</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td>Orange</td>
+                                    <td>II</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Banana</td>
+                                    <td>II</td>
+                                    <td>2</td>
+                                </tr>
+                                <tr>
+                                    <td>Grape</td>
+                                    <td>II</td>
+                                    <td>2</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-gray-700 mt-2">
+                            Tally marks help us count quickly. Every fifth mark is drawn across the previous four (IIII) to make counting easier.
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 1: Collect and organize data.</p>
+                    <div class="problem-solving">
+                        <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
+                            <li>
+                                <p>Count the number of times each digit ($0, 1, 2, 3, 4, 5, 6, 7, 8, 9$) appears in the number $123451234512345$. Then, fill in the frequency table below.</p>
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Digit</th>
+                                            <th>Frequency</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>0</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>1</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>2</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>3</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>4</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>5</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>6</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>7</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>8</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                        <tr><td>9</td><td><input type="text" class="input-field" placeholder="Freq"></td></tr>
+                                    </tbody>
+                                </table>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Content: Representing Data (Pictograms) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Representing Data: Pictograms</h3>
+                    <p class="text-gray-700 mb-3">
+                        A **pictogram** (or pictograph) uses pictures or symbols to represent data. Each symbol usually stands for a certain number of items.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 2: Number of Books Read by Students</p>
+                        <p class="text-gray-700 mb-2">Let's say: <i class="fas fa-book text-blue-600"></i> = 2 books</p>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Student</th>
+                                    <th>Number of Books</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Amal</td>
+                                    <td><i class="fas fa-book"></i> <i class="fas fa-book"></i> <i class="fas fa-book"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Bimal</td>
+                                    <td><i class="fas fa-book"></i> <i class="fas fa-book"></i> <i class="fas fa-book"></i> <i class="fas fa-book"></i></td>
+                                </tr>
+                                <tr>
+                                    <td>Kamal</td>
+                                    <td><i class="fas fa-book"></i> <i class="fas fa-book"></i></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="text-gray-700 mt-2">
+                            From this pictogram, we can see: <br>
+                            Amal read $3 \times 2 = 6$ books.<br>
+                            Bimal read $4 \times 2 = 8$ books.<br>
+                            Kamal read $2 \times 2 = 4$ books.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: Representing Data (Bar Graphs) -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Representing Data: Bar Graphs</h3>
+                    <p class="text-gray-700 mb-3">
+                        A **bar graph** uses bars to show data. The length or height of each bar represents the quantity. Bar graphs usually have two axes: one for categories and one for values.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700 mb-2">Example 3: Favorite Colors of Students</p>
+                        <p class="text-gray-700 mb-2">
+                            Let's say: Red (5 students), Blue (7 students), Green (4 students), Yellow (3 students).
+                        </p>
+                        <!-- Simple representation of a bar graph concept -->
+                        <div class="w-full bg-white p-4 rounded-lg shadow-inner mt-4">
+                            <h4 class="font-bold text-center mb-2">Favorite Colors</h4>
+                            <div class="flex items-end justify-around h-40 border-b border-l border-gray-400 pb-1">
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-red-500 rounded-t-md" style="height: 80%; width: 20px;"></div>
+                                    <span class="text-xs mt-1">Red (5)</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-blue-500 rounded-t-md" style="height: 100%; width: 20px;"></div>
+                                    <span class="text-xs mt-1">Blue (7)</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-green-500 rounded-t-md" style="height: 60%; width: 20px;"></div>
+                                    <span class="text-xs mt-1">Green (4)</span>
+                                </div>
+                                <div class="flex flex-col items-center">
+                                    <div class="bg-yellow-500 rounded-t-md" style="height: 40%; width: 20px;"></div>
+                                    <span class="text-xs mt-1">Yellow (3)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 mt-2">
+                            From this bar graph, we can quickly see that Blue is the most favorite color.
+                        </p>
+                    </div>
+                    <p class="font-semibold text-blue-700 mt-4">Exercise 2: Interpret data from a table.</p>
+                    <div class="problem-solving">
+                        <p class="text-gray-700 mb-2">The table below shows the number of students who like different sports.</p>
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Sport</th>
+                                    <th>Number of Students</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Cricket</td><td>12</td></tr>
+                                <tr><td>Football</td><td>15</td></tr>
+                                <tr><td>Netball</td><td>8</td></tr>
+                                <tr><td>Swimming</td><td>10</td></tr>
+                            </tbody>
+                        </table>
+                        <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
+                            <li>
+                                <p>Which sport is liked by the most number of students?</p>
+                                <input type="text" class="input-field" placeholder="Answer">
+                            </li>
+                            <li>
+                                <p>How many more students like Football than Netball?</p>
+                                <input type="text" class="input-field" placeholder="Answer">
+                            </li>
+                            <li>
+                                <p>What is the total number of students surveyed?</p>
+                                <input type="text" class="input-field" placeholder="Answer">
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- Check Answers Button -->
+                <div class="text-center mt-8">
+                    <button id="show-answers-button" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-bold text-lg transition duration-300 shadow-md hover:shadow-lg">
+                        Check Answers
+                    </button>
+                </div>
+
+                <!-- Content: Answers to Practice Time (Hidden by default) -->
+                <div id="answers-section" class="p-6 rounded-lg shadow-sm">
+                    <h3 class="2xl font-bold mb-4">Answers to Practice Time</h3>
+                    <p class="text-gray-700 mb-4">Let's check your answers!</p>
+                    <ol class="list-decimal list-inside ml-4 space-y-3">
+                        <li>
+                            <p class="font-semibold">Exercise 1: Collect and organize data.</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>0: 0</li>
+                                <li>1: 3</li>
+                                <li>2: 3</li>
+                                <li>3: 3</li>
+                                <li>4: 3</li>
+                                <li>5: 3</li>
+                                <li>6: 0</li>
+                                <li>7: 0</li>
+                                <li>8: 0</li>
+                                <li>9: 0</li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p class="font-semibold">Exercise 2: Interpret data from a table.</p>
+                            <ul class="list-disc list-inside ml-6">
+                                <li>1. Football</li>
+                                <li>2. $15 - 8 = 7$ students</li>
+                                <li>3. $12 + 15 + 8 + 10 = 45$ students</li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+
+                <!-- Conclusion -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You've completed Lesson 17!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Excellent work, Math Lanka students! You've learned the basics of data handling – how to collect, organize, and interpret information. This is a very useful skill in everyday life!</p>
+                    <a href="grade5_lesson18.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade5_lesson16.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Previous Lesson
+                    </a>
+                    <a href="grade5_lesson18.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700" id="close-mobile-menu">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            document.getElementById('close-mobile-menu').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // Functionality to show/hide answers
+            const showAnswersButton = document.getElementById('show-answers-button');
+            const answersSection = document.getElementById('answers-section');
+
+            showAnswersButton.addEventListener('click', function() {
+                if (answersSection.style.display === 'none' || answersSection.style.display === '') {
+                    answersSection.style.display = 'block';
+                    showAnswersButton.textContent = 'Hide Answers';
+                    showAnswersButton.classList.remove('bg-blue-600', 'hover:bg-blue-700');
+                    showAnswersButton.classList.add('bg-red-600', 'hover:bg-red-700');
+                } else {
+                    answersSection.style.display = 'none';
+                    showAnswersButton.textContent = 'Check Answers';
+                    showAnswersButton.classList.remove('bg-red-600', 'hover:bg-red-700');
+                    showAnswersButton.classList.add('bg-blue-600', 'hover:bg-blue-700');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

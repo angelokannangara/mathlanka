@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 4 Math - Lesson 6: Multiplication - 1</title>
-    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about basic multiplication.">
+    <title>Grade 4 Math - Lesson 7: Division - 1</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about basic division.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <script>
@@ -58,7 +58,7 @@
             border-radius: 0.5rem;
             margin-top: 1rem;
         }
-        .multiplication-problem {
+        .division-problem {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -66,32 +66,32 @@
             font-weight: bold;
             margin-bottom: 1rem;
         }
-        .multiplication-problem .number {
+        .division-problem .number {
             text-align: right;
             width: 150px; /* Fixed width for alignment */
         }
-        .multiplication-problem .number-with-operator {
+        .division-problem .number-with-operator {
             display: flex;
             align-items: center;
             justify-content: flex-end; /* Align content to the right within its width */
             width: 150px; /* Match the width of the top number for alignment */
         }
-        .multiplication-problem .operator {
+        .division-problem .operator {
             margin-right: 5px; /* Space between operator and number */
         }
-        .multiplication-problem .line {
+        .division-problem .line {
             border-bottom: 2px solid #333;
             width: 150px;
             margin-top: 5px;
             margin-bottom: 5px;
         }
-        .multiplication-problem .input-group {
+        .division-problem .input-group {
             display: flex;
             gap: 10px;
             width: 180px;
             justify-content: center;
         }
-        .multiplication-problem .input-group input {
+        .division-problem .input-group input {
             max-width: 150px;
         }
         .exercise-grid {
@@ -160,8 +160,9 @@
                 <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
             </div>
             <div class="flex items-center space-x-4">
-                <a href="login.html" class="hidden md:block text-gray-700 hover:text-blue-600 font-medium">Log In</a>
-                <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition duration-300">Sign Up</a>
+                <!-- User Profile/Logout Link -->
+                <h1 class="text-4xl font-bold text-gray-800 mb-4"> <span id="usernameDisplay" class="text-blue-300">Guest</span>!</h1> 
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">Logout</button>
                 <button class="md:hidden text-gray-700">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
@@ -172,138 +173,137 @@
     <!-- Lesson Content Section -->
     <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
         <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
-            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 6: Multiplication - 1 - Let's learn to multiply!</h1>
-            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn basic multiplication and solve problems!</p>
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 7: Division - 1 - Let's learn to divide!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn basic division and solve problems!</p>
 
             <div class="space-y-10">
                 <!-- Introduction and Objectives -->
                 <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
                     <div class="md:w-1/3 flex justify-center items-center">
-                        <i class="fas fa-times lesson-icon text-blue-600"></i>
+                        <i class="fas fa-divide lesson-icon text-blue-600"></i>
                     </div>
                     <div class="md:w-2/3 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
                         <p class="text-gray-700 text-lg">
                             In this lesson, you will learn to:
                             <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
-                                <li>Understand multiplication as **repeated addition**.</li>
-                                <li>Multiply **single-digit numbers**.</li>
-                                <li>Multiply **two-digit numbers by single-digit numbers**.</li>
-                                <li>Solve **word problems** involving multiplication.</li>
+                                <li>Understand division as **sharing equally** or **repeated subtraction**.</li>
+                                <li>Divide **two-digit numbers by single-digit numbers** with no remainder.</li>
+                                <li>Solve **word problems** involving division.</li>
                             </ul>
                         </p>
                     </div>
                 </div>
 
-                <!-- Content: What is Multiplication -->
+                <!-- Content: What is Division -->
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What is Multiplication?</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What is Division?</h3>
                     <p class="text-gray-700 mb-3">
-                        Multiplication is a quick way of adding the same number many times. It's like counting in groups!
+                        Division is splitting a number into equal parts. It tells us how many groups there are or how many are in each group.
                     </p>
                     <div class="example-box">
                         <p class="font-semibold text-blue-700">Example:</p>
-                        <p class="text-blue-600 text-lg font-mono">3 groups of 4 apples is $4 + 4 + 4 = 12$ apples.</p>
-                        <p class="text-blue-600 text-lg font-mono">In multiplication, we write this as $3 \times 4 = 12$.</p>
+                        <p class="text-blue-600 text-lg font-mono">You have 12 cookies and want to share them equally among 3 friends.</p>
+                        <p class="text-blue-600 text-lg font-mono">Each friend gets $12 \div 3 = 4$ cookies.</p>
                     </div>
                 </div>
 
-                <!-- Interactive Activity 1: Single Digit Multiplication -->
+                <!-- Interactive Activity 1: Basic Division -->
                 <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Single Digit Multiplication!</h2>
-                    <p id="single-digit-multiplication-instructions" class="text-yellow-700 text-lg mb-8">Multiply the numbers and enter the answer.</p>
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Basic Division!</h2>
+                    <p id="basic-division-instructions" class="text-yellow-700 text-lg mb-8">Divide the numbers and enter the answer.</p>
 
-                    <div id="single-digit-multiplication-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
-                        <div class="multiplication-problem">
-                            <span id="mult-num1" class="number"></span>
+                    <div id="basic-division-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="division-problem">
+                            <span id="div-num1" class="number"></span>
                             <span class="number-with-operator">
-                                <span class="operator">×</span> <span id="mult-num2" class="number"></span>
+                                <span class="operator">÷</span> <span id="div-num2" class="number"></span>
                             </span>
                             <div class="line"></div>
                             <div class="input-group">
-                                <input type="number" id="mult-answer-input" class="input-field" placeholder="Answer">
+                                <input type="number" id="div-answer-input" class="input-field" placeholder="Answer">
                             </div>
                         </div>
-                        <p id="single-digit-multiplication-feedback" class="text-xl font-semibold mt-4"></p>
+                        <p id="basic-division-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-single-digit-multiplication-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
-                    <button id="next-single-digit-multiplication-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                    <button id="check-basic-division-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-basic-division-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
-                <!-- Interactive Activity 2: Two-Digit by Single-Digit Multiplication -->
+                <!-- Interactive Activity 2: Two-Digit by Single-Digit Division -->
                 <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
-                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Two-Digit by Single-Digit Multiplication!</h2>
-                    <p id="two-digit-multiplication-instructions" class="text-purple-700 text-lg mb-8">Multiply the numbers and enter the answer.</p>
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Two-Digit by Single-Digit Division!</h2>
+                    <p id="two-digit-division-instructions" class="text-purple-700 text-lg mb-8">Divide the numbers and enter the answer.</p>
 
-                    <div id="two-digit-multiplication-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
-                        <div class="multiplication-problem">
-                            <span id="two-mult-num1" class="number"></span>
+                    <div id="two-digit-division-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="division-problem">
+                            <span id="two-div-num1" class="number"></span>
                             <span class="number-with-operator">
-                                <span class="operator">×</span> <span id="two-mult-num2" class="number"></span>
+                                <span class="operator">÷</span> <span id="two-div-num2" class="number"></span>
                             </span>
                             <div class="line"></div>
                             <div class="input-group">
-                                <input type="number" id="two-mult-answer-input" class="input-field" placeholder="Answer">
+                                <input type="number" id="two-div-answer-input" class="input-field" placeholder="Answer">
                             </div>
                         </div>
-                        <p id="two-digit-multiplication-feedback" class="text-xl font-semibold mt-4"></p>
+                        <p id="two-digit-division-feedback" class="text-xl font-semibold mt-4"></p>
                     </div>
 
-                    <button id="check-two-digit-multiplication-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
-                    <button id="next-two-digit-multiplication-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                    <button id="check-two-digit-division-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-two-digit-division-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
                 </div>
 
 
-                <!-- Exercise Section: Static Multiplication Exercises -->
+                <!-- Exercise Section: Static Division Exercises -->
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Multiply the Numbers</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Divide the Numbers</h3>
                     <div class="exercise-grid">
                         <div class="exercise-item">
-                            <p>1. $6 \times 7 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>1. $24 \div 4 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>2. $9 \times 4 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>2. $35 \div 5 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>3. $8 \times 5 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>3. $42 \div 6 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>4. $12 \times 3 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>4. $56 \div 7 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>5. $25 \times 4 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>5. $81 \div 9 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>6. $30 \times 6 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>6. $60 \div 10 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>7. $48 \times 2 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>7. $72 \div 8 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                         <div class="exercise-item">
-                            <p>8. $15 \times 5 = $ <input type="text" class="w-24 inline-block"></p>
+                            <p>8. $90 \div 9 = $ <input type="text" class="w-24 inline-block"></p>
                         </div>
                     </div>
                 </div>
 
                 <!-- Word Problems Section -->
                 <div class="problem-solving">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve by Multiplying</h3>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Word Problems: Solve by Dividing</h3>
                     <ol>
                         <li>
-                            <strong>There are 5 boxes, and each box has 8 pencils. How many pencils are there in total?</strong><br>
+                            <strong>You have 20 candies to share equally among 4 friends. How many candies does each friend get?</strong><br>
                             <input type="text" placeholder="Answer" class="input-field max-w-full">
                         </li>
                         <li>
-                            <strong>A baker bakes 6 cakes every day. How many cakes will he bake in 7 days?</strong><br>
+                            <strong>A class has 30 students, and they need to form groups of 5. How many groups can they form?</strong><br>
                             <input type="text" placeholder="Answer" class="input-field max-w-full">
                         </li>
                         <li>
-                            <strong>Each student needs 3 notebooks. If there are 24 students, how many notebooks are needed in total?</strong><br>
+                            <strong>A gardener has 48 flowers to plant in 6 rows. If each row has the same number of flowers, how many flowers are in each row?</strong><br>
                             <input type="text" placeholder="Answer" class="input-field max-w-full">
                         </li>
                         <li>
-                            <strong>A car travels 60 kilometers in one hour. How far will it travel in 3 hours?</strong><br>
+                            <strong>A book has 90 pages. If you read 10 pages each day, how many days will it take to finish the book?</strong><br>
                             <input type="text" placeholder="Answer" class="input-field max-w-full">
                         </li>
                     </ol>
@@ -313,17 +313,17 @@
                 <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
                     <h3 class="text-2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
                     <p class="text-blue-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
-                    <a href="grade4_lesson7.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                    <a href="grade4_lesson8.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
                         Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
 
                 <!-- Navigation between lessons -->
                 <div class="flex justify-between mt-8">
-                    <a href="grade4_lesson5.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
-                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 5
+                    <a href="grade4_lesson6.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 6
                     </a>
-                    <a href="grade4_lesson7.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                    <a href="grade4_lesson8.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
                         Next Lesson <i class="fas fa-arrow-right ml-2"></i>
                     </a>
                 </div>
@@ -419,20 +419,20 @@
                 mobileMenu.classList.add('hidden');
             });
 
-            // --- Activity 1: Single Digit Multiplication ---
-            let currentSingleDigitMultiplicationCorrectAnswer = 0;
+            // --- Activity 1: Basic Division ---
+            let currentBasicDivisionCorrectAnswer = 0;
 
-            function generateSingleDigitMultiplicationActivity() {
-                const num1Span = document.getElementById('mult-num1');
-                const num2Span = document.getElementById('mult-num2');
-                const answerInput = document.getElementById('mult-answer-input');
-                const feedback = document.getElementById('single-digit-multiplication-feedback');
-                const nextBtn = document.getElementById('next-single-digit-multiplication-btn');
-                const checkBtn = document.getElementById('check-single-digit-multiplication-btn');
+            function generateBasicDivisionActivity() {
+                const num1Span = document.getElementById('div-num1');
+                const num2Span = document.getElementById('div-num2');
+                const answerInput = document.getElementById('div-answer-input');
+                const feedback = document.getElementById('basic-division-feedback');
+                const nextBtn = document.getElementById('next-basic-division-btn');
+                const checkBtn = document.getElementById('check-basic-division-btn');
 
                 if (!num1Span || !num2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Single digit multiplication elements not found. Retrying in 1 second.");
-                    setTimeout(generateSingleDigitMultiplicationActivity, 1000);
+                    console.error("Basic division elements not found. Retrying in 1 second.");
+                    setTimeout(generateBasicDivisionActivity, 1000);
                     return;
                 }
 
@@ -444,28 +444,31 @@
                 nextBtn.classList.add('hidden');
                 checkBtn.classList.remove('hidden');
 
-                const num1 = Math.floor(Math.random() * 9) + 1; // 1 to 9
-                const num2 = Math.floor(Math.random() * 9) + 1; // 1 to 9
+                let num1, num2;
+                do {
+                    num2 = Math.floor(Math.random() * 8) + 2; // Divisor from 2 to 9
+                    num1 = num2 * (Math.floor(Math.random() * 10) + 2); // Dividend is a multiple of divisor, result 2 to 11
+                } while (num1 > 100); // Keep dividend within 2 digits for simplicity
 
                 num1Span.textContent = num1;
                 num2Span.textContent = num2;
-                currentSingleDigitMultiplicationCorrectAnswer = num1 * num2;
+                currentBasicDivisionCorrectAnswer = num1 / num2;
             }
 
-            function checkSingleDigitMultiplicationAnswers() {
-                const answerInput = document.getElementById('mult-answer-input');
-                const feedback = document.getElementById('single-digit-multiplication-feedback');
-                const nextBtn = document.getElementById('next-single-digit-multiplication-btn');
-                const checkBtn = document.getElementById('check-single-digit-multiplication-btn');
+            function checkBasicDivisionAnswers() {
+                const answerInput = document.getElementById('div-answer-input');
+                const feedback = document.getElementById('basic-division-feedback');
+                const nextBtn = document.getElementById('next-basic-division-btn');
+                const checkBtn = document.getElementById('check-basic-division-btn');
 
                 if (!answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Single digit multiplication check elements not found.");
+                    console.error("Basic division check elements not found.");
                     return;
                 }
 
                 const userAnswer = parseInt(answerInput.value.trim());
 
-                if (userAnswer === currentSingleDigitMultiplicationCorrectAnswer) {
+                if (userAnswer === currentBasicDivisionCorrectAnswer) {
                     feedback.textContent = 'Correct! Well done!';
                     feedback.className = 'text-xl font-bold text-green-600 mt-4';
                     answerInput.style.borderColor = '#10b981';
@@ -473,27 +476,27 @@
                     nextBtn.classList.remove('hidden');
                     checkBtn.classList.add('hidden');
                 } else {
-                    feedback.textContent = `Oops! The correct answer is ${currentSingleDigitMultiplicationCorrectAnswer}. Try again!`;
+                    feedback.textContent = `Oops! The correct answer is ${currentBasicDivisionCorrectAnswer}. Try again!`;
                     feedback.className = 'text-xl font-bold text-red-600 mt-4';
                     answerInput.style.borderColor = '#ef4444';
-                    setTimeout(generateSingleDigitMultiplicationActivity, 2000); // Regenerate after a delay
+                    setTimeout(generateBasicDivisionActivity, 2000); // Regenerate after a delay
                 }
             }
 
-            // --- Activity 2: Two-Digit by Single-Digit Multiplication ---
-            let currentTwoDigitMultiplicationCorrectAnswer = 0;
+            // --- Activity 2: Two-Digit by Single-Digit Division ---
+            let currentTwoDigitDivisionCorrectAnswer = 0;
 
-            function generateTwoDigitMultiplicationActivity() {
-                const num1Span = document.getElementById('two-mult-num1');
-                const num2Span = document.getElementById('two-mult-num2');
-                const answerInput = document.getElementById('two-mult-answer-input');
-                const feedback = document.getElementById('two-digit-multiplication-feedback');
-                const nextBtn = document.getElementById('next-two-digit-multiplication-btn');
-                const checkBtn = document.getElementById('check-two-digit-multiplication-btn');
+            function generateTwoDigitDivisionActivity() {
+                const num1Span = document.getElementById('two-div-num1');
+                const num2Span = document.getElementById('two-div-num2');
+                const answerInput = document.getElementById('two-div-answer-input');
+                const feedback = document.getElementById('two-digit-division-feedback');
+                const nextBtn = document.getElementById('next-two-digit-division-btn');
+                const checkBtn = document.getElementById('check-two-digit-division-btn');
 
                 if (!num1Span || !num2Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Two digit multiplication elements not found. Retrying in 1 second.");
-                    setTimeout(generateTwoDigitMultiplicationActivity, 1000);
+                    console.error("Two digit division elements not found. Retrying in 1 second.");
+                    setTimeout(generateTwoDigitDivisionActivity, 1000);
                     return;
                 }
 
@@ -505,28 +508,32 @@
                 nextBtn.classList.add('hidden');
                 checkBtn.classList.remove('hidden');
 
-                const num1 = Math.floor(Math.random() * 89) + 10; // 10 to 99
-                const num2 = Math.floor(Math.random() * 8) + 2; // 2 to 9
+                let num1, num2;
+                do {
+                    num2 = Math.floor(Math.random() * 8) + 2; // Divisor from 2 to 9
+                    // Ensure num1 is a multiple of num2 and is a two-digit number
+                    num1 = num2 * (Math.floor(Math.random() * (99 / num2 - 10 / num2 + 1)) + Math.ceil(10 / num2));
+                } while (num1 < 10 || num1 > 99); // Ensure num1 is a two-digit number
 
                 num1Span.textContent = num1;
                 num2Span.textContent = num2;
-                currentTwoDigitMultiplicationCorrectAnswer = num1 * num2;
+                currentTwoDigitDivisionCorrectAnswer = num1 / num2;
             }
 
-            function checkTwoDigitMultiplicationAnswers() {
-                const answerInput = document.getElementById('two-mult-answer-input');
-                const feedback = document.getElementById('two-digit-multiplication-feedback');
-                const nextBtn = document.getElementById('next-two-digit-multiplication-btn');
-                const checkBtn = document.getElementById('check-two-digit-multiplication-btn');
+            function checkTwoDigitDivisionAnswers() {
+                const answerInput = document.getElementById('two-div-answer-input');
+                const feedback = document.getElementById('two-digit-division-feedback');
+                const nextBtn = document.getElementById('next-two-digit-division-btn');
+                const checkBtn = document.getElementById('check-two-digit-division-btn');
 
                 if (!answerInput || !feedback || !nextBtn || !checkBtn) {
-                    console.error("Two digit multiplication check elements not found.");
+                    console.error("Two digit division check elements not found.");
                     return;
                 }
 
                 const userAnswer = parseInt(answerInput.value.trim());
 
-                if (userAnswer === currentTwoDigitMultiplicationCorrectAnswer) {
+                if (userAnswer === currentTwoDigitDivisionCorrectAnswer) {
                     feedback.textContent = 'Correct! Well done!';
                     feedback.className = 'text-xl font-bold text-green-600 mt-4';
                     answerInput.style.borderColor = '#10b981';
@@ -534,25 +541,25 @@
                     nextBtn.classList.remove('hidden');
                     checkBtn.classList.add('hidden');
                 } else {
-                    feedback.textContent = `Oops! The correct answer is ${currentTwoDigitMultiplicationCorrectAnswer}. Try again!`;
+                    feedback.textContent = `Oops! The correct answer is ${currentTwoDigitDivisionCorrectAnswer}. Try again!`;
                     feedback.className = 'text-xl font-bold text-red-600 mt-4';
                     answerInput.style.borderColor = '#ef4444';
-                    setTimeout(generateTwoDigitMultiplicationActivity, 2000); // Regenerate after a delay
+                    setTimeout(generateTwoDigitDivisionActivity, 2000); // Regenerate after a delay
                 }
             }
 
 
             // Attach event listeners for all activities
-            document.getElementById('check-single-digit-multiplication-btn').addEventListener('click', checkSingleDigitMultiplicationAnswers);
-            document.getElementById('next-single-digit-multiplication-btn').addEventListener('click', generateSingleDigitMultiplicationActivity);
+            document.getElementById('check-basic-division-btn').addEventListener('click', checkBasicDivisionAnswers);
+            document.getElementById('next-basic-division-btn').addEventListener('click', generateBasicDivisionActivity);
 
-            document.getElementById('check-two-digit-multiplication-btn').addEventListener('click', checkTwoDigitMultiplicationAnswers);
-            document.getElementById('next-two-digit-multiplication-btn').addEventListener('click', generateTwoDigitMultiplicationActivity);
+            document.getElementById('check-two-digit-division-btn').addEventListener('click', checkTwoDigitDivisionAnswers);
+            document.getElementById('next-two-digit-division-btn').addEventListener('click', generateTwoDigitDivisionActivity);
 
 
             // Initialize all activities on page load
-            generateSingleDigitMultiplicationActivity();
-            generateTwoDigitMultiplicationActivity();
+            generateBasicDivisionActivity();
+            generateTwoDigitDivisionActivity();
         });
     </script>
 </body>

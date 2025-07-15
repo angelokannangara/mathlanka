@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade 4 Math - Lesson 5: Number Patterns</title>
+    <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about number patterns.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#2563eb",
+                        secondary: "#1e40af",
+                        accent: "#f59e0b",
+                        dark: "#1e293b",
+                        light: "#f8fafc"
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .lesson-icon {
+            font-size: 3rem;
+            color: #2563eb;
+        }
+        .input-field {
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.75rem;
+            width: 100%;
+            max-width: 200px;
+            text-align: center;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .activity-section {
+            background-color: #e2e8f0;
+            border-left: 5px solid #3b82f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .example-box {
+            background-color: #dbeafe;
+            border-left: 4px solid #60a5fa;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+        }
+        .pattern-display {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .pattern-item {
+            background-color: #ffffff;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            min-width: 80px;
+            text-align: center;
+        }
+        .pattern-input {
+            width: 100px;
+            padding: 0.5rem;
+            border: 2px solid #cbd5e0;
+            border-radius: 0.5rem;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .exercise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+        .exercise-item {
+            background-color: #f7fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+        .exercise-item p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #4a5568;
+        }
+        .exercise-item input {
+            width: calc(100% - 1.5rem);
+            padding: 0.75rem;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            text-align: center;
+            color: #2d3748;
+        }
+        .problem-solving {
+            margin-top: 2rem;
+            background-color: #f7fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #ebf4ff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+        .problem-solving ol {
+            list-style-type: decimal;
+            padding-left: 1.5rem;
+        }
+        .problem-solving li {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: #4a5568;
+        }
+        .problem-solving li strong {
+            color: #2c5282;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
+                <span class="text-xl font-bold text-blue-600">MathLanka</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- User Profile/Logout Link -->
+                <h1 class="text-4xl font-bold text-gray-800 mb-4"> <span id="usernameDisplay" class="text-blue-300">Guest</span>!</h1> 
+                <button id="logoutBtn" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition duration-300 hidden">Logout</button>
+                <button class="md:hidden text-gray-700">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Lesson Content Section -->
+    <section class="py-16 bg-gradient-to-br from-indigo-50 to-blue-100 min-h-screen">
+        <div class="container mx-auto px-4 max-w-4xl bg-white rounded-xl shadow-lg p-8 md:p-12">
+            <h1 class="text-4xl font-bold text-center text-gray-800 mb-6">Lesson 5: Number Patterns - Let's identify patterns!</h1>
+            <p class="text-center text-gray-600 text-lg mb-8">For Grade 4 Students (Ages 9-10) - Let's learn to identify and complete number patterns!</p>
+
+            <div class="space-y-10">
+                <!-- Introduction and Objectives -->
+                <div class="flex flex-col md:flex-row items-center gap-6 p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <div class="md:w-1/3 flex justify-center items-center">
+                        <i class="fas fa-braille lesson-icon text-blue-600"></i>
+                    </div>
+                    <div class="md:w-2/3 text-center md:text-left">
+                        <h3 class="text-2xl font-bold text-blue-700 mb-2">What we will learn today:</h3>
+                        <p class="text-gray-700 text-lg">
+                            In this lesson, you will learn to:
+                            <ul class="list-disc list-inside text-gray-700 mt-2 ml-4">
+                                <li>Identify what **number patterns** are.</li>
+                                <li>Identify and complete **increasing patterns** (addition patterns).</li>
+                                <li>Identify and complete **decreasing patterns** (subtraction patterns).</li>
+                                <li>Find the **rule** of a pattern.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Content: What are Number Patterns -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">What are Number Patterns?</h3>
+                    <p class="text-gray-700 mb-3">
+                        A number pattern is a sequence of numbers arranged according to a specific rule. This rule can involve addition, subtraction, multiplication, or division.
+                    </p>
+                    <div class="example-box">
+                        <p class="font-semibold text-blue-700">Example:</p>
+                        <p class="text-blue-600 text-lg font-mono">2, 4, 6, 8, ... (Rule: Add 2 to each number)</p>
+                        <p class="text-blue-600 text-lg font-mono">10, 9, 8, 7, ... (Rule: Subtract 1 from each number)</p>
+                    </div>
+                </div>
+
+                <!-- Interactive Activity 1: Increasing Patterns -->
+                <div class="text-center mt-12 p-8 bg-yellow-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-yellow-800 mb-6">Activity 1: Complete Increasing Patterns!</h2>
+                    <p id="increasing-pattern-instructions" class="text-yellow-700 text-lg mb-8">Identify the pattern and enter the next two numbers.</p>
+
+                    <div id="increasing-pattern-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="pattern-display">
+                            <span id="inc-num1" class="pattern-item"></span>
+                            <span id="inc-num2" class="pattern-item"></span>
+                            <span id="inc-num3" class="pattern-item"></span>
+                            <span class="pattern-item">...</span>
+                            <input type="number" id="inc-answer1" class="pattern-input" placeholder="?">
+                            <input type="number" id="inc-answer2" class="pattern-input" placeholder="?">
+                        </div>
+                        <p id="increasing-pattern-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-increasing-pattern-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-increasing-pattern-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 2: Decreasing Patterns -->
+                <div class="text-center mt-12 p-8 bg-purple-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-purple-800 mb-6">Activity 2: Complete Decreasing Patterns!</h2>
+                    <p id="decreasing-pattern-instructions" class="text-purple-700 text-lg mb-8">Identify the pattern and enter the next two numbers.</p>
+
+                    <div id="decreasing-pattern-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="pattern-display">
+                            <span id="dec-num1" class="pattern-item"></span>
+                            <span id="dec-num2" class="pattern-item"></span>
+                            <span id="dec-num3" class="pattern-item"></span>
+                            <span class="pattern-item">...</span>
+                            <input type="number" id="dec-answer1" class="pattern-input" placeholder="?">
+                            <input type="number" id="dec-answer2" class="pattern-input" placeholder="?">
+                        </div>
+                        <p id="decreasing-pattern-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-decreasing-pattern-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-decreasing-pattern-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+                <!-- Interactive Activity 3: Find the Rule -->
+                <div class="text-center mt-12 p-8 bg-green-50 rounded-lg shadow-md">
+                    <h2 class="text-3xl font-bold text-green-800 mb-6">Activity 3: Find the Rule of the Pattern!</h2>
+                    <p id="rule-pattern-instructions" class="text-green-700 text-lg mb-8">Observe the pattern and enter its rule (e.g., +5, -3).</p>
+
+                    <div id="rule-pattern-container" class="bg-white p-6 rounded-lg shadow-inner mb-6 min-h-[150px] flex flex-col justify-center items-center">
+                        <div class="pattern-display">
+                            <span id="rule-num1" class="pattern-item"></span>
+                            <span id="rule-num2" class="pattern-item"></span>
+                            <span id="rule-num3" class="pattern-item"></span>
+                            <span id="rule-num4" class="pattern-item"></span>
+                        </div>
+                        <input type="text" id="rule-answer-input" class="input-field max-w-[250px]" placeholder="Rule (e.g., +5, -3)">
+                        <p id="rule-pattern-feedback" class="text-xl font-semibold mt-4"></p>
+                    </div>
+
+                    <button id="check-rule-pattern-btn" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 mr-2">Check Answer</button>
+                    <button id="next-rule-pattern-btn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300 hidden">Next Problem</button>
+                </div>
+
+
+                <!-- Exercise Section: Static Pattern Exercises -->
+                <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4">Exercises: Complete the Patterns</h3>
+                    <div class="exercise-grid">
+                        <div class="exercise-item">
+                            <p>1. 5, 10, 15, <input type="text" class="w-24 inline-block">, <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>2. 20, 18, 16, <input type="text" class="w-24 inline-block">, <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>3. 3, 6, 9, <input type="text" class="w-24 inline-block">, <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>4. 50, 45, 40, <input type="text" class="w-24 inline-block">, <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>5. 100, 110, 120, <input type="text" class="w-24 inline-block">, <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                        <div class="exercise-item">
+                            <p>6. 70, 63, 56, <input type="text" class="w-24 inline-block">, <input type="text" class="w-24 inline-block"></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Call to Action for Next Lesson/Quiz -->
+                <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
+                    <h3 class="text-2xl font-bold text-blue-800 mb-4">You're doing great!</h3>
+                    <p class="text-blue-700 text-lg mb-6">Ready to learn more math lessons or play fun games?</p>
+                    <a href="grade4_lesson6.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Navigation between lessons -->
+                <div class="flex justify-between mt-8">
+                    <a href="grade4_lesson4.html" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-6 py-3 rounded-lg font-medium transition duration-300">
+                        <i class="fas fa-arrow-left mr-2"></i> Back to Lesson 4
+                    </a>
+                    <a href="grade4_lesson6.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition duration-300">
+                        Next Lesson <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer (Copied from template) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
+                    <p class="text-gray-400">Making math learning fun and effective for Sri Lankan students since 2025.</p>
+                    <div class="flex space-x-4 mt-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Worksheets</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">Math Lanka</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">+94 74 176 2872</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <span class="text-gray-400">info@mathlanka.lk</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2025 MathLanka. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuButton = document.querySelector('.md\\:hidden');
+            const mobileMenu = document.createElement('div');
+            mobileMenu.className = 'hidden fixed inset-0 bg-white z-50 flex flex-col items-center justify-center';
+            mobileMenu.innerHTML = `
+                <button class="absolute top-4 right-4 text-gray-700">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <div class="flex flex-col items-center space-y-6">
+                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                </div>
+            `;
+            document.body.appendChild(mobileMenu);
+
+            mobileMenuButton.addEventListener('click', function() {
+                mobileMenu.classList.remove('hidden');
+            });
+
+            mobileMenu.querySelector('button').addEventListener('click', function() {
+                mobileMenu.classList.add('hidden');
+            });
+
+            // --- Activity 1: Increasing Patterns ---
+            let currentIncreasingPattern = [];
+            let currentIncreasingRule = 0;
+
+            function generateIncreasingPatternActivity() {
+                const num1Span = document.getElementById('inc-num1');
+                const num2Span = document.getElementById('inc-num2');
+                const num3Span = document.getElementById('inc-num3');
+                const answer1Input = document.getElementById('inc-answer1');
+                const answer2Input = document.getElementById('inc-answer2');
+                const feedback = document.getElementById('increasing-pattern-feedback');
+                const nextBtn = document.getElementById('next-increasing-pattern-btn');
+                const checkBtn = document.getElementById('check-increasing-pattern-btn');
+
+                if (!num1Span || !num2Span || !num3Span || !answer1Input || !answer2Input || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Increasing pattern elements not found. Retrying in 1 second.");
+                    setTimeout(generateIncreasingPatternActivity, 1000);
+                    return;
+                }
+
+                answer1Input.value = '';
+                answer2Input.value = '';
+                answer1Input.style.borderColor = '#cbd5e0';
+                answer2Input.style.borderColor = '#cbd5e0';
+                answer1Input.readOnly = false;
+                answer2Input.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                currentIncreasingRule = Math.floor(Math.random() * 5) + 2; // Rule: +2 to +6
+                let startNum = Math.floor(Math.random() * 20) + 1; // Start from 1 to 20
+
+                currentIncreasingPattern = [startNum];
+                for (let i = 1; i < 5; i++) { // Generate 5 numbers in the pattern
+                    currentIncreasingPattern.push(currentIncreasingPattern[i-1] + currentIncreasingRule);
+                }
+
+                num1Span.textContent = currentIncreasingPattern[0];
+                num2Span.textContent = currentIncreasingPattern[1];
+                num3Span.textContent = currentIncreasingPattern[2];
+            }
+
+            function checkIncreasingPatternAnswers() {
+                const answer1Input = document.getElementById('inc-answer1');
+                const answer2Input = document.getElementById('inc-answer2');
+                const feedback = document.getElementById('increasing-pattern-feedback');
+                const nextBtn = document.getElementById('next-increasing-pattern-btn');
+                const checkBtn = document.getElementById('check-increasing-pattern-btn');
+
+                if (!answer1Input || !answer2Input || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Increasing pattern check elements not found.");
+                    return;
+                }
+
+                const userAnswer1 = parseInt(answer1Input.value.trim());
+                const userAnswer2 = parseInt(answer2Input.value.trim());
+
+                if (userAnswer1 === currentIncreasingPattern[3] && userAnswer2 === currentIncreasingPattern[4]) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answer1Input.style.borderColor = '#10b981';
+                    answer2Input.style.borderColor = '#10b981';
+                    answer1Input.readOnly = true;
+                    answer2Input.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentIncreasingPattern[3]}, ${currentIncreasingPattern[4]}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answer1Input.style.borderColor = '#ef4444';
+                    answer2Input.style.borderColor = '#ef4444';
+                    setTimeout(generateIncreasingPatternActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 2: Decreasing Patterns ---
+            let currentDecreasingPattern = [];
+            let currentDecreasingRule = 0;
+
+            function generateDecreasingPatternActivity() {
+                const num1Span = document.getElementById('dec-num1');
+                const num2Span = document.getElementById('dec-num2');
+                const num3Span = document.getElementById('dec-num3');
+                const answer1Input = document.getElementById('dec-answer1');
+                const answer2Input = document.getElementById('dec-answer2');
+                const feedback = document.getElementById('decreasing-pattern-feedback');
+                const nextBtn = document.getElementById('next-decreasing-pattern-btn');
+                const checkBtn = document.getElementById('check-decreasing-pattern-btn');
+
+                if (!num1Span || !num2Span || !num3Span || !answer1Input || !answer2Input || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Decreasing pattern elements not found. Retrying in 1 second.");
+                    setTimeout(generateDecreasingPatternActivity, 1000);
+                    return;
+                }
+
+                answer1Input.value = '';
+                answer2Input.value = '';
+                answer1Input.style.borderColor = '#cbd5e0';
+                answer2Input.style.borderColor = '#cbd5e0';
+                answer1Input.readOnly = false;
+                answer2Input.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                currentDecreasingRule = Math.floor(Math.random() * 5) + 2; // Rule: -2 to -6
+                let startNum = Math.floor(Math.random() * 50) + 30; // Start from 30 to 80 to ensure positive numbers
+
+                currentDecreasingPattern = [startNum];
+                for (let i = 1; i < 5; i++) { // Generate 5 numbers in the pattern
+                    currentDecreasingPattern.push(currentDecreasingPattern[i-1] - currentDecreasingRule);
+                }
+
+                num1Span.textContent = currentDecreasingPattern[0];
+                num2Span.textContent = currentDecreasingPattern[1];
+                num3Span.textContent = currentDecreasingPattern[2];
+            }
+
+            function checkDecreasingPatternAnswers() {
+                const answer1Input = document.getElementById('dec-answer1');
+                const answer2Input = document.getElementById('dec-answer2');
+                const feedback = document.getElementById('decreasing-pattern-feedback');
+                const nextBtn = document.getElementById('next-decreasing-pattern-btn');
+                const checkBtn = document.getElementById('check-decreasing-pattern-btn');
+
+                if (!answer1Input || !answer2Input || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Decreasing pattern check elements not found.");
+                    return;
+                }
+
+                const userAnswer1 = parseInt(answer1Input.value.trim());
+                const userAnswer2 = parseInt(answer2Input.value.trim());
+
+                if (userAnswer1 === currentDecreasingPattern[3] && userAnswer2 === currentDecreasingPattern[4]) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answer1Input.style.borderColor = '#10b981';
+                    answer2Input.style.borderColor = '#10b981';
+                    answer1Input.readOnly = true;
+                    answer2Input.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentDecreasingPattern[3]}, ${currentDecreasingPattern[4]}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answer1Input.style.borderColor = '#ef4444';
+                    answer2Input.style.borderColor = '#ef4444';
+                    setTimeout(generateDecreasingPatternActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+            // --- Activity 3: Find the Rule ---
+            let currentRulePattern = [];
+            let currentRule = '';
+
+            function generateRulePatternActivity() {
+                const num1Span = document.getElementById('rule-num1');
+                const num2Span = document.getElementById('rule-num2');
+                const num3Span = document.getElementById('rule-num3');
+                const num4Span = document.getElementById('rule-num4');
+                const answerInput = document.getElementById('rule-answer-input');
+                const feedback = document.getElementById('rule-pattern-feedback');
+                const nextBtn = document.getElementById('next-rule-pattern-btn');
+                const checkBtn = document.getElementById('check-rule-pattern-btn');
+
+                if (!num1Span || !num2Span || !num3Span || !num4Span || !answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Rule pattern elements not found. Retrying in 1 second.");
+                    setTimeout(generateRulePatternActivity, 1000);
+                    return;
+                }
+
+                answerInput.value = '';
+                answerInput.style.borderColor = '#cbd5e0';
+                answerInput.readOnly = false;
+                feedback.textContent = '';
+                feedback.className = 'text-xl font-semibold mt-4';
+                nextBtn.classList.add('hidden');
+                checkBtn.classList.remove('hidden');
+
+                const isIncreasing = Math.random() < 0.5; // Randomly choose increasing or decreasing
+                const ruleValue = Math.floor(Math.random() * 5) + 2; // Rule: 2 to 6
+
+                let startNum;
+                if (isIncreasing) {
+                    startNum = Math.floor(Math.random() * 20) + 1; // Start from 1 to 20
+                    currentRule = `+${ruleValue}`;
+                } else {
+                    startNum = Math.floor(Math.random() * 50) + 30; // Start from 30 to 80
+                    currentRule = `-${ruleValue}`;
+                }
+
+                currentRulePattern = [startNum];
+                for (let i = 1; i < 4; i++) { // Generate 4 numbers in the pattern
+                    if (isIncreasing) {
+                        currentRulePattern.push(currentRulePattern[i-1] + ruleValue);
+                    } else {
+                        currentRulePattern.push(currentRulePattern[i-1] - ruleValue);
+                    }
+                }
+
+                num1Span.textContent = currentRulePattern[0];
+                num2Span.textContent = currentRulePattern[1];
+                num3Span.textContent = currentRulePattern[2];
+                num4Span.textContent = currentRulePattern[3];
+            }
+
+            function checkRulePatternAnswers() {
+                const answerInput = document.getElementById('rule-answer-input');
+                const feedback = document.getElementById('rule-pattern-feedback');
+                const nextBtn = document.getElementById('next-rule-pattern-btn');
+                const checkBtn = document.getElementById('check-rule-pattern-btn');
+
+                if (!answerInput || !feedback || !nextBtn || !checkBtn) {
+                    console.error("Rule pattern check elements not found.");
+                    return;
+                }
+
+                const userAnswer = answerInput.value.trim();
+
+                if (userAnswer === currentRule) {
+                    feedback.textContent = 'Correct! Well done!';
+                    feedback.className = 'text-xl font-bold text-green-600 mt-4';
+                    answerInput.style.borderColor = '#10b981';
+                    answerInput.readOnly = true;
+                    nextBtn.classList.remove('hidden');
+                    checkBtn.classList.add('hidden');
+                } else {
+                    feedback.textContent = `Oops! The correct answer is ${currentRule}. Try again!`;
+                    feedback.className = 'text-xl font-bold text-red-600 mt-4';
+                    answerInput.style.borderColor = '#ef4444';
+                    setTimeout(generateRulePatternActivity, 2000); // Regenerate after a delay
+                }
+            }
+
+
+            // Attach event listeners for all activities
+            document.getElementById('check-increasing-pattern-btn').addEventListener('click', checkIncreasingPatternAnswers);
+            document.getElementById('next-increasing-pattern-btn').addEventListener('click', generateIncreasingPatternActivity);
+
+            document.getElementById('check-decreasing-pattern-btn').addEventListener('click', checkDecreasingPatternAnswers);
+            document.getElementById('next-decreasing-pattern-btn').addEventListener('click', generateDecreasingPatternActivity);
+
+            document.getElementById('check-rule-pattern-btn').addEventListener('click', checkRulePatternAnswers);
+            document.getElementById('next-rule-pattern-btn').addEventListener('click', generateRulePatternActivity);
+
+
+            // Initialize all activities on page load
+            generateIncreasingPatternActivity();
+            generateDecreasingPatternActivity();
+            generateRulePatternActivity();
+        });
+    </script>
+</body>
+</html>
