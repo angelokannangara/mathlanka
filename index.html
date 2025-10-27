@@ -50,6 +50,75 @@
         #input-area { display: flex; padding: 5px; }
         #user-input { flex-grow: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px 0 0 5px; }
         #send-button { padding: 8px; border: none; background-color: #4CAF50; color: white; border-radius: 0 5px 5px 0; cursor: pointer; }
+        #chatbot-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 350px;
+    max-width: 90%;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+
+  #chatbot-header {
+    background: #4CAF50;
+    color: #fff;
+    padding: 12px;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  #chatbot-messages {
+    height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+    background: #f9f9f9;
+    flex-grow: 1;
+  }
+
+  #chatbot-input-container {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  #chatbot-input {
+    flex-grow: 1;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  #chatbot-send {
+    background: #4CAF50;
+    border: none;
+    color: white;
+    padding: 0 16px;
+    cursor: pointer;
+  }
+
+  .chatbot-message {
+    margin: 6px 0;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
+  }
+
+  .user-message {
+    background: #DCF8C6;
+    align-self: flex-end;
+  }
+
+  .bot-message {
+    background: #eee;
+    align-self: flex-start;
+  }
+
     </style>
 </head>
 <body class="bg-gray-50">
@@ -178,6 +247,14 @@
             </div>
         </div>
     </section>
+    <div id="chatbot-container">
+        <div id="chatbot-header" onclick="toggleChat()">MathLanka Bot</div>
+        <div id="chatbot-messages"></div>
+        <div id="chatbot-input-container">
+          <input type="text" id="chatbot-input" placeholder="Ask me a math question..." onkeydown="if(event.key==='Enter'){sendMessage();}" />
+          <button id="chatbot-send" onclick="sendMessage()">Send</button>
+        </div>
+      </div>
 
     <!-- Games Section -->
     <section id="games" class="py-16 bg-white">
@@ -497,6 +574,61 @@
         document.getElementById('user-input').focus();
     }
 }
+let chatVisible = true;
+  const messagesDiv = document.getElementById('chatbot-messages');
+
+  function toggleChat() {
+    chatVisible = !chatVisible;
+    messagesDiv.style.display = chatVisible ? 'block' : 'none';
+    document.getElementById('chatbot-input-container').style.display = chatVisible ? 'flex' : 'none';
+  }
+
+  async function sendMessage() {
+    const input = document.getElementById('chatbot-input');
+    const userText = input.value.trim();
+    if (!userText) return;
+
+    // Display user message
+    const userMsgDiv = document.createElement('div');
+    userMsgDiv.className = 'chatbot-message user-message';
+    userMsgDiv.textContent = userText;
+    messagesDiv.appendChild(userMsgDiv);
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    input.value = '';
+
+    // Call Apilage AI API
+    try {
+      const response = await fetch('https://api.apilage.ai/v1/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer YOUR_API_KEY'  // <-- Replace with your Apilage API key
+        },
+        body: JSON.stringify({
+          model: 'gpt-5-mini',
+          messages: [{role: 'user', content: userText}]
+        })
+      });
+      const data = await response.json();
+      const botReply = data.choices[0].message.content;
+
+      const botMsgDiv = document.createElement('div');
+      botMsgDiv.className = 'chatbot-message bot-message';
+      botMsgDiv.textContent = botReply;
+      messagesDiv.appendChild(botMsgDiv);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+
+    } catch (error) {
+      const errorMsg = document.createElement('div');
+      errorMsg.className = 'chatbot-message bot-message';
+      errorMsg.textContent = "Sorry, I couldn't reach the server. Try again later!";
+      messagesDiv.appendChild(errorMsg);
+      messagesDiv.scrollTop = messagesDiv.scrollHeight;
+      console.error(error);
+    }
+  }
+
 
     
     </script>
