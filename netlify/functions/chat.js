@@ -2,7 +2,7 @@
 // ------------------------------------------------------------------
 // CRITICAL: This line defines the function entry point Netlify looks for
 // ------------------------------------------------------------------
-exports.handler = async (event) => {
+export async function handler(event) {
     // Basic security check: Only allow POST requests
     if (event.httpMethod !== 'POST') {
         return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
@@ -31,4 +31,4 @@ exports.handler = async (event) => {
     } catch (error) {
         // ... (error handling)
     }
-};
+}
