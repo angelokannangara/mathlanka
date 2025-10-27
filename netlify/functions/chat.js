@@ -1,34 +1,46 @@
 // netlify/functions/chat.js
-// ------------------------------------------------------------------
-// CRITICAL: This line defines the function entry point Netlify looks for
-// ------------------------------------------------------------------
 export async function handler(event) {
-    // Basic security check: Only allow POST requests
     if (event.httpMethod !== 'POST') {
-        return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+      return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
     }
-
-    // --- SECURE CONFIGURATION ---
-    const APILAGE_AI_API_KEY = process.env.APALAGE_AI_KEY;
-    const APILAGE_AI_URL = 'https://endpoint.apilageai.lk/.netlify/functions/chat';
-    const MODEL = 'APILAGEAI-PRO'; 
-    
-    // Test log added in the previous step (optional, but helpful)
-    console.log('Function started. Key status:', APILAGE_AI_API_KEY ? 'Present' : 'Missing'); 
-    
+  
+    const APILAGE_AI_KEY = process.env.APILAGE_AI_KEY;
+    const APILAGE_AI_URL = 'https://api.apilageai.lk/v1/chat/completions'; // <-- official endpoint
+    const MODEL = 'APILAGEAI-PRO';
+  
+    if (!APILAGE_AI_KEY) {
+      console.error("Missing Apilage AI key in environment variables");
+      return { statusCode: 500, body: JSON.stringify({ error: 'Missing API key' }) };
+    }
+  
     try {
-        // ... (The rest of your code to parse event.body and call fetch)
-        const { message } = JSON.parse(event.body);
-
-        // ... (The fetch call and response handling)
-        const response = await fetch(APILAGE_AI_URL, {
-            method: 'POST',
-            // ...
-        });
-
-        // ... (response processing)
-        
+      const { message } = JSON.parse(event.body);
+  
+      const response = await fetch(APILAGE_AI_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${APILAGE_AI_KEY}`
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          messages: [{ role: 'user', content: message }]
+        })
+      });
+  
+      const data = await response.json();
+  
+      // Apilage AI usually returns { reply: "..." } or similar
+      const botReply = data.reply || data.choices?.[0]?.message?.content || "Sorry, I didn’t get that.";
+  
+      return {
+        statusCode: 200,
+        body: JSON.stringify({ response: botReply })
+      };
+  
     } catch (error) {
-        // ... (error handling)
+      console.error("Apilage AI error:", error);
+      return { statusCode: 500, body: JSON.stringify({ error: 'Internal Server Error' }) };
     }
-}
+  }
+  

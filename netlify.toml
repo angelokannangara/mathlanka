@@ -1,12 +1,8 @@
 [build]
-  # This tells Netlify where your functions are located
   functions = "netlify/functions"
 
 [[redirects]]
-  # This must match your frontend request URL
-  from = "/api/chat"
-  # This must match the actual function path
-  to = "/.netlify/functions/chat"
-  # CRITICAL: This allows all HTTP methods (like POST) to be routed to the function
-  status = 200
-  force = true
+from = "/api/chat"
+to = "/.netlify/functions/chat"
+status = 200
+force = true
