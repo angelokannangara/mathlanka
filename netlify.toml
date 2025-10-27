@@ -1,11 +1,8 @@
 [build]
-  # This tells Netlify where your functions are
   functions = "netlify/functions"
 
 [[redirects]]
   from = "/api/chat"
   to = "/.netlify/functions/chat"
-  # Set status to 200 for a seamless redirect
   status = 200
-  # FORCE = TRUE is critical for routing POST/OPTIONS methods to the function
   force = true
