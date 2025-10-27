@@ -498,72 +498,7 @@
     }
 }
 
-// Paste this entire block into your <script> tag (near the closing </body>)
-
-    function toggleChat() {
-    const chatContainer = document.getElementById('chatbot-container');
-    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
-    if (chatContainer.style.display === 'flex') {
-        document.getElementById('user-input').focus();
-    }
-}
-
-async function sendMessage() {
-    const userInput = document.getElementById('user-input');
-    const message = userInput.value.trim();
-    if (message === '') return;
-
-    // 1. Display User Message
-    addMessage(message, 'user-message');
-    userInput.value = '';
     
-    // 2. Display 'Thinking' Message
-    // Class name is 'bot-message loading-message' (two separate classes)
-    const thinkingMessage = addMessage('MathBot is thinking...', 'bot-message loading-message');
-    
-    try {
-        const response = await fetch('/api/chat', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ message })
-});
-
-        const data = await response.json();
-        
-        thinkingMessage.remove();
-
-        if (response.ok) {
-            addMessage(data.response, 'bot-message');
-        } else {
-            console.error('API Error:', data.error);
-            addMessage('Error: Sorry, I couldn\'t process that request.', 'bot-message');
-        }
-
-    } catch (error) {
-        console.error('Fetch error:', error);
-        thinkingMessage.remove();
-        addMessage('An internal connection error occurred.', 'bot-message');
-    }
-}
-
-// *** THE CRITICAL FIX IS HERE ***
-function addMessage(text, className) {
-    const chatBox = document.getElementById('chat-box');
-    const messageDiv = document.createElement('div');
-    
-    // Add the mandatory 'message' class first
-    messageDiv.classList.add('message');
-    
-    // Then safely add any other classes passed in the 'className' string
-    // by splitting the string by spaces and using the spread operator (...)
-    messageDiv.classList.add(...className.split(' ').filter(cls => cls.length > 0));
-
-    messageDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
-    chatBox.appendChild(messageDiv);
-    chatBox.scrollTop = chatBox.scrollHeight;
-    return messageDiv;
-}
-        
     </script>
 </body>
 </html>
