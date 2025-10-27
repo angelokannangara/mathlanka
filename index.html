@@ -37,6 +37,19 @@
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
+        #chat-button { position: fixed; bottom: 20px; right: 20px; padding: 10px; cursor: pointer; z-index: 1001; }
+        #chatbot-container {
+            position: fixed; bottom: 70px; right: 20px; width: 300px; height: 400px; 
+            border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            display: none; flex-direction: column; background-color: white; z-index: 1000;
+        }
+        #chat-box { flex-grow: 1; padding: 10px; overflow-y: auto; border-bottom: 1px solid #eee; }
+        .message { padding: 8px; margin-bottom: 8px; border-radius: 10px; max-width: 80%; font-size: 14px; }
+        .user-message { background-color: #e3f2fd; margin-left: auto; text-align: right; }
+        .bot-message { background-color: #f1f8e9; margin-right: auto; }
+        #input-area { display: flex; padding: 5px; }
+        #user-input { flex-grow: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px 0 0 5px; }
+        #send-button { padding: 8px; border: none; background-color: #4CAF50; color: white; border-radius: 0 5px 5px 0; cursor: pointer; }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -218,6 +231,18 @@
             </div>
         </div>
     </section>
+    <button id="chat-button" onclick="toggleChat()">Open Math Tutor</button>
+
+    <div id="chatbot-container">
+        <div id="chat-box">
+            <div class="message bot-message">Hello! I'm MathBot, your AI tutor. Ask me any math or curriculum question!</div>
+        </div>
+        <div id="input-area">
+            <input type="text" id="user-input" placeholder="Type your question..." onkeypress="if(event.key === 'Enter') sendMessage()">
+            <button id="send-button" onclick="sendMessage()">Send</button>
+        </div>
+        <small style="font-size: 10px; padding: 5px; text-align: center;">Powered by Apalage AI (APILAGEAI-PRO)</small>
+    </div>
     <script src="//code.tidio.co/b2yjewyp3xbfzv0h706vhbn04me3n1ie.js" async></script>
     <!-- Testimonials -->
     <section class="py-16 bg-blue-50">
@@ -465,7 +490,66 @@
             appId: "1:919138495654:web:50af907fc5b3f55b9b1867",
             measurementId: "G-XW99KH0VWM"
         };
+        function toggleChat() {
+    const chatContainer = document.getElementById('chatbot-container');
+    chatContainer.style.display = chatContainer.style.display === 'none' ? 'flex' : 'none';
+    if (chatContainer.style.display === 'flex') {
+        document.getElementById('user-input').focus();
+    }
+}
 
+async function sendMessage() {
+    const userInput = document.getElementById('user-input');
+    const message = userInput.value.trim();
+    if (message === '') return;
+
+    // 1. Display User Message
+    addMessage(message, 'user-message');
+    userInput.value = '';
+    
+    // 2. Display 'Thinking' Message
+    const thinkingMessage = addMessage('MathBot is thinking...', 'bot-message loading-message');
+    
+    try {
+        // *** CRITICAL CHANGE: This calls the Netlify Serverless Function ***
+        const response = await fetch('/.netlify/functions/chat', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ message: message })
+        });
+
+        const data = await response.json();
+        
+        // Remove 'Thinking' message
+        thinkingMessage.remove();
+
+        if (response.ok) { // Check for HTTP 200 status
+            addMessage(data.response, 'bot-message');
+        } else {
+            // Handle error from the Netlify function
+            console.error('API Error:', data.error);
+            addMessage('Error: Sorry, I couldn\'t process that request.', 'bot-message');
+        }
+
+    } catch (error) {
+        console.error('Fetch error:', error);
+        thinkingMessage.remove();
+        addMessage('An internal connection error occurred.', 'bot-message');
+    }
+}
+
+function addMessage(text, className) {
+    const chatBox = document.getElementById('chat-box');
+    const messageDiv = document.createElement('div');
+    messageDiv.classList.add('message', className);
+    // Basic Markdown support for cleaner response display
+    messageDiv.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
+    chatBox.appendChild(messageDiv);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    return messageDiv;
+}
         
     </script>
 </body>
