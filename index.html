@@ -317,145 +317,250 @@
         </div>
     </section>
     <style>
+        /* Define Color Variables for easy theme changes */
+        :root {
+            --mathlanka-blue: #4285f4;
+            --mathlanka-yellow: #fbbc05;
+            --text-dark: #333;
+            --text-light: #fff;
+            --bg-light: #f9f9f9;
+            --bg-white: #fff;
+        }
+        
+        /* --- Floating Button Style (The Bubble) --- */
+        #floating-chat-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: var(--mathlanka-blue);
+            color: var(--text-light);
+            font-size: 28px;
+            line-height: 60px;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+            transition: transform 0.3s ease, background-color 0.2s;
+            /* Optional: Hide when chat is open for a cleaner look */
+            /* display: none; */ 
+        }
+        
+        #floating-chat-button:hover {
+            background-color: #356be0; /* Darker blue on hover */
+            transform: scale(1.05);
+        }
+        
+        
+        /* --- Main Chat Window Style --- */
         #chatbot-container {
-          position: fixed;
-          bottom: 20px;
-          right: 20px;
-          width: 350px;
-          max-width: 90%;
-          font-family: Arial, sans-serif;
-          box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-          border-radius: 12px;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          background: #fff;
+            position: fixed;
+            bottom: 100px; /* Position above the floating button */
+            right: 20px;
+            width: 350px;
+            max-width: 90%;
+            height: 450px; /* Set a fixed height for better mobile viewing */
+            font-family: Arial, sans-serif;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-white);
+            z-index: 999;
         }
-      
+        
+        /* --- Header Style (Blue) --- */
         #chatbot-header {
-          background: #4CAF50;
-          color: #fff;
-          padding: 12px;
-          font-size: 16px;
-          text-align: center;
-          cursor: pointer;
+            background: var(--mathlanka-blue);
+            color: var(--text-light);
+            padding: 15px;
+            font-size: 1.1em;
+            font-weight: bold;
+            text-align: center;
+            cursor: pointer;
+            user-select: none; /* Prevents text selection on header click */
         }
-      
+        
+        /* --- Messages Area Style --- */
         #chatbot-messages {
-          height: 300px;
-          overflow-y: auto;
-          padding: 10px;
-          background: #f9f9f9;
-          flex-grow: 1;
+            flex-grow: 1;
+            height: 300px; /* Your original height, but flex-grow helps it fill space */
+            overflow-y: auto;
+            padding: 10px;
+            background: var(--bg-light);
+            display: flex; /* Enable flex for message alignment */
+            flex-direction: column;
         }
-      
+        
+        /* Scrollbar styling for a cleaner look */
+        #chatbot-messages::-webkit-scrollbar {
+            width: 6px;
+        }
+        #chatbot-messages::-webkit-scrollbar-thumb {
+            background-color: #cccccc;
+            border-radius: 10px;
+        }
+        
+        /* --- Input Area Style --- */
         #chatbot-input-container {
-          display: flex;
-          border-top: 1px solid #ddd;
+            display: flex;
+            border-top: 1px solid #ddd;
+            background: var(--bg-white);
         }
-      
+        
         #chatbot-input {
-          flex-grow: 1;
-          border: none;
-          padding: 10px;
-          font-size: 14px;
+            flex-grow: 1;
+            border: none;
+            padding: 12px;
+            font-size: 14px;
+            outline: none;
         }
-      
+        
+        /* --- Send Button Style (Yellow) --- */
         #chatbot-send {
-          background: #4CAF50;
-          border: none;
-          color: white;
-          padding: 0 16px;
-          cursor: pointer;
+            background: var(--mathlanka-yellow);
+            border: none;
+            color: var(--text-dark); /* Dark text on yellow for readability */
+            padding: 0 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.2s;
         }
-      
+        
+        #chatbot-send:hover {
+            background-color: #e0a300; /* Darker yellow on hover */
+        }
+        
+        /* --- Chat Bubble Styles --- */
         .chatbot-message {
-          margin: 6px 0;
-          padding: 8px 12px;
-          border-radius: 10px;
-          max-width: 80%;
+            margin: 6px 0;
+            padding: 10px 14px;
+            border-radius: 15px;
+            max-width: 80%;
+            line-height: 1.4;
         }
-      
+        
+        /* User Message (Yellow) */
         .user-message {
-          background: #DCF8C6;
-          align-self: flex-end;
+            background: var(--mathlanka-yellow);
+            color: var(--text-dark);
+            margin-left: auto; /* Aligns to the right */
+            border-bottom-right-radius: 5px;
         }
-      
+        
+        /* Bot Message (Light Gray) */
         .bot-message {
-          background: #eee;
-          align-self: flex-start;
+            background: #e6e6e6;
+            color: var(--text-dark);
+            margin-right: auto; /* Aligns to the left */
+            border-bottom-left-radius: 5px;
         }
+        
+        /* Initial Message Styling */
+        .initial-message {
+            background-color: #e0f2f7; 
+            font-style: italic;
+            font-size: 0.9em;
+            margin-right: auto;
+        }
+        </style>
       
-      </style>
-      
-      <div id="chatbot-container">
-        <div id="chatbot-header" onclick="toggleChat()">MathLanka Bot</div>
-        <div id="chatbot-messages"></div>
-        <div id="chatbot-input-container">
-          <input type="text" id="chatbot-input" placeholder="Ask me a math question..." onkeydown="if(event.key==='Enter'){sendMessage();}" />
-          <button id="chatbot-send" onclick="sendMessage()">Send</button>
+      <button id="floating-chat-button" onclick="toggleChat()">
+        💬
+    </button>
+    
+    <div id="chatbot-container" style="display: none;">
+        <div id="chatbot-header" onclick="toggleChat()">
+            MathLanka Bot 🤖
         </div>
-      </div>
+        <div id="chatbot-messages">
+            <div class="chatbot-message bot-message initial-message">
+                Hello! I'm your MathLanka AI Assistant. How can I help you with your math today?
+            </div>
+        </div>
+        <div id="chatbot-input-container">
+            <input type="text" id="chatbot-input" placeholder="Ask me a math question..." onkeydown="if(event.key==='Enter'){sendMessage();}" />
+            <button id="chatbot-send" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
       
-      <script>
-        let chatVisible = true;
+    <script>
+        const chatContainer = document.getElementById('chatbot-container');
+        const floatButton = document.getElementById('floating-chat-button');
         const messagesDiv = document.getElementById('chatbot-messages');
-      
+    
+        // Function to handle opening and closing the chat window
         function toggleChat() {
-          chatVisible = !chatVisible;
-          messagesDiv.style.display = chatVisible ? 'block' : 'none';
-          document.getElementById('chatbot-input-container').style.display = chatVisible ? 'flex' : 'none';
+            if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+                chatContainer.style.display = 'flex'; // Show chat window
+                floatButton.style.display = 'none'; // Hide floating button
+            } else {
+                chatContainer.style.display = 'none'; // Hide chat window
+                floatButton.style.display = 'block'; // Show floating button
+            }
         }
-      
+    
+        // You must set the initial state (hidden) on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            chatContainer.style.display = 'none';
+            floatButton.style.display = 'block';
+        });
+    
+        // --- sendMessage function remains mostly the same, ensuring correct class usage ---
         async function sendMessage() {
-          const input = document.getElementById('chatbot-input');
-          const userText = input.value.trim();
-          if (!userText) return;
-      
-          // Display user message
-          const userMsgDiv = document.createElement('div');
-          userMsgDiv.className = 'chatbot-message user-message';
-          userMsgDiv.textContent = userText;
-          messagesDiv.appendChild(userMsgDiv);
-          messagesDiv.scrollTop = messagesDiv.scrollHeight;
-      
-          input.value = '';
-      
-          try {
-            const response = await fetch('https://endpoint.apilageai.lk/api/chat', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer apk_6QKCzfs0OVzuip2cG0vLvn4sbwFf2x5q' // Your Apilage API key
-              },
-              body: JSON.stringify({
-                message: userText,
-                enableGoogleSearch: true,
-                model: 'APILAGEAI-PRO'
-              })
-            });
-      
-            const data = await response.json();
-            const botReply = data.response;  // This is the bot's answer
-            console.log('Credits used:', data.credits_used);
-            console.log('Token usage:', data.token_usage);
-      
-            const botMsgDiv = document.createElement('div');
-            botMsgDiv.className = 'chatbot-message bot-message';
-            botMsgDiv.textContent = botReply;
-            messagesDiv.appendChild(botMsgDiv);
+            const input = document.getElementById('chatbot-input');
+            const userText = input.value.trim();
+            if (!userText) return;
+    
+            // Display user message
+            const userMsgDiv = document.createElement('div');
+            userMsgDiv.className = 'chatbot-message user-message';
+            userMsgDiv.textContent = userText;
+            messagesDiv.appendChild(userMsgDiv);
             messagesDiv.scrollTop = messagesDiv.scrollHeight;
-      
-          } catch (error) {
-            const errorMsg = document.createElement('div');
-            errorMsg.className = 'chatbot-message bot-message';
-            errorMsg.textContent = "Sorry, I couldn't reach the server. Try again later!";
-            messagesDiv.appendChild(errorMsg);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-            console.error(error);
-          }
+    
+            input.value = '';
+    
+            // *** API CALL LOGIC ***
+            try {
+                // Note: I'm keeping your API key and endpoint as provided in the prompt
+                const response = await fetch('https://endpoint.apilageai.lk/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Bearer apk_6QKCzfs0OVzuip2cG0vLvn4sbwFf2x5q'
+                    },
+                    body: JSON.stringify({
+                        message: userText,
+                        enableGoogleSearch: true,
+                        model: 'APILAGEAI-PRO'
+                    })
+                });
+    
+                const data = await response.json();
+                const botReply = data.response; 
+                
+                // Display bot message
+                const botMsgDiv = document.createElement('div');
+                botMsgDiv.className = 'chatbot-message bot-message';
+                botMsgDiv.textContent = botReply;
+                messagesDiv.appendChild(botMsgDiv);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    
+            } catch (error) {
+                const errorMsg = document.createElement('div');
+                errorMsg.className = 'chatbot-message bot-message';
+                errorMsg.textContent = "Sorry, I couldn't reach the server. Try again later!";
+                messagesDiv.appendChild(errorMsg);
+                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                console.error(error);
+            }
         }
-      </script>
+    </script>
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-4">
