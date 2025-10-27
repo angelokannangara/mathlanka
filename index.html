@@ -43,13 +43,6 @@
             border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             display: none; flex-direction: column; background-color: white; z-index: 1000;
         }
-        #chat-box { flex-grow: 1; padding: 10px; overflow-y: auto; border-bottom: 1px solid #eee; }
-        .message { padding: 8px; margin-bottom: 8px; border-radius: 10px; max-width: 80%; font-size: 14px; }
-        .user-message { background-color: #e3f2fd; margin-left: auto; text-align: right; }
-        .bot-message { background-color: #f1f8e9; margin-right: auto; }
-        #input-area { display: flex; padding: 5px; }
-        #user-input { flex-grow: 1; padding: 8px; border: 1px solid #ddd; border-radius: 5px 0 0 5px; }
-        #send-button { padding: 8px; border: none; background-color: #4CAF50; color: white; border-radius: 0 5px 5px 0; cursor: pointer; }
         #chatbot-container {
     position: fixed;
     bottom: 20px;
@@ -308,7 +301,7 @@
             </div>
         </div>
     </section>
-    <button id="chat-button" onclick="toggleChat()">Open Math Tutor</button>
+    
 
     <div id="chatbot-container">
         <div id="chat-box">
