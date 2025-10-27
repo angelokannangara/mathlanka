@@ -10,7 +10,7 @@ export async function handler(event) {
 
     // --- SECURE CONFIGURATION ---
     const APILAGE_AI_API_KEY = process.env.APALAGE_AI_KEY;
-    const APILAGE_AI_URL = 'https://endpoint.apilageai.lk/api/chat';
+    const APILAGE_AI_URL = 'https://endpoint.apilageai.lk/.netlify/functions/chat';
     const MODEL = 'APILAGEAI-PRO'; 
     
     // Test log added in the previous step (optional, but helpful)
