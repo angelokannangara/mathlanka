@@ -1,14 +1,12 @@
-# netlify.toml
 [build]
   # This line confirms where your functions are located
   functions = "netlify/functions"
 
 [[redirects]]
-  # Define a cleaner endpoint path
+  # This must match the URL in your frontend JS
   from = "/api/chat"
-  # Map the clean path to the actual function path
+  # This must match the actual function location
   to = "/.netlify/functions/chat"
-  # Set the status code to 200 (Success) for a seamless redirect
+  # This forces Netlify to handle ALL methods (GET, POST, OPTIONS) as a function call
   status = 200
-  # Allow all HTTP methods (crucial for fixing 405 errors)
   force = true
