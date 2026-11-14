@@ -1,173 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Math Lanka - Welcome</title>
-    <link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
-    <meta name="description" content="User dashboard for MathLanka to access lessons and games">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: "#2563eb",
-                        secondary: "#1e40af",
-                        accent: "#f59e0b",
-                        dark: "#1e293b",
-                        light: "#f8fafc"
-                    },
-                    fontFamily: {
-                        sans: ['"Segoe UI"', 'Roboto', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
-        body {
-            font-family: 'Roboto', sans-serif;
-        }
-        .course-card {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-        }
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        /* Specific styles for game cards similar to index.html */
-        .game-card {
-            background-color: #ffffff; /* Adjusted from gray-50 to white for consistency with course cards */
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            overflow: hidden;
-        }
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-        .game-icon-circle {
-            width: 48px; /* w-12 */
-            height: 48px; /* h-12 */
-            border-radius: 9999px; /* rounded-full */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-right: 16px; /* mr-4 */
-        }
-    </style>
-</head>
-<body class="bg-gray-50 flex flex-col min-h-screen">
-    <!-- Header with Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-4 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div>
-                <span class="text-xl font-bold text-blue-600">MathLanka</span>
-            </div>
-            <div class="hidden md:flex space-x-6">
-                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
-                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
-                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
-                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
-            </div>
-        </nav>
-    </header>
-
-    <!-- Main Content for Dashboard -->
-    <main class="flex-grow py-16 bg-gradient-to-br from-blue-50 to-indigo-100">
-        <div class="container mx-auto px-4 max-w-7xl bg-white rounded-xl shadow-lg p-8 md:p-12 text-center">
-                                
-            <h3 class="text-3xl font-bold text-gray-800 mb-4">මාධ්‍යය තෝරන්න Select the medium</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12"> 
-               <!-- Sinhala medium Card -->
-                <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
-                    <img src="https://placehold.co/400x200/90EE90/000000?text=Sinhala" alt="SM" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mt-4">    
-                            <a href="Sinhala Medium/sinhaladb.html" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">ආරම්භ කරන්න &rarr;</a>
-                        </div>
-                    </div>
-                </div> 
-                <!-- English medium Card -->
-                <div class="w-full max-w-sm bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-300 hover:scale-105 border border-gray-200">
-                    <img src="https://placehold.co/400x200/ADD8E6/000000?text=English" alt="EM" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <div class="flex justify-between items-center mt-4">
-                            <a href="English Medium/englishdb.html" class="text-blue-600 font-medium hover:text-blue-800 transition duration-200 ease-in-out">Start &rarr;</a>
-                        </div>
-                    </div>
-                </div> 
-
-
-            </div>
-        </div>
-    </main>
-
-    <!-- Footer (Copied from index.html) -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-xl font-bold mb-4">MathLanka</h3>
-                    <p class="text-gray-400">Making mathematics learning fun and effective for Sri Lankan students since 2025.</p>
-                    <div class="flex space-x-4 mt-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2">
-                        <li><a href="/mathlanka/index.html" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="/mathlanka/index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
-                        <li><a href="/mathlanka/index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
-                        <li><a href="/mathlanka/index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Blog</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Help Center</a></li>
-                        <li><a href="#" class="text-400 hover:text-white">Tutorials</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Practice Papers</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Scholarship Info</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Contact Us</h4>
-                    <ul class="space-y-2">
-                        <li class="flex items-center">
-                            <i class="fas fa-map-marker-alt mr-2 text-gray-400"></i>
-                            <span class="text-gray-400">Math Lanka</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-phone-alt mr-2 text-gray-400"></i>
-                            <span class="text-gray-400">+94 74 176 2872</span>
-                        </li>
-                        <li class="flex items-center">
-                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
-                            <span class="text-gray-400">info@mathlanka.lk</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; 2025 MathLanka. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"><style>body{font-family:Roboto,"Segoe UI",sans-serif}</style><title>MathLanka - My Dashboard</title></head>
+<body class="bg-gray-50 min-h-screen flex flex-col"><header class="bg-white shadow-md sticky top-0 z-50"><nav class="container mx-auto px-4 py-3 flex justify-between items-center"><a href="index.html" class="flex items-center space-x-2"><div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div><span class="text-xl font-bold text-blue-600">MathLanka</span></a><div class="hidden md:flex space-x-6"><a href="learn.html" class="text-gray-700 hover:text-blue-600 font-medium">Lessons</a><a href="practice.html" class="text-gray-700 hover:text-blue-600 font-medium">Practice</a><a href="practice.html?mode=speed" class="text-gray-700 hover:text-blue-600 font-medium">Speed Math</a></div></nav></header>
+<main class="container mx-auto px-4 py-8 max-w-6xl flex-grow">
+<div id="load" class="text-center text-gray-500 py-20">Loading your dashboard…</div>
+<div id="app" class="hidden space-y-6">
+ <div id="guestBar" class="hidden bg-yellow-50 border border-yellow-300 text-yellow-900 rounded-xl p-4 text-sm flex flex-wrap items-center justify-between gap-2"><span>👋 You're using a <b>guest</b> profile. Scores are saved on this device only.</span><a href="login.html?mode=signup&next=dashboard.html" class="bg-yellow-400 hover:bg-yellow-500 font-bold px-4 py-2 rounded-lg">Create free account</a></div>
+ <section class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-2xl p-6 flex flex-wrap items-center gap-5 shadow-lg">
+  <div id="av" class="w-16 h-16 rounded-full bg-white text-blue-600 text-3xl font-bold flex items-center justify-center"></div>
+  <div class="flex-1 min-w-[220px]"><h1 class="text-2xl font-bold" id="hello"></h1><p class="text-blue-100 text-sm" id="sub"></p>
+   <div class="mt-3 text-sm flex justify-between"><span id="lvl" class="font-semibold"></span><span id="xpt"></span></div><div class="h-3 bg-blue-400/50 rounded-full overflow-hidden"><div id="xpb" class="h-full bg-yellow-300 rounded-full" style="width:0"></div></div></div>
+  <div class="flex gap-2"><button id="edit" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-semibold">Edit profile</button><button id="out" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-semibold">Log out</button></div>
+ </section>
+ <section id="stats" class="grid grid-cols-2 md:grid-cols-4 gap-4"></section>
+ <section class="grid md:grid-cols-3 gap-6">
+  <div class="bg-white rounded-2xl shadow p-6 md:col-span-2"><h2 class="font-bold text-lg mb-4">📚 Lesson progress <span class="text-sm font-normal text-gray-500">(passed = 60%+)</span></h2><div id="grades" class="space-y-4"></div></div>
+  <div class="bg-white rounded-2xl shadow p-6"><h2 class="font-bold text-lg mb-3">🎯 Next up</h2><div id="rec"></div></div>
+ </section>
+ <section class="grid md:grid-cols-2 gap-6">
+  <div class="bg-white rounded-2xl shadow p-6"><h2 class="font-bold text-lg mb-4">🧠 Skills (accuracy by topic)</h2><div id="skills" class="space-y-3"></div></div>
+  <div class="bg-white rounded-2xl shadow p-6"><h2 class="font-bold text-lg mb-4">🏅 Badges</h2><div id="badges" class="grid grid-cols-2 sm:grid-cols-3 gap-3"></div></div>
+ </section>
+ <section class="bg-white rounded-2xl shadow p-6"><h2 class="font-bold text-lg mb-4">🕒 Recent quizzes</h2><div class="overflow-x-auto"><table class="w-full text-sm"><thead><tr class="text-left text-gray-500 border-b"><th class="py-2">When</th><th>Quiz</th><th>Topic</th><th>Score</th><th>Time</th></tr></thead><tbody id="recent"></tbody></table></div></section>
+</div>
+<div id="modal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center z-[60] p-4"><div class="bg-white rounded-2xl p-6 w-full max-w-sm space-y-3"><h3 class="font-bold text-lg">Edit profile</h3>
+ <input id="pn" class="w-full border rounded-lg p-3" maxlength="40"><select id="pg" class="w-full border rounded-lg p-3"><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3">Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option></select>
+ <select id="pm" class="w-full border rounded-lg p-3"><option value="en">English medium</option><option value="si">සිංහල මාධ්‍යය</option></select>
+ <div class="flex gap-2 justify-end"><button id="pc" class="px-4 py-2 rounded-lg bg-gray-100">Cancel</button><button id="ps" class="px-4 py-2 rounded-lg bg-blue-600 text-white font-semibold">Save</button></div></div></div>
+</main><footer class="bg-gray-800 text-gray-400 py-6 text-center text-sm mt-auto">&copy; 2025 MathLanka. All rights reserved.</footer>
+<script src="assets/ml.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)},esc=function(s){var d=document.createElement('div');d.textContent=s;return d.innerHTML};
+var TOTAL=ML.lessons,BADGES=[['🌱','First quiz',function(s){return s.n>=1}],['🔟','10 quizzes',function(s){return s.n>=10}],['💯','Perfect score',function(s){return s.perfect>=1}],['🔥','3-day streak',function(s){return s.streak>=3}],
+ ['🚀','7-day streak',function(s){return s.streak>=7}],['⭐','Level 5',function(s){return s.level>=5}],['🎓','Grade master',function(s){return [1,2,3,4,5].some(function(g){return s.done[g]>=TOTAL[g]})}],['📈','90% average',function(s){return s.n>=5&&s.avg>=90}],['⚡','Speed star',function(s){return s.speed>=15}]];
+function bar(p,c){return '<div class="h-3 bg-gray-100 rounded-full overflow-hidden"><div class="h-full rounded-full '+c+'" style="width:'+p+'%"></div></div>'}
+function card(i,v,l){return '<div class="bg-white rounded-2xl shadow p-4 text-center"><div class="text-2xl">'+i+'</div><div class="text-2xl font-bold text-gray-800">'+v+'</div><div class="text-xs text-gray-500">'+l+'</div></div>'}
+function fmt(ts){var d=new Date(ts);return d.toLocaleDateString(undefined,{day:'numeric',month:'short'})+' '+d.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}
+(async function(){
+ var u=await ML.user(); if(!u){location.href='login.html?next=dashboard.html';return}
+ var att=await ML.attempts(),s=ML.summarize(att);
+ s.speed=att.filter(function(a){return a.kind==='speed'}).reduce(function(m,a){return Math.max(m,a.score)},0);
+ $('load').classList.add('hidden');$('app').classList.remove('hidden');if(u.guest)$('guestBar').classList.remove('hidden');
+ $('av').textContent=(u.name||'?').charAt(0).toUpperCase();$('hello').textContent='Hello, '+u.name+'!';$('sub').textContent='Grade '+u.grade+' · '+(u.medium==='si'?'සිංහල':'English')+' medium';
+ $('lvl').textContent='Level '+s.level;$('xpt').textContent=s.xpIn+' / 200 XP';$('xpb').style.width=(s.xpIn/2)+'%';
+ $('stats').innerHTML=card('📝',s.n,'Quizzes taken')+card('🎯',s.avg+'%','Average score')+card('🔥',s.streak+' day'+(s.streak===1?'':'s'),'Current streak')+card('⚡',s.xp,'Total XP');
+ var h='';for(var g=1;g<=5;g++){var d=s.done[g],t=TOTAL[g],p=Math.round(d/t*100);h+='<div><div class="flex justify-between text-sm mb-1"><a class="font-semibold text-blue-700 hover:underline" href="'+(u.medium==='si'?'Sinhala':'English')+' Medium/primary/Grade'+g+'/grade'+g+'.html">Grade '+g+'</a><span class="text-gray-500">'+d+' / '+t+' lessons</span></div>'+bar(p,p===100?'bg-green-500':'bg-blue-500')+'</div>'}$('grades').innerHTML=h;
+ // recommendation: weakest topic (≥2 questions) else next lesson
+ var ts=Object.keys(s.topics).filter(function(k){return s.topics[k].t>=3}).map(function(k){return[k,Math.round(s.topics[k].c/s.topics[k].t*100)]}).sort(function(a,b){return a[1]-b[1]});
+ var med=(u.medium==='si'?'Sinhala':'English')+' Medium/primary/Grade'+u.grade+'/',nl=1;while(nl<=TOTAL[u.grade]&&s.best['g'+u.grade+'-l'+nl]&&s.best['g'+u.grade+'-l'+nl].pct>=60)nl++;
+ var rec='';if(ts.length&&ts[0][1]<70)rec+='<p class="text-sm text-gray-600 mb-3">Your weakest skill is <b>'+ML.topicName[ts[0][0]]+'</b> ('+ts[0][1]+'%).</p><a class="block text-center bg-red-500 hover:bg-red-600 text-white font-bold py-3 rounded-lg mb-2" href="practice.html?grade='+u.grade+'&topic='+ts[0][0]+'">Practise it now</a>';
+ rec+=nl<=TOTAL[u.grade]?'<a class="block text-center bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mb-2" href="'+med+'grade'+u.grade+'_lesson'+nl+'.html">'+(nl===1&&!s.n?'Start':'Continue')+' Lesson '+nl+'</a>':'<p class="text-green-600 font-semibold mb-3">🎉 You finished every Grade '+u.grade+' lesson!</p>';
+ rec+='<a class="block text-center bg-yellow-400 hover:bg-yellow-500 font-bold py-3 rounded-lg" href="practice.html?mode=speed&grade='+u.grade+'">⚡ Speed Math (60s)</a>';$('rec').innerHTML=rec;
+ var sk='';Object.keys(s.topics).sort().forEach(function(k){var p=Math.round(s.topics[k].c/s.topics[k].t*100);sk+='<div><div class="flex justify-between text-sm mb-1"><span>'+esc(ML.topicName[k]||k)+'</span><span class="font-semibold">'+p+'%</span></div>'+bar(p,p>=80?'bg-green-500':p>=60?'bg-yellow-400':'bg-red-400')+'</div>'});
+ $('skills').innerHTML=sk||'<p class="text-gray-400 text-sm">Take a quiz to see your skills here.</p>';
+ $('badges').innerHTML=BADGES.map(function(b){var on=b[2](s);return '<div class="text-center rounded-xl p-3 '+(on?'bg-yellow-50 border border-yellow-300':'bg-gray-50 opacity-50')+'"><div class="text-3xl">'+(on?b[0]:'🔒')+'</div><div class="text-xs font-semibold mt-1">'+b[1]+'</div></div>'}).join('');
+ $('recent').innerHTML=att.slice(0,10).map(function(a){var c=a.pct>=70?'text-green-600':a.pct>=40?'text-yellow-600':'text-red-600';var name=a.kind==='lesson'?'Grade '+a.grade+' · Lesson '+a.lesson:a.kind==='speed'?'⚡ Speed Math':'Practice (Grade '+a.grade+')';
+  return '<tr class="border-b"><td class="py-2 text-gray-500">'+fmt(a.ts)+'</td><td>'+name+'</td><td>'+esc(ML.topicName[a.topic]||a.topic)+'</td><td class="font-bold '+c+'">'+a.score+'/'+a.total+' ('+a.pct+'%)</td><td class="text-gray-500">'+a.secs+'s</td></tr>'}).join('')||'<tr><td colspan="5" class="py-6 text-center text-gray-400">No quizzes yet — open a lesson and press “Start quiz”.</td></tr>';
+ $('out').onclick=ML.signOut;$('edit').onclick=function(){$('pn').value=u.name;$('pg').value=u.grade;$('pm').value=u.medium;$('modal').classList.remove('hidden')};$('pc').onclick=function(){$('modal').classList.add('hidden')};
+ $('ps').onclick=async function(){await ML.setProfile({name:$('pn').value.trim()||u.name,grade:+$('pg').value,medium:$('pm').value});location.reload()};
+})();
+</script></body></html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade 3 Math - Lesson 4: Subtraction of Two-Digit Numbers (No Regrouping)</title>
-    <link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
+    <link rel="icon" href="../../../Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
     <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -101,13 +101,13 @@
                 <span class="text-xl font-bold text-blue-600">MathLanka</span>
             </div>
             <div class="hidden md:flex space-x-6">
-                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
-                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
-                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
-                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+                <a href="../../../index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="../../../index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="../../../index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="../../../index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
             </div>
             
-        </nav>
+        <button class="md:hidden text-gray-700 text-2xl" aria-label="Menu"><i class="fas fa-bars"></i></button></nav>
     </header>
 
     <!-- Lesson Content Section -->
@@ -142,8 +142,8 @@
                     <div class="example-box">
                         <p class="font-semibold text-blue-700">Example: 47 - 23</p>
                         <ul class="list-disc list-inside text-blue-600 space-y-1 ml-4">
-                            <li>First, subtract the ones place: $7 - 3 = 4$</li>
-                            <li>Second, subtract the tens place: $4 - 2 = 2$</li>
+                            <li>First, subtract the ones place: 7 - 3 = 4</li>
+                            <li>Second, subtract the tens place: 4 - 2 = 2</li>
                             <li>Answer: 24</li>
                         </ul>
                         <div class="math-problem">
@@ -238,10 +238,10 @@
                 <div>
                     <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
-                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
-                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="../../../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="../../../index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="../../../index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="../../../index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
                     </ul>
                 </div>
@@ -290,17 +290,17 @@
                     <i class="fas fa-times text-2xl"></i>
                 </button>
                 <div class="flex flex-col items-center space-y-6">
-                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
-                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
-                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
-                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
-                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                    <a href="../../../index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="../../../index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="../../../index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="../../../index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="../../../login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="../../../login.html?mode=signup" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
                 </div>
             `;
             document.body.appendChild(mobileMenu);
 
-            mobileMenuButton.addEventListener('click', function() {
+            if (mobileMenuButton) if (mobileMenuButton) if (mobileMenuButton) mobileMenuButton.addEventListener('click', function() {
                 mobileMenu.classList.remove('hidden');
             });
 
@@ -310,9 +310,9 @@
 
             // Function to generate two-digit numbers for subtraction without regrouping
             function generateSubtractionNumbers() {
-                let num1, num2;
+                let num1, num2, ones1, ones2;
                 do {
-                    num1 = Math.floor(Math.random() * 90) + 10; // Generate num1 between 10 and 99
+                    num1 = Math.floor(Math.random() * 80) + 20; // num1 between 20 and 99
                     num2 = Math.floor(Math.random() * (num1 - 9)) + 10; // Generate num2 such that num1 - num2 >= 10 and num2 >= 10
 
                     // Ensure num2 is always less than num1 to avoid negative results
@@ -321,8 +321,8 @@
                         num2 = Math.floor(Math.random() * (num1 - 10)) + 10;
                     }
 
-                    const ones1 = num1 % 10;
-                    const ones2 = num2 % 10;
+                    ones1 = num1 % 10;
+                    ones2 = num2 % 10;
 
                     // Condition for no regrouping: ones digit of num1 must be greater than or equal to ones digit of num2
                 } while (ones1 < ones2); // Keep regenerating if regrouping is needed
@@ -334,8 +334,8 @@
             const verticalNum1 = document.getElementById('vertical-num1');
             const verticalNum2 = document.getElementById('vertical-num2');
             const verticalAnswerInput = document.getElementById('vertical-answer-input');
-            const verticalAddFeedback = document.getElementById('vertical-add-feedback');
-            const nextVerticalAddBtn = document.getElementById('next-vertical-add-btn');
+            const verticalAddFeedback = document.getElementById('vertical-sub-feedback');
+            const nextVerticalAddBtn = document.getElementById('next-vertical-sub-btn');
             const checkVerticalAddBtn = document.getElementById('check-vertical-sub-btn'); // Corrected ID
 
             let currentVerticalCorrectAnswer = 0;
@@ -379,8 +379,8 @@
             const horizontalNum1 = document.getElementById('horizontal-num1');
             const horizontalNum2 = document.getElementById('horizontal-num2');
             const horizontalAnswerInput = document.getElementById('horizontal-answer-input');
-            const horizontalAddFeedback = document.getElementById('horizontal-add-feedback');
-            const nextHorizontalAddBtn = document.getElementById('next-horizontal-add-btn');
+            const horizontalAddFeedback = document.getElementById('horizontal-sub-feedback');
+            const nextHorizontalAddBtn = document.getElementById('next-horizontal-sub-btn');
             const checkHorizontalAddBtn = document.getElementById('check-horizontal-sub-btn'); // Corrected ID
 
             let currentHorizontalCorrectAnswer = 0;
@@ -425,5 +425,6 @@
             generateHorizontalSubActivity();
         });
     </script>
+<script src="../../../assets/ml.js"></script>
 </body>
 </html>

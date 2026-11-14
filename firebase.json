@@ -6,11 +6,27 @@
     "indexes": "firestore.indexes.json"
   },
   "hosting": {
-    "public": "public",
+    "public": ".",
+    "cleanUrls": false,
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**"
+      "**/node_modules/**",
+      "dataconnect/**",
+      "firestore.*",
+      "tools_*",
+      "*.md"
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(js|css|png)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, max-age=3600"
+          }
+        ]
+      }
     ]
   }
 }

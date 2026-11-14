@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MathLanka - Grade 1 Lesson 1: Counting to 3</title>
-    <link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
+    <link rel="icon" href="../../../Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
     <meta name="description" content="Interactive mathematics learning platform with quizzes and games designed for Sri Lankan students">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -125,13 +125,13 @@
                 <span class="text-xl font-bold text-blue-600">MathLanka</span>
             </div>
             <div class="hidden md:flex space-x-6">
-                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
-                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
-                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
-                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
+                <a href="../../../index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="../../../index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="../../../index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="../../../index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About</a>
             </div>
             
-        </nav>
+        <button class="md:hidden text-gray-700 text-2xl" aria-label="Menu"><i class="fas fa-bars"></i></button></nav>
     </header>
 
     <!-- Lesson Content Section -->
@@ -212,7 +212,7 @@
             <div class="text-center mt-12 p-6 bg-blue-50 rounded-lg shadow-md">
                 <h3 class="text-2xl font-bold text-blue-800 mb-4">Hey, you guys know how to count now!</h3>
                 <p class="text-blue-700 text-lg mb-6">Now, let's practice with a fun game!</p>
-                <a href="index.html#math-game" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
+                <a href="countinggame.html" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-bold text-xl transition duration-300 shadow-lg hover:shadow-xl">
                     Start Counting Game! <i class="fas fa-gamepad ml-2"></i>
                 </a>
             </div>
@@ -245,10 +245,10 @@
                 <div>
                     <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
-                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
-                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="../../../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="../../../index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="../../../index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="../../../index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
                     </ul>
                 </div>
@@ -297,17 +297,17 @@
                     <i class="fas fa-times text-2xl"></i>
                 </button>
                 <div class="flex flex-col items-center space-y-6">
-                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
-                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
-                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
-                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
-                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                    <a href="../../../index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="../../../index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="../../../index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="../../../index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About</a>
+                    <a href="../../../login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Login</a>
+                    <a href="../../../login.html?mode=signup" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
                 </div>
             `;
             document.body.appendChild(mobileMenu);
 
-            mobileMenuButton.addEventListener('click', function() {
+            if (mobileMenuButton) if (mobileMenuButton) if (mobileMenuButton) mobileMenuButton.addEventListener('click', function() {
                 mobileMenu.classList.remove('hidden');
             });
 
@@ -414,5 +414,6 @@
             startNewActivity();
         });
     </script>
+<script src="../../../assets/ml.js"></script>
 </body>
 </html>
