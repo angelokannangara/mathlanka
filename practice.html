@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"><style>body{font-family:Roboto,"Segoe UI",sans-serif}</style><title>MathLanka - Practice</title></head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col"><header class="bg-white shadow-md sticky top-0 z-50"><nav class="container mx-auto px-4 py-3 flex justify-between items-center"><a href="index.html" class="flex items-center space-x-2"><div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div><span class="text-xl font-bold text-blue-600">MathLanka</span></a><div class="hidden md:flex space-x-6"><a href="learn.html" class="text-gray-700 hover:text-blue-600 font-medium">Lessons</a><a href="practice.html" class="text-gray-700 hover:text-blue-600 font-medium">Practice</a><a href="practice.html?mode=speed" class="text-gray-700 hover:text-blue-600 font-medium">Speed Math</a></div></nav></header>
+<main class="container mx-auto px-4 py-8 max-w-3xl flex-grow">
+<div class="bg-white rounded-2xl shadow p-6 mb-6"><h1 class="text-2xl font-bold mb-4" id="ptitle">Practice</h1>
+<div class="flex flex-wrap gap-3 items-end">
+<label class="text-sm font-semibold text-gray-600">Grade<select id="g" class="block border rounded-lg p-2 mt-1"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>5</option></select></label>
+<label class="text-sm font-semibold text-gray-600" id="tw">Topic<select id="t" class="block border rounded-lg p-2 mt-1"></select></label>
+<label class="text-sm font-semibold text-gray-600">Mode<select id="m" class="block border rounded-lg p-2 mt-1"><option value="practice">Practice (10 questions)</option><option value="speed">⚡ Speed Math (60 seconds)</option></select></label>
+<button id="go" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-6 py-3 rounded-lg">Start</button></div></div>
+<div id="box"></div></main><footer class="bg-gray-800 text-gray-400 py-6 text-center text-sm mt-auto">&copy; 2025 MathLanka. All rights reserved.</footer>
+<script src="assets/ml.js"></script>
+<script>
+var $=function(i){return document.getElementById(i)},q=new URLSearchParams(location.search);
+$('t').innerHTML=ML.topics.map(function(k){return '<option value="'+k+'">'+ML.topicName[k]+'</option>'}).join('');
+$('t').value=ML.topics.indexOf(q.get('topic'))>=0?q.get('topic'):'mixed';if(q.get('grade'))$('g').value=q.get('grade');if(q.get('mode')==='speed')$('m').value='speed';
+function sync(){$('tw').style.display=$('m').value==='speed'?'none':''}$('m').onchange=sync;sync();
+ML.user().then(function(u){if(u&&!q.get('grade'))$('g').value=u.grade;
+ function start(){var sp=$('m').value==='speed',g=+$('g').value,t=sp?'speed':$('t').value;
+  ML.quiz($('box'),{grade:g,topic:t,kind:sp?'speed':'practice',medium:u?u.medium:'en',n:10,seconds:sp?60:0,opts:{},key:(sp?'speed':'practice')+'-g'+g+'-'+t});$('box').className='mlq-card'}
+ $('go').onclick=start;if(q.get('mode')||q.get('topic'))start()});
+</script></body></html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grade 5 Math - Lesson 5: Subtraction</title>
-    <link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
+    <link rel="icon" href="../../../Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png">
     <meta name="description" content="An interactive math learning platform for Sri Lankan students with quizzes and games. Let's learn about subtraction for Grade 5.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
@@ -151,13 +151,13 @@
                 <span class="text-xl font-bold text-blue-600">MathLanka</span>
             </div>
             <div class="hidden md:flex space-x-6">
-                <a href="index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
-                <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
-                <a href="index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
-                <a href="index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
+                <a href="../../../index.html#features" class="text-gray-700 hover:text-blue-600 font-medium">Features</a>
+                <a href="../../../index.html#courses" class="text-gray-700 hover:text-blue-600 font-medium">Courses</a>
+                <a href="../../../index.html#games" class="text-gray-700 hover:text-blue-600 font-medium">Games</a>
+                <a href="../../../index.html#about" class="text-gray-700 hover:text-blue-600 font-medium">About Us</a>
             </div>
             
-        </nav>
+        <button class="md:hidden text-gray-700 text-2xl" aria-label="Menu"><i class="fas fa-bars"></i></button></nav>
     </header>
 
     <!-- Lesson Content Section -->
@@ -207,7 +207,7 @@
                         When we subtract without regrouping, it means that in each place value column, the top digit is greater than or equal to the bottom digit. This makes subtraction straightforward!
                     </p>
                     <div class="example-box">
-                        <p class="font-semibold text-blue-700 mb-2">Example 1: Subtract $5432$ from $8765$.</p>
+                        <p class="font-semibold text-blue-700 mb-2">Example 1: Subtract 5432 from 8765.</p>
                         <p class="text-gray-700 mb-2">We align the numbers by place value and subtract column by column, starting from the Ones place.</p>
                         <pre class="bg-blue-100 p-3 rounded-md text-blue-800 font-mono text-lg text-center">
     8765
@@ -216,25 +216,25 @@
     3333
                         </pre>
                         <p class="text-gray-700 mt-2">
-                            Here, $5-2=3$ (Ones), $6-3=3$ (Tens), $7-4=3$ (Hundreds), $8-5=3$ (Thousands).
+                            Here, 5-2=3 (Ones), 6-3=3 (Tens), 7-4=3 (Hundreds), 8-5=3 (Thousands).
                         </p>
                     </div>
                     <p class="font-semibold text-blue-700 mt-4">Exercise 1: Subtract the following numbers without regrouping.</p>
                     <div class="exercise-grid">
                         <div class="exercise-item">
-                            <p>$9876 - 1234 = \underline{\hspace{2cm}}$</p>
+                            <p>9876 - 1234 = ______</p>
                             <input type="text" id="ex1-q1" class="input-field" placeholder="Answer">
                         </div>
                         <div class="exercise-item">
-                            <p>$7543 - 2101 = \underline{\hspace{2cm}}$</p>
+                            <p>7543 - 2101 = ______</p>
                             <input type="text" id="ex1-q2" class="input-field" placeholder="Answer">
                         </div>
                         <div class="exercise-item">
-                            <p>$6050 - 3020 = \underline{\hspace{2cm}}$</p>
+                            <p>6050 - 3020 = ______</p>
                             <input type="text" id="ex1-q3" class="input-field" placeholder="Answer">
                         </div>
                         <div class="exercise-item">
-                            <p>$4999 - 1888 = \underline{\hspace{2cm}}$</p>
+                            <p>4999 - 1888 = ______</p>
                             <input type="text" id="ex1-q4" class="input-field" placeholder="Answer">
                         </div>
                     </div>
@@ -244,16 +244,16 @@
                 <div class="p-6 bg-gray-50 rounded-lg shadow-sm">
                     <h3 class="text-2xl font-bold text-gray-800 mb-4">Subtraction with Regrouping (Borrowing)</h3>
                     <p class="text-gray-700 mb-3">
-                        Sometimes, the top digit in a column is smaller than the bottom digit. In such cases, we need to **regroup** or **borrow** from the next higher place value.
+                        Sometimes, the top digit in a column is smaller than the bottom digit. In such cases, we need to <strong>regroup</strong> or <strong>borrow</strong> from the next higher place value.
                     </p>
                     <div class="example-box">
-                        <p class="font-semibold text-blue-700 mb-2">Example 2: Subtract $1234$ from $5000$.</p>
+                        <p class="font-semibold text-blue-700 mb-2">Example 2: Subtract 1234 from 5000.</p>
                         <p class="text-gray-700 mb-2">Let's go step-by-step:</p>
                         <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-2">
-                            <li><strong>Ones place:</strong> We cannot subtract $4$ from $0$. We need to borrow from the Tens place. But the Tens place is also $0$. So, we go to the Hundreds place, also $0$. We go to the Thousands place.</li>
-                            <li><strong>Thousands place:</strong> Borrow $1$ from $5$ (Thousands), making it $4$. Give $10$ to the Hundreds place. Now Hundreds is $10$.</li>
-                            <li><strong>Hundreds place:</strong> Borrow $1$ from $10$ (Hundreds), making it $9$. Give $10$ to the Tens place. Now Tens is $10$.</li>
-                            <li><strong>Tens place:</strong> Borrow $1$ from $10$ (Tens), making it $9$. Give $10$ to the Ones place. Now Ones is $10$.</li>
+                            <li><strong>Ones place:</strong> We cannot subtract 4 from 0. We need to borrow from the Tens place. But the Tens place is also 0. So, we go to the Hundreds place, also 0. We go to the Thousands place.</li>
+                            <li><strong>Thousands place:</strong> Borrow 1 from 5 (Thousands), making it 4. Give 10 to the Hundreds place. Now Hundreds is 10.</li>
+                            <li><strong>Hundreds place:</strong> Borrow 1 from 10 (Hundreds), making it 9. Give 10 to the Tens place. Now Tens is 10.</li>
+                            <li><strong>Tens place:</strong> Borrow 1 from 10 (Tens), making it 9. Give 10 to the Ones place. Now Ones is 10.</li>
                             <li><strong>Now subtract:</strong>
                                 <pre class="bg-blue-100 p-3 rounded-md text-blue-800 font-mono text-lg text-center">
     4 9 9 10  (after regrouping)
@@ -262,29 +262,29 @@
 ----------
     3 7 6 6
                                 </pre>
-                                $10 - 4 = 6$ (Ones)<br>
-                                $9 - 3 = 6$ (Tens)<br>
-                                $9 - 2 = 7$ (Hundreds)<br>
-                                $4 - 1 = 3$ (Thousands)
+                                10 - 4 = 6 (Ones)<br>
+                                9 - 3 = 6 (Tens)<br>
+                                9 - 2 = 7 (Hundreds)<br>
+                                4 - 1 = 3 (Thousands)
                             </li>
                         </ol>
                     </div>
                     <p class="font-semibold text-blue-700 mt-4">Exercise 2: Subtract the following numbers with regrouping.</p>
                     <div class="exercise-grid">
                         <div class="exercise-item">
-                            <p>$6321 - 1879 = \underline{\hspace{2cm}}$</p>
+                            <p>6321 - 1879 = ______</p>
                             <input type="text" id="ex2-q1" class="input-field" placeholder="Answer">
                         </div>
                         <div class="exercise-item">
-                            <p>$9000 - 4567 = \underline{\hspace{2cm}}$</p>
+                            <p>9000 - 4567 = ______</p>
                             <input type="text" id="ex2-q2" class="input-field" placeholder="Answer">
                         </div>
                         <div class="exercise-item">
-                            <p>$40000 - 12345 = \underline{\hspace{2cm}}$</p>
+                            <p>40000 - 12345 = ______</p>
                             <input type="text" id="ex2-q3" class="input-field" placeholder="Answer">
                         </div>
                         <div class="exercise-item">
-                            <p>$82005 - 37198 = \underline{\hspace{2cm}}$</p>
+                            <p>82005 - 37198 = ______</p>
                             <input type="text" id="ex2-q4" class="input-field" placeholder="Answer">
                         </div>
                     </div>
@@ -300,15 +300,15 @@
                         <p class="font-semibold text-blue-700 mb-2">Exercise 3: Solve the following word problems.</p>
                         <ol class="list-decimal list-inside text-gray-700 ml-4 space-y-4">
                             <li>
-                                <p>A library has $15,780$ books. If $8,525$ books are borrowed, how many books are left in the library?</p>
+                                <p>A library has 15,780 books. If 8,525 books are borrowed, how many books are left in the library?</p>
                                 <input type="text" class="input-field" placeholder="Answer">
                             </li>
                             <li>
-                                <p>A farmer harvested $45,200$ kg of rice. He sold $28,950$ kg. How many kilograms of rice are remaining?</p>
+                                <p>A farmer harvested 45,200 kg of rice. He sold 28,950 kg. How many kilograms of rice are remaining?</p>
                                 <input type="text" class="input-field" placeholder="Answer">
                             </li>
                             <li>
-                                <p>The population of a town was $92,500$. If $17,800$ people moved out of the town, what is the current population?</p>
+                                <p>The population of a town was 92,500. If 17,800 people moved out of the town, what is the current population?</p>
                                 <input type="text" class="input-field" placeholder="Answer">
                             </li>
                         </ol>
@@ -330,27 +330,27 @@
                         <li>
                             <p class="font-semibold">Exercise 1: Subtraction without Regrouping</p>
                             <ul class="list-disc list-inside ml-6">
-                                <li>$9876 - 1234 = 8642$</li>
-                                <li>$7543 - 2101 = 5442$</li>
-                                <li>$6050 - 3020 = 3030$</li>
-                                <li>$4999 - 1888 = 3111$</li>
+                                <li>9876 - 1234 = 8642</li>
+                                <li>7543 - 2101 = 5442</li>
+                                <li>6050 - 3020 = 3030</li>
+                                <li>4999 - 1888 = 3111</li>
                             </ul>
                         </li>
                         <li>
                             <p class="font-semibold">Exercise 2: Subtraction with Regrouping</p>
                             <ul class="list-disc list-inside ml-6">
-                                <li>$6321 - 1879 = 4442$</li>
-                                <li>$9000 - 4567 = 4433$</li>
-                                <li>$40000 - 12345 = 27655$</li>
-                                <li>$82005 - 37198 = 44807$</li>
+                                <li>6321 - 1879 = 4442</li>
+                                <li>9000 - 4567 = 4433</li>
+                                <li>40000 - 12345 = 27655</li>
+                                <li>82005 - 37198 = 44807</li>
                             </ul>
                         </li>
                         <li>
                             <p class="font-semibold">Exercise 3: Problem Solving with Subtraction</p>
                             <ul class="list-disc list-inside ml-6">
-                                <li>$15,780 - 8,525 = 7,255$ books are left.</li>
-                                <li>$45,200 - 28,950 = 16,250$ kg of rice are remaining.</li>
-                                <li>$92,500 - 17,800 = 74,700$ is the current population.</li>
+                                <li>15,780 - 8,525 = 7,255 books are left.</li>
+                                <li>45,200 - 28,950 = 16,250 kg of rice are remaining.</li>
+                                <li>92,500 - 17,800 = 74,700 is the current population.</li>
                             </ul>
                         </li>
                     </ol>
@@ -396,10 +396,10 @@
                 <div>
                     <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white">Home</a></li>
-                        <li><a href="index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
-                        <li><a href="index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
-                        <li><a href="index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
+                        <li><a href="../../../index.html" class="text-gray-400 hover:text-white">Home</a></li>
+                        <li><a href="../../../index.html#features" class="text-gray-400 hover:text-white">Features</a></li>
+                        <li><a href="../../../index.html#courses" class="text-gray-400 hover:text-white">Courses</a></li>
+                        <li><a href="../../../index.html#games" class="text-gray-400 hover:text-white">Games</a></li>
                         <li><a href="#" class="text-gray-400 hover:text-white">Pricing</a></li>
                     </ul>
                 </div>
@@ -448,17 +448,17 @@
                     <i class="fas fa-times text-2xl"></i>
                 </button>
                 <div class="flex flex-col items-center space-y-6">
-                    <a href="index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
-                    <a href="index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
-                    <a href="index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
-                    <a href="index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
-                    <a href="login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
-                    <a href="signup.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
+                    <a href="../../../index.html#features" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Features</a>
+                    <a href="../../../index.html#courses" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Courses</a>
+                    <a href="../../../index.html#games" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Games</a>
+                    <a href="../../../index.html#about" class="text-gray-700 hover:text-blue-600 text-xl font-medium">About Us</a>
+                    <a href="../../../login.html" class="text-gray-700 hover:text-blue-600 text-xl font-medium">Log In</a>
+                    <a href="../../../login.html?mode=signup" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium text-xl">Sign Up</a>
                 </div>
             `;
             document.body.appendChild(mobileMenu);
 
-            mobileMenuButton.addEventListener('click', function() {
+            if (mobileMenuButton) if (mobileMenuButton) if (mobileMenuButton) mobileMenuButton.addEventListener('click', function() {
                 mobileMenu.classList.remove('hidden');
             });
 
@@ -485,5 +485,6 @@
             });
         });
     </script>
+<script src="../../../assets/ml.js"></script>
 </body>
 </html>

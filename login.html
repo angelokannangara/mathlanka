@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="Gemini_Generated_Image_q0j4v8q0j4v8q0j4.png" type="image/png"><script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"><style>body{font-family:Roboto,"Segoe UI",sans-serif}</style><title>MathLanka - Login</title></head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen flex flex-col"><header class="bg-white shadow-md sticky top-0 z-50"><nav class="container mx-auto px-4 py-3 flex justify-between items-center"><a href="index.html" class="flex items-center space-x-2"><div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl">ML</div><span class="text-xl font-bold text-blue-600">MathLanka</span></a><div class="hidden md:flex space-x-6"><a href="learn.html" class="text-gray-700 hover:text-blue-600 font-medium">Lessons</a><a href="practice.html" class="text-gray-700 hover:text-blue-600 font-medium">Practice</a><a href="practice.html?mode=speed" class="text-gray-700 hover:text-blue-600 font-medium">Speed Math</a></div></nav></header>
+<main class="flex-grow flex items-center justify-center px-4 py-10"><div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-8">
+<h1 class="text-2xl font-bold text-gray-800 mb-1" id="ttl">Welcome back 👋</h1><p class="text-gray-500 mb-5 text-sm">Save your quiz scores and track your progress.</p>
+<div class="flex mb-5 bg-gray-100 rounded-lg p-1 text-sm font-semibold"><button id="tIn" class="flex-1 py-2 rounded-md">Login</button><button id="tUp" class="flex-1 py-2 rounded-md">Sign up</button></div>
+<div id="err" class="hidden bg-red-50 text-red-700 text-sm rounded-lg p-3 mb-4"></div>
+<div id="upOnly" class="hidden space-y-3 mb-3"><input id="name" class="w-full border rounded-lg p-3" placeholder="Your name" maxlength="40">
+<div class="flex gap-2"><select id="grade" class="flex-1 border rounded-lg p-3"><option value="1">Grade 1</option><option value="2">Grade 2</option><option value="3" selected>Grade 3</option><option value="4">Grade 4</option><option value="5">Grade 5</option></select>
+<select id="medium" class="flex-1 border rounded-lg p-3"><option value="en">English</option><option value="si">සිංහල</option></select></div></div>
+<form id="f" class="space-y-3"><input id="email" type="email" required class="w-full border rounded-lg p-3" placeholder="Email" autocomplete="email">
+<input id="pw" type="password" required minlength="6" class="w-full border rounded-lg p-3" placeholder="Password (6+ characters)" autocomplete="current-password">
+<button id="go" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg">Login</button></form>
+<button id="goog" class="w-full mt-3 border rounded-lg py-3 font-semibold text-gray-700 hover:bg-gray-50"><i class="fab fa-google mr-2"></i>Continue with Google</button>
+<div class="text-center text-gray-400 text-sm my-4">or</div>
+<button id="gst" class="w-full bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 rounded-lg">Continue as guest</button>
+<p class="text-xs text-gray-400 mt-2 text-center">Guest scores are stored only on this device. If you sign up later they are moved to your account.</p></div></main><footer class="bg-gray-800 text-gray-400 py-6 text-center text-sm mt-auto">&copy; 2025 MathLanka. All rights reserved.</footer>
+<script src="assets/ml.js"></script><script>
+var up=false,q=new URLSearchParams(location.search),next=(/^[\w\-]+\.html(\?[\w=&\-]*)?$/.test(q.get('next')||'')?q.get('next'):'dashboard.html'),$=function(i){return document.getElementById(i)};
+function mode(u){up=u;$('upOnly').classList.toggle('hidden',!u);$('go').textContent=u?'Create account':'Login';$('ttl').textContent=u?'Join MathLanka 🎓':'Welcome back 👋';$('pw').autocomplete=u?'new-password':'current-password';
+ $('tUp').className='flex-1 py-2 rounded-md '+(u?'bg-white shadow text-blue-600':'text-gray-500');$('tIn').className='flex-1 py-2 rounded-md '+(u?'text-gray-500':'bg-white shadow text-blue-600')}
+function err(e){var m=(e&&e.code||'').replace('auth/','');var map={'invalid-credential':'Wrong email or password.','wrong-password':'Wrong email or password.','user-not-found':'No account with that email.','email-already-in-use':'That email already has an account — try logging in.','weak-password':'Password must be at least 6 characters.','invalid-email':'Please enter a valid email.','popup-closed-by-user':'Google sign-in was cancelled.'};$('err').textContent=map[m]||(e&&e.message)||'Something went wrong.';$('err').classList.remove('hidden')}
+function busy(b){['go','goog','gst'].forEach(function(i){$(i).disabled=b;$(i).style.opacity=b?.6:1})}
+async function run(fn){$('err').classList.add('hidden');busy(true);try{await fn();location.href=next}catch(e){err(e);busy(false)}}
+$('tIn').onclick=function(){mode(false)};$('tUp').onclick=function(){mode(true)};mode(q.get('mode')==='signup');
+$('f').onsubmit=function(e){e.preventDefault();var n=$('name').value.trim();if(up&&!n){return err({message:'Please enter your name.'})}
+ run(function(){return up?ML.signUp($('email').value,$('pw').value,{name:n,grade:+$('grade').value,medium:$('medium').value}):ML.signIn($('email').value,$('pw').value)})};
+$('goog').onclick=function(){run(ML.google)};
+$('gst').onclick=function(){ML.guest({name:$('name').value.trim()||'Guest',grade:+$('grade').value,medium:$('medium').value});location.href=next};
+</script></body></html>
